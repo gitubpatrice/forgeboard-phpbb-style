@@ -3877,11 +3877,6 @@ Keeps the generous top spacing while removing the boxed background/border.
 	min-width: 0;
 	overflow: hidden;
 	gap: 14px;
-	background:
-		linear-gradient(135deg, rgba(88, 166, 255, 0.10), rgba(248, 81, 73, 0.035) 48%, transparent 74%),
-		var(--gb-surface);
-	border: 1px solid var(--gb-border);
-	border-radius: 16px;
 	box-shadow: none;
 	min-height: 104px;
 	padding: 22px 24px;
@@ -3895,9 +3890,6 @@ Keeps the generous top spacing while removing the boxed background/border.
 	max-width: 380px;
 	width: 100%;
 	align-self: stretch;
-	background: var(--gb-surface);
-	border: 1px solid var(--gb-border);
-	border-radius: 16px;
 	display: flex;
 	justify-content: center;
 	min-height: 104px;
@@ -6136,7 +6128,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	align-items: center;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 8px;
+	gap: 3px;
 	justify-content: flex-end;
 }
 
@@ -6256,4 +6248,59 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	.forgeboard .forge-category .forge-forum-grid::after {
 		display: none;
 	}
+}
+
+/* ------------------------------------------------------------------
+   ForgeBoard layout fixes — restore Prosilver float behaviors
+   that were lost when bulk-removing !important.
+   ------------------------------------------------------------------ */
+
+/* MCP / UCP tabs-container: H2 on the left, minitabs flushed right */
+.forgeboard .tabs-container {
+	align-items: flex-start;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	justify-content: space-between;
+}
+
+.forgeboard .tabs-container > h2 {
+	float: none;
+	margin: 0;
+}
+
+.forgeboard .tabs-container .minitabs,
+.forgeboard .tabs-container #minitabs {
+	margin: 0 0 0 auto;
+}
+
+/* Post buttons: right-aligned, but only outside the .has-profile context
+   (in viewtopic, .has-profile .post-buttons is positioned absolute by Prosilver
+   and that rule keeps winning thanks to higher specificity). */
+.forgeboard .post-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	float: right;
+	gap: 5px;
+	justify-content: flex-end;
+	margin: 0 0 6px;
+}
+
+.forgeboard .has-profile .post-buttons {
+	float: none;
+}
+
+/* H3 review header with right-box "Expand view": ensure clean layout */
+.forgeboard .topicreview h3.review,
+.forgeboard h3.review {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	justify-content: space-between;
+}
+
+.forgeboard h3.review .right-box {
+	float: none;
+	margin: 0 0 0 auto;
 }
