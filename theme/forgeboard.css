@@ -6293,29 +6293,77 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	float: none;
 }
 
-/* H3 review header: H3 text on left, "Expand view" on right.
-   .right-box comes BEFORE the text in source, so we use float: right
-   (block formatting context) — flex would put it on the left. */
-.forgeboard h3.review,
-.forgeboard .topicreview h3.review {
-	display: block;
-	overflow: hidden;
+/* ------------------------------------------------------------------
+   ForgeBoard MCP topic view (mcp_topic.html override)
+   Clean hooks instead of fighting Prosilver float/inline styles.
+   ------------------------------------------------------------------ */
+
+.forgeboard .forge-mcp-review-head {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	justify-content: space-between;
+	margin: 0 0 14px;
 }
 
-.forgeboard h3.review .right-box {
-	float: right;
+.forgeboard .forge-mcp-review-title {
+	float: none;
+	font-size: 1.05em;
 	margin: 0;
 }
 
-/* Remove the <hr> separator and the action-bar borders in MCP/UCP panels */
-.forgeboard #cp-main .panel hr,
-.forgeboard #topicreview + hr,
-.forgeboard .topicreview + hr {
-	display: none;
+.forgeboard .forge-mcp-review-toggle {
+	float: none;
+	margin: 0;
 }
 
-.forgeboard .action-bar.bar-bottom,
-.forgeboard #cp-main .action-bar {
+.forgeboard .forge-mcp-post .forge-mcp-postbody {
+	position: relative;
+}
+
+.forgeboard .forge-mcp-post-actions {
+	display: flex;
+	float: right;
+	gap: 6px;
+	list-style: none;
+	margin: 0 0 6px 12px;
+	padding: 0;
+}
+
+.forgeboard .forge-mcp-post-actions > li {
+	align-items: center;
+	display: flex;
+	float: none;
+	margin: 0;
+}
+
+.forgeboard .forge-mcp-select-cell {
+	color: var(--gb-text-muted);
+	font-size: 0.92em;
+}
+
+.forgeboard .forge-mcp-select-cell label {
+	align-items: center;
+	display: inline-flex;
+	gap: 6px;
+	margin: 0;
+}
+
+.forgeboard .forge-mcp-actionbar {
 	border-top: 0;
 	border-bottom: 0;
+	margin-top: 8px;
+}
+
+.forgeboard .forge-mcp-display-actions {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 12px;
+}
+
+.forgeboard .forge-mcp-mark-actions {
+	margin-left: auto;
 }
