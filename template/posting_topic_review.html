@@ -1,12 +1,12 @@
 
-<h3 id="review" class="review forge-topic-review-head">
-	{L_TOPIC_REVIEW}{L_COLON} {TOPIC_TITLE}
-</h3>
+<header class="forge-topic-review-bar">
+	<h3 id="review" class="review forge-topic-review-head">
+		{L_TOPIC_REVIEW}{L_COLON} {TOPIC_TITLE}
+	</h3>
+	<span class="right-box forge-topic-review-toggle"><a href="#review" onclick="viewableArea(getElementById('topicreview'), true); var rev_link = document.querySelector('.forge-topic-review-toggle a'); var rev_text = rev_link.firstChild; if (rev_text.data == '{LA_EXPAND_VIEW}'){rev_text.data = '{LA_COLLAPSE_VIEW}'; } else if (rev_text.data == '{LA_COLLAPSE_VIEW}'){rev_text.data = '{LA_EXPAND_VIEW}'};">{L_EXPAND_VIEW}</a></span>
+</header>
 
 <div id="topicreview" class="topicreview forge-topic-review-list">
-<p class="forge-topic-review-toolbar">
-	<span class="right-box forge-topic-review-toggle"><a href="#review" onclick="viewableArea(getElementById('topicreview'), true); var rev_text = getElementById('review').getElementsByTagName('a').item(0).firstChild; if (rev_text.data == '{LA_EXPAND_VIEW}'){rev_text.data = '{LA_COLLAPSE_VIEW}'; } else if (rev_text.data == '{LA_COLLAPSE_VIEW}'){rev_text.data = '{LA_EXPAND_VIEW}'};">{L_EXPAND_VIEW}</a></span>
-</p>
 <script>
 	bbcodeEnabled = {S_BBCODE_ALLOWED};
 </script>
@@ -84,9 +84,7 @@
 	<!-- END topic_review_row -->
 </div>
 
-<hr />
-
-<p>
+<p class="forge-topic-review-back">
 	<a href="<!-- IF S_MCP_REPORT -->#report<!-- ELSE -->#postingbox<!-- ENDIF -->" class="top">
 		<i class="icon fa-chevron-circle-up fa-fw icon-gray" aria-hidden="true"></i><span>{L_BACK_TO_TOP}</span>
 	</a>
