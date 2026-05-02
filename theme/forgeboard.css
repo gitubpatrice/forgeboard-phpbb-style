@@ -1869,6 +1869,30 @@ table.table1 tbody td {
 	color: #ffffff;
 }
 
+/* Counter badges (Notifications, Private messages, etc.)
+   GitHub-style: subtle rounded chip, not a red dot.
+   Hidden state (.badge.hidden) handled by phpBB JS — keep that behavior. */
+.forgeboard .badge {
+	background: var(--gb-surface-muted);
+	border-radius: var(--gb-radius-md);
+	color: var(--gb-text-muted);
+	display: inline-block;
+	font-size: var(--gb-font-xs);
+	font-weight: var(--gb-weight-medium);
+	line-height: 1;
+	min-width: 20px;
+	padding: 2px 6px;
+	text-align: center;
+}
+
+/* When the counter has unread items, phpBB removes .hidden — escalate
+   to the danger color to draw attention. */
+.forgeboard .badge:not(.hidden) {
+	background: var(--gb-danger);
+	color: #ffffff;
+}
+
+/* Legacy non-scoped fallback (kept for any contexts outside .forgeboard) */
 .badge {
 	background: var(--gb-danger);
 	color: #ffffff;
