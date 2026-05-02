@@ -6324,14 +6324,23 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 /* MCP posts have no postprofile column — collapse the grid to a single column.
    Prosilver's .post.inner is a 1fr+210px grid (body + profile sidebar);
    here we override to take the full width. */
+.forgeboard .forge-mcp-post {
+	box-sizing: border-box;
+	padding: 14px 18px;
+}
+
 .forgeboard .forge-mcp-post > .inner {
+	box-sizing: border-box;
 	display: block;
 	grid-template-columns: none;
 	grid-template-areas: none;
 	overflow: hidden;
+	padding: 0;
+	width: 100%;
 }
 
 .forgeboard .forge-mcp-post .forge-mcp-postbody {
+	box-sizing: border-box;
 	float: none;
 	position: relative;
 	width: 100%;
