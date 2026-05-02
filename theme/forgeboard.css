@@ -1012,7 +1012,11 @@ hr {
 }
 
 .forge-topic-section .forge-category-head {
-	grid-template-columns: minmax(0, 1.4fr) minmax(70px, 0.24fr) minmax(70px, 0.24fr) minmax(240px, 0.72fr);
+	/* Aligned with the row's grid (set on .forge-topic-card-viewforum).
+	   Both use 4 columns with shared widths so labels line up vertically
+	   with the stats below. Responsive overrides handle smaller screens. */
+	grid-template-columns: minmax(0, 1fr) 83px 83px minmax(240px, 320px);
+	column-gap: 14px;
 }
 
 .forge-topic-section .forge-category-head > div:first-child {
@@ -1028,11 +1032,10 @@ hr {
 }
 
 .forge-category:not(.forge-topic-section) .forge-category-labels span {
-	align-self: end;
+	place-self: end center;
 	color: var(--gb-text-muted);
 	font-size: 1em;
 	font-weight: 800;
-	justify-self: center;
 	line-height: 1;
 	text-transform: uppercase;
 }
@@ -1042,11 +1045,10 @@ hr {
 }
 
 .forge-topic-section .forge-category-labels span {
-	align-self: end;
+	place-self: end center;
 	color: var(--gb-text-muted);
 	font-size: 1em;
 	font-weight: 800;
-	justify-self: center;
 	line-height: 1;
 	text-transform: uppercase;
 }
@@ -1221,11 +1223,10 @@ hr {
 }
 
 .forge-forum-card > .forge-forum-numbers {
-	align-content: start;
+	place-content: start start;
 	display: grid;
 	grid-area: numbers;
 	grid-template-columns: repeat(2, minmax(96px, 128px));
-	justify-content: start;
 	padding-left: 56px;
 }
 
@@ -1692,19 +1693,26 @@ ul.zebra-list li:nth-child(even) {
 
 /* Quote blocks (BBCode [quote] and any blockquote) — GitHub-style:
    left accent border + muted text color, NO fill, NO radius. */
-blockquote {
-	background: transparent;
+.forgeboard blockquote {
+	background: #141920;
 	border: 0;
-	border-left: 3px solid var(--gb-border);
-	border-radius: 0;
+	border-left: 5px solid var(--gb-border);
+	border-radius: 9px;
 	color: var(--gb-text-muted);
 	margin: var(--gb-space-2) 0;
-	padding: 0 var(--gb-space-4);
+	padding: 20px;
 }
 
-blockquote blockquote {
-	border-left-color: var(--gb-border-muted);
+.forgeboard blockquote blockquote {
+	background-color: #171d25;
+	border-left: 4px solid var(--gb-border);
 	margin-top: var(--gb-space-2);
+}
+
+.forgeboard blockquote blockquote blockquote {
+  background-color: #12171e;
+  border-left: 3px solid var(--gb-border);
+  margin-top: var(--gb-space-2);
 }
 
 .forgeboard blockquote cite,
@@ -2522,39 +2530,6 @@ a:hover .icon.icon-orange {
 	font-weight: 500;
 }
 
-@media (max-width: 900px) {
-	.forgeboard .forge-topbar {
-		grid-template-columns: 1fr;
-	}
-
-	.forgeboard .forge-search {
-		grid-column: 1;
-		grid-row: auto;
-		justify-self: stretch;
-		max-width: none;
-	}
-
-	.forgeboard .forge-forum-grid {
-		grid-template-columns: 1fr;
-	}
-
-	.forgeboard .forge-forum-card {
-		grid-template-areas:
-			"main"
-			"meta"
-			"numbers"
-			"lastpost";
-		grid-template-columns: 1fr;
-	}
-
-	.forgeboard .action-bar .search-box,
-	.forgeboard .action-bar .pagination {
-		flex-basis: 100%;
-		margin-left: 0;
-		width: 100%;
-	}
-}
-
 /* Live correction pass: remove prosilver-like leftovers and stop overflow. */
 
 .forgeboard .forge-lastpost span,
@@ -2572,6 +2547,8 @@ a:hover .icon.icon-orange {
 .forgeboard .panel-container h3 {
 	border:0;
 }
+
+.forgeboard h3.forge-topic-review-head {border:0;}
 
 .forgeboard .panel,
 .forgeboard .panel-container,
@@ -2608,28 +2585,8 @@ a:hover .icon.icon-orange {
 	color: var(--gb-text);
 }
 
-.forgeboard input.button2 {
-	margin-top: 10px;
-}
-
 .forgeboard .topiclist li.row:hover dd {
   border-left-color: #388BFD;
-}
-
-@media (max-width: 900px) {
-	.forgeboard .post > .inner {
-		grid-template-columns: 1fr;
-	}
-
-	.forgeboard .postprofile {
-		border-radius: 0 0 var(--gb-radius) var(--gb-radius);
-		margin-left: 0;
-	}
-
-	.forgeboard .forge-forum-card > .forge-forum-numbers,
-	.forgeboard .forge-forum-meta {
-		padding-left: 0;
-	}
 }
 
 @media (max-width: 700px) {
@@ -2663,169 +2620,6 @@ a:hover .icon.icon-orange {
 		margin-left: -8px;
 		margin-right: -8px;
 		padding: 12px;
-	}
-}
-
-@media (max-width: 980px) {
-	.forge-topbar,
-	.forge-hero,
-	.forge-forum-hero,
-	.forge-login-panel {
-		grid-template-columns: 1fr;
-	}
-
-	.forge-hero-action {
-		justify-self: stretch;
-		width: 100%;
-	}
-
-	.forge-category-labels {
-		display: none;
-	}
-
-	.forge-forum-card,
-	.forge-topic-card {
-		grid-template-columns: 1fr;
-	}
-
-	.forge-forum-card {
-		grid-template-areas:
-			"main"
-			"meta"
-			"numbers"
-			"lastpost";
-	}
-
-	.forge-topic-section .forge-category-head {
-		grid-template-columns: 1fr;
-	}
-
-	.forge-topic-section .forge-category-labels {
-		display: none;
-	}
-
-	.forge-topic-card > .forge-forum-numbers {
-		display: grid;
-	}
-
-	.forge-forum-card > .forge-forum-numbers {
-		display: grid;
-		padding-left: 0;
-	}
-
-	.forge-topic-card > .forge-lastpost {
-		grid-area: auto;
-	}
-
-	.forge-mini-pagination {
-		grid-area: auto;
-		justify-self: start;
-	}
-
-	.forge-forum-card > .forge-lastpost {
-		grid-area: auto;
-	}
-
-	.post > .inner {
-		grid-template-areas:
-			"body"
-			"profile"
-			"top";
-		grid-template-columns: 1fr;
-	}
-
-	.postprofile {
-		border-left: 0;
-		border-top: 1px solid var(--gb-border);
-		grid-area: profile;
-		order: 2;
-		position: static;
-	}
-
-	.forgeboard .back2top {
-		margin: 0 12px 12px 0;
-	}
-
-	.profile-post-actions .post-buttons {
-		margin: 0 0 10px;
-		position: static;
-		width: auto;
-	}
-
-	.action-bar .search-box,
-	.action-bar .pagination {
-		margin-left: 0;
-		width: 100%;
-	}
-
-	.forge-forum-meta {
-		padding-left: 0;
-	}
-
-	.forge-lastpost {
-		min-height: auto;
-	}
-
-	.forge-toolbar {
-		grid-template-columns: 1fr;
-	}
-
-	.forge-topic-pagination {
-		justify-self: start;
-	}
-
-	.forge-login-grid,
-	.forge-stats-grid {
-		grid-template-columns: 1fr;
-	}
-}
-
-@media (max-width: 560px) {
-	.forge-shell {
-		padding-left: 8px;
-		padding-right: 8px;
-	}
-
-	.forge-topbar {
-		border-radius: 0 0 12px 12px;
-		margin-left: -8px;
-		margin-right: -8px;
-		padding: 14px;
-	}
-
-	.forge-brand {
-		grid-template-columns: 44px minmax(0, 1fr);
-	}
-
-	.forge-brand .site_logo {
-		border-radius: 12px;
-		height: 44px;
-		width: 44px;
-	}
-
-	.forge-brand-copy strong {
-		font-size: 1.9em;
-	}
-
-	.forge-hero,
-	.forge-forum-hero {
-		border-radius: 12px;
-		padding: 18px;
-	}
-
-	.forge-forum-main,
-	.forge-topic-main {
-		grid-template-columns: 1fr;
-	}
-
-	.forge-forum-icon,
-	.forge-topic-icon {
-		height: 40px;
-		width: 40px;
-	}
-
-	.forge-forum-numbers {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
 
@@ -2871,11 +2665,6 @@ Intentional page-level overrides to move away from prosilver.
 .forgeboard .forge-nav-card #nav-main > li.rightside .dropdown {
 	left: auto;
 	right: 0;
-}
-
-.forgeboard .forge-forum-card > .forge-forum-numbers,
-.forgeboard .forge-forum-meta {
-	padding-left: 56px;
 }
 
 .forgeboard .forge-lastpost .lastsubject,
@@ -3036,36 +2825,60 @@ Intentional page-level overrides to move away from prosilver.
 	color: var(--gb-link);
 }
 
-@media (max-width: 980px) {
-	.forgeboard .forge-topbar {
-		grid-template-columns: 1fr;
-	}
-
-	.forgeboard .forge-forum-card > .forge-forum-numbers,
-	.forgeboard .forge-forum-meta {
-		padding-left: 0;
-	}
-
-	.forgeboard .post > .inner {
-		grid-template-areas:
-			"body"
-			"profile"
-			"top";
-		grid-template-columns: 1fr;
-	}
-
-	.forgeboard .postprofile {
-		border-radius: 0 0 var(--gb-radius) var(--gb-radius);
-		border-width: 1px 0 0;
-		margin-left: 0;
-	}
-}
-
 @media (max-width: 560px) {
+
+	.forge-shell {
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+
+	.forge-topbar {
+		border-radius: 0 0 12px 12px;
+		margin-left: -8px;
+		margin-right: -8px;
+		padding: 14px;
+	}
+
+	.forge-brand {
+		grid-template-columns: 44px minmax(0, 1fr);
+	}
+
+	.forge-brand .site_logo {
+		border-radius: 12px;
+		height: 44px;
+		width: 44px;
+	}
+
+	.forge-brand-copy strong {
+		font-size: 1.9em;
+	}
+
+	.forge-hero,
+	.forge-forum-hero {
+		border-radius: 12px;
+		padding: 18px;
+	}
+
+	.forge-forum-main,
+	.forge-topic-main {
+		grid-template-columns: 1fr;
+	}
+
+	.forge-forum-icon,
+	.forge-topic-icon {
+		height: 40px;
+		width: 40px;
+	}
+
+	.forge-forum-numbers {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
 	.forgeboard .forge-topbar {
 		margin-left: 0;
 		margin-right: 0;
 	}
+
 }
 
 /*
@@ -3124,10 +2937,6 @@ Overrides phpBB/prosilver dropdowns while keeping the native JS hooks.
 
 .forgeboard #notification_list {
 	width: min(92vw, 380px);
-}
-
-.forgeboard #notification_list .dropdown-contents {
-	width: 100%;
 }
 
 .forgeboard #notification_list li {
@@ -3195,7 +3004,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 
 .forgeboard .forge-main {
 	display: grid;
-	gap: 18px;
+	gap: 5px;
 }
 
 .forgeboard .forge-site-card,
@@ -3272,14 +3081,14 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 	line-height: 1.08;
 	margin: 0;
 	text-wrap: balance;
+	border:0;
 }
 
 .forgeboard .forge-category-labels {
-	align-items: center;
+	place-items: center center;
 	display: grid;
 	gap: 18px;
 	grid-template-columns: 72px 72px minmax(130px, 1fr);
-	justify-items: center;
 	min-width: 310px;
 }
 
@@ -3395,13 +3204,9 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 	max-width: 100%;
 	min-width: 0;
 	overflow: hidden;
-	padding-right: 34px;
-	border-left-width: 2px;
 	width: 100%;
-	border-left: 3px solid var(--gb-link);
-	border-top: 1px solid var(--gb-link);
-  	border-right: 1px solid var(--gb-link);
-  	border-bottom: 1px solid var(--gb-link);
+	border: 1px solid var(--gb-link);
+	border-left-width: 3px;
 	border-radius: 6px;
 	display: grid;
 	gap: 5px;
@@ -3422,7 +3227,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 	border-radius: 6px;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 10px;
+	gap: 3px;
 	margin: 0;
 	min-width: 0;
 	padding: 10px 12px;
@@ -3687,65 +3492,6 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 	outline-offset: 2px;
 }
 
-@media (max-width: 900px) {
-	.forgeboard .forge-topbar {
-		grid-template-columns: 1fr;
-	}
-
-	.forgeboard .forge-header-search {
-		margin-left: 0;
-		max-width: none;
-		width: 100%;
-	}
-
-	.forgeboard .forge-category-head {
-		grid-template-columns: 1fr;
-	}
-
-	.forgeboard .forge-category-labels {
-		display: none;
-	}
-
-	.forgeboard .post > .inner {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.forgeboard .postprofile {
-		border-left: 0;
-		border-radius: 0 0 12px 12px;
-		margin-left: 0;
-		order: 2;
-	}
-
-	.forgeboard .postbody {
-		order: 1;
-	}
-}
-
-@media (max-width: 640px) {
-	.forgeboard .forge-site-card,
-	.forgeboard .forge-nav-card,
-	.forgeboard .forge-forum-card {
-		padding: 14px;
-	}
-
-	.forgeboard .forge-forum-meta,
-	.forgeboard .forge-forum-card > .forge-forum-numbers {
-		padding-left: 0;
-	}
-
-	.forgeboard .forge-forum-numbers {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-
-	.forgeboard .action-bar .pagination {
-		flex-basis: 100%;
-		margin-left: 0;
-		text-align: left;
-	}
-}
-
 /*
 ForgeBoard UX revision
 Header and dropdowns are intentionally overridden last because prosilver has many
@@ -3898,25 +3644,6 @@ legacy selectors for these areas.
 .forgeboard .dropdown-extended .footer {
 	border-top: 1px solid var(--gb-border-muted);
 	margin-top: 6px;
-}
-
-@media (max-width: 900px) {
-	.forgeboard .forge-topbar {
-		gap: 14px;
-		grid-template-columns: 1fr;
-		padding-top: 18px;
-	}
-
-	.forgeboard .forge-brand,
-	.forgeboard .forge-search {
-		min-height: 0;
-		padding: 18px;
-	}
-
-	.forgeboard .forge-nav-card #nav-main > #username_logged_in {
-		margin-left: 0;
-		padding-left: 0;
-	}
 }
 
 /*
@@ -4090,10 +3817,9 @@ Keeps the generous top spacing while removing the boxed background/border.
 .forgeboard .forge-search {
 	grid-column: 2;
 	grid-row: 1;
-	justify-self: end;
+	place-self: stretch end;
 	max-width: 380px;
 	width: 100%;
-	align-self: stretch;
 	display: flex;
 	justify-content: center;
 	min-height: 104px;
@@ -4268,6 +3994,7 @@ Replaces the old prosilver FAQ column stack with readable responsive cards.
 .forgeboard .topic-title,
 .forgeboard .searchresults-title {
 	color: var(--gb-danger);
+	border-bottom: 1px solid var(--gb-border);
 }
 
 .forgeboard h2 a,
@@ -4338,10 +4065,13 @@ Neutralises prosilver white hover on UCP/MCP topiclist rows.
 	color: var(--gb-danger);
 }
 
-.forgeboard #username_logged_in .dropdown,
-.forgeboard #notification_list.dropdown,
-.forgeboard #notification_list .dropdown {
-	padding-top: 31px;
+.forgeboard #username_logged_in .dropdown {
+	padding-top: 20px;
+}
+
+.forgeboard #notification_list.dropdown {
+	padding-top: 10px;
+	right: 0;
 }
 
 /*
@@ -4391,7 +4121,6 @@ Replaces prosilver tab hover/active states with stable dark pills.
 .forgeboard #tabs .tab > a,
 .forgeboard #minitabs .tab > a {
 	background: var(--gb-surface);
-	border-color: var(--gb-border);
 	color: var(--gb-text-muted);
 	align-items: center;
 	border: 1px solid var(--gb-border);
@@ -4973,10 +4702,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	max-width: none;
 }
 
-.forgeboard .forge-inline-search .button-search-end {
-	display: none;
-}
-
 .forgeboard .forge-inline-search .button-search {
 	border-radius: 0 6px 6px 0;
 }
@@ -5114,8 +4839,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	border-radius: 6px;
 	max-height: min(420px, calc(100vh - 150px));
 	min-width: 218px;
-	overflow-x: hidden;
-	overflow-y: auto;
+	overflow: hidden auto;
 	padding: 4px;
 	scrollbar-color: rgba(88, 166, 255, 0.58) rgba(13, 17, 23, 0.28);
 	scrollbar-width: thin;
@@ -5343,20 +5067,28 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	color: var(--gb-danger);
 }
 
-@media (max-width: 760px) {
-	.forgeboard #mcp_queue ul.topiclist.missing-column dl,
-	.forgeboard #mcp_queue ul.topiclist.cplist.missing-column dl {
-		grid-template-columns: minmax(0, 1fr) 46px;
-	}
-
-	.forgeboard #mcp_queue ul.topiclist.missing-column dd.moderation {
-		border-left: 0;
-		border-top: 1px solid rgba(48, 54, 61, 0.64);
-		grid-column: 1 / -1;
-	}
-}
-
 @media (max-width: 640px) {
+
+	.forgeboard .forge-site-card,
+	.forgeboard .forge-nav-card,
+	.forgeboard .forge-forum-card {
+		padding: 14px;
+	}
+
+	.forgeboard .forge-forum-meta,
+	.forgeboard .forge-forum-card > .forge-forum-numbers {
+		padding-left: 0;
+	}
+
+	.forgeboard .forge-forum-numbers {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.forgeboard .action-bar .pagination {
+		flex-basis: 100%;
+		margin-left: 0;
+	}
+
 	.forgeboard .forge-faq-section-head {
 		align-items: flex-start;
 		flex-direction: column;
@@ -5366,6 +5098,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	.forgeboard .forge-faq-item {
 		padding: 15px;
 	}
+
 }
 
 /* ------------------------------------------------------------------
@@ -5454,7 +5187,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard.section-viewtopic .forge-topic-bottom-bar .forge-bottom-row {
 	align-items: center;
 	display: flex;
-	gap: 10px;
+	gap: 5px;
 	justify-content: space-between;
 	width: 100%;
 }
@@ -5501,8 +5234,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard .jumpbox.dropdown-visible .dropdown-contents,
 .forgeboard .jumpbox.dropdown-container .dropdown-contents {
 	max-height: min(62vh, 430px);
-	overflow-x: hidden;
-	overflow-y: auto;
+	overflow: hidden auto;
 	padding: 4px;
 }
 
@@ -5529,8 +5261,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard #quickmod .dropdown-contents,
 .forgeboard .quickmod .dropdown-contents {
 	max-height: min(56vh, 360px);
-	overflow-x: hidden;
-	overflow-y: auto;
+	overflow: hidden auto;
 	padding: 4px;
 }
 
@@ -5554,21 +5285,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 /* D) Responsive */
-@media (max-width: 760px) {
-	.forgeboard .forge-jumpbar {
-		align-items: stretch;
-		flex-direction: column;
-	}
-
-	.forgeboard .forge-jumpbox {
-		margin-left: 0;
-		width: 100%;
-	}
-
-	.forgeboard .forge-jumpbox .dropdown-trigger {
-		width: 100%;
-	}
-}
 
 /* ------------------------------------------------------------------
    UCP/MCP fixes
@@ -5759,6 +5475,8 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 .forgeboard .forge-nav-user-card {
 	padding: 8px 10px;
+   border-right: 3px solid #30363d;
+   border-radius: 0 9px 9px 0;
 }
 
 .forgeboard .forge-nav-breadcrumbs-card {
@@ -5882,8 +5600,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forgeboard .forge-topic-stats {
-	align-self: start;
-	justify-self: center;
+	place-self: start center;
 	margin: 0;
 }
 
@@ -5900,30 +5617,13 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard.section-memberlist #viewprofile .left-box.details.profile-details {
 	display: grid;
 	grid-template-columns: max-content minmax(0, 1fr);
-	row-gap: 8px;
-	column-gap: 10px;
+	gap: 8px 10px;
 }
 
 .forgeboard.section-memberlist #viewprofile .left-box.details.profile-details dt,
 .forgeboard.section-memberlist #viewprofile .left-box.details.profile-details dd {
 	float: none;
 	margin: 0;
-}
-
-@media (max-width: 1100px) {
-	.forgeboard .forge-topic-card-viewforum {
-		grid-template-columns: minmax(0, 1fr) 150px minmax(220px, 0.42fr);
-	}
-}
-
-@media (max-width: 900px) {
-	.forgeboard .forge-topic-card-viewforum {
-		grid-template-columns: 1fr;
-	}
-
-	.forgeboard .forge-topic-stats {
-		justify-self: start;
-	}
 }
 
 /* Remove parent frame: keep only the two split cards visible */
@@ -5938,10 +5638,9 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	margin: 0;
 	padding: 22px 24px;
 	background: transparent;
-	border-color: var(--gb-border);
-	box-shadow: none;
-	border-radius: 12px;
 	border: 0;
+	border-radius: 12px;
+	box-shadow: none;
 }
 
 /* Forum grid: keep 3-card rhythm, even with 1-2 real forums */
@@ -5961,7 +5660,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	align-items: center;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 8px;
+	gap: 5px;
 	justify-content: center;
 	margin: 0;
 }
@@ -5973,15 +5672,11 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	vertical-align: middle;
 }
 
-.forgeboard.section-ucp .submit-buttons #agreed,
-.forgeboard.section-ucp .submit-buttons #not_agreed {
-}
-
 .forgeboard .forge-posting-submit-buttons {
 	align-items: center;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 8px;
+	gap: 5px;
 	justify-content: center;
 }
 
@@ -6027,11 +5722,12 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	min-width: 0;
 }
 
+/* Default: stats wrapper is transparent to the parent grid (4-col card layout
+   takes care of replies/views placement). Mobile responsive restores it as
+   a 2-col grid below. */
 .forgeboard.section-viewforum .forge-topic-stats {
 	align-self: start;
-	display: grid;
-	gap: 10px;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
+	display: contents;
 	margin: 0;
 	min-width: 0;
 }
@@ -6072,13 +5768,29 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	width: 100%;
 }
 
-/* Viewforum final lock on live markup (forge-forum-numbers + forge-topic-stats) */
+/* Viewforum row layout — 4 cols matching the .forge-category-head header. */
 .forgeboard.section-viewforum .forge-topic-card-viewforum {
 	align-items: stretch;
 	display: grid;
-	gap: 14px;
-	grid-template-columns: minmax(0, 1fr) 180px minmax(240px, 320px);
+	gap: 10px 14px;
+	grid-template-columns: minmax(0, 1fr) 83px 83px minmax(240px, 320px);
 	min-height: 0;
+}
+
+/* .forge-topic-stats is a wrapper around the 2 stat divs — make it
+   transparent to the parent grid so its children land in cols 2 and 3. */
+.forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-stats {
+	display: contents;
+}
+
+.forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-stats > .forge-topic-stat-replies {
+	grid-column: 2;
+	grid-row: 1;
+}
+
+.forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-stats > .forge-topic-stat-views {
+	grid-column: 3;
+	grid-row: 1;
 }
 
 .forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-main {
@@ -6088,19 +5800,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	min-height: 0;
 }
 
-.forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-stats.forge-forum-numbers {
-	align-content: start;
-	align-self: start;
-	display: grid;
-	gap: 10px;
-	grid-column: 2;
-	grid-row: 1;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	justify-self: stretch;
-	min-width: 0;
-	padding: 0;
-}
-
+/* Legacy hook kept for any markup using forge-forum-numbers wrapper */
 .forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-stats.forge-forum-numbers span,
 .forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-stats.forge-forum-numbers span:first-child,
 .forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-stats.forge-forum-numbers span:last-child {
@@ -6108,7 +5808,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-lastpost {
-	grid-column: 3;
+	grid-column: 4;
 	grid-row: 1;
 }
 
@@ -6144,16 +5844,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 .forgeboard.section-viewforum .forge-topic-section .forge-category-head > div:first-child {
 	grid-column: 1;
-}
-
-.forgeboard.section-viewforum .forge-topic-section .forge-category-labels {
-	display: grid;
-	gap: 0;
-	grid-column: 2 / 4;
-	grid-template-columns: 90px 90px minmax(240px, 320px);
-	justify-items: center;
-	min-width: 0;
-	width: 100%;
 }
 
 .forgeboard.section-viewforum .forge-topic-section .forge-category-labels span:last-child {
@@ -6261,18 +5951,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	background: color-mix(in srgb, var(--gb-link) 16%, var(--gb-surface-subtle));
 	border-color: var(--gb-link);
 	color: var(--gb-text);
-}
-
-@media (max-width: 900px) {
-	.forgeboard #cp-menu,
-	.forgeboard .cp-menu {
-		padding: 8px;
-	}
-
-	.forgeboard #cp-menu #navigation ul,
-	.forgeboard .cp-menu .navigation ul {
-		grid-template-columns: 1fr;
-	}
 }
 
 /* UCP/MCP forum-selection: vertical align of controls/buttons */
@@ -6389,64 +6067,9 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	margin: 0 0 0 10px;
 }
 
-@media (max-width: 1100px) {
-	.forgeboard.section-viewforum .forge-topic-card-viewforum {
-		grid-template-columns: minmax(0, 1fr) 170px minmax(230px, 0.36fr);
-	}
+/* Tablet: shrink stat columns + lastpost so the row stays single-line */
 
-	.forgeboard.section-viewforum .forge-topic-section .forge-category-head {
-		grid-template-columns: minmax(0, 1fr) 170px minmax(230px, 0.36fr);
-	}
-
-	.forgeboard.section-viewforum .forge-topic-section .forge-category-labels {
-		grid-template-columns: 85px 85px minmax(230px, 0.36fr);
-	}
-}
-
-@media (max-width: 900px) {
-	.forgeboard.section-viewforum .forge-topic-card-viewforum {
-		grid-template-columns: 1fr;
-	}
-
-	.forgeboard.section-viewforum .forge-topic-section .forge-category-head {
-		grid-template-columns: 1fr;
-	}
-
-	.forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-main,
-	.forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-stats,
-	.forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-lastpost {
-		grid-column: 1;
-		grid-row: auto;
-	}
-
-	.forgeboard.section-viewforum .forge-topic-stats {
-		grid-template-columns: repeat(2, minmax(110px, 1fr));
-		justify-self: start;
-	}
-
-	.forgeboard.section-viewforum .forge-topic-section .forge-category-labels {
-		display: none;
-	}
-}
-
-.forgeboard .forge-category .forge-forum-grid::before,
-.forgeboard .forge-category .forge-forum-grid::after {
-	background:
-		linear-gradient(160deg, rgba(88, 166, 255, 0.08), rgba(248, 81, 73, 0.06)),
-		rgba(22, 27, 34, 0.68);
-	border: 1px dashed rgba(88, 166, 255, 0.34);
-	border-radius: 6px;
-	box-sizing: border-box;
-	color: var(--gb-header-muted);
-	content: attr(data-placeholder-title);
-	display: none;
-	font-size: 12px;
-	font-weight: 700;
-	letter-spacing: 0;
-	min-height: 188px;
-	padding: 14px;
-	text-transform: uppercase;
-}
+/* Mobile: stack vertically, hide labels, show stats as a 2-col chip row */
 
 /* 1 forum -> show 2 placeholders */
 .forgeboard .forge-category .forge-forum-grid:has(> .forge-forum-card:only-child)::after {
@@ -6475,6 +6098,138 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 @media (max-width: 980px) {
+
+	.forge-topbar,
+	.forge-hero,
+	.forge-forum-hero,
+	.forge-login-panel {
+		grid-template-columns: 1fr;
+	}
+
+	.forge-hero-action {
+		justify-self: stretch;
+		width: 100%;
+	}
+
+	.forge-category-labels {
+		display: none;
+	}
+
+	.forge-forum-card,
+	.forge-topic-card {
+		grid-template-columns: 1fr;
+	}
+
+	.forge-forum-card {
+		grid-template-areas:
+			"main"
+			"meta"
+			"numbers"
+			"lastpost";
+	}
+
+	.forge-topic-section .forge-category-head {
+		grid-template-columns: 1fr;
+	}
+
+	.forge-topic-section .forge-category-labels {
+		display: none;
+	}
+
+	.forge-topic-card > .forge-forum-numbers {
+		display: grid;
+	}
+
+	.forge-forum-card > .forge-forum-numbers {
+		display: grid;
+		padding-left: 0;
+	}
+
+	.forge-topic-card > .forge-lastpost {
+		grid-area: auto;
+	}
+
+	.forge-mini-pagination {
+		grid-area: auto;
+		justify-self: start;
+	}
+
+	.forge-forum-card > .forge-lastpost {
+		grid-area: auto;
+	}
+
+	.post > .inner {
+		grid-template-areas:
+			"body"
+			"profile"
+			"top";
+		grid-template-columns: 1fr;
+	}
+
+	.postprofile {
+		border-left: 0;
+		border-top: 1px solid var(--gb-border);
+		grid-area: profile;
+		order: 2;
+		position: static;
+	}
+
+	.forgeboard .back2top {
+		margin: 0 12px 12px 0;
+	}
+
+	.profile-post-actions .post-buttons {
+		margin: 0 0 10px;
+		position: static;
+		width: auto;
+	}
+
+	.action-bar .search-box,
+	.action-bar .pagination {
+		margin-left: 0;
+		width: 100%;
+	}
+
+	.forge-forum-meta {
+		padding-left: 0;
+	}
+
+	.forge-lastpost {
+		min-height: auto;
+	}
+
+	.forge-toolbar {
+		grid-template-columns: 1fr;
+	}
+
+	.forge-topic-pagination {
+		justify-self: start;
+	}
+
+	.forge-login-grid,
+	.forge-stats-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.forgeboard .forge-forum-card > .forge-forum-numbers,
+	.forgeboard .forge-forum-meta {
+		padding-left: 0;
+	}
+
+	.forgeboard .post > .inner {
+		grid-template-areas:
+			"body"
+			"profile"
+			"top";
+		grid-template-columns: 1fr;
+	}
+
+	.forgeboard .postprofile {
+		border-radius: 0 0 var(--gb-radius) var(--gb-radius);
+		border-width: 1px 0 0;
+		margin-left: 0;
+	}
+
 	.forgeboard .forge-nav-card .forge-nav-split,
 	.forgeboard .forge-nav-top {
 		grid-template-columns: 1fr;
@@ -6492,6 +6247,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	.forgeboard .forge-category .forge-forum-grid::after {
 		display: none;
 	}
+
 }
 
 /* ------------------------------------------------------------------
@@ -6962,4 +6718,667 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard .forge-nav-user-card .forge-nav-user-notify > a:focus {
 	color: var(--gb-link-hover);
 	text-decoration: none;
+}
+
+/* ------------------------------------------------------------------
+   Posting topic review (posting.php preview / reply pages)
+   - Header bar: H3 left, Expand view right (flex layout)
+   - Posts have no postprofile sidebar -> postbody takes full width
+   ------------------------------------------------------------------ */
+.forgeboard .forge-topic-review-bar {
+	border-bottom:1px solid var(--gb-border);
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--gb-space-3);
+	justify-content: space-between;
+	margin: 0 0 var(--gb-space-3);
+}
+
+.forgeboard .forge-topic-review-bar > .forge-topic-review-head {
+	float: none;
+	margin: 0;
+}
+
+.forgeboard .forge-topic-review-bar > .forge-topic-review-toggle {
+	float: none;
+	margin: 0 0 0 auto;
+}
+
+/* Posts inside a topic review have no profile column (no .has-profile) —
+   collapse the .post grid to a single column so .postbody fills the width. */
+.forgeboard .forge-topic-review-list .post {
+	box-sizing: border-box;
+	padding: 20px;
+}
+
+.forgeboard .forge-topic-review-list .post > .inner {
+	box-sizing: border-box;
+	display: block;
+	grid-template-columns: none;
+	grid-template-areas: none;
+	overflow: hidden;
+	padding: 0;
+	width: 100%;
+}
+
+.forgeboard .forge-topic-review-list .post .postbody {
+	box-sizing: border-box;
+	float: none;
+	width: 100%;
+}
+
+.forgeboard .forge-topic-review-list .post .post-buttons {
+	float: right;
+	margin: 0 0 var(--gb-space-2) var(--gb-space-3);
+}
+
+.forgeboard .forge-topic-review-back {
+	margin: var(--gb-space-3) 0 0;
+}
+
+/* ------------------------------------------------------------------
+   Scope-restore for buttons that have their own visual identity and
+   should NOT inherit the generic .forgeboard .button GitHub-style.
+   These restores must come AFTER the generic rule (source order wins).
+   ------------------------------------------------------------------ */
+
+/* Topbar/inline search buttons: compact, square-flat, no padding bloat.
+   Connected to the input (no gap, square inner corners). */
+.forgeboard .button-search,
+.forgeboard .button-search-end,
+.forgeboard a.button-search,
+.forgeboard a.button-search-end,
+.forgeboard .forge-search .button,
+.forgeboard .forge-inline-search .button {
+	display: inline-flex;
+	gap: 0;
+	margin: 0;
+	padding: 5px 9px;
+	font-size: var(--gb-font-md);
+}
+
+/* Inline search inside .forge-inline-search hides the gear (advanced search)
+   button — this rule existed earlier but was overridden by the generic
+   button-search-end display: inline-flex above. Restore it here. */
+.forgeboard .forge-inline-search .button-search-end {
+	display: none;
+}
+
+/* Connected button group: input + button(s) form a single visual unit.
+   The input loses its right border/radius when followed by buttons. */
+.forgeboard .forge-search fieldset .inputbox + .button-search,
+.forgeboard .forge-inline-search fieldset .inputbox + .button-search {
+	border-left: 0;
+	border-radius: 0 var(--gb-radius-md) var(--gb-radius-md) 0;
+	margin-left: -1px;
+}
+
+.forgeboard .forge-search fieldset .button-search + .button-search-end {
+	border-left: 0;
+	border-radius: 0 var(--gb-radius-md) var(--gb-radius-md) 0;
+	margin-left: -1px;
+}
+
+.forgeboard .forge-search fieldset .inputbox,
+.forgeboard .forge-inline-search fieldset .inputbox {
+	border-radius: var(--gb-radius-md) 0 0 var(--gb-radius-md);
+}
+
+.forgeboard .button-search:hover,
+.forgeboard .button-search-end:hover,
+.forgeboard .forge-search .button:hover,
+.forgeboard .forge-inline-search .button:hover {
+	background: var(--gb-surface-subtle);
+	border-color: var(--gb-border);
+	color: var(--gb-link);
+}
+
+/* Nav main card links: don't inherit button chrome (they're nav links) */
+.forgeboard .forge-nav-main-card a,
+.forgeboard .forge-nav-main-card a:hover,
+.forgeboard .forge-nav-main-card a:focus,
+.forgeboard #nav-main > li > a,
+.forgeboard #nav-main > li > a:hover,
+.forgeboard #nav-main > li > a:focus {
+	background: transparent;
+	box-shadow: none;
+}
+
+/* Forum-card empty placeholders: box-sizing for clean borders */
+.forgeboard .forge-category .forge-forum-grid::before,
+.forgeboard .forge-category .forge-forum-grid::after {
+	background:
+		linear-gradient(160deg, rgba(88, 166, 255, 0.08), rgba(248, 81, 73, 0.06)),
+		rgba(22, 27, 34, 0.68);
+	border: 1px dashed rgba(88, 166, 255, 0.34);
+	border-radius: 6px;
+	box-sizing: border-box;
+	color: var(--gb-header-muted);
+	content: attr(data-placeholder-title);
+	display: none;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0;
+	min-height: 188px;
+	padding: 14px;
+	text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------
+   Responsive overrides — narrow viewports
+   ------------------------------------------------------------------ */
+
+/* Topbar stack threshold: 1100px — below this we force the topbar into a
+   single column (brand on top, search bar below). !important is needed
+   because earlier in the file there are non-media `.forgeboard .forge-topbar`
+   rules that win by source order at the same specificity. */
+@media (max-width: 1100px) {
+
+	.forgeboard .forge-topic-card-viewforum {
+		grid-template-columns: minmax(0, 1fr) 150px minmax(220px, 0.42fr);
+	}
+
+	.forgeboard.section-viewforum .forge-topic-card-viewforum,
+	.forgeboard.section-viewforum .forge-topic-section .forge-category-head {
+		grid-template-columns: minmax(0, 1fr) 70px 70px minmax(200px, 260px);
+	}
+
+	.forgeboard .forge-topbar {
+		grid-template-columns: 1fr !important;
+		gap: 10px !important;
+	}
+
+	.forgeboard .forge-topbar .forge-search,
+	.forgeboard .forge-topbar > .forge-search {
+		max-width: 100%;
+		width: 100%;
+	}
+
+	/* Brand: take full width of its row, shrink the title so it doesn't
+	   force letter-by-letter wrapping inside its parent grid cell. */
+	.forgeboard .forge-topbar .forge-brand {
+		display: grid;
+		min-width: 0;
+		width: 100%;
+	}
+
+	.forgeboard .forge-topbar .forge-brand-copy {
+		min-width: 0;
+	}
+
+	.forgeboard .forge-topbar .forge-brand-copy strong {
+		font-size: clamp(1.1rem, 4vw, 1.5rem);
+		overflow-wrap: break-word;
+		word-break: normal;
+	}
+
+	.forgeboard .forge-topbar .forge-brand-copy small {
+		font-size: 0.85rem;
+	}
+
+	/* Hero heading scales down */
+	.forgeboard .forge-hero h1,
+	.forgeboard h1 {
+		font-size: clamp(1.5rem, 6vw, 2rem);
+	}
+
+	/* Forum grid placeholders force-hidden (override any leftover display) */
+	.forgeboard .forge-category .forge-forum-grid::before,
+	.forgeboard .forge-category .forge-forum-grid::after,
+	.forgeboard .forge-category .forge-forum-grid:has(> .forge-forum-card:only-child)::before,
+	.forgeboard .forge-category .forge-forum-grid:has(> .forge-forum-card:only-child)::after,
+	.forgeboard .forge-category .forge-forum-grid:has(> .forge-forum-card:nth-child(2):last-child)::after {
+		display: none !important;
+	}
+
+	/* Force forum grid to single column at this breakpoint too */
+	.forgeboard .forge-category .forge-forum-grid {
+		grid-template-columns: 1fr;
+	}
+
+	/* Forum card internal layout: stack everything vertically */
+	.forgeboard .forge-forum-card {
+		grid-template-columns: 1fr;
+	}
+
+}
+
+/* viewtopic responsive: postbody + profile stack on narrow screens */
+@media (max-width: 900px) {
+
+	.forgeboard .forge-search {
+		grid-column: 1;
+		grid-row: auto;
+		justify-self: stretch;
+		max-width: none;
+	}
+
+	.forgeboard .forge-forum-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.forgeboard .forge-forum-card {
+		grid-template-areas:
+			"main"
+			"meta"
+			"numbers"
+			"lastpost";
+		grid-template-columns: 1fr;
+	}
+
+	.forgeboard .action-bar .search-box,
+	.forgeboard .action-bar .pagination {
+		flex-basis: 100%;
+		margin-left: 0;
+		width: 100%;
+	}
+
+	
+
+	
+
+	.forgeboard .forge-forum-card > .forge-forum-numbers,
+	.forgeboard .forge-forum-meta {
+		padding-left: 0;
+	}
+
+	.forgeboard .forge-header-search {
+		margin-left: 0;
+		max-width: none;
+		width: 100%;
+	}
+
+	.forgeboard .forge-category-head {
+		grid-template-columns: 1fr;
+	}
+
+	.forgeboard .forge-category-labels {
+		display: none;
+	}
+
+	.forgeboard .post > .inner {
+	grid-template-columns: 1fr;
+	display: flex;
+	flex-direction: column;
+}
+
+	.forgeboard .postprofile {
+	border-radius: 0 0 12px 12px;
+	margin-left: 0;
+	border-left: 0;
+	order: 2;
+}
+
+	.forgeboard .postbody {
+		order: 1;
+	}
+
+	.action-bar, .action-bar.bar-top {
+		justify-content: inherit;
+	}
+
+	.forgeboard .forge-brand,
+	.forgeboard .forge-search {
+		min-height: 0;
+		padding: 18px;
+	}
+
+	.forgeboard .forge-nav-card #nav-main > #username_logged_in {
+		margin-left: 0;
+		padding-left: 0;
+	}
+
+	.forgeboard .forge-topic-card-viewforum {
+		grid-template-columns: 1fr;
+	}
+
+	.forgeboard .forge-topic-stats {
+		justify-self: start;
+	}
+
+	.forgeboard #cp-menu,
+	.forgeboard .cp-menu {
+		padding: 8px;
+	}
+
+	.forgeboard #cp-menu #navigation ul,
+	.forgeboard .cp-menu .navigation ul {
+		grid-template-columns: 1fr;
+	}
+
+	.forgeboard.section-viewforum .forge-topic-card-viewforum,
+	.forgeboard.section-viewforum .forge-topic-section .forge-category-head {
+		grid-template-columns: 1fr;
+	}
+
+	.forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-main,
+	.forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-lastpost {
+		grid-column: 1;
+		grid-row: auto;
+	}
+
+	/* Stacked: restore .forge-topic-stats as a real container with a
+	   2-col grid for the chips (override the desktop display: contents) */
+	.forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-stats {
+		display: grid;
+		gap: 10px;
+		grid-column: 1;
+		grid-row: auto;
+		grid-template-columns: repeat(2, minmax(110px, 1fr));
+		justify-self: start;
+	}
+
+	.forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-stats > .forge-topic-stat-replies,
+	.forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-stats > .forge-topic-stat-views {
+		grid-column: auto;
+		grid-row: auto;
+	}
+
+	.forgeboard.section-viewforum .forge-topic-section .forge-category-labels {
+		display: none;
+	}
+
+	.forgeboard .post.has-profile > .inner {
+		grid-template-areas: "profile" "body" "top";
+		grid-template-columns: 1fr;
+	}
+
+	.forgeboard .post.has-profile .postbody {
+		padding-right: 14px;
+	}
+
+	.forgeboard .post.has-profile .postprofile {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 12px;
+		padding: 10px 14px;
+	}
+
+	/* Compact profile: avatar inline with name + meta */
+	.forgeboard .post.has-profile .postprofile .avatar-container {
+		flex-shrink: 0;
+		margin: 0;
+	}
+
+	.forgeboard .post.has-profile .postprofile .avatar img {
+		height: 40px;
+		width: 40px;
+	}
+
+	.forgeboard .post.has-profile .postprofile dl,
+	.forgeboard .post.has-profile .postprofile dd {
+		flex: 1 1 auto;
+		margin: 0;
+		min-width: 0;
+	}
+
+}
+
+/* Tablet & below: viewforum toolbars stack to single column */
+@media (max-width: 760px) {
+
+	.forgeboard #mcp_queue ul.topiclist.missing-column dl,
+	.forgeboard #mcp_queue ul.topiclist.cplist.missing-column dl {
+		grid-template-columns: minmax(0, 1fr) 46px;
+	}
+
+	.forgeboard #mcp_queue ul.topiclist.missing-column dd.moderation {
+		border-left: 0;
+		border-top: 1px solid rgba(48, 54, 61, 0.64);
+		grid-column: 1 / -1;
+	}
+
+	.forgeboard .forge-jumpbar {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.forgeboard .forge-jumpbox {
+		margin-left: 0;
+		width: 100%;
+	}
+
+	.forgeboard .forge-jumpbox .dropdown-trigger {
+		width: 100%;
+	}
+
+	/* Post titles must wrap by word, not by letter */
+	.forgeboard .post .postbody h3,
+	.forgeboard .has-profile .postbody h3 {
+		font-size: clamp(1rem, 4vw, 1.25rem);
+		overflow-wrap: break-word;
+		word-break: normal;
+	}
+	.forgeboard .forge-toolbar,
+	.forgeboard .forge-action-strip,
+	.forgeboard.section-viewforum .forge-toolbar.bar-top {
+		grid-template-columns: 1fr;
+		row-gap: 10px;
+	}
+
+	.forgeboard .forge-toolbar-actions {
+		flex-wrap: wrap;
+	}
+
+	.forgeboard .forge-inline-search {
+		justify-self: stretch;
+		width: 100%;
+	}
+
+	.forgeboard .forge-inline-search fieldset,
+	.forgeboard .forge-inline-search .inputbox {
+		width: 100%;
+	}
+
+	.forgeboard .forge-topic-pagination {
+		justify-self: start;
+	}
+
+	/* Bottom toolbar: stack the two rows + their inner halves
+	   (apply to both viewforum and viewtopic) */
+	.forgeboard.section-viewforum .forge-toolbar.bar-bottom .forge-bottom-row,
+	.forgeboard.section-viewtopic .forge-topic-bottom-bar .forge-bottom-row {
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.forgeboard.section-viewforum .forge-toolbar.bar-bottom .forge-bottom-left,
+	.forgeboard.section-viewforum .forge-toolbar.bar-bottom .forge-bottom-right,
+	.forgeboard.section-viewtopic .forge-topic-bottom-bar .forge-bottom-left,
+	.forgeboard.section-viewtopic .forge-topic-bottom-bar .forge-bottom-right {
+		flex-wrap: wrap;
+		width: 100%;
+	}
+
+	.forgeboard.section-viewforum .forge-toolbar.bar-bottom .forge-bottom-right,
+	.forgeboard.section-viewtopic .forge-topic-bottom-bar .forge-bottom-right {
+		justify-content: flex-end;
+		margin-left: 0;
+	}
+
+	/* viewtopic: jumpbox right-aligned and compact */
+	.forgeboard.section-viewtopic .forge-topic-bottom-bar .forge-jumpbox-inline {
+		margin-left: auto;
+		width: auto;
+	}
+
+	.forgeboard.section-viewtopic .forge-topic-bottom-bar .forge-jumpbox-inline .forge-jumpbox-trigger,
+	.forgeboard.section-viewtopic .forge-topic-bottom-bar .forge-jumpbox-inline .dropdown-trigger {
+		width: auto;
+	}
+
+	.forgeboard.section-viewforum .forge-toolbar.bar-bottom .forge-jumpbox-inline {
+		margin-left: auto;  /* keep right-aligned in its row */
+		width: auto;
+	}
+
+	/* Hide the "Return to..." link on narrow viewports (saves space).
+	   Prosilver hides it by default below ~700px; we keep that behavior. */
+	.forgeboard.section-viewforum .forge-toolbar.bar-bottom .forge-jumpbox-return,
+	.forgeboard p.jumpbox-return {
+		display: none;
+	}
+
+	/* Jump-to trigger keeps compact (max-content), not full row width */
+	.forgeboard.section-viewforum .forge-toolbar.bar-bottom .forge-jumpbox-inline .forge-jumpbox-trigger,
+	.forgeboard.section-viewforum .forge-toolbar.bar-bottom .forge-jumpbox-inline .dropdown-trigger {
+		width: auto;
+	}
+
+	/* The bottom-right cell holding the jumpbox: align its content to the right */
+	.forgeboard.section-viewforum .forge-toolbar.bar-bottom .forge-bottom-right {
+		justify-content: flex-end;
+	}
+
+}
+
+/* Phone: even tighter spacing */
+@media (max-width: 480px) {
+	.forgeboard .wrap,
+	.forgeboard .forge-shell {
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+
+	.forgeboard .forge-topbar {
+		padding: 10px 12px;
+	}
+
+	.forgeboard .forge-hero,
+	.forgeboard .forge-forum-hero {
+		padding: 16px;
+	}
+
+	.forgeboard .forge-hero h1,
+	.forgeboard .forge-forum-hero h1 {
+		font-size: clamp(1.3rem, 6vw, 1.7rem);
+	}
+
+	/* Compact stat cards: 2-up instead of cramped */
+	.forgeboard .forge-stats-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Prevent horizontal scroll caused by any oversized child.
+   IMPORTANT: do NOT put overflow-x:hidden on .forgeboard or #wrap —
+   it clips dropdowns (notifications, jumpbox, quick-links).
+   Instead, use overflow-x:hidden only on <body> if needed. */
+html,
+body.forgeboard {
+	max-width: 100%;
+	overflow-x: clip; /* `clip` doesn't establish a clipping context for
+	                     positioned descendants, so dropdowns still escape. */
+}
+
+/* ------------------------------------------------------------------
+   Header user profile dropdown trigger: no "active" highlight
+   when the dropdown is open. Just an icon link.
+   ------------------------------------------------------------------ */
+.forgeboard .forge-nav-card #username_logged_in.dropdown-visible .header-profile > a,
+.forgeboard .forge-nav-card .header-profile.dropdown-container.dropdown-visible > a,
+.forgeboard .forge-nav-user-card .header-profile.dropdown-container.dropdown-visible > a,
+.forgeboard .forge-nav-user-card .header-profile.dropdown-container.dropdown-visible .header-avatar {
+	background: transparent;
+	border-color: transparent;
+	box-shadow: none;
+	color: inherit;
+}
+
+/* ------------------------------------------------------------------
+   Notifications dropdown — alignment + visual separator
+   ------------------------------------------------------------------ */
+.forgeboard .forge-nav-user-notify {
+	position: relative;
+}
+
+/* Notification dropdown positioning — anchored to the bell trigger's right
+   edge so the panel always opens toward the left.
+   !important here is intentional: Prosilver and earlier Forge rules set
+   left/right/margin-right with multiple specificities; we want a single
+   deterministic position that wins regardless of cascade. */
+.forgeboard #notification_list,
+.forgeboard .forge-nav-user-notify > #notification_list,
+.forgeboard #notification_list.dropdown {
+	left: auto !important;
+	right: 0 !important;
+	margin: 0 !important;
+	margin-right: 0 !important;
+	width: min(340px, calc(100vw - 24px)) !important;
+}
+
+/* Make .dropdown-contents flow inside the wrapper (override Prosilver's
+   position: absolute) so it naturally fills the wrapper's box. */
+.forgeboard #notification_list .dropdown-contents {
+	width: 100% !important;
+	left: auto !important;
+	margin: 0 !important;
+	position: relative !important;
+	right: auto !important;
+}
+
+/* Separator between the .header bar, the <ul> list, and the .footer */
+.forgeboard #notification_list .dropdown-contents > .header {
+	border-bottom: 1px solid var(--gb-border);
+}
+
+.forgeboard #notification_list .dropdown-contents > ul {
+	border-bottom: 1px solid var(--gb-border);
+	margin: 0;
+}
+
+.forgeboard #notification_list .dropdown-contents > ul > li.no_notifications {
+	color: var(--gb-text-muted);
+	font-size: var(--gb-font-sm);
+	padding: var(--gb-space-3) var(--gb-space-4);
+	text-align: center;
+}
+
+/* ------------------------------------------------------------------
+   viewtopic: First unread post link inside the H2 topic title.
+   The <a class="mark forge-first-unread"> sits at the right edge of
+   the title row.
+   ------------------------------------------------------------------ */
+.forgeboard h2.forge-topic-title,
+.forgeboard h2.topic-title.forge-topic-title {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--gb-space-3);
+	justify-content: space-between;
+}
+
+.forgeboard h2.forge-topic-title > a:first-of-type {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.forgeboard h2.forge-topic-title .forge-first-unread {
+	background: var(--gb-surface-subtle);
+	border: 1px solid var(--gb-border);
+	border-radius: var(--gb-radius-md);
+	color: var(--gb-link);
+	flex: 0 0 auto;
+	font-size: var(--gb-font-sm);
+	font-weight: var(--gb-weight-medium);
+	margin-left: auto;
+	padding: 4px 10px;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.forgeboard h2.forge-topic-title .forge-first-unread:hover,
+.forgeboard h2.forge-topic-title .forge-first-unread:focus {
+	background: var(--gb-blue-soft);
+	border-color: var(--gb-link);
+	color: var(--gb-link-hover);
+}
+
+/* viewforum: shift only the Replies/Views header labels 10px to the left.
+   The stat boxes below stay in place. */
+.forgeboard.section-viewforum .forge-topic-section .forge-category-labels span:nth-child(1),
+.forgeboard.section-viewforum .forge-topic-section .forge-category-labels span:nth-child(2) {
+	transform: translateX(-6px);
 }
