@@ -6065,19 +6065,29 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	background: var(--gb-surface-subtle);
 	border: 1px solid var(--gb-border-muted);
 	border-radius: 6px;
+	container-type: inline-size;
 	display: flex;
 	flex-direction: column;
 	gap: 2px;
 	justify-content: center;
 	min-height: 72px;
+	min-width: 0;
 	padding: 10px 8px;
 	text-align: center;
 }
 
 .forgeboard.section-viewforum .forge-topic-stat strong {
 	color: var(--gb-text);
-	font-size: 1.8em;
+	/* Scale font down when the column is narrow so 5-6 digit numbers fit
+	   without forcing the column to expand and breaking grid alignment. */
+	font-size: clamp(1.05em, 4cqi, 1.6em);
+	font-variant-numeric: tabular-nums;
 	line-height: 1;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
 }
 
 .forgeboard.section-viewforum .forge-topic-stat small {
