@@ -5749,11 +5749,15 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
-.forgeboard .forge-nav-main-card,
-.forgeboard .forge-nav-user-card {
+.forgeboard .forge-nav-main-card
+{
 	background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent 80px), var(--gb-surface);
 	border: 1px solid rgba(48, 54, 61, 0.72);
 	border-radius: 6px;
+	padding: 8px 10px;
+}
+
+.forgeboard .forge-nav-user-card {
 	padding: 8px 10px;
 }
 
@@ -6927,4 +6931,35 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	position: absolute;
 	top: 20%;
 	width: 3px;
+}
+
+/* ------------------------------------------------------------------
+   User nav (avatar / PM / Notifications): icon-only, no chip hover.
+   Strip background/border/box-shadow/transform on both base and hover.
+   Only the text/icon color changes on hover.
+   ------------------------------------------------------------------ */
+.forgeboard .forge-nav-user-card .header-avatar,
+.forgeboard .forge-nav-user-card .header-avatar:hover,
+.forgeboard .forge-nav-user-card .header-avatar:focus,
+.forgeboard .forge-nav-user-card .forge-nav-user-pm > a,
+.forgeboard .forge-nav-user-card .forge-nav-user-pm > a:hover,
+.forgeboard .forge-nav-user-card .forge-nav-user-pm > a:focus,
+.forgeboard .forge-nav-user-card .forge-nav-user-notify > a,
+.forgeboard .forge-nav-user-card .forge-nav-user-notify > a:hover,
+.forgeboard .forge-nav-user-card .forge-nav-user-notify > a:focus {
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	transform: none;
+}
+
+.forgeboard .forge-nav-user-card .header-avatar:hover,
+.forgeboard .forge-nav-user-card .header-avatar:focus,
+.forgeboard .forge-nav-user-card .forge-nav-user-pm > a:hover,
+.forgeboard .forge-nav-user-card .forge-nav-user-pm > a:focus,
+.forgeboard .forge-nav-user-card .forge-nav-user-notify > a:hover,
+.forgeboard .forge-nav-user-card .forge-nav-user-notify > a:focus {
+	color: var(--gb-link-hover);
+	text-decoration: none;
 }
