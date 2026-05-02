@@ -217,7 +217,7 @@ hr {
 	background: color-mix(in srgb, var(--gb-header) 94%, var(--gb-accent));
 	border: 1px solid var(--gb-border);
 	border: 1px solid color-mix(in srgb, var(--gb-border) 54%, transparent);
-	border-radius: 0 0 18px 18px;
+	border-radius: 0 0 12px 12px;
 	box-shadow: var(--gb-shadow);
 	display: grid;
 	gap: 14px;
@@ -244,7 +244,7 @@ hr {
 	align-items: center;
 	background:
 		linear-gradient(135deg, #ffffff, #dbeafe);
-	border-radius: 14px;
+	border-radius: 12px;
 	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 14px 35px rgba(0, 0, 0, 0.24);
 	color: #0d1117;
 	display: inline-flex;
@@ -371,7 +371,7 @@ hr {
 
 .forge-nav-card a {
 	align-items: center;
-	border-radius: 9px;
+	border-radius: 6px;
 	color: var(--gb-text-muted);
 	display: inline-flex;
 	gap: 5px;
@@ -458,7 +458,7 @@ hr {
 		linear-gradient(135deg, rgba(31, 111, 235, 0.14), transparent 50%),
 		linear-gradient(45deg, var(--gb-surface), var(--gb-surface-subtle));
 	border: 1px solid var(--gb-border);
-	border-radius: 18px;
+	border-radius: 12px;
 	box-shadow: var(--gb-shadow);
 	display: grid;
 	gap: 18px;
@@ -503,7 +503,7 @@ hr {
 		linear-gradient(135deg, rgba(31, 111, 235, 0.18), transparent 52%),
 		linear-gradient(160deg, var(--gb-surface), var(--gb-surface-subtle));
 	border: 1px solid var(--gb-border);
-	border-radius: 24px;
+	border-radius: 12px;
 	box-shadow: var(--gb-shadow);
 	display: grid;
 	gap: 18px;
@@ -514,7 +514,7 @@ hr {
 
 .forge-forum-hero::before {
 	background: var(--gb-danger);
-	border-radius: 9px;
+	border-radius: 6px;
 	content: "";
 	height: 54%;
 	left: 0;
@@ -638,7 +638,7 @@ hr {
 
 .forge-topic-card::before {
 	background: var(--gb-link);
-	border-radius: 9px;
+	border-radius: 6px;
 	content: "";
 	height: calc(100% - 28px);
 	left: -1px;
@@ -706,7 +706,7 @@ hr {
 	background: var(--gb-blue-soft);
 	border: 1px solid var(--gb-border);
 	border: 1px solid color-mix(in srgb, var(--gb-link) 26%, var(--gb-border));
-	border-radius: 14px;
+	border-radius: 12px;
 	color: var(--gb-link);
 	display: inline-flex;
 	font-size: 1.7em;
@@ -745,7 +745,7 @@ hr {
 	background: var(--gb-red-soft);
 	border: 1px solid var(--gb-border);
 	border: 1px solid color-mix(in srgb, var(--gb-danger) 35%, var(--gb-border));
-	border-radius: 9px;
+	border-radius: 6px;
 	color: var(--gb-danger);
 	font-size: 1.05em;
 	font-weight: 700;
@@ -1068,7 +1068,7 @@ hr {
 
 .forge-forum-card::before {
 	background: var(--gb-link);
-	border-radius: 9px;
+	border-radius: 6px;
 	content: "";
 	height: calc(100% - 28px);
 	left: -1px;
@@ -1131,7 +1131,7 @@ hr {
 	background: var(--gb-blue-soft);
 	border: 1px solid var(--gb-border);
 	border: 1px solid color-mix(in srgb, var(--gb-link) 28%, var(--gb-border));
-	border-radius: 13px;
+	border-radius: 12px;
 	color: var(--gb-link);
 	display: inline-flex;
 	font-size: 2em;
@@ -2674,7 +2674,7 @@ a:hover .icon.icon-orange {
 	}
 
 	.forge-topbar {
-		border-radius: 0 0 18px 18px;
+		border-radius: 0 0 12px 12px;
 		margin-left: -8px;
 		margin-right: -8px;
 		padding: 14px;
@@ -2685,7 +2685,7 @@ a:hover .icon.icon-orange {
 	}
 
 	.forge-brand .site_logo {
-		border-radius: 14px;
+		border-radius: 12px;
 		height: 44px;
 		width: 44px;
 	}
@@ -2696,7 +2696,7 @@ a:hover .icon.icon-orange {
 
 	.forge-hero,
 	.forge-forum-hero {
-		border-radius: 18px;
+		border-radius: 12px;
 		padding: 18px;
 	}
 
@@ -2777,7 +2777,7 @@ Intentional page-level overrides to move away from prosilver.
 .forgeboard .jumpbox .dropdown-contents a {
 	background: transparent;
 	border: 0;
-	border-radius: 5px;
+	border-radius: 6px;
 	box-shadow: none;
 	color: var(--gb-text);
 	display: block;
@@ -2794,7 +2794,7 @@ Intentional page-level overrides to move away from prosilver.
 	background: var(--gb-surface-subtle);
 	background-image: none;
 	border: 1px solid var(--gb-border);
-	border-radius: 7px;
+	border-radius: 6px;
 	box-shadow: none;
 	color: var(--gb-text-muted);
 	display: inline-flex;
@@ -3018,7 +3018,7 @@ Overrides phpBB/prosilver dropdowns while keeping the native JS hooks.
 }
 
 .forgeboard #notification_list li {
-	border-radius: 8px;
+	border-radius: 6px;
 	position: relative;
 }
 
@@ -3038,7 +3038,7 @@ Overrides phpBB/prosilver dropdowns while keeping the native JS hooks.
 
 .forgeboard #notification_list img,
 .forgeboard #notification_list .avatar img {
-	border-radius: 8px;
+	border-radius: 6px;
 	height: 36px;
 	object-fit: cover;
 	width: 36px;
@@ -3127,7 +3127,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 	background:
 		linear-gradient(135deg, rgba(88, 166, 255, 0.11), rgba(248, 81, 73, 0.04) 46%, transparent 70%),
 		var(--gb-surface);
-	border-radius: 16px;
+	border-radius: 12px;
 	margin: 0 0 18px;
 	min-width: 0;
 	overflow: hidden;
@@ -3269,7 +3269,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 
 .forgeboard .forge-forum-numbers span {
 	align-items: center;
-	border-radius: 9px;
+	border-radius: 6px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -3289,7 +3289,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 	border-top: 1px solid var(--gb-link);
   	border-right: 1px solid var(--gb-link);
   	border-bottom: 1px solid var(--gb-link);
-	border-radius: 10px;
+	border-radius: 6px;
 	display: grid;
 	gap: 5px;
 	padding: 14px 44px 14px 16px;
@@ -3306,7 +3306,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 .forgeboard .forge-toolbar {
 	align-items: center;
 	background: var(--gb-surface);
-	border-radius: 9px;
+	border-radius: 6px;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
@@ -3359,7 +3359,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 .forgeboard input.button2,
 .forgeboard input[type="submit"],
 .forgeboard input[type="button"] {
-	border-radius: 9px;
+	border-radius: 6px;
 	box-shadow: none;
 	filter: none;
 	text-shadow: none;
@@ -3397,7 +3397,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 .forgeboard select {
 	background: #12161c;
 	border: 1px solid var(--gb-border);
-	border-radius: 8px;
+	border-radius: 6px;
   	padding: 0.200rem 0.500rem;
 	box-shadow: none;
 	color: var(--gb-text);
@@ -3411,7 +3411,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 
 .forgeboard .search-box .inputbox {
 	border: 0;
-	border-radius: 8px 0 0 8px;
+	border-radius: 6px 0 0 6px;
 	height: 32px;
 	padding: 0 10px;
 	min-height: 36px;
@@ -3419,7 +3419,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 
 .forgeboard .search-box .button {
 	border-bottom: 0;
-	border-radius: 0 8px 8px 0;
+	border-radius: 0 6px 6px 0;
 	border-right: 0;
 	border-top: 0;
 	box-shadow: none;
@@ -3548,7 +3548,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 .forgeboard .back2top .top {
 	background-color: #161b22;
 	border: 1px solid var(--gb-border);
-	border-radius: 9px;
+	border-radius: 6px;
 	color: var(--gb-text-muted);
 	display: inline-flex;
 	align-items: center;
@@ -3686,13 +3686,13 @@ legacy selectors for these areas.
 }
 
 .forgeboard .forge-search .inputbox {
-	border-radius: 10px 0 0 10px;
+	border-radius: 6px 0 0 6px;
 	font-size: 13px;
 	height: 42px;
 }
 
 .forgeboard .forge-search .button-search-end {
-	border-radius: 0 10px 10px 0;
+	border-radius: 0 6px 6px 0;
 }
 
 .forgeboard .forge-nav-card .navbar {
@@ -3710,7 +3710,7 @@ legacy selectors for these areas.
 .forgeboard .forge-nav-card #nav-main > li > a,
 .forgeboard .forge-nav-card #nav-main > li > span,
 .forgeboard .forge-nav-card #nav-main .header-profile > a {
-	border-radius: 9px;
+	border-radius: 6px;
 	display: inline-flex;
 	min-height: 34px;
 	padding: 7px 9px;
@@ -3737,7 +3737,7 @@ legacy selectors for these areas.
 
 .forgeboard .forge-nav-card #nav-main > #username_logged_in img,
 .forgeboard .forge-nav-card #nav-main > #username_logged_in .avatar img {
-	border-radius: 7px;
+	border-radius: 6px;
 	height: 30px;
 	width: 30px;
 }
@@ -3767,7 +3767,7 @@ legacy selectors for these areas.
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	border-radius: 8px;
+	border-radius: 6px;
 }
 
 .forgeboard .dropdown-contents a:hover .icon,
@@ -3823,7 +3823,7 @@ Prevents prosilver hover/focus rules from changing the geometry of search button
 	align-items: stretch;
 	background: var(--gb-bg-soft);
 	border: 1px solid var(--gb-border);
-	border-radius: 10px;
+	border-radius: 6px;
 	display: grid;
 	gap: 0;
 	grid-template-columns: minmax(0, 1fr) 42px 42px;
@@ -4054,7 +4054,7 @@ Replaces the old prosilver FAQ column stack with readable responsive cards.
 		linear-gradient(135deg, rgba(88, 166, 255, 0.10), rgba(248, 81, 73, 0.035) 58%, transparent),
 		var(--gb-surface);
 	border: 1px solid var(--gb-border);
-	border-radius: 16px;
+	border-radius: 12px;
 	margin: 0 0 18px;
 	padding: clamp(22px, 3vw, 34px);
 }
@@ -4094,7 +4094,7 @@ Replaces the old prosilver FAQ column stack with readable responsive cards.
 
 .forgeboard .forge-faq-index-card a {
 	align-items: flex-start;
-	border-radius: 8px;
+	border-radius: 6px;
 	color: var(--gb-link);
 	display: flex;
 	line-height: 1.35;
@@ -4181,7 +4181,7 @@ Replaces the old prosilver FAQ column stack with readable responsive cards.
 	align-self: flex-start;
 	background: var(--gb-bg-soft);
 	border: 1px solid var(--gb-border);
-	border-radius: 9px;
+	border-radius: 6px;
 	color: var(--gb-text-muted);
 	display: inline-flex;
 	gap: 6px;
@@ -4282,7 +4282,7 @@ Replaces prosilver tab hover/active states with stable dark pills.
 	color: var(--gb-text-muted);
 	align-items: center;
 	border: 1px solid var(--gb-border);
-	border-radius: 9px;
+	border-radius: 6px;
 	box-shadow: none;
 	display: inline-flex;
 	gap: 7px;
@@ -4361,7 +4361,7 @@ Keeps the themed dropdown look while reducing item height near the header search
 .forgeboard .dropdown-extended .dropdown-contents a,
 .forgeboard .jumpbox .dropdown-contents a {
 	border: 0;
-	border-radius: 7px;
+	border-radius: 6px;
 	box-shadow: inset 0 0 0 1px transparent, inset 3px 0 0 transparent;
 	display: flex;
 	line-height: 1.3;
@@ -4396,7 +4396,7 @@ Keeps the themed dropdown look while reducing item height near the header search
 	gap: 10px;
 	justify-content: space-between;
 	padding: 7px 9px;
-	border-radius: 8px;
+	border-radius: 6px;
 }
 
 .forgeboard .contact-icons.dropdown-contents {
@@ -4473,7 +4473,7 @@ Extends the UCP tab hover/active language to common controls across the board.
 
 .forgeboard .post-buttons .button,
 .forgeboard .post-author-actions .button {
-	border-radius: 9px;
+	border-radius: 6px;
 }
 
 .forgeboard .search-box .button,
@@ -4523,7 +4523,7 @@ Aligns header navigation hover/open states with UCP tabs.
 .forgeboard .forge-nav-card .breadcrumbs a {
 	background: transparent;
 	border: 1px solid transparent;
-	border-radius: 9px;
+	border-radius: 6px;
 	box-shadow: none;
 	color: var(--gb-text-muted);
 	transform: none;
@@ -4655,7 +4655,7 @@ Keeps author/forum links as inline text links, not pill buttons.
 .forgeboard .post-author-actions a {
 	background: var(--gb-surface);
 	border: 1px solid var(--gb-border);
-	border-radius: 9px;
+	border-radius: 6px;
 	box-shadow: none;
 	color: var(--gb-text-muted);
 	line-height: 2.2;
@@ -4865,7 +4865,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forgeboard .forge-inline-search .button-search {
-	border-radius: 0 10px 10px 0;
+	border-radius: 0 6px 6px 0;
 }
 
 .forgeboard .jumpbox.dropdown-visible .dropdown,
@@ -4928,7 +4928,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard .left-box a {
 	background: var(--gb-surface);
 	border: 1px solid var(--gb-border);
-	border-radius: 9px;
+	border-radius: 6px;
 	box-shadow: none;
 	color: var(--gb-text-muted);
 	padding: 0.200rem 0.500rem;
@@ -4998,7 +4998,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard #quick-links.dropdown-container .dropdown-contents,
 .forgeboard #quick-links.dropdown-container.dropdown-visible .dropdown-contents,
 .forgeboard #quick-links.responsive-menu .dropdown-contents {
-	border-radius: 9px;
+	border-radius: 6px;
 	max-height: min(420px, calc(100vh - 150px));
 	min-width: 218px;
 	overflow-x: hidden;
@@ -5024,7 +5024,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard #quick-links.dropdown-container.dropdown-visible .dropdown-contents::-webkit-scrollbar-thumb,
 .forgeboard #quick-links.responsive-menu .dropdown-contents::-webkit-scrollbar-thumb {
 	background: rgba(88, 166, 255, 0.58);
-	border-radius: 9px;
+	border-radius: 6px;
 }
 
 .forgeboard #quick-links.dropdown-container .dropdown-contents li,
@@ -5081,7 +5081,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard #mcp_queue ul.topiclist.missing-column {
 	background: var(--gb-surface);
 	border: 1px solid rgba(48, 54, 61, 0.86);
-	border-radius: 9px;
+	border-radius: 6px;
 	box-shadow: none;
 	margin: 0 0 8px;
 	overflow: hidden;
@@ -5216,7 +5216,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 		linear-gradient(135deg, rgba(248, 81, 73, 0.24), rgba(248, 81, 73, 0.10)),
 		rgba(248, 81, 73, 0.12);
 	border: 1px solid rgba(248, 81, 73, 0.38);
-	border-radius: 9px;
+	border-radius: 6px;
 	box-sizing: border-box;
 	color: var(--gb-text);
 	margin: 10px 0 14px;
@@ -5640,7 +5640,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard .forge-nav-user-card {
 	background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent 80px), var(--gb-surface);
 	border: 1px solid rgba(48, 54, 61, 0.72);
-	border-radius: 9px;
+	border-radius: 6px;
 	padding: 8px 10px;
 }
 
@@ -5823,7 +5823,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	background: transparent;
 	border-color: var(--gb-border);
 	box-shadow: none;
-	border-radius: 16px;
+	border-radius: 12px;
 	border: 0;
 }
 
@@ -5923,7 +5923,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	align-items: center;
 	background: var(--gb-surface-subtle);
 	border: 1px solid var(--gb-border-muted);
-	border-radius: 9px;
+	border-radius: 6px;
 	display: flex;
 	flex-direction: column;
 	gap: 2px;
@@ -6061,7 +6061,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 .forgeboard.section-viewforum .forge-mark-read-link {
 	border: 1px solid var(--gb-border);
-	border-radius: 9px;
+	border-radius: 6px;
 	display: inline-block;
 	padding: 6px 10px;
 }
@@ -6071,7 +6071,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard .cp-menu {
 	background: var(--gb-surface);
 	border: 1px solid var(--gb-border);
-	border-radius: 9px;
+	border-radius: 6px;
 	box-sizing: border-box;
 	box-shadow: none;
 	margin-top: 0;
@@ -6117,7 +6117,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard .cp-menu .navigation a {
 	background: var(--gb-surface-subtle);
 	border: 1px solid var(--gb-border);
-	border-radius: 9px;
+	border-radius: 6px;
 	box-shadow: none;
 	color: var(--gb-text);
 	display: block;
@@ -6318,7 +6318,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 		linear-gradient(160deg, rgba(88, 166, 255, 0.08), rgba(248, 81, 73, 0.06)),
 		rgba(22, 27, 34, 0.68);
 	border: 1px dashed rgba(88, 166, 255, 0.34);
-	border-radius: 9px;
+	border-radius: 6px;
 	box-sizing: border-box;
 	color: var(--gb-header-muted);
 	content: attr(data-placeholder-title);
