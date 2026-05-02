@@ -7745,3 +7745,66 @@ body.forgeboard {
     display: none;
   }
 }
+
+/* ------------------------------------------------------------------
+   ForgeBoard imageset overrides — replace inherited Prosilver GIFs
+   with custom SVG icons (monochrome, scalable, dark-mode friendly).
+   The same class names are reused so phpBB's existing markup works
+   unchanged. SVGs live in styles/ForgeBoard/theme/images/.
+   ------------------------------------------------------------------ */
+
+/* Forums */
+.forgeboard .forum_read              { background-image: url("./images/forum_read.svg"); }
+.forgeboard .forum_read_locked       { background-image: url("./images/forum_read_locked.svg"); }
+.forgeboard .forum_read_subforum     { background-image: url("./images/forum_read_subforum.svg"); }
+.forgeboard .forum_unread            { background-image: url("./images/forum_unread.svg"); }
+.forgeboard .forum_unread_locked     { background-image: url("./images/forum_unread_locked.svg"); }
+.forgeboard .forum_unread_subforum   { background-image: url("./images/forum_unread_subforum.svg"); }
+.forgeboard .forum_link              { background-image: url("./images/forum_link.svg"); }
+
+/* Topics */
+.forgeboard .topic_read              { background-image: url("./images/topic_read.svg"); }
+.forgeboard .topic_read_mine         { background-image: url("./images/topic_read_mine.svg"); }
+.forgeboard .topic_read_locked       { background-image: url("./images/topic_read_locked.svg"); }
+.forgeboard .topic_read_locked_mine  { background-image: url("./images/topic_read_locked_mine.svg"); }
+.forgeboard .topic_read_hot          { background-image: url("./images/topic_read_hot.svg"); }
+.forgeboard .topic_read_hot_mine     { background-image: url("./images/topic_read_hot_mine.svg"); }
+.forgeboard .topic_unread            { background-image: url("./images/topic_unread.svg"); }
+.forgeboard .topic_unread_mine       { background-image: url("./images/topic_unread_mine.svg"); }
+.forgeboard .topic_unread_locked     { background-image: url("./images/topic_unread_locked.svg"); }
+.forgeboard .topic_unread_locked_mine{ background-image: url("./images/topic_unread_locked_mine.svg"); }
+.forgeboard .topic_unread_hot        { background-image: url("./images/topic_unread_hot.svg"); }
+.forgeboard .topic_unread_hot_mine   { background-image: url("./images/topic_unread_hot_mine.svg"); }
+.forgeboard .topic_moved             { background-image: url("./images/topic_moved.svg"); }
+
+/* Sticky */
+.forgeboard .sticky_read              { background-image: url("./images/sticky_read.svg"); }
+.forgeboard .sticky_read_mine         { background-image: url("./images/sticky_read_mine.svg"); }
+.forgeboard .sticky_read_locked       { background-image: url("./images/sticky_read_locked.svg"); }
+.forgeboard .sticky_read_locked_mine  { background-image: url("./images/sticky_read_locked_mine.svg"); }
+.forgeboard .sticky_unread            { background-image: url("./images/sticky_unread.svg"); }
+.forgeboard .sticky_unread_mine       { background-image: url("./images/sticky_unread_mine.svg"); }
+.forgeboard .sticky_unread_locked     { background-image: url("./images/sticky_unread_locked.svg"); }
+.forgeboard .sticky_unread_locked_mine{ background-image: url("./images/sticky_unread_locked_mine.svg"); }
+
+/* Announce + Global */
+.forgeboard .announce_read              { background-image: url("./images/announce_read.svg"); }
+.forgeboard .announce_read_mine         { background-image: url("./images/announce_read_mine.svg"); }
+.forgeboard .announce_read_locked       { background-image: url("./images/announce_read_locked.svg"); }
+.forgeboard .announce_read_locked_mine  { background-image: url("./images/announce_read_locked_mine.svg"); }
+.forgeboard .announce_unread            { background-image: url("./images/announce_unread.svg"); }
+.forgeboard .announce_unread_mine       { background-image: url("./images/announce_unread_mine.svg"); }
+.forgeboard .announce_unread_locked     { background-image: url("./images/announce_unread_locked.svg"); }
+.forgeboard .announce_unread_locked_mine{ background-image: url("./images/announce_unread_locked_mine.svg"); }
+.forgeboard .global_read                { background-image: url("./images/announce_read.svg"); }
+.forgeboard .global_read_mine           { background-image: url("./images/announce_read_mine.svg"); }
+.forgeboard .global_read_locked         { background-image: url("./images/announce_read_locked.svg"); }
+.forgeboard .global_read_locked_mine    { background-image: url("./images/announce_read_locked_mine.svg"); }
+.forgeboard .global_unread              { background-image: url("./images/announce_unread.svg"); }
+.forgeboard .global_unread_mine         { background-image: url("./images/announce_unread_mine.svg"); }
+.forgeboard .global_unread_locked       { background-image: url("./images/announce_unread_locked.svg"); }
+.forgeboard .global_unread_locked_mine  { background-image: url("./images/announce_unread_locked_mine.svg"); }
+
+/* Misc */
+.forgeboard img[src$="no_avatar.gif"]   { content: url("./images/no_avatar.svg"); }
+.forgeboard img[src$="loading.gif"]     { content: url("./images/loading.svg"); }
