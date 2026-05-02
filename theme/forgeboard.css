@@ -738,6 +738,30 @@ hr {
 	grid-area: views;
 }
 
+/* viewforum_body uses .forge-topic-stats as a wrapper around the two
+   stat divs. Make it transparent to the grid so its children land in
+   the .replies and .views columns of the parent .forge-topic-card. */
+.forge-topic-card > .forge-topic-stats {
+	display: contents;
+}
+
+.forge-topic-card .forge-topic-stat {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	justify-content: center;
+	min-width: 0;
+}
+
+.forge-topic-card > .forge-topic-stats > .forge-topic-stat-replies {
+	grid-area: replies;
+}
+
+.forge-topic-card > .forge-topic-stats > .forge-topic-stat-views {
+	grid-area: views;
+}
+
 .forge-topic-card > .forge-lastpost {
 	grid-area: lastpost;
 }
