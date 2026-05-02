@@ -872,7 +872,7 @@ hr {
 }
 
 .postprofile .avatar img {
-	border-radius: var(--gb-radius-small);
+	border-radius: var(--gb-radius-md);
 	max-width: 100%;
 }
 
@@ -3038,7 +3038,7 @@ Overrides phpBB/prosilver dropdowns while keeping the native JS hooks.
 
 .forgeboard #notification_list img,
 .forgeboard #notification_list .avatar img {
-	border-radius: 6px;
+	border-radius: var(--gb-radius-md);
 	height: 36px;
 	object-fit: cover;
 	width: 36px;
@@ -6510,4 +6510,18 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 .forgeboard .forge-mcp-mark-actions {
 	margin-left: auto;
+}
+
+/* ------------------------------------------------------------------
+   Avatars: rounded squares (squircle) — consistent radius across the UI
+   ------------------------------------------------------------------ */
+.forgeboard img.avatar,
+.forgeboard .avatar img,
+.forgeboard .avatar-container img,
+.forgeboard .header-avatar img,
+.forgeboard .header-avatar .avatar,
+.forgeboard #notification_list img.avatar,
+.forgeboard .postprofile img.avatar {
+	border-radius: var(--gb-radius-md);
+	object-fit: cover;
 }
