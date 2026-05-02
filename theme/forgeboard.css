@@ -126,9 +126,7 @@ hr {
 .forgeboard ul.topiclist li.row.reported:focus-within,
 .forgeboard .panel ul.topiclist li.row.reported:hover,
 .forgeboard .panel ul.topiclist li.row.reported:focus-within {
-	background:
-		linear-gradient(90deg, rgba(248, 81, 73, 0.18), transparent 72%),
-		#612F2C;
+	background: #612F2C;
 	border-color: #612F2C;
 	box-shadow: inset 3px 0 0 #612F2C;
 }
