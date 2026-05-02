@@ -6578,6 +6578,85 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 /* ------------------------------------------------------------------
+   Inputs, textareas, selects — GitHub-style
+   - subtle inset shadow giving a slight relief
+   - blue focus ring (3px transparent), no fill change
+   - 6px radius
+   ------------------------------------------------------------------ */
+.forgeboard .inputbox,
+.forgeboard input[type="text"],
+.forgeboard input[type="email"],
+.forgeboard input[type="password"],
+.forgeboard input[type="search"],
+.forgeboard input[type="url"],
+.forgeboard input[type="tel"],
+.forgeboard input[type="number"],
+.forgeboard input[type="date"],
+.forgeboard input[type="datetime-local"],
+.forgeboard textarea,
+.forgeboard select {
+	background: var(--gb-input-bg);
+	border: 1px solid var(--gb-input-border);
+	border-radius: var(--gb-radius-md);
+	box-shadow: var(--gb-input-shadow-inset);
+	color: var(--gb-text);
+	font-family: var(--gb-font-sans);
+	font-size: var(--gb-font-md);
+	line-height: var(--gb-leading-normal);
+	padding: 5px var(--gb-space-3);
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.forgeboard textarea {
+	line-height: var(--gb-leading-normal);
+	min-height: 6em;
+	padding: var(--gb-space-2) var(--gb-space-3);
+	resize: vertical;
+}
+
+/* Focus state — blue border + 3px transparent blue ring (GitHub signature) */
+.forgeboard .inputbox:focus,
+.forgeboard input[type="text"]:focus,
+.forgeboard input[type="email"]:focus,
+.forgeboard input[type="password"]:focus,
+.forgeboard input[type="search"]:focus,
+.forgeboard input[type="url"]:focus,
+.forgeboard input[type="tel"]:focus,
+.forgeboard input[type="number"]:focus,
+.forgeboard textarea:focus,
+.forgeboard select:focus {
+	border-color: var(--gb-accent);
+	box-shadow: 0 0 0 3px var(--gb-input-focus-ring);
+	outline: 0;
+}
+
+/* Disabled */
+.forgeboard .inputbox[disabled],
+.forgeboard input[disabled],
+.forgeboard textarea[disabled],
+.forgeboard select[disabled] {
+	background: var(--gb-surface-subtle);
+	color: var(--gb-text-muted);
+	cursor: not-allowed;
+	opacity: 0.7;
+}
+
+/* Placeholder */
+.forgeboard .inputbox::placeholder,
+.forgeboard input::placeholder,
+.forgeboard textarea::placeholder {
+	color: var(--gb-text-muted);
+	opacity: 0.7;
+}
+
+/* Checkbox + radio — keep native, just align color */
+.forgeboard input[type="checkbox"],
+.forgeboard input[type="radio"] {
+	accent-color: var(--gb-accent);
+	cursor: pointer;
+}
+
+/* ------------------------------------------------------------------
    Buttons — 3-level system (default / primary / danger)
    Max radius 6px (no pill shapes anywhere).
    ------------------------------------------------------------------ */
