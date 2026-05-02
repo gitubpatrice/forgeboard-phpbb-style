@@ -3345,6 +3345,10 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 	border-left: 0;
 }
 
+.forgeboard .panel-container .panel {
+    margin-top: 10px;
+}
+
 .forgeboard .topic-title {
 	background: var(--gb-surface);
 	border: 1px solid var(--gb-border);
@@ -3372,7 +3376,6 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 
 .forgeboard .postbody {
 	min-width: 0;
-	padding: 18px 20px 22px;
 }
 
 .forgeboard .postbody h3 {
@@ -6290,17 +6293,29 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	float: none;
 }
 
-/* H3 review header with right-box "Expand view": ensure clean layout */
-.forgeboard .topicreview h3.review,
-.forgeboard h3.review {
-	align-items: center;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 12px;
-	justify-content: space-between;
+/* H3 review header: H3 text on left, "Expand view" on right.
+   .right-box comes BEFORE the text in source, so we use float: right
+   (block formatting context) — flex would put it on the left. */
+.forgeboard h3.review,
+.forgeboard .topicreview h3.review {
+	display: block;
+	overflow: hidden;
 }
 
 .forgeboard h3.review .right-box {
-	float: none;
-	margin: 0 0 0 auto;
+	float: right;
+	margin: 0;
+}
+
+/* Remove the <hr> separator and the action-bar borders in MCP/UCP panels */
+.forgeboard #cp-main .panel hr,
+.forgeboard #topicreview + hr,
+.forgeboard .topicreview + hr {
+	display: none;
+}
+
+.forgeboard .action-bar.bar-bottom,
+.forgeboard #cp-main .action-bar {
+	border-top: 0;
+	border-bottom: 0;
 }
