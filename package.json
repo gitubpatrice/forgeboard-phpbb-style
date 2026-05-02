@@ -1,0 +1,16 @@
+{
+	"name": "forgeboard-phpbb-style",
+	"version": "1.3.0",
+	"private": true,
+	"description": "Modern code-forge phpBB style based on Prosilver (3.3.16)",
+	"scripts": {
+		"lint:css": "stylelint \"theme/**/*.css\"",
+		"lint:css:fix": "stylelint \"theme/**/*.css\" --fix",
+		"lint:report": "stylelint \"theme/**/*.css\" --formatter verbose",
+		"dedup": "python theme/_dedup.py"
+	},
+	"devDependencies": {
+		"stylelint": "^16.10.0",
+		"stylelint-config-standard": "^36.0.1"
+	}
+}

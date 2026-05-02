@@ -4,5 +4,15 @@
 *~
 .DS_Store
 Thumbs.db
-.vscode/
 .idea/
+
+# Node / Stylelint dependencies
+node_modules/
+
+# Don't track CSS backups produced by the dedup script
+theme/forgeboard.css.bak*
+
+# VS Code: ignore everything except shared settings & recommendations
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json

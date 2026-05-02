@@ -1,0 +1,4 @@
+# Don't lint backup or generated files
+theme/forgeboard.css.bak
+theme/forgeboard.css.bak2
+node_modules/

@@ -1,0 +1,30 @@
+{
+	"// ----- Stylelint -----": "",
+	"stylelint.enable": true,
+	"stylelint.validate": ["css", "scss", "postcss"],
+	"editor.codeActionsOnSave": {
+		"source.fixAll.stylelint": "explicit"
+	},
+
+	"// ----- Prevent VS Code's built-in CSS linter from competing with Stylelint -----": "",
+	"css.validate": false,
+	"scss.validate": false,
+	"less.validate": false,
+
+	"// ----- Editor defaults for CSS -----": "",
+	"[css]": {
+		"editor.defaultFormatter": "vscode.css-language-features",
+		"editor.tabSize": 4,
+		"editor.insertSpaces": false,
+		"editor.detectIndentation": false,
+		"editor.formatOnSave": false
+	},
+
+	"// ----- Color preview (Color Highlight extension) -----": "",
+	"color-highlight.enable": true,
+
+	"// ----- Files -----": "",
+	"files.eol": "\n",
+	"files.trimTrailingWhitespace": true,
+	"files.insertFinalNewline": true
+}

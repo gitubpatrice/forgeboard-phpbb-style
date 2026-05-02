@@ -1,0 +1,67 @@
+{
+	"extends": ["stylelint-config-standard"],
+	"rules": {
+		"no-duplicate-selectors": [true, { "disallowInList": false }],
+		"no-duplicate-at-import-rules": true,
+		"declaration-block-no-duplicate-properties": [true, {
+			"ignore": ["consecutive-duplicates-with-different-values"]
+		}],
+		"declaration-block-no-redundant-longhand-properties": true,
+		"declaration-block-no-shorthand-property-overrides": true,
+		"shorthand-property-no-redundant-values": true,
+		"length-zero-no-unit": true,
+		"font-family-no-duplicate-names": true,
+		"keyframe-block-no-duplicate-selectors": true,
+		"declaration-no-important": [true, { "severity": "warning" }],
+		"max-nesting-depth": [3, { "severity": "warning" }],
+		"selector-max-specificity": ["0,5,2", {
+			"severity": "warning",
+			"message": "Selector specificity above (0,5,2). Refactor instead of piling classes."
+		}],
+		"color-no-invalid-hex": true,
+		"unit-no-unknown": true,
+		"font-family-no-missing-generic-family-keyword": true,
+		"selector-pseudo-element-no-unknown": true,
+		"selector-pseudo-class-no-unknown": [true, {
+			"ignorePseudoClasses": ["has", "is", "where"]
+		}],
+		"property-no-unknown": [true, {
+			"ignoreProperties": ["composes", "container-type", "container-name"]
+		}],
+		"function-no-unknown": [true, {
+			"ignoreFunctions": ["color-mix", "clamp", "min", "max", "calc"]
+		}],
+		"selector-class-pattern": [
+			"^([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+			{
+				"severity": "warning",
+				"message": "Class names should be kebab-case (e.g. .forge-topic-card)",
+				"resolveNestedSelectors": true
+			}
+		],
+		"no-descending-specificity": null,
+		"no-empty-source": null,
+		"value-keyword-case": null,
+		"color-hex-length": null,
+		"color-named": null,
+		"color-function-notation": null,
+		"alpha-value-notation": null,
+		"hue-degree-notation": null,
+		"declaration-block-single-line-max-declarations": null,
+		"comment-empty-line-before": null,
+		"declaration-empty-line-before": null,
+		"rule-empty-line-before": null,
+		"at-rule-empty-line-before": null,
+		"custom-property-empty-line-before": null,
+		"media-feature-range-notation": null,
+		"import-notation": null,
+		"property-no-vendor-prefix": null,
+		"value-no-vendor-prefix": null,
+		"selector-no-vendor-prefix": null,
+		"keyframes-name-pattern": null,
+		"font-family-name-quotes": null,
+		"selector-not-notation": null,
+		"selector-id-pattern": null,
+		"selector-pseudo-element-colon-notation": [true, { "severity": "warning" }]
+	}
+}

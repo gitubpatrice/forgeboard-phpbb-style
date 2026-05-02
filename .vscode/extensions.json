@@ -1,0 +1,8 @@
+{
+	"recommendations": [
+		"stylelint.vscode-stylelint",
+		"pranaygp.vscode-css-peek",
+		"ecmel.vscode-html-css",
+		"naumovs.color-highlight"
+	]
+}
