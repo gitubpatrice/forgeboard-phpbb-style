@@ -6,6 +6,8 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
 
 :root {
 	color-scheme: light dark;
+
+	/* Color tokens — light theme */
 	--gb-canvas: #f3f5f7;
 	--gb-surface: #ffffff;
 	--gb-surface-subtle: #f7f9fb;
@@ -27,8 +29,41 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
 	--gb-white-soft: #fbfdff;
 	--gb-shadow: 0 14px 34px rgba(31, 35, 40, 0.12);
 	--gb-shadow-soft: 0 1px 0 rgba(31, 35, 40, 0.06);
+
+	/* Typography tokens — based on a 14px / 1.5 base */
+	--gb-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+	--gb-font-mono: SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+	--gb-font-xs: 12px;
+	--gb-font-sm: 13px;
+	--gb-font-md: 14px;
+	--gb-font-lg: 16px;
+	--gb-font-h3: 20px;
+	--gb-font-h2: 24px;
+	--gb-font-h1: 32px;
+	--gb-leading-tight: 1.25;
+	--gb-leading-normal: 1.5;
+	--gb-weight-normal: 400;
+	--gb-weight-medium: 500;
+	--gb-weight-semibold: 600;
+	--gb-weight-bold: 700;
+
+	/* Radius tokens */
+	--gb-radius-sm: 4px;
+	--gb-radius-md: 6px;
+	--gb-radius-lg: 12px;
+	--gb-radius-pill: 999px;
+	/* legacy aliases (kept for backward compatibility with existing rules) */
 	--gb-radius: 12px;
-	--gb-radius-small: 8px;
+	--gb-radius-small: 6px;
+
+	/* Spacing tokens — 4px grid */
+	--gb-space-1: 4px;
+	--gb-space-2: 8px;
+	--gb-space-3: 12px;
+	--gb-space-4: 16px;
+	--gb-space-6: 24px;
+	--gb-space-8: 32px;
+	--gb-space-12: 48px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -68,9 +103,26 @@ body {
 }
 
 body {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-	font-size: 11px;
+	font-family: var(--gb-font-sans);
+	font-size: var(--gb-font-md);
+	line-height: var(--gb-leading-normal);
 	padding: 0;
+}
+
+/* Headings: tight leading, semibold weight (GitHub-like prose hierarchy) */
+.forgeboard h1 { font-size: var(--gb-font-h1); line-height: var(--gb-leading-tight); font-weight: var(--gb-weight-semibold); }
+.forgeboard h2 { font-size: var(--gb-font-h2); line-height: var(--gb-leading-tight); font-weight: var(--gb-weight-semibold); }
+.forgeboard h3 { font-size: var(--gb-font-h3); line-height: var(--gb-leading-tight); font-weight: var(--gb-weight-semibold); }
+.forgeboard h4 { font-size: var(--gb-font-lg); line-height: var(--gb-leading-tight); font-weight: var(--gb-weight-semibold); }
+
+/* Inline code & pre: monospace stack */
+.forgeboard code,
+.forgeboard kbd,
+.forgeboard pre,
+.forgeboard samp,
+.forgeboard tt {
+	font-family: var(--gb-font-mono);
+	font-size: 0.92em;
 }
 
 .forgeboard {
@@ -128,8 +180,8 @@ hr {
 .forgeboard .panel ul.topiclist li.row.reported:focus-within {
 	/* !important required: Prosilver's colours.css sets
 	   `li.reported:hover { background-color: #ECD5D8 !important }` */
-	background: #612F2C !important;
-	background-color: #612F2C !important;
+	background: #9C4D48 !important;
+	background-color: #9C4D48 !important;
 	border-color: #612F2C;
 	box-shadow: inset 3px 0 0 #612F2C;
 }
