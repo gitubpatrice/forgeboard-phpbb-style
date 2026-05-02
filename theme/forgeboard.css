@@ -2366,10 +2366,13 @@ a:hover .icon.icon-orange {
 	overflow-wrap: anywhere;
 }
 
-.forgeboard .panel-container h3,
 .forgeboard .panel-container hr,
 .forgeboard .cp-menu hr {
   	border-color: #414C59;
+}
+
+.forgeboard .panel-container h3 {
+	border:0;
 }
 
 .forgeboard .panel,
@@ -6318,14 +6321,20 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	margin: 0;
 }
 
+/* MCP posts have no postprofile column — collapse the grid to a single column.
+   Prosilver's .post.inner is a 1fr+210px grid (body + profile sidebar);
+   here we override to take the full width. */
+.forgeboard .forge-mcp-post > .inner {
+	display: block;
+	grid-template-columns: none;
+	grid-template-areas: none;
+	overflow: hidden;
+}
+
 .forgeboard .forge-mcp-post .forge-mcp-postbody {
 	float: none;
 	position: relative;
 	width: 100%;
-}
-
-.forgeboard .forge-mcp-post > .inner {
-	overflow: hidden;
 }
 
 .forgeboard .forge-mcp-post-actions {
