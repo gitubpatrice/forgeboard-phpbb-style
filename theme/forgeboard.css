@@ -1659,12 +1659,29 @@ ul.zebra-list li:nth-child(even) {
 	font-family: ui-monospace, SFMono-Regular, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
 }
 
+/* Quote blocks (BBCode [quote] and any blockquote) — GitHub-style:
+   left accent border + muted text color, NO fill, NO radius. */
 blockquote {
-	background: var(--gb-surface-subtle);
-	border-color: var(--gb-border);
-	border-left: 4px solid var(--gb-border);
-	border-radius: var(--gb-radius);
+	background: transparent;
+	border: 0;
+	border-left: 3px solid var(--gb-border);
+	border-radius: 0;
 	color: var(--gb-text-muted);
+	margin: var(--gb-space-2) 0;
+	padding: 0 var(--gb-space-4);
+}
+
+blockquote blockquote {
+	border-left-color: var(--gb-border-muted);
+	margin-top: var(--gb-space-2);
+}
+
+.forgeboard blockquote cite,
+.forgeboard blockquote cite:before {
+	color: var(--gb-text-muted);
+	font-size: var(--gb-font-sm);
+	font-style: normal;
+	font-weight: var(--gb-weight-medium);
 }
 
 .button,
