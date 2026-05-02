@@ -30,6 +30,31 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
 	--gb-shadow: 0 14px 34px rgba(31, 35, 40, 0.12);
 	--gb-shadow-soft: 0 1px 0 rgba(31, 35, 40, 0.06);
 
+	/* Button intent tokens (light theme) */
+	--gb-btn-primary-bg: #1f883d;
+	--gb-btn-primary-bg-hover: #1a7f37;
+	--gb-btn-primary-bg-active: #197233;
+	--gb-btn-primary-fg: #ffffff;
+	--gb-btn-primary-border: rgba(31, 35, 40, 0.15);
+
+	--gb-btn-danger-bg: #cf222e;
+	--gb-btn-danger-bg-hover: #a40e26;
+	--gb-btn-danger-bg-active: #8c0d20;
+	--gb-btn-danger-fg: #ffffff;
+	--gb-btn-danger-border: rgba(31, 35, 40, 0.15);
+
+	--gb-btn-default-bg: var(--gb-surface);
+	--gb-btn-default-bg-hover: var(--gb-surface-subtle);
+	--gb-btn-default-bg-active: var(--gb-surface-muted);
+	--gb-btn-default-fg: var(--gb-text);
+	--gb-btn-default-border: var(--gb-border);
+
+	/* Input tokens */
+	--gb-input-bg: var(--gb-surface);
+	--gb-input-border: var(--gb-border);
+	--gb-input-focus-ring: rgba(31, 111, 235, 0.30);
+	--gb-input-shadow-inset: inset 0 1px 0 rgba(208, 215, 222, 0.20);
+
 	/* Typography tokens — based on a 14px / 1.5 base */
 	--gb-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 	--gb-font-mono: SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
@@ -89,6 +114,22 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
 		--gb-white-soft: #0d1117;
 	--gb-shadow: 0 18px 48px rgba(0, 0, 0, 0.26);
 		--gb-shadow-soft: 0 1px 0 rgba(240, 246, 252, 0.06);
+
+		/* Button intent tokens (dark theme) */
+		--gb-btn-primary-bg: #238636;
+		--gb-btn-primary-bg-hover: #2ea043;
+		--gb-btn-primary-bg-active: #238636;
+		--gb-btn-primary-fg: #ffffff;
+		--gb-btn-primary-border: rgba(240, 246, 252, 0.10);
+
+		--gb-btn-danger-bg: #da3633;
+		--gb-btn-danger-bg-hover: #f85149;
+		--gb-btn-danger-bg-active: #b62324;
+		--gb-btn-danger-fg: #ffffff;
+		--gb-btn-danger-border: rgba(240, 246, 252, 0.10);
+
+		--gb-input-focus-ring: rgba(88, 166, 255, 0.40);
+		--gb-input-shadow-inset: inset 0 1px 0 rgba(0, 0, 0, 0.20);
 	}
 }
 
@@ -6534,6 +6575,141 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 .forgeboard .forge-mcp-mark-actions {
 	margin-left: auto;
+}
+
+/* ------------------------------------------------------------------
+   Buttons — 3-level system (default / primary / danger)
+   Max radius 6px (no pill shapes anywhere).
+   ------------------------------------------------------------------ */
+
+/* Default button — neutral surface, subtle border */
+.forgeboard .button,
+.forgeboard a.button,
+.forgeboard input.button1,
+.forgeboard input.button2,
+.forgeboard input.button3,
+.forgeboard input[type="submit"],
+.forgeboard input[type="button"],
+.forgeboard input[type="reset"],
+.forgeboard button {
+	background: var(--gb-btn-default-bg);
+	border: 1px solid var(--gb-btn-default-border);
+	border-radius: var(--gb-radius-md);
+	box-shadow: var(--gb-shadow-soft);
+	color: var(--gb-btn-default-fg);
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	gap: var(--gb-space-2);
+	font-family: var(--gb-font-sans);
+	font-size: var(--gb-font-md);
+	font-weight: var(--gb-weight-medium);
+	line-height: 1;
+	padding: 6px var(--gb-space-3);
+	text-decoration: none;
+	transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.forgeboard .button:hover,
+.forgeboard a.button:hover,
+.forgeboard input.button1:hover,
+.forgeboard input.button2:hover,
+.forgeboard input.button3:hover,
+.forgeboard input[type="submit"]:hover,
+.forgeboard input[type="button"]:hover,
+.forgeboard input[type="reset"]:hover,
+.forgeboard button:hover {
+	background: var(--gb-btn-default-bg-hover);
+	border-color: var(--gb-text-muted);
+	color: var(--gb-btn-default-fg);
+	text-decoration: none;
+}
+
+.forgeboard .button:active,
+.forgeboard a.button:active,
+.forgeboard input.button1:active,
+.forgeboard input.button2:active,
+.forgeboard input[type="submit"]:active,
+.forgeboard input[type="button"]:active,
+.forgeboard button:active {
+	background: var(--gb-btn-default-bg-active);
+}
+
+.forgeboard .button:focus-visible,
+.forgeboard a.button:focus-visible,
+.forgeboard input[type="submit"]:focus-visible,
+.forgeboard input[type="button"]:focus-visible,
+.forgeboard input.button1:focus-visible,
+.forgeboard input.button2:focus-visible,
+.forgeboard button:focus-visible {
+	border-color: var(--gb-accent);
+	box-shadow: 0 0 0 3px var(--gb-input-focus-ring);
+	outline: 0;
+}
+
+/* Disabled state */
+.forgeboard .button[disabled],
+.forgeboard .button.disabled,
+.forgeboard a.button.disabled,
+.forgeboard input.button1[disabled],
+.forgeboard input.button2[disabled],
+.forgeboard input[type="submit"][disabled],
+.forgeboard button[disabled] {
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+/* Primary button — green CTA (post topic, submit-action, etc.) */
+.forgeboard .button.is-primary,
+.forgeboard .button.forge-primary-button,
+.forgeboard a.button.forge-primary-button {
+	background: var(--gb-btn-primary-bg);
+	border-color: var(--gb-btn-primary-border);
+	color: var(--gb-btn-primary-fg);
+}
+
+.forgeboard .button.is-primary:hover,
+.forgeboard .button.forge-primary-button:hover,
+.forgeboard a.button.forge-primary-button:hover {
+	background: var(--gb-btn-primary-bg-hover);
+	border-color: var(--gb-btn-primary-border);
+	color: var(--gb-btn-primary-fg);
+}
+
+.forgeboard .button.is-primary:active,
+.forgeboard .button.forge-primary-button:active {
+	background: var(--gb-btn-primary-bg-active);
+}
+
+/* Danger button — red destructive (delete, ban) */
+.forgeboard .button.is-danger,
+.forgeboard .button.forge-danger-button {
+	background: var(--gb-btn-danger-bg);
+	border-color: var(--gb-btn-danger-border);
+	color: var(--gb-btn-danger-fg);
+}
+
+.forgeboard .button.is-danger:hover,
+.forgeboard .button.forge-danger-button:hover {
+	background: var(--gb-btn-danger-bg-hover);
+	color: var(--gb-btn-danger-fg);
+}
+
+.forgeboard .button.is-danger:active {
+	background: var(--gb-btn-danger-bg-active);
+}
+
+/* Icon-only buttons (post buttons, pagination prev/next) — square-ish */
+.forgeboard .button.button-icon-only {
+	gap: 0;
+	padding: 6px var(--gb-space-2);
+}
+
+/* Compact button variant */
+.forgeboard .button.is-small,
+.forgeboard .button.button-small {
+	font-size: var(--gb-font-sm);
+	padding: 4px var(--gb-space-2);
 }
 
 /* ------------------------------------------------------------------
