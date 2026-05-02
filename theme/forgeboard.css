@@ -257,12 +257,23 @@ hr {
 }
 
 .forge-nav-card ul.linklist > li {
+	background: none;
 	align-items: center;
 	border: 0;
 	display: inline-flex;
 	margin: 0;
 	padding: 0;
 	white-space: nowrap;
+}
+
+.forgeboard .forge-nav-card .breadcrumbs a:hover,
+.forgeboard .forge-nav-card .nav-breadcrumbs a:hover {
+	background: none !important;
+	border-radius: inherit;
+	transform: none !important;
+	border:0;
+	padding:0;
+	margin:0;
 }
 
 .forge-nav-card .breadcrumbs .crumb,
@@ -5552,12 +5563,48 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forgeboard .forge-nav-main-card,
-.forgeboard .forge-nav-breadcrumbs-card,
 .forgeboard .forge-nav-user-card {
 	background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent 80px), var(--gb-surface);
 	border: 1px solid rgba(48, 54, 61, 0.72);
 	border-radius: 9px;
 	padding: 8px 10px;
+}
+
+.forgeboard .forge-nav-breadcrumbs-card {
+	background: none;
+	border:0;
+}
+
+/* Plain-text breadcrumbs in the bottom nav card: no chip, no shift on hover.
+   Base AND hover share the same box geometry (border:0, padding:0, margin:0)
+   so only color/underline change between states. */
+.forgeboard .forge-nav-card .forge-nav-breadcrumbs-card .breadcrumbs a,
+.forgeboard .forge-nav-card .forge-nav-breadcrumbs-card .nav-breadcrumbs a,
+.forgeboard .forge-nav-card .forge-nav-breadcrumbs-card .breadcrumbs a:hover,
+.forgeboard .forge-nav-card .forge-nav-breadcrumbs-card .breadcrumbs a:focus,
+.forgeboard .forge-nav-card .forge-nav-breadcrumbs-card .nav-breadcrumbs a:hover,
+.forgeboard .forge-nav-card .forge-nav-breadcrumbs-card .nav-breadcrumbs a:focus {
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	margin: 0;
+	padding: 0;
+	transform: none;
+}
+
+.forgeboard .forge-nav-card .forge-nav-breadcrumbs-card .breadcrumbs a,
+.forgeboard .forge-nav-card .forge-nav-breadcrumbs-card .nav-breadcrumbs a {
+	color: var(--gb-text-muted);
+	transition: color 0.15s ease;
+}
+
+.forgeboard .forge-nav-card .forge-nav-breadcrumbs-card .breadcrumbs a:hover,
+.forgeboard .forge-nav-card .forge-nav-breadcrumbs-card .breadcrumbs a:focus,
+.forgeboard .forge-nav-card .forge-nav-breadcrumbs-card .nav-breadcrumbs a:hover,
+.forgeboard .forge-nav-card .forge-nav-breadcrumbs-card .nav-breadcrumbs a:focus {
+	color: var(--gb-link-hover);
+	text-decoration: underline;
 }
 
 .forgeboard .forge-nav-main-card #nav-main,
@@ -6307,7 +6354,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	flex-wrap: wrap;
 	gap: 12px;
 	justify-content: space-between;
-	margin: 0 0 14px;
+	margin: 5px 0 10px;
 }
 
 .forgeboard .forge-mcp-review-title {
@@ -6344,6 +6391,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	float: none;
 	position: relative;
 	width: 100%;
+	padding:0;
 }
 
 .forgeboard .forge-mcp-post-actions {
