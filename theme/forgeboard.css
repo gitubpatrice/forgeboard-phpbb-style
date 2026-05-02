@@ -450,7 +450,7 @@ hr {
 }
 
 .forge-forum-hero h1 {
-	font-size: clamp(3em, 4.4vw, 5.4em);
+	font-size: clamp(3em, 4.0vw, 5.0em);
 	line-height: 0.98;
 	margin: 0;
 }
@@ -5604,7 +5604,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard .forge-nav-card .forge-nav-breadcrumbs-card .nav-breadcrumbs a:hover,
 .forgeboard .forge-nav-card .forge-nav-breadcrumbs-card .nav-breadcrumbs a:focus {
 	color: var(--gb-link-hover);
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 .forgeboard .forge-nav-main-card #nav-main,
