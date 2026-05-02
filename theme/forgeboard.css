@@ -6319,7 +6319,13 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forgeboard .forge-mcp-post .forge-mcp-postbody {
+	float: none;
 	position: relative;
+	width: 100%;
+}
+
+.forgeboard .forge-mcp-post > .inner {
+	overflow: hidden;
 }
 
 .forgeboard .forge-mcp-post-actions {
@@ -6351,8 +6357,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forgeboard .forge-mcp-actionbar {
-	border-top: 0;
-	border-bottom: 0;
 	margin-top: 8px;
 }
 
