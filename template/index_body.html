@@ -1,0 +1,85 @@
+<!-- INCLUDE overall_header.html -->
+
+<section class="forge-hero">
+	<div>
+		<p class="forge-kicker">{CURRENT_TIME}</p>
+		<h1>{SITENAME}</h1>
+		<p>{SITE_DESCRIPTION}</p>
+	</div>
+	<!-- IF U_MARK_FORUMS -->
+	<a href="{U_MARK_FORUMS}" class="button forge-hero-action" accesskey="m" data-ajax="mark_forums_read">{L_MARK_FORUMS_READ}</a>
+	<!-- ENDIF -->
+</section>
+
+<!-- EVENT index_body_markforums_before -->
+<!-- EVENT index_body_markforums_after -->
+
+<!-- INCLUDE forumlist_body.html -->
+
+<!-- EVENT index_body_forumlist_body_after -->
+
+<!-- EVENT index_body_stat_blocks_before -->
+
+<section class="forge-stats-grid">
+<!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
+	<article class="stat-block forge-login-panel">
+		<div>
+			<p class="forge-kicker">{L_LOGIN_LOGOUT}</p>
+			<h3><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a><!-- IF S_REGISTER_ENABLED --> <span>/</span> <a href="{U_REGISTER}">{L_REGISTER}</a><!-- ENDIF --></h3>
+		</div>
+		<form method="post" action="{S_LOGIN_ACTION}">
+			<fieldset class="quick-login forge-login-grid">
+				<label for="username"><span>{L_USERNAME}{L_COLON}</span> <input type="text" tabindex="1" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}" autocomplete="username" /></label>
+				<label for="password"><span>{L_PASSWORD}{L_COLON}</span> <input type="password" tabindex="2" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}" autocomplete="current-password" /></label>
+				<!-- IF U_SEND_PASSWORD --><a href="{U_SEND_PASSWORD}">{L_FORGOT_PASS}</a><!-- ENDIF -->
+				<!-- IF S_AUTOLOGIN_ENABLED --><label for="autologin" class="forge-check">{L_LOG_ME_IN} <input type="checkbox" tabindex="4" name="autologin" id="autologin" /></label><!-- ENDIF -->
+				<input type="submit" tabindex="5" name="login" value="{L_LOGIN}" class="button2" />
+				{S_LOGIN_REDIRECT}
+				{S_FORM_TOKEN_LOGIN}
+			</fieldset>
+		</form>
+	</article>
+<!-- ENDIF -->
+<!-- IF S_DISPLAY_ONLINE_LIST -->
+	<article class="stat-block online-list">
+		<!-- IF U_VIEWONLINE --><h3><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h3><!-- ELSE --><h3>{L_WHO_IS_ONLINE}</h3><!-- ENDIF -->
+		<p>
+			<!-- EVENT index_body_block_online_prepend -->
+			{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}
+			<!-- IF U_VIEWONLINE -->
+				<br /><br />{LOGGED_IN_USER_LIST}
+				<!-- IF LEGEND --><br /><em>{L_LEGEND}{L_COLON} {LEGEND}</em><!-- ENDIF -->
+			<!-- ENDIF -->
+			<!-- EVENT index_body_block_online_append -->
+		</p>
+	</article>
+<!-- ENDIF -->
+
+<!-- EVENT index_body_birthday_block_before -->
+
+<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
+	<article class="stat-block birthday-list">
+		<h3>{L_BIRTHDAYS}</h3>
+		<p>
+			<!-- EVENT index_body_block_birthday_prepend -->
+			<!-- IF .birthdays -->{L_CONGRATULATIONS}{L_COLON} <strong><!-- BEGIN birthdays -->{birthdays.USERNAME}<!-- IF birthdays.AGE !== '' --> ({birthdays.AGE})<!-- ENDIF --><!-- IF not birthdays.S_LAST_ROW -->, <!-- ENDIF --><!-- END birthdays --></strong><!-- ELSE -->{L_NO_BIRTHDAYS}<!-- ENDIF -->
+			<!-- EVENT index_body_block_birthday_append -->
+		</p>
+	</article>
+<!-- ENDIF -->
+
+<!-- IF NEWEST_USER -->
+	<article class="stat-block statistics">
+		<h3>{L_STATISTICS}</h3>
+		<p>
+			<!-- EVENT index_body_block_stats_prepend -->
+			{TOTAL_POSTS}<br />{TOTAL_TOPICS}<br />{TOTAL_USERS}<br />{NEWEST_USER}
+			<!-- EVENT index_body_block_stats_append -->
+		</p>
+	</article>
+<!-- ENDIF -->
+</section>
+
+<!-- EVENT index_body_stat_blocks_after -->
+
+<!-- INCLUDE overall_footer.html -->

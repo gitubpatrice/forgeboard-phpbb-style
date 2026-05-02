@@ -1,0 +1,107 @@
+
+<!-- BEGIN forumrow -->
+	<!-- IF (forumrow.S_IS_CAT and not forumrow.S_FIRST_ROW) or forumrow.S_NO_CAT  -->
+			</div>
+		</section>
+	<!-- ENDIF -->
+
+	<!-- EVENT forumlist_body_category_header_before -->
+	<!-- IF forumrow.S_IS_CAT or forumrow.S_FIRST_ROW or forumrow.S_NO_CAT -->
+		<section class="forge-category">
+			<header class="forge-category-head">
+				<!-- EVENT forumlist_body_category_header_row_prepend -->
+				<div>
+					<p class="forge-kicker">{L_FORUM}</p>
+					<h2><!-- IF forumrow.S_IS_CAT --><a href="{forumrow.U_VIEWFORUM}">{forumrow.FORUM_NAME}</a><!-- ELSE -->{L_FORUM}<!-- ENDIF --></h2>
+				</div>
+				<div class="forge-category-labels" aria-hidden="true">
+					<span>{L_TOPICS}</span>
+					<span>{L_POSTS}</span>
+					<span>{L_LAST_POST}</span>
+				</div>
+				<!-- EVENT forumlist_body_category_header_row_append -->
+			</header>
+			<div class="forge-forum-grid">
+	<!-- ENDIF -->
+	<!-- EVENT forumlist_body_category_header_after -->
+
+	<!-- IF not forumrow.S_IS_CAT -->
+		<!-- EVENT forumlist_body_forum_row_before -->
+		<article class="forge-forum-card<!-- IF forumrow.S_UNREAD_FORUM --> forge-forum-unread<!-- ENDIF --><!-- IF forumrow.S_IS_LINK --> forge-forum-link<!-- ENDIF -->">
+			<!-- EVENT forumlist_body_forum_row_prepend -->
+			<a class="forge-forum-main" href="{forumrow.U_VIEWFORUM}" title="{% if forumrow.S_IS_LINK %}{{ lang('FORUM_LINK') }}{% else %}{{ forumrow.FORUM_FOLDER_IMG_ALT }}{% endif %}">
+				<span class="forge-forum-icon" aria-hidden="true">
+					<!-- IF forumrow.FORUM_IMAGE -->
+						<!-- EVENT forumlist_body_forum_image_before -->
+						<span class="forum-image"><!-- EVENT forumlist_body_forum_image_prepend -->{forumrow.FORUM_IMAGE}<!-- EVENT forumlist_body_forum_image_append --></span>
+						<!-- EVENT forumlist_body_forum_image_after -->
+					<!-- ELSEIF forumrow.S_UNREAD_FORUM --><i class="icon fa-folder-open fa-fw icon-red"></i><!-- ELSEIF forumrow.S_IS_LINK --><i class="icon fa-external-link fa-fw icon-blue"></i><!-- ELSE --><i class="icon fa-folder fa-fw icon-blue"></i><!-- ENDIF -->
+				</span>
+				<span class="forge-forum-copy">
+					<strong class="forumtitle">{forumrow.FORUM_NAME}</strong>
+					<!-- IF forumrow.FORUM_DESC --><span class="forge-forum-desc">{forumrow.FORUM_DESC}</span><!-- ENDIF -->
+				</span>
+			</a>
+
+			<!-- IF forumrow.MODERATORS or (.forumrow.subforum and forumrow.S_LIST_SUBFORUMS) -->
+			<div class="forge-forum-meta">
+				<!-- IF forumrow.MODERATORS --><span><strong>{forumrow.L_MODERATOR_STR}{L_COLON}</strong> {forumrow.MODERATORS}</span><!-- ENDIF -->
+				<!-- IF .forumrow.subforum and forumrow.S_LIST_SUBFORUMS -->
+					<!-- EVENT forumlist_body_subforums_before -->
+					<span><strong>{forumrow.L_SUBFORUM_STR}{L_COLON}</strong>
+					<!-- BEGIN subforum -->
+						<!-- EVENT forumlist_body_subforum_link_prepend --><a href="{forumrow.subforum.U_SUBFORUM}" class="subforum<!-- IF forumrow.subforum.S_UNREAD --> unread<!-- ELSE --> read<!-- ENDIF -->" title="{% if forumrow.subforum.IS_LINK %}{{ lang('FORUM_LINK') }}{% elseif forumrow.subforum.S_UNREAD %}{{ lang('UNREAD_POSTS') }}{% else %}{{ lang('NO_UNREAD_POSTS') }}{% endif %}">{forumrow.subforum.SUBFORUM_NAME}</a><!-- IF not forumrow.subforum.S_LAST_ROW -->{L_COMMA_SEPARATOR}<!-- ENDIF --><!-- EVENT forumlist_body_subforum_link_append -->
+					<!-- END subforum -->
+					</span>
+					<!-- EVENT forumlist_body_subforums_after -->
+				<!-- ENDIF -->
+			</div>
+			<!-- ENDIF -->
+
+			<div class="forge-forum-numbers">
+				<!-- IF forumrow.CLICKS -->
+					<span><strong>{forumrow.CLICKS}</strong><small>{L_REDIRECTS}</small></span>
+				<!-- ELSEIF not forumrow.S_IS_LINK -->
+					<span><strong>{forumrow.TOPICS}</strong><small>{L_TOPICS}</small></span>
+					<span><strong>{forumrow.POSTS}</strong><small>{L_POSTS}</small></span>
+				<!-- ELSE -->
+					<span><strong>-</strong><small>{L_FORUM}</small></span>
+				<!-- ENDIF -->
+			</div>
+
+			<div class="forge-lastpost">
+				<span class="forge-lastpost-label">{L_LAST_POST}</span>
+				<!-- IF not forumrow.S_IS_LINK and forumrow.LAST_POST_TIME_RFC3339 -->
+					<!-- IF forumrow.S_DISPLAY_SUBJECT -->
+						<!-- EVENT forumlist_body_last_post_title_prepend -->
+						<a href="{forumrow.U_LAST_POST}" title="{forumrow.LAST_POST_SUBJECT}" class="lastsubject">{forumrow.LAST_POST_SUBJECT_TRUNCATED}</a>
+					<!-- ENDIF -->
+					<span>{L_POST_BY_AUTHOR} <!-- EVENT forumlist_body_last_poster_username_prepend -->{forumrow.LAST_POSTER_FULL}<!-- EVENT forumlist_body_last_poster_username_append --></span>
+					<a href="{forumrow.U_LAST_POST}" title="{L_VIEW_LATEST_POST}" class="forge-lastpost-jump">
+						<i class="icon fa-arrow-circle-right fa-fw" aria-hidden="true"></i><span class="sr-only">{L_VIEW_LATEST_POST}</span>
+					</a>
+					<time datetime="{forumrow.LAST_POST_TIME_RFC3339}">{forumrow.LAST_POST_TIME}</time>
+				<!-- ELSEIF not forumrow.S_IS_LINK -->
+					<span>{% if forumrow.U_UNAPPROVED_TOPICS %}{{ lang('TOPIC_UNAPPROVED_FORUM', forumrow.TOPICS) }}{% else %}{{ lang('NO_POSTS') }}{% endif %}</span>
+				<!-- ELSE -->
+					<span>{{ lang('FORUM_LINK') }}</span>
+				<!-- ENDIF -->
+			</div>
+			<!-- EVENT forumlist_body_forum_row_append -->
+		</article>
+		<!-- EVENT forumlist_body_forum_row_after -->
+	<!-- ENDIF -->
+
+	<!-- IF forumrow.S_LAST_ROW -->
+			</div>
+		</section>
+		<!-- EVENT forumlist_body_last_row_after -->
+	<!-- ENDIF -->
+
+<!-- BEGINELSE -->
+	<div class="panel forge-empty">
+		<div class="inner">
+		<strong>{L_NO_FORUMS}</strong>
+		</div>
+	</div>
+<!-- END forumrow -->

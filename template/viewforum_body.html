@@ -1,0 +1,278 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- EVENT viewforum_forum_title_before -->
+<section class="forge-forum-hero">
+	<div>
+		<p class="forge-kicker">{L_FORUM}</p>
+		<h1><!-- EVENT viewforum_forum_name_prepend --><a href="{U_VIEW_FORUM}">{FORUM_NAME}</a><!-- EVENT viewforum_forum_name_append --></h1>
+		<!-- IF FORUM_DESC --><div class="forge-forum-hero-desc">{FORUM_DESC}</div><!-- ENDIF -->
+		<!-- IF MODERATORS --><p><strong><!-- IF S_SINGLE_MODERATOR -->{L_MODERATOR}<!-- ELSE -->{L_MODERATORS}<!-- ENDIF -->{L_COLON}</strong> {MODERATORS}</p><!-- ENDIF -->
+	</div>
+	<div class="forge-forum-hero-actions">
+		<!-- IF U_MCP --><a class="button" href="{U_MCP}">{L_MCP}</a><!-- ENDIF -->
+		<!-- IF not S_IS_BOT and U_MARK_TOPICS and .topicrow --><a href="{U_MARK_TOPICS}" class="button forge-hero-mark-read" accesskey="m" data-ajax="mark_topics_read">{L_MARK_TOPICS_READ}</a><!-- ENDIF -->
+	</div>
+</section>
+<!-- EVENT viewforum_forum_title_after -->
+
+<!-- IF S_FORUM_RULES -->
+	<section class="rules forge-rules<!-- IF U_FORUM_RULES --> rules-link<!-- ENDIF -->">
+		<div class="inner">
+		<!-- IF U_FORUM_RULES -->
+			<a href="{U_FORUM_RULES}">{L_FORUM_RULES}</a>
+		<!-- ELSE -->
+			<strong>{L_FORUM_RULES}</strong><br />
+			{FORUM_RULES}
+		<!-- ENDIF -->
+		</div>
+	</section>
+<!-- ENDIF -->
+
+<!-- IF S_HAS_SUBFORUM -->
+	<!-- IF not S_IS_BOT and U_MARK_FORUMS -->
+	<div class="action-bar compact forge-action-strip">
+		<a href="{U_MARK_FORUMS}" class="mark-read" data-ajax="mark_forums_read">{L_MARK_SUBFORUMS_READ}</a>
+	</div>
+	<!-- ENDIF -->
+	<!-- INCLUDE forumlist_body.html -->
+<!-- ENDIF -->
+
+<!-- IF S_DISPLAY_POST_INFO or .pagination or TOTAL_POSTS or TOTAL_TOPICS -->
+	<section class="forge-toolbar bar-top">
+		<div class="forge-toolbar-actions">
+		<!-- IF not S_IS_BOT and S_DISPLAY_POST_INFO -->
+			<!-- EVENT viewforum_buttons_top_before -->
+			<a href="{U_POST_NEW_TOPIC}" class="button forge-primary-button" title="<!-- IF S_IS_LOCKED -->{L_FORUM_LOCKED}<!-- ELSE -->{L_POST_TOPIC}<!-- ENDIF -->">
+				<!-- IF S_IS_LOCKED -->
+					<span>{L_BUTTON_FORUM_LOCKED}</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+				<!-- ELSE -->
+					<span>{L_BUTTON_NEW_TOPIC}</span> <i class="icon fa-pencil fa-fw" aria-hidden="true"></i>
+				<!-- ENDIF -->
+			</a>
+			<!-- EVENT viewforum_buttons_top_after -->
+		<!-- ENDIF -->
+		</div>
+
+		<!-- IF S_DISPLAY_SEARCHBOX -->
+		<div class="search-box forge-inline-search" role="search">
+			<form method="get" id="forum-search" action="{S_SEARCHBOX_ACTION}">
+			<fieldset>
+				<input class="inputbox search tiny" type="search" name="keywords" id="search_keywords" size="20" placeholder="{L_SEARCH_FORUM}" />
+				<button class="button button-search" type="submit" title="{L_SEARCH}">
+					<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">{L_SEARCH}</span>
+				</button>
+				<a href="{{ U_SEARCH_FORUM }}" class="button button-search-end" title="{L_SEARCH_ADV}">
+					<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">{L_SEARCH_ADV}</span>
+				</a>
+				{S_SEARCH_LOCAL_HIDDEN_FIELDS}
+			</fieldset>
+			</form>
+		</div>
+		<!-- ENDIF -->
+
+		<div class="pagination forge-topic-pagination">
+			{TOTAL_TOPICS}
+			<!-- IF .pagination --><!-- INCLUDE pagination.html --><!-- ELSE -->{PAGE_NUMBER}<!-- ENDIF -->
+		</div>
+	</section>
+<!-- ENDIF -->
+
+<!-- IF S_NO_READ_ACCESS -->
+	<div class="panel forge-empty">
+		<div class="inner"><strong>{L_NO_READ_ACCESS}</strong></div>
+	</div>
+	<!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
+	<form action="{S_LOGIN_ACTION}" method="post" class="forge-login-panel">
+		<div>
+			<p class="forge-kicker">{L_LOGIN_LOGOUT}</p>
+			<h2><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a><!-- IF S_REGISTER_ENABLED --> <span>/</span> <a href="{U_REGISTER}">{L_REGISTER}</a><!-- ENDIF --></h2>
+		</div>
+		<fieldset class="fields1 forge-login-grid">
+			<label for="username">{L_USERNAME}{L_COLON}<input type="text" tabindex="1" name="username" id="username" size="25" value="{USERNAME}" class="inputbox autowidth" autocomplete="username" /></label>
+			<label for="password">{L_PASSWORD}{L_COLON}<input type="password" tabindex="2" id="password" name="password" size="25" class="inputbox autowidth" autocomplete="current-password" /></label>
+			<!-- IF S_AUTOLOGIN_ENABLED --><label for="autologin" class="forge-check"><input type="checkbox" name="autologin" id="autologin" tabindex="3" /> {L_LOG_ME_IN}</label><!-- ENDIF -->
+			<label for="viewonline" class="forge-check"><input type="checkbox" name="viewonline" id="viewonline" tabindex="4" /> {L_HIDE_ME}</label>
+			<input type="submit" name="login" tabindex="5" value="{L_LOGIN}" class="button1" />
+			{S_LOGIN_REDIRECT}
+			{S_FORM_TOKEN_LOGIN}
+		</fieldset>
+	</form>
+	<!-- ENDIF -->
+<!-- ENDIF -->
+
+<!-- EVENT viewforum_body_topic_row_before -->
+
+<!-- BEGIN topicrow -->
+	<!-- IF not topicrow.S_TOPIC_TYPE_SWITCH and not topicrow.S_FIRST_ROW -->
+			</div>
+		</section>
+	<!-- ENDIF -->
+
+	<!-- IF topicrow.S_FIRST_ROW or not topicrow.S_TOPIC_TYPE_SWITCH -->
+		<section class="forge-topic-section<!-- IF topicrow.S_TOPIC_TYPE_SWITCH and (topicrow.S_POST_ANNOUNCE or topicrow.S_POST_GLOBAL) --> announcement<!-- ENDIF -->">
+			<header class="forge-category-head">
+				<div>
+					<p class="forge-kicker"><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and (topicrow.S_POST_ANNOUNCE or topicrow.S_POST_GLOBAL) -->{L_ANNOUNCEMENTS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></p>
+					<h2<!-- IF S_DISPLAY_ACTIVE --> id="active_topics"<!-- ENDIF -->><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and (topicrow.S_POST_ANNOUNCE or topicrow.S_POST_GLOBAL) -->{L_ANNOUNCEMENTS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></h2>
+				</div>
+				<div class="forge-category-labels" aria-hidden="true">
+					<span>{L_REPLIES}</span>
+					<span>{L_VIEWS}</span>
+					<span>{L_LAST_POST}</span>
+				</div>
+			</header>
+			<div class="forge-topic-grid">
+	<!-- ENDIF -->
+
+	<!-- EVENT viewforum_body_topicrow_row_before -->
+	<article class="forge-topic-card forge-topic-card-viewforum<!-- IF topicrow.S_ROW_COUNT is even --> bg1<!-- ELSE --> bg2<!-- ENDIF --><!-- IF topicrow.S_POST_GLOBAL --> global-announce<!-- ENDIF --><!-- IF topicrow.S_POST_ANNOUNCE --> announce<!-- ENDIF --><!-- IF topicrow.S_POST_STICKY --> sticky<!-- ENDIF --><!-- IF topicrow.S_TOPIC_REPORTED --> reported<!-- ENDIF --> {topicrow.TOPIC_IMG_STYLE}">
+		<!-- EVENT viewforum_body_topic_row_prepend -->
+		<div class="forge-topic-main forge-topic-main-viewforum" title="{topicrow.TOPIC_FOLDER_IMG_ALT}">
+			<span class="forge-topic-icon" aria-hidden="true">
+				<!-- IF topicrow.S_UNREAD_TOPIC --><i class="icon fa-file fa-fw icon-red"></i><!-- ELSEIF topicrow.S_POST_STICKY --><i class="icon fa-thumb-tack fa-fw icon-blue"></i><!-- ELSEIF topicrow.S_POST_ANNOUNCE or topicrow.S_POST_GLOBAL --><i class="icon fa-bullhorn fa-fw icon-red"></i><!-- ELSE --><i class="icon fa-file-o fa-fw icon-blue"></i><!-- ENDIF -->
+			</span>
+			<div class="forge-topic-copy">
+				<!-- EVENT topiclist_row_prepend -->
+				<!-- IF topicrow.U_VIEW_TOPIC --><a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a><!-- ELSE --><strong class="topictitle">{topicrow.TOPIC_TITLE}</strong><!-- ENDIF -->
+				<!-- EVENT topiclist_row_topic_title_after -->
+				<span class="forge-topic-byline">
+					<!-- IF topicrow.S_HAS_POLL --><i class="icon fa-bar-chart fa-fw" aria-hidden="true"></i><!-- ENDIF -->
+					<!-- IF topicrow.ATTACH_ICON_IMG --><i class="icon fa-paperclip fa-fw" aria-hidden="true"></i><!-- ENDIF -->
+					{% EVENT topiclist_row_topic_by_author_before %}
+					{L_POST_BY_AUTHOR} <!-- EVENT viewforum_body_topic_author_username_prepend -->{topicrow.TOPIC_AUTHOR_FULL}<!-- EVENT viewforum_body_topic_author_username_append --> / <time datetime="{topicrow.FIRST_POST_TIME_RFC3339}">{topicrow.FIRST_POST_TIME}</time>
+					{% EVENT topiclist_row_topic_by_author_after %}
+					<!-- IF topicrow.S_POST_GLOBAL and FORUM_ID != topicrow.FORUM_ID --> / {L_IN} <a href="{topicrow.U_VIEW_FORUM}">{topicrow.FORUM_NAME}</a><!-- ENDIF -->
+				</span>
+				<!-- IF topicrow.S_TOPIC_UNAPPROVED or topicrow.S_POSTS_UNAPPROVED --><a href="{topicrow.U_MCP_QUEUE}" class="forge-topic-flag">{L_TOPIC_UNAPPROVED}</a><!-- ENDIF -->
+				<!-- IF topicrow.S_TOPIC_DELETED --><a href="{topicrow.U_MCP_QUEUE}" class="forge-topic-flag">{L_TOPIC_DELETED}</a><!-- ENDIF -->
+				<!-- IF topicrow.S_TOPIC_REPORTED --><a href="{topicrow.U_MCP_REPORT}" class="forge-topic-flag">{L_TOPIC_REPORTED}</a><!-- ENDIF -->
+				<!-- IF .topicrow.pagination -->
+				<div class="pagination forge-mini-pagination">
+					<span><i class="icon fa-clone fa-fw" aria-hidden="true"></i></span>
+					<ul>
+					<!-- BEGIN pagination -->
+						<!-- IF topicrow.pagination.S_IS_PREV -->
+						<!-- ELSEIF topicrow.pagination.S_IS_CURRENT --><li class="active"><span>{topicrow.pagination.PAGE_NUMBER}</span></li>
+						<!-- ELSEIF topicrow.pagination.S_IS_ELLIPSIS --><li class="ellipsis"><span>{L_ELLIPSIS}</span></li>
+						<!-- ELSEIF topicrow.pagination.S_IS_NEXT -->
+						<!-- ELSE --><li><a class="button" href="{topicrow.pagination.PAGE_URL}">{topicrow.pagination.PAGE_NUMBER}</a></li>
+						<!-- ENDIF -->
+					<!-- END pagination -->
+					</ul>
+				</div>
+				<!-- ENDIF -->
+				<!-- EVENT topiclist_row_append -->
+			</div>
+		</div>
+		<div class="forge-topic-stats">
+			<div class="forge-topic-stat forge-topic-stat-replies"><strong>{topicrow.REPLIES}</strong><small>{L_REPLIES}</small></div>
+			<div class="forge-topic-stat forge-topic-stat-views"><strong>{topicrow.VIEWS}</strong><small>{L_VIEWS}</small></div>
+		</div>
+		<div class="forge-lastpost forge-topic-lastpost">
+			<span>{L_POST_BY_AUTHOR} <!-- EVENT viewforum_body_last_post_author_username_prepend -->{topicrow.LAST_POST_AUTHOR_FULL}<!-- EVENT viewforum_body_last_post_author_username_append --></span>
+			<!-- IF not S_IS_BOT and topicrow.U_LAST_POST -->
+				<a href="{topicrow.U_LAST_POST}" title="{L_GOTO_LAST_POST}" class="forge-lastpost-jump">
+					<i class="icon fa-arrow-circle-right fa-fw" aria-hidden="true"></i><span class="sr-only">{VIEW_LATEST_POST}</span>
+				</a>
+			<!-- ENDIF -->
+			<time datetime="{topicrow.LAST_POST_TIME_RFC3339}">{topicrow.LAST_POST_TIME}</time>
+		</div>
+		<!-- EVENT viewforum_body_topic_row_append -->
+	</article>
+	<!-- EVENT viewforum_body_topic_row_after -->
+
+	<!-- IF topicrow.S_LAST_ROW -->
+			</div>
+		</section>
+	<!-- ENDIF -->
+
+<!-- BEGINELSE -->
+	<!-- IF S_IS_POSTABLE -->
+	<div class="panel forge-empty"><div class="inner"><strong>{{ lang(S_SORT_DAYS ? 'NO_TOPICS_TIME_FRAME' : 'NO_TOPICS') }}</strong></div></div>
+	<!-- ELSE IF not S_HAS_SUBFORUM -->
+	<div class="panel forge-empty"><div class="inner"><strong>{L_NO_FORUMS_IN_CATEGORY}</strong></div></div>
+	<!-- ENDIF -->
+<!-- END topicrow -->
+
+<!-- IF .topicrow and not S_DISPLAY_ACTIVE -->
+	<section class="forge-toolbar bar-bottom">
+		<div class="forge-bottom-row forge-bottom-row-top">
+			<div class="forge-bottom-left">
+				<!-- IF not S_IS_BOT and S_DISPLAY_POST_INFO -->
+					<!-- EVENT viewforum_buttons_bottom_before -->
+					<a href="{U_POST_NEW_TOPIC}" class="button forge-primary-button" title="<!-- IF S_IS_LOCKED -->{L_FORUM_LOCKED}<!-- ELSE -->{L_POST_TOPIC}<!-- ENDIF -->">
+					<!-- IF S_IS_LOCKED -->
+						<span>{L_BUTTON_FORUM_LOCKED}</span> <i class="icon fa-lock fa-fw" aria-hidden="true"></i>
+					<!-- ELSE -->
+						<span>{L_BUTTON_NEW_TOPIC}</span> <i class="icon fa-pencil fa-fw" aria-hidden="true"></i>
+					<!-- ENDIF -->
+					</a>
+					<!-- EVENT viewforum_buttons_bottom_after -->
+				<!-- ENDIF -->
+				<!-- IF S_SELECT_SORT_DAYS and not S_IS_BOT -->
+					<form method="post" action="{S_FORUM_ACTION}">
+					<!-- INCLUDE display_options.html -->
+					</form>
+				<!-- ENDIF -->
+			</div>
+			<div class="forge-bottom-right">
+				<div class="pagination forge-topic-pagination">
+					{TOTAL_TOPICS}
+					<!-- IF .pagination --><!-- INCLUDE pagination.html --><!-- ELSE -->{PAGE_NUMBER}<!-- ENDIF -->
+				</div>
+			</div>
+		</div>
+		<div class="forge-bottom-row forge-bottom-row-bottom">
+			<div class="forge-bottom-left">
+				<p class="jumpbox-return forge-jumpbox-return">
+					<a href="{U_INDEX}" class="left-box arrow-{S_CONTENT_FLOW_BEGIN}" accesskey="r">
+						<i class="icon fa-angle-{S_CONTENT_FLOW_BEGIN} fa-fw icon-black" aria-hidden="true"></i><span>{L_RETURN_TO_INDEX}</span>
+					</a>
+				</p>
+			</div>
+			<div class="forge-bottom-right">
+				<!-- IF S_DISPLAY_JUMPBOX -->
+				<div class="jumpbox forge-jumpbox forge-jumpbox-inline dropdown-container dropdown-container-right dropdown-up dropdown-left dropdown-button-control" id="jumpbox">
+					<span title="{L_JUMP_TO}" class="button button-secondary dropdown-trigger dropdown-select forge-jumpbox-trigger">
+						<span>{L_JUMP_TO}</span>
+						<span class="caret"><i class="icon fa-sort-down fa-fw" aria-hidden="true"></i></span>
+					</span>
+					<div class="dropdown forge-jumpbox-dropdown">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<ul class="dropdown-contents forge-jumpbox-menu" id="forge-jumpbox-menu">
+							<!-- BEGIN jumpbox_forums -->
+							<!-- IF jumpbox_forums.FORUM_ID neq -1 -->
+							<li class="forge-jumpbox-item">
+								<a href="{jumpbox_forums.LINK}" class="forge-jumpbox-link <!-- IF jumpbox_forums.level -->jumpbox-sub-link<!-- ELSEIF jumpbox_forums.S_IS_CAT -->jumpbox-cat-link<!-- ELSE -->jumpbox-forum-link<!-- ENDIF -->">
+									<!-- BEGIN level --><span class="spacer"></span><!-- END level -->
+									<span><!-- IF jumpbox_forums.level -->&#8627; &nbsp;<!-- ENDIF --> {jumpbox_forums.FORUM_NAME}</span>
+								</a>
+							</li>
+							<!-- ENDIF -->
+							<!-- END jumpbox_forums -->
+						</ul>
+					</div>
+				</div>
+				<!-- ENDIF -->
+			</div>
+		</div>
+	</section>
+<!-- ENDIF -->
+
+{% EVENT viewforum_body_online_list_before %}
+
+<!-- IF S_DISPLAY_ONLINE_LIST and U_VIEWONLINE -->
+	<div class="stat-block online-list">
+		<h3><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h3>
+		<p>{LOGGED_IN_USER_LIST}</p>
+	</div>
+<!-- ENDIF -->
+
+<!-- IF S_IS_POSTABLE and rules|length -->
+	<div class="stat-block permissions">
+		<h3>{L_FORUM_PERMISSIONS}</h3>
+		<p><!-- BEGIN rules -->{rules.RULE}<br /><!-- END rules --></p>
+	</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

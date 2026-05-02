@@ -1,0 +1,10 @@
+/*  phpBB3 Style Sheet
+    --------------------------------------------------------------
+	Style name:			ForgeBoard
+	Based on style:		prosilver (the default phpBB 3.3.x style)
+	Modified by:		FanFanlaTuFlippe
+    --------------------------------------------------------------
+*/
+
+@import url("../../prosilver/theme/stylesheet.css?hash=3b3d9a10");
+@import url("forgeboard.css?hash=5b80a350");
