@@ -6852,3 +6852,79 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 	border-radius: var(--gb-radius-md);
 	object-fit: cover;
 }
+
+/* ------------------------------------------------------------------
+   UCP / MCP sidebar — rail navigation (GitHub-style)
+   No per-item borders, no chip background. Active item is a filled
+   surface-subtle with bold weight. Hover is a subtle bg fill.
+   Higher specificity (.forgeboard .cp-menu .navigation a) beats earlier
+   chip rules without !important.
+   ------------------------------------------------------------------ */
+.forgeboard #cp-menu .navigation,
+.forgeboard .cp-menu .navigation {
+	background: transparent;
+	border: 1px solid var(--gb-border);
+	border-radius: var(--gb-radius-md);
+	padding: var(--gb-space-1);
+}
+
+.forgeboard #cp-menu .navigation ul,
+.forgeboard .cp-menu .navigation ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.forgeboard #cp-menu .navigation li,
+.forgeboard .cp-menu .navigation li {
+	margin: 0;
+}
+
+.forgeboard #cp-menu .navigation a,
+.forgeboard .cp-menu .navigation a {
+	background: transparent;
+	border: 0;
+	border-radius: var(--gb-radius-sm);
+	color: var(--gb-text-muted);
+	display: block;
+	font-size: var(--gb-font-md);
+	font-weight: var(--gb-weight-medium);
+	margin: 1px 0;
+	padding: var(--gb-space-2) var(--gb-space-3);
+	text-decoration: none;
+	transition: background 0.15s ease, color 0.15s ease;
+}
+
+.forgeboard #cp-menu .navigation a:hover,
+.forgeboard #cp-menu .navigation a:focus,
+.forgeboard .cp-menu .navigation a:hover,
+.forgeboard .cp-menu .navigation a:focus {
+	background: var(--gb-surface-subtle);
+	color: var(--gb-text);
+	text-decoration: none;
+}
+
+.forgeboard #cp-menu .navigation .active-subsection a,
+.forgeboard #cp-menu .navigation #active-subsection a,
+.forgeboard .cp-menu .navigation .active-subsection a,
+.forgeboard .cp-menu .navigation #active-subsection a {
+	background: var(--gb-surface-subtle);
+	color: var(--gb-text);
+	font-weight: var(--gb-weight-semibold);
+	position: relative;
+}
+
+/* Active item: 3px accent stripe on the left for visual anchor */
+.forgeboard #cp-menu .navigation .active-subsection a::before,
+.forgeboard #cp-menu .navigation #active-subsection a::before,
+.forgeboard .cp-menu .navigation .active-subsection a::before,
+.forgeboard .cp-menu .navigation #active-subsection a::before {
+	background: var(--gb-accent);
+	border-radius: 0 var(--gb-radius-sm) var(--gb-radius-sm) 0;
+	content: '';
+	height: 60%;
+	left: 0;
+	position: absolute;
+	top: 20%;
+	width: 3px;
+}
