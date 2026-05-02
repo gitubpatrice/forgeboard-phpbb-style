@@ -30,10 +30,10 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
 	--gb-shadow: 0 14px 34px rgba(31, 35, 40, 0.12);
 	--gb-shadow-soft: 0 1px 0 rgba(31, 35, 40, 0.06);
 
-	/* Button intent tokens (light theme) */
-	--gb-btn-primary-bg: #1f883d;
-	--gb-btn-primary-bg-hover: #1a7f37;
-	--gb-btn-primary-bg-active: #197233;
+	/* Button intent tokens (light theme) — sky blue primary */
+	--gb-btn-primary-bg: #38a3ff;
+	--gb-btn-primary-bg-hover: #1f8def;
+	--gb-btn-primary-bg-active: #1276d4;
 	--gb-btn-primary-fg: #ffffff;
 	--gb-btn-primary-border: rgba(31, 35, 40, 0.15);
 
@@ -115,11 +115,11 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
 	--gb-shadow: 0 18px 48px rgba(0, 0, 0, 0.26);
 		--gb-shadow-soft: 0 1px 0 rgba(240, 246, 252, 0.06);
 
-		/* Button intent tokens (dark theme) */
-		--gb-btn-primary-bg: #238636;
-		--gb-btn-primary-bg-hover: #2ea043;
-		--gb-btn-primary-bg-active: #238636;
-		--gb-btn-primary-fg: #ffffff;
+		/* Button intent tokens (dark theme) — sky blue primary */
+		--gb-btn-primary-bg: #58a6ff;
+		--gb-btn-primary-bg-hover: #79c0ff;
+		--gb-btn-primary-bg-active: #388bfd;
+		--gb-btn-primary-fg: #0d1117;
 		--gb-btn-primary-border: rgba(240, 246, 252, 0.10);
 
 		--gb-btn-danger-bg: #da3633;
