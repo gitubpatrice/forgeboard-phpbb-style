@@ -14,7 +14,7 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
   --gb-surface-muted: #edf1f5;
   --gb-border: #cbd5df;
   --gb-border-muted: #dde4ec;
-  --gb-text: #202a36;
+  --gb-text: #4d5c6e;
   --gb-text-muted: #607080;
   --gb-link: #1f6feb;
   --gb-link-hover: #0a58ca;
@@ -136,47 +136,11 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
   --gb-input-shadow-inset: inset 0 1px 0 rgba(0, 0, 0, 0.2);
 }
 
-/* Auto mode: when no explicit pref, follow system preference */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --gb-canvas: #0d1117;
-    --gb-surface: #161b22;
-    --gb-surface-subtle: #21262d;
-    --gb-surface-muted: #30363d;
-    --gb-border: #30363d;
-    --gb-border-muted: #21262d;
-    --gb-text: #f6f8fb;
-    --gb-text-muted: #aeb8c4;
-    --gb-link: #58a6ff;
-    --gb-link-hover: #79c0ff;
-    --gb-accent: #388bfd;
-    --gb-accent-hover: #58a6ff;
-    --gb-danger: #ff7b72;
-    --gb-header: #010409;
-    --gb-header-muted: #8b949e;
-    --gb-focus: #58a6ff;
-    --gb-red-soft: rgba(248, 81, 73, 0.14);
-    --gb-blue-soft: rgba(88, 166, 255, 0.12);
-    --gb-white-soft: #0d1117;
-    --gb-shadow: 0 18px 48px rgba(0, 0, 0, 0.26);
-    --gb-shadow-soft: 0 1px 0 rgba(240, 246, 252, 0.06);
-
-    --gb-btn-primary-bg: #58a6ff;
-    --gb-btn-primary-bg-hover: #79c0ff;
-    --gb-btn-primary-bg-active: #388bfd;
-    --gb-btn-primary-fg: #0d1117;
-    --gb-btn-primary-border: rgba(240, 246, 252, 0.1);
-
-    --gb-btn-danger-bg: #da3633;
-    --gb-btn-danger-bg-hover: #f85149;
-    --gb-btn-danger-bg-active: #b62324;
-    --gb-btn-danger-fg: #ffffff;
-    --gb-btn-danger-border: rgba(240, 246, 252, 0.1);
-
-    --gb-input-focus-ring: rgba(88, 166, 255, 0.4);
-    --gb-input-shadow-inset: inset 0 1px 0 rgba(0, 0, 0, 0.2);
-  }
-}
+/* No @media (prefers-color-scheme) fallback: forge_theme_toggle.js
+   sets [data-theme="dark|light"] inline in <head> before render, so the
+   single [data-theme="dark"] block above covers ALL paths
+   (toggle, cookie, localStorage, system-preference detection by JS).
+   Visitors with JS disabled get the default light theme. */
 
 html,
 body {
@@ -316,22 +280,20 @@ hr {
 
 .forge-topbar {
   align-items: center;
-  background: var(--gb-header);
-  background: color-mix(in srgb, var(--gb-header) 94%, var(--gb-accent));
-  border: 1px solid var(--gb-border);
-  border: 1px solid color-mix(in srgb, var(--gb-border) 54%, transparent);
+  background: none;
+  border: 0;
   border-radius: 0 0 12px 12px;
-  box-shadow: var(--gb-shadow);
+  box-shadow: none;
   display: grid;
   gap: 14px;
   grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
   margin: 0;
-  padding: 12px clamp(16px, 3vw, 30px);
+  padding: 0;
 }
 
 .forge-brand {
   align-items: center;
-  color: #ffffff;
+  color: var(--gb-text);
   display: inline-grid;
   gap: 12px;
   grid-template-columns: auto minmax(0, 1fr);
@@ -339,7 +301,7 @@ hr {
 }
 
 .forge-brand:hover {
-  color: #ffffff;
+  color: var(--gb-text);
   text-decoration: none;
 }
 
@@ -350,7 +312,7 @@ hr {
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.12),
     0 14px 35px rgba(0, 0, 0, 0.24);
-  color: #0d1117;
+  color: var(--gb-text);
   display: inline-flex;
   font-size: 1.35em;
   font-weight: 900;
@@ -378,7 +340,7 @@ hr {
 }
 
 .forge-brand-copy small {
-  color: #c9d1d9;
+  color: var(--gb-text-muted);
   font-size: 1.12em;
   line-height: 1.25;
 }
@@ -1766,10 +1728,10 @@ ul.zebra-list li:nth-child(even) {
   padding: 1px 5px;
 }
 
-/* Quote blocks (BBCode [quote] and any blockquote) — GitHub-style:
-   left accent border + muted text color, NO fill, NO radius. */
+/* Quote blocks (BBCode [quote] and any blockquote).
+   Uses theme tokens so the surface color adapts to light AND dark mode. */
 .forgeboard blockquote {
-  background: #141920;
+  background: var(--gb-surface-subtle);
   border: 0;
   border-left: 5px solid var(--gb-border);
   border-radius: 9px;
@@ -1779,14 +1741,14 @@ ul.zebra-list li:nth-child(even) {
 }
 
 .forgeboard blockquote blockquote {
-  background-color: #171d25;
-  border-left: 4px solid var(--gb-border);
+  background-color: var(--gb-surface-muted);
+  border-left: 4px solid var(--gb-border-muted);
   margin-top: var(--gb-space-2);
 }
 
 .forgeboard blockquote blockquote blockquote {
-  background-color: #12171e;
-  border-left: 3px solid var(--gb-border);
+  background-color: var(--gb-surface);
+  border-left: 3px solid var(--gb-border-muted);
   margin-top: var(--gb-space-2);
 }
 
@@ -2374,8 +2336,6 @@ a:hover .icon.icon-orange {
   border-radius: 0;
   box-shadow: none;
   color: var(--gb-text-muted);
-  height: 34px;
-  min-width: 38px;
   text-shadow: none;
   transition:
     background-color 120ms ease,
@@ -3107,22 +3067,6 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
   min-width: 0;
 }
 
-.forgeboard .forge-site-card {
-  padding: 18px 20px;
-}
-
-.forgeboard .forge-brand-title {
-  line-height: 1.04;
-  text-wrap: balance;
-}
-
-.forgeboard .forge-header-search {
-  align-self: start;
-  margin-left: auto;
-  max-width: 360px;
-  width: min(100%, 360px);
-}
-
 .forgeboard .forge-hero,
 .forgeboard .forge-forum-hero {
   box-shadow: none;
@@ -3313,7 +3257,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
   display: flex;
   flex-wrap: wrap;
   gap: 3px;
-  margin: 0 0 10px 0;
+  margin: 0 0 10px;
   min-width: 0;
   padding: 10px 12px;
 }
@@ -3398,7 +3342,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 .forgeboard input.inputbox,
 .forgeboard textarea.inputbox,
 .forgeboard select {
-  background: #12161c;
+  background: var(--gb-input-bg);
   border: 1px solid var(--gb-border);
   border-radius: 6px;
   padding: 0.2rem 0.5rem;
@@ -3430,10 +3374,6 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
   min-width: 40px;
   text-shadow: none;
   min-height: 36px;
-}
-
-.forgeboard .search-box .button-search-end {
-  border-left: 0;
 }
 
 .forgeboard .panel-container .panel {
@@ -3549,7 +3489,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 }
 
 .forgeboard .back2top .top {
-  background-color: #161b22;
+  background-color: var(--gb-surface);
   border: 1px solid var(--gb-border);
   border-radius: 6px;
   color: var(--gb-text-muted);
@@ -3601,7 +3541,6 @@ legacy selectors for these areas.
     ),
     var(--gb-surface);
   border-color: rgba(88, 166, 255, 0.42);
-  color: var(--gb-text);
 }
 
 .forgeboard .forge-brand .site_logo {
@@ -3640,10 +3579,6 @@ legacy selectors for these areas.
   height: 42px;
 }
 
-.forgeboard .forge-search .button-search-end {
-  border-radius: 0 6px 6px 0;
-}
-
 .forgeboard .forge-nav-card .navbar {
   display: grid;
   gap: 14px;
@@ -3652,6 +3587,9 @@ legacy selectors for these areas.
 .forgeboard .forge-nav-card #nav-main {
   width: 100%;
   align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
   min-height: 38px;
 }
 
@@ -3860,25 +3798,6 @@ Prevents prosilver hover/focus rules from changing the geometry of search button
 .forgeboard .forge-topic-search fieldset:focus-within {
   border-color: rgba(88, 166, 255, 0.72);
   box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.14);
-}
-
-/*
-ForgeBoard open header
-Keeps the generous top spacing while removing the boxed background/border.
-*/
-.forgeboard .forge-topbar {
-  align-items: stretch;
-  border-radius: 0;
-  display: grid;
-  gap: 24px;
-  grid-template-columns: minmax(280px, 1fr) minmax(300px, 420px);
-  margin: 0;
-  padding: 26px 0 0;
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  padding-left: 0;
-  padding-right: 0;
 }
 
 .forgeboard .forge-brand,
@@ -4827,10 +4746,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   max-width: none;
 }
 
-.forgeboard .forge-inline-search .button-search {
-  border-radius: 0 6px 6px 0;
-}
-
 .forgeboard .jumpbox.dropdown-visible .dropdown,
 .forgeboard .jumpbox .dropdown-visible .dropdown,
 .forgeboard .jumpbox.dropdown-container .dropdown {
@@ -5094,7 +5009,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 .forgeboard #mcp_queue ul.topiclist.missing-column {
   background: var(--gb-surface);
-  border: 1px solid rgba(48, 54, 61, 0.86);
+  border: 1px solid var(--gb-border);
   border-radius: 6px;
   box-shadow: none;
   margin: 0 0 8px;
@@ -5110,12 +5025,12 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 .forgeboard #mcp_queue ul.topiclist.missing-column li.header {
   background: rgba(22, 27, 34, 0.72);
-  border-bottom: 1px solid rgba(48, 54, 61, 0.86);
+  border-bottom: 1px solid var(--gb-border);
   color: var(--gb-danger);
 }
 
 .forgeboard #mcp_queue ul.topiclist.cplist.missing-column li.row + li.row {
-  border-top: 1px solid rgba(48, 54, 61, 0.64);
+  border-top: 1px solid var(--gb-border-muted);
 }
 
 .forgeboard #mcp_queue ul.topiclist.missing-column dl,
@@ -5147,7 +5062,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forgeboard #mcp_queue ul.topiclist.missing-column dd {
-  border-left: 1px solid rgba(48, 54, 61, 0.72);
+  border-left: 1px solid var(--gb-border);
 }
 
 .forgeboard #mcp_queue ul.topiclist.missing-column dt .list-inner,
@@ -5166,7 +5081,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard #mcp_queue ul.topiclist.cplist.missing-column dd.mark {
   align-items: center;
   background: transparent;
-  border-left: 1px solid rgba(48, 54, 61, 0.72);
+  border-left: 1px solid var(--gb-border);
   border-radius: 0;
   color: var(--gb-danger);
   display: flex;
@@ -5480,7 +5395,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard ul.topiclist,
 .forgeboard ul.topiclist li.header,
 .forgeboard ul.topiclist li.row {
-  border-color: rgba(48, 54, 61, 0.72);
+  border-color: var(--gb-border);
 }
 
 .forgeboard .panel-container .panel > .inner,
@@ -5557,6 +5472,11 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 .forgeboard.section-ucp ul.topiclist.cplist.two-columns dd.mark {
   align-items: center;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 1px solid var(--gb-border);
+  border-radius: 0;
   display: flex;
   justify-content: center;
   position: relative;
@@ -5651,12 +5571,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 /* Header navigation split: main menu + breadcrumbs in two cards */
-.forgeboard .forge-nav-card .forge-nav-split {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-}
-
 .forgeboard .forge-nav-layout {
   display: grid;
   gap: 12px;
@@ -5672,7 +5586,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent 80px),
     var(--gb-surface);
-  border: 1px solid rgba(48, 54, 61, 0.72);
+  border: 1px solid var(--gb-border);
   border-radius: 6px;
   padding: 8px 10px;
 }
@@ -6126,17 +6040,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   white-space: nowrap;
 }
 
-.forgeboard.section-viewforum .forge-mark-read-row {
-  margin: 0 0 8px;
-}
-
-.forgeboard.section-viewforum .forge-mark-read-link {
-  border: 1px solid var(--gb-border);
-  border-radius: 6px;
-  display: inline-block;
-  padding: 6px 10px;
-}
-
 /* CP menu redesign: UCP / MCP / ACP side navigation */
 .forgeboard #cp-menu,
 .forgeboard .cp-menu {
@@ -6252,7 +6155,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard.section-mcp .topiclist th.mark {
   background: transparent;
   border: 0;
-  border-left: 1px solid rgba(48, 54, 61, 0.72);
+  border-left: 1px solid var(--gb-border);
   border-radius: 0;
   box-shadow: none;
   padding: 0;
@@ -7095,9 +6998,8 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
    The input loses its right border/radius when followed by buttons. */
 .forgeboard .forge-search fieldset .inputbox + .button-search,
 .forgeboard .forge-inline-search fieldset .inputbox + .button-search {
-  border-left: 0;
-  border-radius: 0 var(--gb-radius-md) var(--gb-radius-md) 0;
-  margin-left: -1px;
+  border-left: 1px solid #30363d;
+  border-right: 1px solid #30363d;
 }
 
 .forgeboard .forge-search fieldset .button-search + .button-search-end {
@@ -7115,9 +7017,11 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard .button-search-end:hover,
 .forgeboard .forge-search .button:hover,
 .forgeboard .forge-inline-search .button:hover {
-  background: var(--gb-surface-subtle);
-  border-color: var(--gb-border);
+  background: rgba(88, 166, 255, 0.1);
+  border-bottom: 1px rgba(88, 166, 255, 0.45);
   color: var(--gb-link);
+  margin: 0;
+  padding: 0;
 }
 
 /* Nav main card links: don't inherit button chrome (they're nav links) */
@@ -7245,7 +7149,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
   .forgeboard #mcp_queue ul.topiclist.missing-column dd.moderation {
     border-left: 0;
-    border-top: 1px solid rgba(48, 54, 61, 0.64);
+    border-top: 1px solid var(--gb-border-muted);
     grid-column: 1 / -1;
   }
 
@@ -7572,7 +7476,6 @@ body.forgeboard {
    wrap per word. We stack vertically: cp-menu becomes a horizontal
    tab-bar across the top, cp-main takes the full width below. */
 @media (max-width: 900px) {
-
   .forgeboard .forge-forum-grid {
     grid-template-columns: 1fr;
   }
@@ -7598,13 +7501,7 @@ body.forgeboard {
     padding-left: 0;
   }
 
-  .forgeboard .forge-header-search {
-    margin-left: 0;
-    max-width: none;
-    width: 100%;
-  }
-
-  .forgeboard .forge-category-head {
+.forgeboard .forge-category-head {
     grid-template-columns: 1fr;
   }
 
@@ -7652,8 +7549,6 @@ body.forgeboard {
   .forgeboard .forge-topic-stats {
     justify-self: start;
   }
-
-  
 
   .forgeboard #cp-menu #navigation ul,
   .forgeboard .cp-menu .navigation ul {
@@ -7747,9 +7642,9 @@ body.forgeboard {
 
   .forgeboard #cp-menu,
   .forgeboard .cp-menu {
-	padding: 8px;
-	margin: 0 0 14px;
-}
+    padding: 8px;
+    margin: 0 0 14px;
+  }
 
   .forgeboard #cp-menu .navigation,
   .forgeboard .cp-menu .navigation {
@@ -7785,7 +7680,6 @@ body.forgeboard {
   .forgeboard .cp-menu .navigation #active-subsection a::before {
     display: none;
   }
-
 }
 
 /* ------------------------------------------------------------------
@@ -7985,27 +7879,42 @@ body.forgeboard {
    - light -> sun icon
    - dark  -> moon icon
    ------------------------------------------------------------------ */
+/* Wrapper <li> in nav-main: ALWAYS pushed to the right edge of the row.
+   !important defeats any earlier rule that could reset margin on linklist
+   items. */
+.forgeboard #nav-main .forge-nav-theme-toggle,
+.forgeboard .forge-nav-main-card .forge-nav-theme-toggle {
+  margin-left: auto !important;
+  align-self: center;
+  display: inline-flex;
+  list-style: none;
+  order: 99;
+}
+
 .forgeboard .forge-theme-toggle {
   align-items: center;
   align-self: center;
   background: transparent;
-  border: 1px solid transparent;
+  border: 1px solid var(--gb-border);
   border-radius: var(--gb-radius-md);
-  color: #ffffff;
+  color: var(--gb-text-muted);
   cursor: pointer;
   display: inline-flex;
-  height: 36px;
+  height: 34px;
   justify-content: center;
-  margin-left: 8px;
+  margin: 0;
   padding: 0;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-  width: 36px;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+  width: 34px;
 }
 
 .forgeboard .forge-theme-toggle:hover,
 .forgeboard .forge-theme-toggle:focus-visible {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: var(--gb-surface-subtle);
+  border-color: var(--gb-accent);
   color: var(--gb-link);
 }
 
@@ -8015,15 +7924,29 @@ body.forgeboard {
 }
 
 /* Hide all icons by default, then show the one matching the active pref */
-.forgeboard .forge-theme-toggle .forge-theme-icon { display: none; }
-:root[data-theme-pref="auto"]  .forgeboard .forge-theme-toggle .forge-theme-icon-auto,
-:root[data-theme-pref="light"] .forgeboard .forge-theme-toggle .forge-theme-icon-light,
-:root[data-theme-pref="dark"]  .forgeboard .forge-theme-toggle .forge-theme-icon-dark {
+.forgeboard .forge-theme-toggle .forge-theme-icon {
+  display: none;
+}
+:root[data-theme-pref="auto"]
+  .forgeboard
+  .forge-theme-toggle
+  .forge-theme-icon-auto,
+:root[data-theme-pref="light"]
+  .forgeboard
+  .forge-theme-toggle
+  .forge-theme-icon-light,
+:root[data-theme-pref="dark"]
+  .forgeboard
+  .forge-theme-toggle
+  .forge-theme-icon-dark {
   display: inline-block;
 }
 
 /* Fallback: if data-theme-pref is missing (no JS), show the auto icon */
-:root:not([data-theme-pref]) .forgeboard .forge-theme-toggle .forge-theme-icon-auto {
+:root:not([data-theme-pref])
+  .forgeboard
+  .forge-theme-toggle
+  .forge-theme-icon-auto {
   display: inline-block;
 }
 
@@ -8088,8 +8011,12 @@ body.forgeboard {
 
 /* Variant icons by context (using attribute selectors) */
 .forgeboard.section-search .forge-empty-state::before,
-.forgeboard .panel.forge-empty.is-search::before { content: "🔍"; }
-.forgeboard.section-mcp .panel.forge-empty::before { content: "✓"; }
+.forgeboard .panel.forge-empty.is-search::before {
+  content: "🔍";
+}
+.forgeboard.section-mcp .panel.forge-empty::before {
+  content: "✓";
+}
 .forgeboard #notification_list .no_notifications::before {
   background:
     radial-gradient(circle at 30% 30%, var(--gb-blue-soft), transparent 70%),
