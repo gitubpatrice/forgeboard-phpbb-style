@@ -1,0 +1,183 @@
+/*  ForgeBoard — Print stylesheet
+    --------------------------------------------------------------
+    Optimised for paper: hide nav/UI chrome, keep only the readable
+    content (post body, author, date), force black text on white.
+    GPL-2.0 (c) 2026 FanFanLaTuFlippe
+    -------------------------------------------------------------- */
+
+@media print {
+	/* ---------- Reset chrome ---------- */
+	html, body {
+		background: #fff !important;
+		color: #000 !important;
+		font-family: Georgia, "Times New Roman", serif;
+		font-size: 11pt;
+		line-height: 1.5;
+	}
+
+	/* Hide everything that's not core content */
+	.forge-topbar,
+	#page-header,
+	.forge-nav-card,
+	.forge-nav-wrap,
+	.forge-toolbar,
+	.forge-bottom-row,
+	.forge-jumpbox,
+	.forge-jumpbox-inline,
+	.forge-jumpbox-return,
+	.action-bar,
+	.skiplink,
+	.responsive-menu,
+	.dropdown-trigger,
+	.dropdown,
+	.notification_list,
+	.forge-theme-toggle,
+	.forge-mini-pagination,
+	.forge-search,
+	.forge-inline-search,
+	.search-box,
+	#nav-footer,
+	.forge-footer-nav,
+	.forge-footer-meta,
+	.copyright,
+	#page-footer,
+	.post-buttons,
+	.forge-mcp-post-actions,
+	.back2top,
+	.forge-lastpost-jump,
+	.signature {
+		display: none !important;
+	}
+
+	/* ---------- Layout ---------- */
+	.wrap, .forge-shell, #wrap, .forge-main, #page-body {
+		background: #fff !important;
+		border: 0 !important;
+		box-shadow: none !important;
+		margin: 0 !important;
+		max-width: 100% !important;
+		padding: 0 !important;
+		width: 100% !important;
+	}
+
+	/* ---------- Headings ---------- */
+	h1, h2, h3, h4 {
+		color: #000 !important;
+		page-break-after: avoid;
+	}
+	h1 { font-size: 18pt; }
+	h2 { font-size: 16pt; }
+	h3 { font-size: 13pt; }
+
+	/* ---------- Posts ---------- */
+	.post,
+	.forge-mcp-post {
+		background: #fff !important;
+		border: 0 !important;
+		border-top: 1pt solid #999 !important;
+		box-shadow: none !important;
+		margin: 1em 0 0 !important;
+		padding: 0.5em 0 !important;
+		page-break-inside: avoid;
+	}
+
+	.post .inner,
+	.forge-mcp-post .inner {
+		background: transparent !important;
+		display: block !important;
+		grid-template-columns: none !important;
+		padding: 0 !important;
+	}
+
+	.postbody,
+	.forge-mcp-postbody {
+		float: none !important;
+		width: 100% !important;
+	}
+
+	.postprofile {
+		background: transparent !important;
+		border: 0 !important;
+		float: none !important;
+		font-size: 10pt;
+		margin: 0 0 0.5em 0 !important;
+		padding: 0 !important;
+		width: 100% !important;
+	}
+
+	.postprofile dl, .postprofile dd { display: inline; margin: 0 0.3em 0 0; }
+	.postprofile .avatar-container, .avatar { display: none !important; }
+
+	.post .author,
+	.forge-mcp-post-author {
+		color: #444 !important;
+		font-size: 10pt;
+		font-style: italic;
+		margin: 0 0 0.5em !important;
+	}
+
+	.content {
+		color: #000 !important;
+		font-size: 11pt;
+	}
+
+	/* ---------- Quote / code blocks ---------- */
+	blockquote {
+		background: transparent !important;
+		border: 0 !important;
+		border-left: 3pt solid #888 !important;
+		color: #333 !important;
+		margin: 0.5em 0 !important;
+		padding: 0 0 0 0.8em !important;
+	}
+
+	.codebox {
+		background: #f6f6f6 !important;
+		border: 1pt solid #ccc !important;
+		page-break-inside: avoid;
+	}
+
+	.codebox p {
+		background: #eee !important;
+		color: #333 !important;
+		padding: 0.2em 0.5em !important;
+	}
+
+	.codebox code,
+	.codebox pre {
+		background: transparent !important;
+		color: #000 !important;
+		font-family: "Courier New", monospace;
+		font-size: 9pt;
+		padding: 0.5em !important;
+	}
+
+	/* ---------- Links ---------- */
+	a, a:link, a:visited {
+		color: #000 !important;
+		text-decoration: underline;
+	}
+
+	/* Show URL after external links */
+	a[href^="http"]:not(.no-print-url):after {
+		content: " (" attr(href) ")";
+		color: #555 !important;
+		font-size: 9pt;
+		font-style: italic;
+	}
+
+	/* ---------- Topic / forum titles list ---------- */
+	.forabg, .forumbg, .panel,
+	.forge-category, .forge-topic-card, .forge-forum-card,
+	.forge-hero, .forge-forum-hero {
+		background: #fff !important;
+		border: 0 !important;
+		box-shadow: none !important;
+		padding: 0 !important;
+	}
+
+	/* Avoid huge blank pages */
+	@page {
+		margin: 1.5cm;
+	}
+}

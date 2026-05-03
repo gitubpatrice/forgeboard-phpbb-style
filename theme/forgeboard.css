@@ -93,8 +93,52 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
   --gb-space-12: 48px;
 }
 
+/* Dark theme tokens — applied via [data-theme="dark"] on <html>
+   (set by forge_theme_toggle.js). Falls back to system preference for
+   visitors with JS disabled via the @media block below. */
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  --gb-canvas: #0d1117;
+  --gb-surface: #161b22;
+  --gb-surface-subtle: #21262d;
+  --gb-surface-muted: #30363d;
+  --gb-border: #30363d;
+  --gb-border-muted: #21262d;
+  --gb-text: #f6f8fb;
+  --gb-text-muted: #aeb8c4;
+  --gb-link: #58a6ff;
+  --gb-link-hover: #79c0ff;
+  --gb-accent: #388bfd;
+  --gb-accent-hover: #58a6ff;
+  --gb-danger: #ff7b72;
+  --gb-header: #010409;
+  --gb-header-muted: #8b949e;
+  --gb-focus: #58a6ff;
+  --gb-red-soft: rgba(248, 81, 73, 0.14);
+  --gb-blue-soft: rgba(88, 166, 255, 0.12);
+  --gb-white-soft: #0d1117;
+  --gb-shadow: 0 18px 48px rgba(0, 0, 0, 0.26);
+  --gb-shadow-soft: 0 1px 0 rgba(240, 246, 252, 0.06);
+
+  --gb-btn-primary-bg: #58a6ff;
+  --gb-btn-primary-bg-hover: #79c0ff;
+  --gb-btn-primary-bg-active: #388bfd;
+  --gb-btn-primary-fg: #0d1117;
+  --gb-btn-primary-border: rgba(240, 246, 252, 0.1);
+
+  --gb-btn-danger-bg: #da3633;
+  --gb-btn-danger-bg-hover: #f85149;
+  --gb-btn-danger-bg-active: #b62324;
+  --gb-btn-danger-fg: #ffffff;
+  --gb-btn-danger-border: rgba(240, 246, 252, 0.1);
+
+  --gb-input-focus-ring: rgba(88, 166, 255, 0.4);
+  --gb-input-shadow-inset: inset 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Auto mode: when no explicit pref, follow system preference */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --gb-canvas: #0d1117;
     --gb-surface: #161b22;
     --gb-surface-subtle: #21262d;
@@ -117,7 +161,6 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
     --gb-shadow: 0 18px 48px rgba(0, 0, 0, 0.26);
     --gb-shadow-soft: 0 1px 0 rgba(240, 246, 252, 0.06);
 
-    /* Button intent tokens (dark theme) — sky blue primary */
     --gb-btn-primary-bg: #58a6ff;
     --gb-btn-primary-bg-hover: #79c0ff;
     --gb-btn-primary-bg-active: #388bfd;
@@ -3270,7 +3313,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
   display: flex;
   flex-wrap: wrap;
   gap: 3px;
-  margin: 0;
+  margin: 0 0 10px 0;
   min-width: 0;
   padding: 10px 12px;
 }
@@ -7192,174 +7235,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 /* viewtopic responsive: postbody + profile stack on narrow screens */
-@media (max-width: 900px) {
-  .forgeboard .forge-forum-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .forgeboard .forge-forum-card {
-    grid-template-areas:
-      "main"
-      "meta"
-      "numbers"
-      "lastpost";
-    grid-template-columns: 1fr;
-  }
-
-  .forgeboard .action-bar .search-box,
-  .forgeboard .action-bar .pagination {
-    flex-basis: 100%;
-    margin-left: 0;
-    width: 100%;
-  }
-
-  .forgeboard .forge-forum-card > .forge-forum-numbers,
-  .forgeboard .forge-forum-meta {
-    padding-left: 0;
-  }
-
-  .forgeboard .forge-header-search {
-    margin-left: 0;
-    max-width: none;
-    width: 100%;
-  }
-
-  .forgeboard .forge-category-head {
-    grid-template-columns: 1fr;
-  }
-
-  .forgeboard .forge-category-labels {
-    display: none;
-  }
-
-  .forgeboard .post > .inner {
-    grid-template-columns: 1fr;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .forgeboard .postprofile {
-    border-radius: 0 0 12px 12px;
-    margin-left: 0;
-    border-left: 0;
-    order: 2;
-  }
-
-  .forgeboard .postbody {
-    order: 1;
-  }
-
-  .action-bar,
-  .action-bar.bar-top {
-    justify-content: inherit;
-  }
-
-  .forgeboard .forge-brand,
-  .forgeboard .forge-search {
-    min-height: 0;
-    padding: 18px;
-  }
-
-  .forgeboard .forge-nav-card #nav-main > #username_logged_in {
-    margin-left: 0;
-    padding-left: 0;
-  }
-
-  .forgeboard .forge-topic-card-viewforum {
-    grid-template-columns: 1fr;
-  }
-
-  .forgeboard .forge-topic-stats {
-    justify-self: start;
-  }
-
-  .forgeboard #cp-menu,
-  .forgeboard .cp-menu {
-    padding: 8px;
-  }
-
-  .forgeboard #cp-menu #navigation ul,
-  .forgeboard .cp-menu .navigation ul {
-    grid-template-columns: 1fr;
-  }
-
-  .forgeboard.section-viewforum .forge-topic-card-viewforum,
-  .forgeboard.section-viewforum .forge-topic-section .forge-category-head {
-    grid-template-columns: 1fr;
-  }
-
-  .forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-main,
-  .forgeboard.section-viewforum
-    .forge-topic-card-viewforum
-    > .forge-topic-lastpost {
-    grid-column: 1;
-    grid-row: auto;
-  }
-
-  /* Stacked: restore .forge-topic-stats as a real container with a
-	   2-col grid for the chips (override the desktop display: contents) */
-  .forgeboard.section-viewforum
-    .forge-topic-card-viewforum
-    > .forge-topic-stats {
-    display: grid;
-    gap: 10px;
-    grid-column: 1;
-    grid-row: auto;
-    grid-template-columns: repeat(2, minmax(110px, 1fr));
-    justify-self: start;
-  }
-
-  .forgeboard.section-viewforum
-    .forge-topic-card-viewforum
-    > .forge-topic-stats
-    > .forge-topic-stat-replies,
-  .forgeboard.section-viewforum
-    .forge-topic-card-viewforum
-    > .forge-topic-stats
-    > .forge-topic-stat-views {
-    grid-column: auto;
-    grid-row: auto;
-  }
-
-  .forgeboard.section-viewforum .forge-topic-section .forge-category-labels {
-    display: none;
-  }
-
-  .forgeboard .post.has-profile > .inner {
-    grid-template-areas: "profile" "body" "top";
-    grid-template-columns: 1fr;
-  }
-
-  .forgeboard .post.has-profile .postbody {
-    padding-right: 14px;
-  }
-
-  .forgeboard .post.has-profile .postprofile {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    padding: 10px 14px;
-  }
-
-  /* Compact profile: avatar inline with name + meta */
-  .forgeboard .post.has-profile .postprofile .avatar-container {
-    flex-shrink: 0;
-    margin: 0;
-  }
-
-  .forgeboard .post.has-profile .postprofile .avatar img {
-    height: 40px;
-    width: 40px;
-  }
-
-  .forgeboard .post.has-profile .postprofile dl,
-  .forgeboard .post.has-profile .postprofile dd {
-    flex: 1 1 auto;
-    margin: 0;
-    min-width: 0;
-  }
-}
 
 /* Tablet & below: viewforum toolbars stack to single column */
 @media (max-width: 760px) {
@@ -7697,6 +7572,171 @@ body.forgeboard {
    wrap per word. We stack vertically: cp-menu becomes a horizontal
    tab-bar across the top, cp-main takes the full width below. */
 @media (max-width: 900px) {
+
+  .forgeboard .forge-forum-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .forgeboard .forge-forum-card {
+    grid-template-areas:
+      "main"
+      "meta"
+      "numbers"
+      "lastpost";
+    grid-template-columns: 1fr;
+  }
+
+  .forgeboard .action-bar .search-box,
+  .forgeboard .action-bar .pagination {
+    flex-basis: 100%;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .forgeboard .forge-forum-card > .forge-forum-numbers,
+  .forgeboard .forge-forum-meta {
+    padding-left: 0;
+  }
+
+  .forgeboard .forge-header-search {
+    margin-left: 0;
+    max-width: none;
+    width: 100%;
+  }
+
+  .forgeboard .forge-category-head {
+    grid-template-columns: 1fr;
+  }
+
+  .forgeboard .forge-category-labels {
+    display: none;
+  }
+
+  .forgeboard .post > .inner {
+    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .forgeboard .postprofile {
+    border-radius: 0 0 12px 12px;
+    margin-left: 0;
+    border-left: 0;
+    order: 2;
+  }
+
+  .forgeboard .postbody {
+    order: 1;
+  }
+
+  .action-bar,
+  .action-bar.bar-top {
+    justify-content: inherit;
+  }
+
+  .forgeboard .forge-brand,
+  .forgeboard .forge-search {
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .forgeboard .forge-nav-card #nav-main > #username_logged_in {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .forgeboard .forge-topic-card-viewforum {
+    grid-template-columns: 1fr;
+  }
+
+  .forgeboard .forge-topic-stats {
+    justify-self: start;
+  }
+
+  
+
+  .forgeboard #cp-menu #navigation ul,
+  .forgeboard .cp-menu .navigation ul {
+    grid-template-columns: 1fr;
+  }
+
+  .forgeboard.section-viewforum .forge-topic-card-viewforum,
+  .forgeboard.section-viewforum .forge-topic-section .forge-category-head {
+    grid-template-columns: 1fr;
+  }
+
+  .forgeboard.section-viewforum .forge-topic-card-viewforum > .forge-topic-main,
+  .forgeboard.section-viewforum
+    .forge-topic-card-viewforum
+    > .forge-topic-lastpost {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  /* Stacked: restore .forge-topic-stats as a real container with a
+	   2-col grid for the chips (override the desktop display: contents) */
+  .forgeboard.section-viewforum
+    .forge-topic-card-viewforum
+    > .forge-topic-stats {
+    display: grid;
+    gap: 10px;
+    grid-column: 1;
+    grid-row: auto;
+    grid-template-columns: repeat(2, minmax(110px, 1fr));
+    justify-self: start;
+  }
+
+  .forgeboard.section-viewforum
+    .forge-topic-card-viewforum
+    > .forge-topic-stats
+    > .forge-topic-stat-replies,
+  .forgeboard.section-viewforum
+    .forge-topic-card-viewforum
+    > .forge-topic-stats
+    > .forge-topic-stat-views {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .forgeboard.section-viewforum .forge-topic-section .forge-category-labels {
+    display: none;
+  }
+
+  .forgeboard .post.has-profile > .inner {
+    grid-template-areas: "profile" "body" "top";
+    grid-template-columns: 1fr;
+  }
+
+  .forgeboard .post.has-profile .postbody {
+    padding-right: 14px;
+  }
+
+  .forgeboard .post.has-profile .postprofile {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 10px 14px;
+  }
+
+  /* Compact profile: avatar inline with name + meta */
+  .forgeboard .post.has-profile .postprofile .avatar-container {
+    flex-shrink: 0;
+    margin: 0;
+  }
+
+  .forgeboard .post.has-profile .postprofile .avatar img {
+    height: 40px;
+    width: 40px;
+  }
+
+  .forgeboard .post.has-profile .postprofile dl,
+  .forgeboard .post.has-profile .postprofile dd {
+    flex: 1 1 auto;
+    margin: 0;
+    min-width: 0;
+  }
+
   .forgeboard #cp-menu,
   .forgeboard .cp-menu,
   .forgeboard #cp-main,
@@ -7707,8 +7747,9 @@ body.forgeboard {
 
   .forgeboard #cp-menu,
   .forgeboard .cp-menu {
-    margin: 0 0 14px;
-  }
+	padding: 8px;
+	margin: 0 0 14px;
+}
 
   .forgeboard #cp-menu .navigation,
   .forgeboard .cp-menu .navigation {
@@ -7744,6 +7785,7 @@ body.forgeboard {
   .forgeboard .cp-menu .navigation #active-subsection a::before {
     display: none;
   }
+
 }
 
 /* ------------------------------------------------------------------
@@ -7800,50 +7842,266 @@ body.forgeboard {
   background-repeat: no-repeat;
 }
 
-.forgeboard dl.row-item.forum_read              { background-image: url("./images/forum_read.svg"); }
-.forgeboard dl.row-item.forum_read_locked       { background-image: url("./images/forum_read_locked.svg"); }
-.forgeboard dl.row-item.forum_read_subforum     { background-image: url("./images/forum_read_subforum.svg"); }
-.forgeboard dl.row-item.forum_unread            { background-image: url("./images/forum_unread.svg"); }
-.forgeboard dl.row-item.forum_unread_locked     { background-image: url("./images/forum_unread_locked.svg"); }
-.forgeboard dl.row-item.forum_unread_subforum   { background-image: url("./images/forum_unread_subforum.svg"); }
-.forgeboard dl.row-item.forum_link              { background-image: url("./images/forum_link.svg"); }
+.forgeboard dl.row-item.forum_read {
+  background-image: url("./images/forum_read.svg");
+}
+.forgeboard dl.row-item.forum_read_locked {
+  background-image: url("./images/forum_read_locked.svg");
+}
+.forgeboard dl.row-item.forum_read_subforum {
+  background-image: url("./images/forum_read_subforum.svg");
+}
+.forgeboard dl.row-item.forum_unread {
+  background-image: url("./images/forum_unread.svg");
+}
+.forgeboard dl.row-item.forum_unread_locked {
+  background-image: url("./images/forum_unread_locked.svg");
+}
+.forgeboard dl.row-item.forum_unread_subforum {
+  background-image: url("./images/forum_unread_subforum.svg");
+}
+.forgeboard dl.row-item.forum_link {
+  background-image: url("./images/forum_link.svg");
+}
 
-.forgeboard dl.row-item dt.topic_read              { background-image: url("./images/topic_read.svg"); }
-.forgeboard dl.row-item dt.topic_read_mine         { background-image: url("./images/topic_read_mine.svg"); }
-.forgeboard dl.row-item dt.topic_read_locked       { background-image: url("./images/topic_read_locked.svg"); }
-.forgeboard dl.row-item dt.topic_read_locked_mine  { background-image: url("./images/topic_read_locked_mine.svg"); }
-.forgeboard dl.row-item dt.topic_read_hot          { background-image: url("./images/topic_read_hot.svg"); }
-.forgeboard dl.row-item dt.topic_read_hot_mine     { background-image: url("./images/topic_read_hot_mine.svg"); }
-.forgeboard dl.row-item dt.topic_unread            { background-image: url("./images/topic_unread.svg"); }
-.forgeboard dl.row-item dt.topic_unread_mine       { background-image: url("./images/topic_unread_mine.svg"); }
-.forgeboard dl.row-item dt.topic_unread_locked     { background-image: url("./images/topic_unread_locked.svg"); }
-.forgeboard dl.row-item dt.topic_unread_locked_mine{ background-image: url("./images/topic_unread_locked_mine.svg"); }
-.forgeboard dl.row-item dt.topic_unread_hot        { background-image: url("./images/topic_unread_hot.svg"); }
-.forgeboard dl.row-item dt.topic_unread_hot_mine   { background-image: url("./images/topic_unread_hot_mine.svg"); }
-.forgeboard dl.row-item dt.topic_moved             { background-image: url("./images/topic_moved.svg"); }
+.forgeboard dl.row-item dt.topic_read {
+  background-image: url("./images/topic_read.svg");
+}
+.forgeboard dl.row-item dt.topic_read_mine {
+  background-image: url("./images/topic_read_mine.svg");
+}
+.forgeboard dl.row-item dt.topic_read_locked {
+  background-image: url("./images/topic_read_locked.svg");
+}
+.forgeboard dl.row-item dt.topic_read_locked_mine {
+  background-image: url("./images/topic_read_locked_mine.svg");
+}
+.forgeboard dl.row-item dt.topic_read_hot {
+  background-image: url("./images/topic_read_hot.svg");
+}
+.forgeboard dl.row-item dt.topic_read_hot_mine {
+  background-image: url("./images/topic_read_hot_mine.svg");
+}
+.forgeboard dl.row-item dt.topic_unread {
+  background-image: url("./images/topic_unread.svg");
+}
+.forgeboard dl.row-item dt.topic_unread_mine {
+  background-image: url("./images/topic_unread_mine.svg");
+}
+.forgeboard dl.row-item dt.topic_unread_locked {
+  background-image: url("./images/topic_unread_locked.svg");
+}
+.forgeboard dl.row-item dt.topic_unread_locked_mine {
+  background-image: url("./images/topic_unread_locked_mine.svg");
+}
+.forgeboard dl.row-item dt.topic_unread_hot {
+  background-image: url("./images/topic_unread_hot.svg");
+}
+.forgeboard dl.row-item dt.topic_unread_hot_mine {
+  background-image: url("./images/topic_unread_hot_mine.svg");
+}
+.forgeboard dl.row-item dt.topic_moved {
+  background-image: url("./images/topic_moved.svg");
+}
 
-.forgeboard dl.row-item dt.sticky_read              { background-image: url("./images/sticky_read.svg"); }
-.forgeboard dl.row-item dt.sticky_read_mine         { background-image: url("./images/sticky_read_mine.svg"); }
-.forgeboard dl.row-item dt.sticky_read_locked       { background-image: url("./images/sticky_read_locked.svg"); }
-.forgeboard dl.row-item dt.sticky_read_locked_mine  { background-image: url("./images/sticky_read_locked_mine.svg"); }
-.forgeboard dl.row-item dt.sticky_unread            { background-image: url("./images/sticky_unread.svg"); }
-.forgeboard dl.row-item dt.sticky_unread_mine       { background-image: url("./images/sticky_unread_mine.svg"); }
-.forgeboard dl.row-item dt.sticky_unread_locked     { background-image: url("./images/sticky_unread_locked.svg"); }
-.forgeboard dl.row-item dt.sticky_unread_locked_mine{ background-image: url("./images/sticky_unread_locked_mine.svg"); }
+.forgeboard dl.row-item dt.sticky_read {
+  background-image: url("./images/sticky_read.svg");
+}
+.forgeboard dl.row-item dt.sticky_read_mine {
+  background-image: url("./images/sticky_read_mine.svg");
+}
+.forgeboard dl.row-item dt.sticky_read_locked {
+  background-image: url("./images/sticky_read_locked.svg");
+}
+.forgeboard dl.row-item dt.sticky_read_locked_mine {
+  background-image: url("./images/sticky_read_locked_mine.svg");
+}
+.forgeboard dl.row-item dt.sticky_unread {
+  background-image: url("./images/sticky_unread.svg");
+}
+.forgeboard dl.row-item dt.sticky_unread_mine {
+  background-image: url("./images/sticky_unread_mine.svg");
+}
+.forgeboard dl.row-item dt.sticky_unread_locked {
+  background-image: url("./images/sticky_unread_locked.svg");
+}
+.forgeboard dl.row-item dt.sticky_unread_locked_mine {
+  background-image: url("./images/sticky_unread_locked_mine.svg");
+}
 
-.forgeboard dl.row-item dt.announce_read              { background-image: url("./images/announce_read.svg"); }
-.forgeboard dl.row-item dt.announce_read_mine         { background-image: url("./images/announce_read_mine.svg"); }
-.forgeboard dl.row-item dt.announce_read_locked       { background-image: url("./images/announce_read_locked.svg"); }
-.forgeboard dl.row-item dt.announce_read_locked_mine  { background-image: url("./images/announce_read_locked_mine.svg"); }
-.forgeboard dl.row-item dt.announce_unread            { background-image: url("./images/announce_unread.svg"); }
-.forgeboard dl.row-item dt.announce_unread_mine       { background-image: url("./images/announce_unread_mine.svg"); }
-.forgeboard dl.row-item dt.announce_unread_locked     { background-image: url("./images/announce_unread_locked.svg"); }
-.forgeboard dl.row-item dt.announce_unread_locked_mine{ background-image: url("./images/announce_unread_locked_mine.svg"); }
-.forgeboard dl.row-item dt.global_read                { background-image: url("./images/announce_read.svg"); }
-.forgeboard dl.row-item dt.global_read_mine           { background-image: url("./images/announce_read_mine.svg"); }
-.forgeboard dl.row-item dt.global_read_locked         { background-image: url("./images/announce_read_locked.svg"); }
-.forgeboard dl.row-item dt.global_read_locked_mine    { background-image: url("./images/announce_read_locked_mine.svg"); }
-.forgeboard dl.row-item dt.global_unread              { background-image: url("./images/announce_unread.svg"); }
-.forgeboard dl.row-item dt.global_unread_mine         { background-image: url("./images/announce_unread_mine.svg"); }
-.forgeboard dl.row-item dt.global_unread_locked       { background-image: url("./images/announce_unread_locked.svg"); }
-.forgeboard dl.row-item dt.global_unread_locked_mine  { background-image: url("./images/announce_unread_locked_mine.svg"); }
+.forgeboard dl.row-item dt.announce_read {
+  background-image: url("./images/announce_read.svg");
+}
+.forgeboard dl.row-item dt.announce_read_mine {
+  background-image: url("./images/announce_read_mine.svg");
+}
+.forgeboard dl.row-item dt.announce_read_locked {
+  background-image: url("./images/announce_read_locked.svg");
+}
+.forgeboard dl.row-item dt.announce_read_locked_mine {
+  background-image: url("./images/announce_read_locked_mine.svg");
+}
+.forgeboard dl.row-item dt.announce_unread {
+  background-image: url("./images/announce_unread.svg");
+}
+.forgeboard dl.row-item dt.announce_unread_mine {
+  background-image: url("./images/announce_unread_mine.svg");
+}
+.forgeboard dl.row-item dt.announce_unread_locked {
+  background-image: url("./images/announce_unread_locked.svg");
+}
+.forgeboard dl.row-item dt.announce_unread_locked_mine {
+  background-image: url("./images/announce_unread_locked_mine.svg");
+}
+.forgeboard dl.row-item dt.global_read {
+  background-image: url("./images/announce_read.svg");
+}
+.forgeboard dl.row-item dt.global_read_mine {
+  background-image: url("./images/announce_read_mine.svg");
+}
+.forgeboard dl.row-item dt.global_read_locked {
+  background-image: url("./images/announce_read_locked.svg");
+}
+.forgeboard dl.row-item dt.global_read_locked_mine {
+  background-image: url("./images/announce_read_locked_mine.svg");
+}
+.forgeboard dl.row-item dt.global_unread {
+  background-image: url("./images/announce_unread.svg");
+}
+.forgeboard dl.row-item dt.global_unread_mine {
+  background-image: url("./images/announce_unread_mine.svg");
+}
+.forgeboard dl.row-item dt.global_unread_locked {
+  background-image: url("./images/announce_unread_locked.svg");
+}
+.forgeboard dl.row-item dt.global_unread_locked_mine {
+  background-image: url("./images/announce_unread_locked_mine.svg");
+}
+
+/* ------------------------------------------------------------------
+   Theme toggle button (light / dark / auto)
+   Shows ONE icon at a time based on data-theme-pref on <html>:
+   - auto  -> half-circle icon
+   - light -> sun icon
+   - dark  -> moon icon
+   ------------------------------------------------------------------ */
+.forgeboard .forge-theme-toggle {
+  align-items: center;
+  align-self: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--gb-radius-md);
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  height: 36px;
+  justify-content: center;
+  margin-left: 8px;
+  padding: 0;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  width: 36px;
+}
+
+.forgeboard .forge-theme-toggle:hover,
+.forgeboard .forge-theme-toggle:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: var(--gb-link);
+}
+
+.forgeboard .forge-theme-toggle:focus-visible {
+  box-shadow: 0 0 0 3px var(--gb-input-focus-ring);
+  outline: 0;
+}
+
+/* Hide all icons by default, then show the one matching the active pref */
+.forgeboard .forge-theme-toggle .forge-theme-icon { display: none; }
+:root[data-theme-pref="auto"]  .forgeboard .forge-theme-toggle .forge-theme-icon-auto,
+:root[data-theme-pref="light"] .forgeboard .forge-theme-toggle .forge-theme-icon-light,
+:root[data-theme-pref="dark"]  .forgeboard .forge-theme-toggle .forge-theme-icon-dark {
+  display: inline-block;
+}
+
+/* Fallback: if data-theme-pref is missing (no JS), show the auto icon */
+:root:not([data-theme-pref]) .forgeboard .forge-theme-toggle .forge-theme-icon-auto {
+  display: inline-block;
+}
+
+/* ------------------------------------------------------------------
+   Empty states — applied wherever phpBB shows "No topics", "No forums",
+   "No notifications", "No search results" etc. We target both the
+   Prosilver wrapper (.panel.forge-empty) and standalone messages.
+   ------------------------------------------------------------------ */
+
+.forgeboard .panel.forge-empty,
+.forgeboard .forge-empty-state,
+.forgeboard #notification_list .no_notifications,
+.forgeboard .search-results-empty,
+.forgeboard .panel:has(> .inner > strong:only-child) {
+  align-items: center;
+  background: var(--gb-surface);
+  border: 1px dashed var(--gb-border);
+  border-radius: var(--gb-radius-lg);
+  color: var(--gb-text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gb-space-3);
+  justify-content: center;
+  padding: var(--gb-space-8) var(--gb-space-4);
+  text-align: center;
+}
+
+.forgeboard .panel.forge-empty .inner,
+.forgeboard .forge-empty-state .inner {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.forgeboard .panel.forge-empty strong,
+.forgeboard .forge-empty-state strong,
+.forgeboard #notification_list .no_notifications {
+  color: var(--gb-text);
+  font-size: var(--gb-font-lg);
+  font-weight: var(--gb-weight-semibold);
+}
+
+/* Pseudo-element illustration: a soft circle with an icon glyph.
+   Pure CSS so no extra HTTP request. */
+.forgeboard .panel.forge-empty::before,
+.forgeboard .forge-empty-state::before {
+  align-items: center;
+  background:
+    radial-gradient(circle at 30% 30%, var(--gb-blue-soft), transparent 70%),
+    var(--gb-surface-subtle);
+  border: 1px solid var(--gb-border);
+  border-radius: 50%;
+  color: var(--gb-text-muted);
+  content: "📭";
+  display: flex;
+  font-size: 28px;
+  height: 64px;
+  justify-content: center;
+  margin: 0 auto var(--gb-space-2);
+  width: 64px;
+}
+
+/* Variant icons by context (using attribute selectors) */
+.forgeboard.section-search .forge-empty-state::before,
+.forgeboard .panel.forge-empty.is-search::before { content: "🔍"; }
+.forgeboard.section-mcp .panel.forge-empty::before { content: "✓"; }
+.forgeboard #notification_list .no_notifications::before {
+  background:
+    radial-gradient(circle at 30% 30%, var(--gb-blue-soft), transparent 70%),
+    var(--gb-surface-subtle);
+  border: 1px solid var(--gb-border);
+  border-radius: 50%;
+  content: "🔔";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  height: 56px;
+  width: 56px;
+  margin: 0 auto var(--gb-space-2);
+}

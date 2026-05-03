@@ -8,3 +8,4 @@
 
 @import url("../../prosilver/theme/stylesheet.css?hash=3b3d9a10");
 @import url("forgeboard.css?hash=5b80a350");
+@import url("print.css?hash=1") print;

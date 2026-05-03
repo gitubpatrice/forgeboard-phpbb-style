@@ -1,56 +1,155 @@
-# ForgeBoard
+# ForgeBoard — phpBB 3.3 Style
 
-A modern code-forge inspired phpBB style based on Prosilver (phpBB 3.3.16).
+A modern, code-forge inspired style for phpBB 3.3, built on top of Prosilver.
+
+- 🎨 Light **and** dark theme with auto/light/dark toggle (cookie + localStorage)
+- 🧩 Custom SVG imageset (39 forum/topic/sticky/announce icons)
+- 😀 Original SVG smiley pack (23 expressions)
+- ⚡ System-font stack (no web-font download — saves ~590 KB on first paint)
+- 📱 Fully responsive (≥320 px)
+- ♿ Focus-visible rings, ARIA labels, skip link
+- 🖨️ Custom print stylesheet
+- 📐 Design tokens (typography, spacing, radius, color, shadow)
+
+## Requirements
+
+- phpBB **3.3.x** (tested on 3.3.16)
+- Prosilver style installed (parent style)
+- A modern browser (Chrome 90+, Firefox 81+, Safari 14+, Edge 90+)
 
 ## Installation
 
 1. Copy the `ForgeBoard/` directory into your phpBB `styles/` directory.
-2. Go to ACP → Customise → Styles → Install ForgeBoard.
-3. Purge the phpBB cache.
+2. ACP → **Customise** → **Styles** → install ForgeBoard.
+3. Purge the phpBB cache (ACP → General → Server load).
+4. Set ForgeBoard as the default style for your board (or assign per user).
 
-## Requirements
-
-- phpBB 3.3.x (tested on 3.3.16)
-- Prosilver style installed (parent style)
-
-## Structure
+## File layout
 
 ```
 ForgeBoard/
-├── style.cfg           # Style metadata (parent = prosilver)
-├── template/           # Templates overriding Prosilver
+├── style.cfg               Style metadata (parent = prosilver)
+├── LICENSE                 GPL-2.0-or-later
+├── README.md
+├── CHANGELOG.md
+├── template/               Templates that override Prosilver
 │   ├── overall_header.html
 │   ├── overall_footer.html
 │   ├── index_body.html
 │   ├── viewforum_body.html
 │   ├── viewtopic_body.html
 │   ├── posting_editor.html
-│   ├── ...
-│   ├── forge_dropdown_reset.js
-│   └── forge_mcp_fix.js
-└── theme/              # CSS theme
-    ├── stylesheet.css  # Imports Prosilver + forgeboard.css
-    └── forgeboard.css  # ForgeBoard overrides + variables
+│   ├── posting_topic_review.html
+│   ├── mcp_topic.html
+│   ├── (… others)
+│   ├── forge_mcp_fix.js
+│   └── forge_theme_toggle.js
+└── theme/
+    ├── stylesheet.css      @imports prosilver + forgeboard.css + print.css
+    ├── forgeboard.css      Main theme (~6260 lines, dedup'd)
+    ├── print.css           Paper-friendly stylesheet
+    └── images/             Custom imageset
+        ├── *.svg           39 status icons (forum/topic/sticky/announce)
+        ├── bbcode_*.svg    18 BBCode toolbar icons
+        ├── site_logo.svg   Logo
+        ├── no_avatar.svg
+        ├── loading.svg
+        └── smilies/        23 SVG smileys
 ```
 
-## CSS Variables
+## Design tokens
 
-The theme exposes CSS custom properties (in `:root`) for colors, radii and shadows.
-A dark variant is auto-applied via `prefers-color-scheme: dark`.
+The theme exposes CSS custom properties on `:root`. To create a sub-theme,
+override these tokens in your own CSS file imported after `forgeboard.css`.
 
-Key variables:
+Key tokens:
 
-- `--gb-canvas`, `--gb-surface`, `--gb-surface-subtle`
-- `--gb-text`, `--gb-text-muted`
-- `--gb-link`, `--gb-link-hover`, `--gb-accent`
-- `--gb-border`, `--gb-border-muted`
-- `--gb-radius`, `--gb-radius-small`
-- `--gb-shadow`, `--gb-shadow-soft`
+```css
+/* Colors */
+--gb-canvas, --gb-surface, --gb-surface-subtle, --gb-surface-muted
+--gb-border, --gb-border-muted
+--gb-text, --gb-text-muted
+--gb-link, --gb-link-hover, --gb-accent, --gb-danger
+--gb-header
 
-## Versioning
+/* Typography (14 px base, 1.5 leading) */
+--gb-font-sans, --gb-font-mono
+--gb-font-xs, --gb-font-sm, --gb-font-md, --gb-font-lg
+--gb-font-h1, --gb-font-h2, --gb-font-h3
+--gb-leading-tight, --gb-leading-normal
+--gb-weight-normal, --gb-weight-medium, --gb-weight-semibold, --gb-weight-bold
 
-See `style.cfg` for current `style_version`.
+/* Radius (max 9 px on buttons, never pill) */
+--gb-radius-sm: 4px;   --gb-radius-md: 6px;   --gb-radius-lg: 12px;
+
+/* Spacing (4 px grid) */
+--gb-space-1..12 (4 / 8 / 12 / 16 / 24 / 32 / 48 px)
+
+/* Buttons + inputs */
+--gb-btn-primary-*, --gb-btn-danger-*, --gb-btn-default-*
+--gb-input-bg, --gb-input-border, --gb-input-focus-ring
+```
+
+## Theme toggle
+
+A button in the header lets users cycle between **auto**, **light**, **dark**.
+Choice is saved in `localStorage` AND a cookie (`forgeboard_theme`, 1 year).
+Without JavaScript, the theme follows the system preference via `@media`.
+
+The bootstrap script is inlined in `<head>` to prevent flash-of-unstyled-content (FOUC).
+
+## Custom imageset
+
+Status icons (`forum_read`, `topic_unread_locked_mine`, etc.) are SVG
+`currentColor` files. They override the inherited Prosilver GIFs only
+where Prosilver-style markup (`dl.row-item`) is used, so ForgeBoard's
+custom card layouts (which use FontAwesome inline) are untouched.
 
 ## License
 
-(c) FanFanLaTuFlippe, 2026.
+**GPL-2.0-or-later** — see [LICENSE](LICENSE).
+
+You are free to use, modify and redistribute this style under the terms of
+the GNU General Public License version 2 (or any later version).
+
+## Credits
+
+- ForgeBoard (c) 2026 FanFanLaTuFlippe
+- Built on phpBB Prosilver (c) phpBB Limited — GPL-2.0
+- FontAwesome icons — used via the phpBB FontAwesome bundle
+- No code or assets copied from any third-party theme
+
+## Contributing / Reporting issues
+
+This is a personal style, but bug reports are welcome via GitHub Issues:
+https://github.com/gitubpatrice/forgeboard-phpbb-style
+
+When reporting, include:
+- phpBB version
+- Browser + version
+- A screenshot if visual
+- The page URL where the issue appears
+
+## Development
+
+The repo includes optional dev tooling:
+
+```bash
+# From styles/ForgeBoard/
+npm install                   # installs Stylelint
+npm run lint:css              # lint forgeboard.css
+npm run lint:css:fix          # auto-fix what's possible
+npm run dedup                 # run the Python dedup script
+```
+
+VS Code users get recommended extensions and settings via `.vscode/`.
+
+Icon packs are generated by:
+
+```bash
+python theme/images/_generate_icons.py        # status icons
+python theme/images/_generate_bbcode.py       # BBCode toolbar
+python theme/images/smilies/_generate_smileys.py
+```
+
+Tweak the Python files if you want to change colors / shapes for the whole pack.
