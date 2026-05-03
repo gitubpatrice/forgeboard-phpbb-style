@@ -407,16 +407,6 @@ hr {
   white-space: nowrap;
 }
 
-.forgeboard .forge-nav-card .breadcrumbs a:hover,
-.forgeboard .forge-nav-card .nav-breadcrumbs a:hover {
-  background: none !important;
-  border-radius: inherit;
-  transform: none !important;
-  border: 0;
-  padding: 0;
-  margin: 0;
-}
-
 .forge-nav-card .breadcrumbs .crumb,
 .forge-nav-card .breadcrumbs li,
 .forge-nav-card .nav-breadcrumbs li {
@@ -1438,8 +1428,8 @@ hr {
 }
 
 .search-header .inputbox {
-  background: #111922;
-  border-color: #566575;
+  background: var(--gb-canvas);
+  border-color: var(--gb-border);
   color: #ffffff;
 }
 
@@ -1556,7 +1546,7 @@ ul.topiclist li.row {
 }
 
 ul.topiclist li.row:hover {
-  background: #eef8fb;
+  background: var(--gb-blue-soft);
   box-shadow: inset 3px 0 0 var(--gb-link);
 }
 
@@ -1793,17 +1783,12 @@ input[type="reset"]:hover,
 a.button1:hover,
 a.button2:hover {
   background: var(--gb-surface-muted);
-  border-color: #afb8c1;
+  border-color: var(--gb-text-muted);
   color: var(--gb-text);
 }
 
 .button-icon-only {
   border-radius: var(--gb-radius);
-}
-
-.button-search,
-.button-search-end {
-  border-color: #566575;
 }
 
 .buttons .button,
@@ -1842,7 +1827,7 @@ a.button2:hover {
 }
 
 .pagination li a:hover {
-  background: #eef8fb;
+  background: var(--gb-blue-soft);
   border-color: var(--gb-link);
   color: var(--gb-link-hover);
 }
@@ -1864,7 +1849,7 @@ textarea {
 .inputbox:hover,
 select:hover,
 textarea:hover {
-  border-color: #afb8c1;
+  border-color: var(--gb-text-muted);
 }
 
 .inputbox:focus,
@@ -1915,7 +1900,7 @@ table.table1 tbody tr {
 
 table.table1 tbody tr:hover,
 table.table1 tbody tr.hover {
-  background: #eef8fb;
+  background: var(--gb-blue-soft);
   color: var(--gb-text);
 }
 
@@ -2363,7 +2348,6 @@ a:hover .icon.icon-orange {
 .forgeboard input,
 .forgeboard select,
 .forgeboard textarea,
-
 .forgeboard a:hover,
 .forgeboard button:hover,
 .forgeboard input:hover,
@@ -2495,7 +2479,6 @@ a:hover .icon.icon-orange {
 .forgeboard .postprofile dd,
 .forgeboard .pagination,
 .forgeboard .dropdown-contents,
-
 .forgeboard .forge-kicker,
 .forgeboard .forge-category-labels,
 .forgeboard .forge-lastpost-label,
@@ -3736,7 +3719,7 @@ Prevents prosilver hover/focus rules from changing the geometry of search button
 .forgeboard .forge-brand {
   align-items: center;
   grid-template-columns: 48px minmax(0, 1fr);
-  max-width: 100%;
+  max-width: 60%;
   min-width: 0;
   overflow: hidden;
   gap: 14px;
@@ -6927,8 +6910,8 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
    The input loses its right border/radius when followed by buttons. */
 .forgeboard .forge-search fieldset .inputbox + .button-search,
 .forgeboard .forge-inline-search fieldset .inputbox + .button-search {
-  border-left: 1px solid #30363d;
-  border-right: 1px solid #30363d;
+  border-left: 1px solid var(--gb-border);
+  border-right: 1px solid var(--gb-border);
 }
 
 .forgeboard .forge-search fieldset .button-search + .button-search-end {
@@ -8020,41 +8003,109 @@ body.forgeboard {
    ------------------------------------------------------------------ */
 
 /* 24 smileys */
-.forgeboard img[src$="/smilies/icon_e_smile.gif"]      { content: url("./images/smilies/icon_e_smile.svg"); }
-.forgeboard img[src$="/smilies/icon_e_biggrin.gif"]    { content: url("./images/smilies/icon_e_biggrin.svg"); }
-.forgeboard img[src$="/smilies/icon_e_wink.gif"]       { content: url("./images/smilies/icon_e_wink.svg"); }
-.forgeboard img[src$="/smilies/icon_e_sad.gif"]        { content: url("./images/smilies/icon_e_sad.svg"); }
-.forgeboard img[src$="/smilies/icon_e_surprised.gif"]  { content: url("./images/smilies/icon_e_surprised.svg"); }
-.forgeboard img[src$="/smilies/icon_e_confused.gif"]   { content: url("./images/smilies/icon_e_confused.svg"); }
-.forgeboard img[src$="/smilies/icon_e_geek.gif"]       { content: url("./images/smilies/icon_e_geek.svg"); }
-.forgeboard img[src$="/smilies/icon_e_ugeek.gif"]      { content: url("./images/smilies/icon_e_ugeek.svg"); }
-.forgeboard img[src$="/smilies/icon_cool.gif"]         { content: url("./images/smilies/icon_cool.svg"); }
-.forgeboard img[src$="/smilies/icon_cry.gif"]          { content: url("./images/smilies/icon_cry.svg"); }
-.forgeboard img[src$="/smilies/icon_eek.gif"]          { content: url("./images/smilies/icon_eek.svg"); }
-.forgeboard img[src$="/smilies/icon_evil.gif"]         { content: url("./images/smilies/icon_evil.svg"); }
-.forgeboard img[src$="/smilies/icon_exclaim.gif"]      { content: url("./images/smilies/icon_exclaim.svg"); }
-.forgeboard img[src$="/smilies/icon_idea.gif"]         { content: url("./images/smilies/icon_idea.svg"); }
-.forgeboard img[src$="/smilies/icon_lol.gif"]          { content: url("./images/smilies/icon_lol.svg"); }
-.forgeboard img[src$="/smilies/icon_mad.gif"]          { content: url("./images/smilies/icon_mad.svg"); }
-.forgeboard img[src$="/smilies/icon_mrgreen.gif"]      { content: url("./images/smilies/icon_mrgreen.svg"); }
-.forgeboard img[src$="/smilies/icon_neutral.gif"]      { content: url("./images/smilies/icon_neutral.svg"); }
-.forgeboard img[src$="/smilies/icon_question.gif"]     { content: url("./images/smilies/icon_question.svg"); }
-.forgeboard img[src$="/smilies/icon_razz.gif"]         { content: url("./images/smilies/icon_razz.svg"); }
-.forgeboard img[src$="/smilies/icon_redface.gif"]      { content: url("./images/smilies/icon_redface.svg"); }
-.forgeboard img[src$="/smilies/icon_rolleyes.gif"]     { content: url("./images/smilies/icon_rolleyes.svg"); }
-.forgeboard img[src$="/smilies/icon_twisted.gif"]      { content: url("./images/smilies/icon_twisted.svg"); }
-.forgeboard img[src$="/smilies/icon_arrow.gif"]        { content: url("./images/smilies/icon_arrow.svg"); }
+.forgeboard img[src$="/smilies/icon_e_smile.gif"] {
+  content: url("./images/smilies/icon_e_smile.svg");
+}
+.forgeboard img[src$="/smilies/icon_e_biggrin.gif"] {
+  content: url("./images/smilies/icon_e_biggrin.svg");
+}
+.forgeboard img[src$="/smilies/icon_e_wink.gif"] {
+  content: url("./images/smilies/icon_e_wink.svg");
+}
+.forgeboard img[src$="/smilies/icon_e_sad.gif"] {
+  content: url("./images/smilies/icon_e_sad.svg");
+}
+.forgeboard img[src$="/smilies/icon_e_surprised.gif"] {
+  content: url("./images/smilies/icon_e_surprised.svg");
+}
+.forgeboard img[src$="/smilies/icon_e_confused.gif"] {
+  content: url("./images/smilies/icon_e_confused.svg");
+}
+.forgeboard img[src$="/smilies/icon_e_geek.gif"] {
+  content: url("./images/smilies/icon_e_geek.svg");
+}
+.forgeboard img[src$="/smilies/icon_e_ugeek.gif"] {
+  content: url("./images/smilies/icon_e_ugeek.svg");
+}
+.forgeboard img[src$="/smilies/icon_cool.gif"] {
+  content: url("./images/smilies/icon_cool.svg");
+}
+.forgeboard img[src$="/smilies/icon_cry.gif"] {
+  content: url("./images/smilies/icon_cry.svg");
+}
+.forgeboard img[src$="/smilies/icon_eek.gif"] {
+  content: url("./images/smilies/icon_eek.svg");
+}
+.forgeboard img[src$="/smilies/icon_evil.gif"] {
+  content: url("./images/smilies/icon_evil.svg");
+}
+.forgeboard img[src$="/smilies/icon_exclaim.gif"] {
+  content: url("./images/smilies/icon_exclaim.svg");
+}
+.forgeboard img[src$="/smilies/icon_idea.gif"] {
+  content: url("./images/smilies/icon_idea.svg");
+}
+.forgeboard img[src$="/smilies/icon_lol.gif"] {
+  content: url("./images/smilies/icon_lol.svg");
+}
+.forgeboard img[src$="/smilies/icon_mad.gif"] {
+  content: url("./images/smilies/icon_mad.svg");
+}
+.forgeboard img[src$="/smilies/icon_mrgreen.gif"] {
+  content: url("./images/smilies/icon_mrgreen.svg");
+}
+.forgeboard img[src$="/smilies/icon_neutral.gif"] {
+  content: url("./images/smilies/icon_neutral.svg");
+}
+.forgeboard img[src$="/smilies/icon_question.gif"] {
+  content: url("./images/smilies/icon_question.svg");
+}
+.forgeboard img[src$="/smilies/icon_razz.gif"] {
+  content: url("./images/smilies/icon_razz.svg");
+}
+.forgeboard img[src$="/smilies/icon_redface.gif"] {
+  content: url("./images/smilies/icon_redface.svg");
+}
+.forgeboard img[src$="/smilies/icon_rolleyes.gif"] {
+  content: url("./images/smilies/icon_rolleyes.svg");
+}
+.forgeboard img[src$="/smilies/icon_twisted.gif"] {
+  content: url("./images/smilies/icon_twisted.svg");
+}
+.forgeboard img[src$="/smilies/icon_arrow.gif"] {
+  content: url("./images/smilies/icon_arrow.svg");
+}
 
 /* Post icons — misc */
-.forgeboard img[src$="/icons/misc/fire.gif"]           { content: url("./images/icons/misc/fire.svg"); }
-.forgeboard img[src$="/icons/misc/star.gif"]           { content: url("./images/icons/misc/star.svg"); }
-.forgeboard img[src$="/icons/misc/heart.gif"]          { content: url("./images/icons/misc/heart.svg"); }
-.forgeboard img[src$="/icons/misc/radioactive.gif"]    { content: url("./images/icons/misc/radioactive.svg"); }
-.forgeboard img[src$="/icons/misc/thinking.gif"]       { content: url("./images/icons/misc/thinking.svg"); }
+.forgeboard img[src$="/icons/misc/fire.gif"] {
+  content: url("./images/icons/misc/fire.svg");
+}
+.forgeboard img[src$="/icons/misc/star.gif"] {
+  content: url("./images/icons/misc/star.svg");
+}
+.forgeboard img[src$="/icons/misc/heart.gif"] {
+  content: url("./images/icons/misc/heart.svg");
+}
+.forgeboard img[src$="/icons/misc/radioactive.gif"] {
+  content: url("./images/icons/misc/radioactive.svg");
+}
+.forgeboard img[src$="/icons/misc/thinking.gif"] {
+  content: url("./images/icons/misc/thinking.svg");
+}
 
 /* Post icons — smile */
-.forgeboard img[src$="/icons/smile/redface.gif"]       { content: url("./images/icons/smile/redface.svg"); }
-.forgeboard img[src$="/icons/smile/mrgreen.gif"]       { content: url("./images/icons/smile/mrgreen.svg"); }
-.forgeboard img[src$="/icons/smile/question.gif"]      { content: url("./images/icons/smile/question.svg"); }
-.forgeboard img[src$="/icons/smile/alert.gif"]         { content: url("./images/icons/smile/alert.svg"); }
-.forgeboard img[src$="/icons/smile/info.gif"]          { content: url("./images/icons/smile/info.svg"); }
+.forgeboard img[src$="/icons/smile/redface.gif"] {
+  content: url("./images/icons/smile/redface.svg");
+}
+.forgeboard img[src$="/icons/smile/mrgreen.gif"] {
+  content: url("./images/icons/smile/mrgreen.svg");
+}
+.forgeboard img[src$="/icons/smile/question.gif"] {
+  content: url("./images/icons/smile/question.svg");
+}
+.forgeboard img[src$="/icons/smile/alert.gif"] {
+  content: url("./images/icons/smile/alert.svg");
+}
+.forgeboard img[src$="/icons/smile/info.gif"] {
+  content: url("./images/icons/smile/info.svg");
+}
