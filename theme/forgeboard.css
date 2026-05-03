@@ -55,6 +55,20 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
   --gb-input-focus-ring: rgba(31, 111, 235, 0.3);
   --gb-input-shadow-inset: inset 0 1px 0 rgba(208, 215, 222, 0.2);
 
+  /* Status message tokens (successbox / .notice / errorbox / .info) */
+  --gb-success-bg: #e5f6ec;
+  --gb-success-border: #69b985;
+  --gb-success-fg: #28643f;
+  --gb-warning-bg: #fff7d6;
+  --gb-warning-border: #dec45f;
+  --gb-warning-fg: #6f5700;
+  --gb-error-bg: #fff0f1;
+  --gb-error-border: #e58a96;
+  --gb-error-fg: #bc4c00;
+  --gb-info-bg: #def5f8;
+  --gb-info-border: var(--gb-accent);
+  --gb-info-fg: #0a58ca;
+
   /* Typography tokens — based on a 14px / 1.5 base */
   --gb-font-sans:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -135,6 +149,20 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
 
   --gb-input-focus-ring: rgba(88, 166, 255, 0.4);
   --gb-input-shadow-inset: inset 0 1px 0 rgba(0, 0, 0, 0.2);
+
+  /* Status messages (dark theme) — softer surfaces, readable text */
+  --gb-success-bg: rgba(63, 185, 80, 0.10);
+  --gb-success-border: rgba(63, 185, 80, 0.35);
+  --gb-success-fg: #56d364;
+  --gb-warning-bg: rgba(210, 153, 34, 0.10);
+  --gb-warning-border: rgba(210, 153, 34, 0.35);
+  --gb-warning-fg: #e3b341;
+  --gb-error-bg: rgba(248, 81, 73, 0.10);
+  --gb-error-border: rgba(248, 81, 73, 0.35);
+  --gb-error-fg: #ff7b72;
+  --gb-info-bg: rgba(88, 166, 255, 0.10);
+  --gb-info-border: rgba(88, 166, 255, 0.35);
+  --gb-info-fg: #79c0ff;
 }
 
 /* No @media (prefers-color-scheme) fallback: forge_theme_toggle.js
@@ -2024,21 +2052,21 @@ table.table1 tbody td {
 
 .successbox,
 .notice {
-  background: #e5f6ec;
-  border-color: #69b985;
-  color: #28643f;
+  background: var(--gb-success-bg);
+  border-color: var(--gb-success-border);
+  color: var(--gb-success-fg);
 }
 
 .errorbox {
-  background: #fff0f1;
-  border-color: #e58a96;
+  background: var(--gb-error-bg);
+  border-color: var(--gb-error-border);
   color: var(--gb-danger);
 }
 
 .rules {
-  background: #fff7d6;
-  border-color: #dec45f;
-  color: #6f5700;
+  background: var(--gb-warning-bg);
+  border-color: var(--gb-warning-border);
+  color: var(--gb-warning-fg);
 }
 
 .postlink,
@@ -2048,7 +2076,7 @@ table.table1 tbody td {
 }
 
 .postlink:hover {
-  background: #def5f8;
+  background: var(--gb-info-bg);
   color: var(--gb-link-hover);
 }
 
@@ -2073,7 +2101,7 @@ a:hover .icon.icon-red {
 
 .icon.icon-orange,
 a:hover .icon.icon-orange {
-  color: #bc4c00;
+  color: var(--gb-error-fg);
 }
 
 .rtl .postprofile {
@@ -3719,7 +3747,7 @@ Prevents prosilver hover/focus rules from changing the geometry of search button
 .forgeboard .forge-brand {
   align-items: center;
   grid-template-columns: 48px minmax(0, 1fr);
-  max-width: 60%; /* */
+  max-width: 60%; /* Ajuster pour agrandir la largeur du titre*/
   min-width: 0;
   overflow: hidden;
   gap: 14px;
