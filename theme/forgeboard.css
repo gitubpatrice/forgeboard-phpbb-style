@@ -104,7 +104,8 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
   --gb-surface-muted: #30363d;
   --gb-border: #30363d;
   --gb-border-muted: #21262d;
-  --gb-text: #f6f8fb;
+  --gb-text: #ffffff;
+  --gb-text-h: #4d5c6e;
   --gb-text-muted: #aeb8c4;
   --gb-link: #58a6ff;
   --gb-link-hover: #79c0ff;
@@ -312,7 +313,7 @@ hr {
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.12),
     0 14px 35px rgba(0, 0, 0, 0.24);
-  color: var(--gb-text);
+  color: var(--gb-text-h);
   display: inline-flex;
   font-size: 1.35em;
   font-weight: 900;
@@ -2353,34 +2354,6 @@ a:hover .icon.icon-orange {
   white-space: normal;
 }
 
-.forgeboard .button,
-.forgeboard .button1,
-.forgeboard .button2,
-.forgeboard .button-search,
-.forgeboard .button-search-end,
-.forgeboard .buttons .button,
-.forgeboard .action-bar .button,
-.forgeboard .post-buttons .button {
-  background-image: none;
-  box-shadow: none;
-  filter: none;
-  text-shadow: none;
-}
-
-.forgeboard .button:hover,
-.forgeboard .button1:hover,
-.forgeboard .button2:hover,
-.forgeboard .button-search:hover,
-.forgeboard .button-search-end:hover,
-.forgeboard .buttons .button:hover,
-.forgeboard .action-bar .button:hover,
-.forgeboard .post-buttons .button:hover {
-  background-image: none;
-  box-shadow: none;
-  filter: none;
-  text-shadow: none;
-}
-
 /* Dropdown shell must stay transparent; only the real contents panel is painted. */
 
 /* Sharp interaction pass: remove fuzzy prosilver glow and keep hover states flat. */
@@ -2390,18 +2363,6 @@ a:hover .icon.icon-orange {
 .forgeboard input,
 .forgeboard select,
 .forgeboard textarea,
-.forgeboard .button,
-.forgeboard .button1,
-.forgeboard .button2,
-.forgeboard .pagination li a,
-.forgeboard .pagination li span,
-.forgeboard .dropdown-contents a,
-.forgeboard .post-buttons .button,
-.forgeboard .action-bar .button,
-.forgeboard .reply-icon,
-.forgeboard .post-icon {
-  text-shadow: none;
-}
 
 .forgeboard a:hover,
 .forgeboard button:hover,
@@ -2534,11 +2495,6 @@ a:hover .icon.icon-orange {
 .forgeboard .postprofile dd,
 .forgeboard .pagination,
 .forgeboard .dropdown-contents,
-.forgeboard .button,
-.forgeboard .button1,
-.forgeboard .button2 {
-  font-size: 12px;
-}
 
 .forgeboard .forge-kicker,
 .forgeboard .forge-category-labels,
@@ -3296,38 +3252,6 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
   margin-left: auto;
   order: 90;
   text-align: right;
-}
-
-.forgeboard .button,
-.forgeboard .button1,
-.forgeboard .button2,
-.forgeboard a.button,
-.forgeboard input.button1,
-.forgeboard input.button2,
-.forgeboard input[type="submit"],
-.forgeboard input[type="button"] {
-  border-radius: 6px;
-  box-shadow: none;
-  filter: none;
-  text-shadow: none;
-}
-
-.forgeboard .button:hover,
-.forgeboard .button:focus,
-.forgeboard .button1:hover,
-.forgeboard .button1:focus,
-.forgeboard .button2:hover,
-.forgeboard .button2:focus,
-.forgeboard a.button:hover,
-.forgeboard a.button:focus,
-.forgeboard input.button1:hover,
-.forgeboard input.button1:focus,
-.forgeboard input.button2:hover,
-.forgeboard input.button2:focus {
-  background: var(--gb-surface-muted);
-  border-color: var(--gb-link);
-  color: var(--gb-text);
-  outline: 0;
 }
 
 .forgeboard .search-box,
@@ -6653,7 +6577,9 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
    Max radius 6px (no pill shapes anywhere).
    ------------------------------------------------------------------ */
 
-/* Default button — neutral surface, subtle border */
+/* Default button — neutral surface, subtle border.
+   Includes Prosilver-reset properties (filter, text-shadow, background-image)
+   so we don't need separate rules duplicated 3-4× elsewhere in the file. */
 .forgeboard .button,
 .forgeboard a.button,
 .forgeboard input.button1,
@@ -6664,6 +6590,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard input[type="reset"],
 .forgeboard button {
   background: var(--gb-btn-default-bg);
+  background-image: none;
   border: 1px solid var(--gb-btn-default-border);
   border-radius: var(--gb-radius-md);
   box-shadow: var(--gb-shadow-soft);
@@ -6672,12 +6599,14 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   display: inline-flex;
   align-items: center;
   gap: var(--gb-space-2);
+  filter: none;
   font-family: var(--gb-font-sans);
   font-size: var(--gb-font-md);
   font-weight: var(--gb-weight-medium);
   line-height: 1;
   padding: 6px var(--gb-space-3);
   text-decoration: none;
+  text-shadow: none;
   transition:
     background 0.15s ease,
     border-color 0.15s ease,
@@ -7501,7 +7430,7 @@ body.forgeboard {
     padding-left: 0;
   }
 
-.forgeboard .forge-category-head {
+  .forgeboard .forge-category-head {
     grid-template-columns: 1fr;
   }
 
@@ -7989,46 +7918,143 @@ body.forgeboard {
   font-weight: var(--gb-weight-semibold);
 }
 
-/* Pseudo-element illustration: a soft circle with an icon glyph.
-   Pure CSS so no extra HTTP request. */
+/* Empty-state illustration: a soft circle with a custom SVG icon.
+   The SVG uses currentColor so it adapts to the theme. We use mask-image
+   so the icon shape is filled with the parent's text-muted color. */
 .forgeboard .panel.forge-empty::before,
 .forgeboard .forge-empty-state::before {
-  align-items: center;
   background:
     radial-gradient(circle at 30% 30%, var(--gb-blue-soft), transparent 70%),
     var(--gb-surface-subtle);
   border: 1px solid var(--gb-border);
   border-radius: 50%;
   color: var(--gb-text-muted);
-  content: "📭";
-  display: flex;
-  font-size: 28px;
+  content: "";
+  display: block;
   height: 64px;
-  justify-content: center;
   margin: 0 auto var(--gb-space-2);
+  position: relative;
   width: 64px;
 }
 
-/* Variant icons by context (using attribute selectors) */
-.forgeboard.section-search .forge-empty-state::before,
-.forgeboard .panel.forge-empty.is-search::before {
-  content: "🔍";
+.forgeboard .panel.forge-empty::after,
+.forgeboard .forge-empty-state::after {
+  background-color: var(--gb-text-muted);
+  content: "";
+  display: block;
+  height: 36px;
+  left: 50%;
+  margin-left: -18px;
+  margin-top: -50px;
+  mask-image: url("./images/empty_inbox.svg");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  -webkit-mask-image: url("./images/empty_inbox.svg");
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  position: relative;
+  top: 14px;
+  width: 36px;
 }
-.forgeboard.section-mcp .panel.forge-empty::before {
-  content: "✓";
+
+/* Variant icons by context */
+.forgeboard.section-search .forge-empty-state::after,
+.forgeboard .panel.forge-empty.is-search::after {
+  mask-image: url("./images/empty_search.svg");
+  -webkit-mask-image: url("./images/empty_search.svg");
 }
+.forgeboard.section-mcp .panel.forge-empty::after {
+  mask-image: url("./images/empty_check.svg");
+  -webkit-mask-image: url("./images/empty_check.svg");
+}
+
+/* Notification dropdown empty state */
+.forgeboard #notification_list .no_notifications {
+  position: relative;
+  padding-top: 72px;
+}
+
 .forgeboard #notification_list .no_notifications::before {
   background:
     radial-gradient(circle at 30% 30%, var(--gb-blue-soft), transparent 70%),
     var(--gb-surface-subtle);
   border: 1px solid var(--gb-border);
   border-radius: 50%;
-  content: "🔔";
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
+  color: var(--gb-text-muted);
+  content: "";
   height: 56px;
+  left: 50%;
+  margin-left: -28px;
+  position: absolute;
+  top: 8px;
   width: 56px;
-  margin: 0 auto var(--gb-space-2);
 }
+
+.forgeboard #notification_list .no_notifications::after {
+  background-color: var(--gb-text-muted);
+  content: "";
+  height: 32px;
+  left: 50%;
+  margin-left: -16px;
+  mask-image: url("./images/empty_bell.svg");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  -webkit-mask-image: url("./images/empty_bell.svg");
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  position: absolute;
+  top: 20px;
+  width: 32px;
+}
+
+/* ------------------------------------------------------------------
+   ForgeBoard custom smileys + post icons
+   Maps phpBB's default GIF URLs to our SVG counterparts via the CSS
+   `content: url()` trick — no database change required.
+   The .smilies-table in the smiley picker, the topic-icon radio in
+   posting, and inline post smileys all benefit automatically.
+   ------------------------------------------------------------------ */
+
+/* 24 smileys */
+.forgeboard img[src$="/smilies/icon_e_smile.gif"]      { content: url("./images/smilies/icon_e_smile.svg"); }
+.forgeboard img[src$="/smilies/icon_e_biggrin.gif"]    { content: url("./images/smilies/icon_e_biggrin.svg"); }
+.forgeboard img[src$="/smilies/icon_e_wink.gif"]       { content: url("./images/smilies/icon_e_wink.svg"); }
+.forgeboard img[src$="/smilies/icon_e_sad.gif"]        { content: url("./images/smilies/icon_e_sad.svg"); }
+.forgeboard img[src$="/smilies/icon_e_surprised.gif"]  { content: url("./images/smilies/icon_e_surprised.svg"); }
+.forgeboard img[src$="/smilies/icon_e_confused.gif"]   { content: url("./images/smilies/icon_e_confused.svg"); }
+.forgeboard img[src$="/smilies/icon_e_geek.gif"]       { content: url("./images/smilies/icon_e_geek.svg"); }
+.forgeboard img[src$="/smilies/icon_e_ugeek.gif"]      { content: url("./images/smilies/icon_e_ugeek.svg"); }
+.forgeboard img[src$="/smilies/icon_cool.gif"]         { content: url("./images/smilies/icon_cool.svg"); }
+.forgeboard img[src$="/smilies/icon_cry.gif"]          { content: url("./images/smilies/icon_cry.svg"); }
+.forgeboard img[src$="/smilies/icon_eek.gif"]          { content: url("./images/smilies/icon_eek.svg"); }
+.forgeboard img[src$="/smilies/icon_evil.gif"]         { content: url("./images/smilies/icon_evil.svg"); }
+.forgeboard img[src$="/smilies/icon_exclaim.gif"]      { content: url("./images/smilies/icon_exclaim.svg"); }
+.forgeboard img[src$="/smilies/icon_idea.gif"]         { content: url("./images/smilies/icon_idea.svg"); }
+.forgeboard img[src$="/smilies/icon_lol.gif"]          { content: url("./images/smilies/icon_lol.svg"); }
+.forgeboard img[src$="/smilies/icon_mad.gif"]          { content: url("./images/smilies/icon_mad.svg"); }
+.forgeboard img[src$="/smilies/icon_mrgreen.gif"]      { content: url("./images/smilies/icon_mrgreen.svg"); }
+.forgeboard img[src$="/smilies/icon_neutral.gif"]      { content: url("./images/smilies/icon_neutral.svg"); }
+.forgeboard img[src$="/smilies/icon_question.gif"]     { content: url("./images/smilies/icon_question.svg"); }
+.forgeboard img[src$="/smilies/icon_razz.gif"]         { content: url("./images/smilies/icon_razz.svg"); }
+.forgeboard img[src$="/smilies/icon_redface.gif"]      { content: url("./images/smilies/icon_redface.svg"); }
+.forgeboard img[src$="/smilies/icon_rolleyes.gif"]     { content: url("./images/smilies/icon_rolleyes.svg"); }
+.forgeboard img[src$="/smilies/icon_twisted.gif"]      { content: url("./images/smilies/icon_twisted.svg"); }
+.forgeboard img[src$="/smilies/icon_arrow.gif"]        { content: url("./images/smilies/icon_arrow.svg"); }
+
+/* Post icons — misc */
+.forgeboard img[src$="/icons/misc/fire.gif"]           { content: url("./images/icons/misc/fire.svg"); }
+.forgeboard img[src$="/icons/misc/star.gif"]           { content: url("./images/icons/misc/star.svg"); }
+.forgeboard img[src$="/icons/misc/heart.gif"]          { content: url("./images/icons/misc/heart.svg"); }
+.forgeboard img[src$="/icons/misc/radioactive.gif"]    { content: url("./images/icons/misc/radioactive.svg"); }
+.forgeboard img[src$="/icons/misc/thinking.gif"]       { content: url("./images/icons/misc/thinking.svg"); }
+
+/* Post icons — smile */
+.forgeboard img[src$="/icons/smile/redface.gif"]       { content: url("./images/icons/smile/redface.svg"); }
+.forgeboard img[src$="/icons/smile/mrgreen.gif"]       { content: url("./images/icons/smile/mrgreen.svg"); }
+.forgeboard img[src$="/icons/smile/question.gif"]      { content: url("./images/icons/smile/question.svg"); }
+.forgeboard img[src$="/icons/smile/alert.gif"]         { content: url("./images/icons/smile/alert.svg"); }
+.forgeboard img[src$="/icons/smile/info.gif"]          { content: url("./images/icons/smile/info.svg"); }
