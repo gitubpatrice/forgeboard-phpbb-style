@@ -12,6 +12,9 @@ node_modules/
 # Don't track CSS backups produced by the dedup script
 theme/forgeboard.css.bak*
 
+# Build artifacts (theme + contribution zips)
+ForgeBoard-*.zip
+
 # VS Code: ignore everything except shared settings & recommendations
 .vscode/*
 !.vscode/settings.json

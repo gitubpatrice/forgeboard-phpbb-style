@@ -11,6 +11,7 @@
 	<div class="forge-forum-hero-actions">
 		<!-- IF U_MCP --><a class="button" href="{U_MCP}">{L_MCP}</a><!-- ENDIF -->
 		<!-- IF not S_IS_BOT and U_MARK_TOPICS and .topicrow --><a href="{U_MARK_TOPICS}" class="button forge-hero-mark-read" accesskey="m" data-ajax="mark_topics_read">{L_MARK_TOPICS_READ}</a><!-- ENDIF -->
+		<!-- IF not S_IS_BOT and U_MARK_FORUMS and S_HAS_SUBFORUM --><a href="{U_MARK_FORUMS}" class="button forge-hero-mark-read" data-ajax="mark_forums_read">{L_MARK_SUBFORUMS_READ}</a><!-- ENDIF -->
 	</div>
 </section>
 <!-- EVENT viewforum_forum_title_after -->
@@ -29,11 +30,6 @@
 <!-- ENDIF -->
 
 <!-- IF S_HAS_SUBFORUM -->
-	<!-- IF not S_IS_BOT and U_MARK_FORUMS -->
-	<div class="action-bar compact forge-action-strip">
-		<a href="{U_MARK_FORUMS}" class="mark-read" data-ajax="mark_forums_read">{L_MARK_SUBFORUMS_READ}</a>
-	</div>
-	<!-- ENDIF -->
 	<!-- INCLUDE forumlist_body.html -->
 <!-- ENDIF -->
 

@@ -71,13 +71,13 @@
 	<header id="page-header" class="forge-page-header">
 		<div class="forge-topbar" role="banner">
 			<!-- EVENT overall_header_headerbar_before -->
-			<a id="logo" class="forge-brand" href="{% if U_SITE_HOME %}{{ U_SITE_HOME }}{% else %}{{ U_INDEX }}{% endif %}" title="{% if U_SITE_HOME %}{{ L_SITE_HOME }}{% else %}{{ L_INDEX }}{% endif %}">
+			<div id="logo" class="forge-brand">
 				<span class="site_logo"></span>
 				<span class="forge-brand-copy">
-					<strong>{SITENAME}</strong>
+					<strong><a class="forge-brand-link" href="{% if U_SITE_HOME %}{{ U_SITE_HOME }}{% else %}{{ U_INDEX }}{% endif %}" title="{% if U_SITE_HOME %}{{ L_SITE_HOME }}{% else %}{{ L_INDEX }}{% endif %}">{SITENAME}</a></strong>
 					<small>{SITE_DESCRIPTION}</small>
 				</span>
-			</a>
+			</div>
 
 			<!-- EVENT overall_header_searchbox_before -->
 			<!-- IF S_DISPLAY_SEARCH and not S_IN_SEARCH -->

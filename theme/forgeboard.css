@@ -8,7 +8,8 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
   color-scheme: light dark;
 
   /* Color tokens — light theme */
-  --gb-canvas: #f3f5f7;
+  --gb-canvas: #e2e7f0;
+  --gb-canvas-end: #fafbfd;
   --gb-surface: #ffffff;
   --gb-surface-subtle: #f7f9fb;
   --gb-surface-muted: #edf1f5;
@@ -16,6 +17,8 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
   --gb-border-muted: #dde4ec;
   --gb-text: #4d5c6e;
   --gb-text-muted: #607080;
+  --gb-code-text: #24292f;
+  --gb-code-bg: #f6f8fa;
   --gb-link: #1f6feb;
   --gb-link-hover: #0a58ca;
   --gb-accent: #388bfd;
@@ -113,6 +116,7 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
 :root[data-theme="dark"],
 [data-theme="dark"] {
   --gb-canvas: #0d1117;
+  --gb-canvas-end: #1e2530;
   --gb-surface: #161b22;
   --gb-surface-subtle: #21262d;
   --gb-surface-muted: #30363d;
@@ -121,6 +125,8 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
   --gb-text: #ffffff;
   --gb-text-h: #4d5c6e;
   --gb-text-muted: #aeb8c4;
+  --gb-code-text: #c9d1d9;
+  --gb-code-bg: #21262d;
   --gb-link: #58a6ff;
   --gb-link-hover: #79c0ff;
   --gb-accent: #388bfd;
@@ -151,16 +157,16 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
   --gb-input-shadow-inset: inset 0 1px 0 rgba(0, 0, 0, 0.2);
 
   /* Status messages (dark theme) — softer surfaces, readable text */
-  --gb-success-bg: rgba(63, 185, 80, 0.10);
+  --gb-success-bg: rgba(63, 185, 80, 0.1);
   --gb-success-border: rgba(63, 185, 80, 0.35);
   --gb-success-fg: #56d364;
-  --gb-warning-bg: rgba(210, 153, 34, 0.10);
+  --gb-warning-bg: rgba(210, 153, 34, 0.1);
   --gb-warning-border: rgba(210, 153, 34, 0.35);
   --gb-warning-fg: #e3b341;
-  --gb-error-bg: rgba(248, 81, 73, 0.10);
+  --gb-error-bg: rgba(248, 81, 73, 0.1);
   --gb-error-border: rgba(248, 81, 73, 0.35);
   --gb-error-fg: #ff7b72;
-  --gb-info-bg: rgba(88, 166, 255, 0.10);
+  --gb-info-bg: rgba(88, 166, 255, 0.1);
   --gb-info-border: rgba(88, 166, 255, 0.35);
   --gb-info-fg: #79c0ff;
 }
@@ -173,7 +179,12 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
 
 html,
 body {
-  background: var(--gb-canvas);
+  background: linear-gradient(
+      135deg,
+      var(--gb-canvas) 0%,
+      var(--gb-canvas-end, #fafbfd) 100%
+    )
+    fixed;
   color: var(--gb-text);
   font-kerning: normal;
   text-rendering: optimizeLegibility;
@@ -204,6 +215,11 @@ body {
   line-height: var(--gb-leading-tight);
   font-weight: var(--gb-weight-semibold);
 }
+
+.forgeboard .panel h3 {
+  margin: 0 0 0.4em 0;
+}
+
 .forgeboard h4 {
   font-size: var(--gb-font-lg);
   line-height: var(--gb-leading-tight);
@@ -224,7 +240,12 @@ body {
   background:
     linear-gradient(140deg, rgba(31, 111, 235, 0.1), transparent 34rem),
     linear-gradient(28deg, rgba(200, 62, 77, 0.08), transparent 26rem),
-    var(--gb-canvas);
+    linear-gradient(
+      135deg,
+      var(--gb-canvas) 0%,
+      var(--gb-canvas-end, #fafbfd) 100%
+    );
+  background-attachment: fixed;
   min-height: 100vh;
 }
 
@@ -921,7 +942,7 @@ hr {
   display: grid;
   grid-template-areas:
     "body profile"
-    "top profile";
+    "top  top";
   grid-template-columns: minmax(0, 1fr) 224px;
   min-height: 0;
   position: relative;
@@ -1726,7 +1747,8 @@ ul.zebra-list li:nth-child(even) {
 
 .codebox code,
 .codebox pre {
-  color: var(--gb-text);
+  background: var(--gb-code-bg);
+  color: var(--gb-code-text);
   display: block;
   font-family: var(--gb-font-mono);
   font-size: var(--gb-font-sm);
@@ -3000,6 +3022,26 @@ Overrides phpBB/prosilver dropdowns while keeping the native JS hooks.
   top: 8px;
 }
 
+/* Stabilise the check-circle icon: no padding/transform change on hover so
+   the glyph stays centred in its own box. */
+.forgeboard #notification_list .mark_read,
+.forgeboard #notification_list .mark_read:hover,
+.forgeboard #notification_list .mark_read:focus,
+.forgeboard #notification_list .mark_read:active {
+  align-items: center;
+  display: inline-flex;
+  height: 24px;
+  justify-content: center;
+  padding: 0;
+  transform: none;
+  width: 24px;
+}
+
+.forgeboard #notification_list .mark_read .icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
 /*
 ForgeBoard UX polish
 Final visual layer for spacing, rhythm, readable cards and clean controls.
@@ -3097,7 +3139,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 }
 
 .forgeboard .forge-kicker {
-  color: var(--gb-danger);
+  color: var(--gb-text);
   font-size: 15px;
 }
 
@@ -3256,7 +3298,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 .forgeboard .action-bar.actions-jump .jumpbox .dropdown-trigger {
   align-items: center;
   display: inline-flex;
-  min-height: 34px;
+  min-height: 26px;
 }
 
 .forgeboard .action-bar .pagination {
@@ -3380,13 +3422,6 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
   margin: 0;
 }
 
-.forgeboard .post-author-actions .button {
-  height: 30px;
-  min-height: 30px;
-  min-width: 30px;
-  padding: 0;
-}
-
 .forgeboard .postprofile {
   display: flex;
   flex-direction: column;
@@ -3415,11 +3450,8 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
   grid-area: top;
   justify-self: end;
   margin: 0;
-  padding: 0;
+  padding: 0 12px 12px 0;
   text-align: right;
-  bottom: 12px;
-  position: absolute;
-  right: 12px;
   z-index: 3;
 }
 
@@ -3608,6 +3640,10 @@ legacy selectors for these areas.
   margin-top: 6px;
 }
 
+.forgeboard .notification_text {
+  margin-left: 0;
+}
+
 /*
 ForgeBoard search lock
 Prevents prosilver hover/focus rules from changing the geometry of search buttons.
@@ -3747,7 +3783,7 @@ Prevents prosilver hover/focus rules from changing the geometry of search button
 .forgeboard .forge-brand {
   align-items: center;
   grid-template-columns: 48px minmax(0, 1fr);
-  max-width: 60%; /* Ajuster pour agrandir la largeur du titre*/
+  max-width: 80%;
   min-width: 0;
   overflow: hidden;
   gap: 14px;
@@ -3755,6 +3791,22 @@ Prevents prosilver hover/focus rules from changing the geometry of search button
   min-height: 104px;
   padding: 22px 24px;
   padding-left: 0;
+}
+
+/* Only the title link inside .forge-brand is clickable.
+   Hover indicates clickability via underline only — color stays as the
+   inherited title color so the brand area looks visually stable.
+   Want a colored hover? Replace `text-decoration: underline` with
+   `color: var(--gb-link)` (and remove the underline if desired). */
+.forgeboard .forge-brand-copy a.forge-brand-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.forgeboard .forge-brand-copy a.forge-brand-link:hover,
+.forgeboard .forge-brand-copy a.forge-brand-link:focus {
+  color: inherit;
+  text-decoration: underline;
 }
 
 .forgeboard .forge-search {
@@ -3814,15 +3866,10 @@ Uses an inset accent so the hover marker is visible without moving menu items.
 .forgeboard .dropdown-extended .dropdown-contents a:focus,
 .forgeboard .jumpbox .dropdown-contents a:hover,
 .forgeboard .jumpbox .dropdown-contents a:focus {
-  background: rgba(88, 166, 255, 0.12);
   border: 0;
   border-radius: 0;
-  color: var(--gb-text);
+  color: var(--gb-link-hover);
   outline: 0;
-  border-left-color: var(--gb-link);
-  box-shadow:
-    inset 0 0 0 1px rgba(88, 166, 255, 0.2),
-    inset 3px 0 0 var(--gb-link);
 }
 
 .forgeboard .faq strong {
@@ -3970,13 +4017,14 @@ Replaces the old prosilver FAQ column stack with readable responsive cards.
   align-items: center;
   align-self: flex-start;
   background: var(--gb-bg-soft);
-  border: 1px solid var(--gb-border);
-  border-radius: 6px;
+  border: 0;
+  border-radius: 0;
   color: var(--gb-text-muted);
-  display: inline-flex;
-  gap: 6px;
+  display: inline-block;
+  gap: 1px;
   margin-top: auto;
-  padding: 6px 10px;
+  margin-left: auto;
+  padding: 0;
   text-decoration: none;
 }
 
@@ -4001,6 +4049,13 @@ Neutralises prosilver white hover on UCP/MCP topiclist rows.
   border-color: rgba(88, 166, 255, 0.35);
   box-shadow: inset 3px 0 0 var(--gb-link);
   color: var(--gb-text);
+}
+
+.forgeboard .forge-faq-top:hover,
+.forgeboard .forge-faq-top:focus {
+  background: none;
+  color: var(--gb-link-hover);
+  text-decoration: none;
 }
 
 .forgeboard ul.topiclist li.row:hover a,
@@ -4392,11 +4447,17 @@ Aligns FAQ hover/focus with the global ForgeBoard interaction language.
 }
 
 .forgeboard .forge-faq-index-card a:hover,
-.forgeboard .forge-faq-index-card a:focus,
-.forgeboard .forge-faq-top:hover,
-.forgeboard .forge-faq-top:focus {
+.forgeboard .forge-faq-index-card a:focus {
   background: rgba(88, 166, 255, 0.1);
   border-color: rgba(88, 166, 255, 0.45);
+  color: var(--gb-link-hover);
+  text-decoration: none;
+}
+
+.forgeboard .forge-faq-top:hover,
+.forgeboard .forge-faq-top:focus {
+  background: none;
+  border: 1px solid transparent;
   color: var(--gb-link-hover);
   text-decoration: none;
 }
@@ -4460,8 +4521,9 @@ Keeps author/forum links as inline text links, not pill buttons.
   box-shadow: none;
   color: var(--gb-text-muted);
   line-height: 2.2;
+  min-width: 26px;
   min-height: 26px;
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.3rem;
   transform: none;
 }
 
@@ -4619,8 +4681,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forgeboard .post.has-profile .back2top {
-  right: 16px;
-  bottom: 19px;
   z-index: 1;
 }
 
@@ -6222,10 +6282,8 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
     grid-template-columns: 1fr;
   }
 
-  /* Hero action keeps natural size, aligned left in its own row.
-     Full-width stretch made the focus ring/dashed outline look heavy. */
   .forge-hero-action {
-    justify-self: start;
+    justify-self: end;
     width: auto;
   }
 
@@ -6534,6 +6592,10 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
     box-shadow 0.15s ease;
 }
 
+.forgeboard select {
+  margin-right: 5px;
+}
+
 .forgeboard textarea {
   line-height: var(--gb-leading-normal);
   min-height: 6em;
@@ -6615,7 +6677,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   font-size: var(--gb-font-md);
   font-weight: var(--gb-weight-medium);
   line-height: 1;
-  padding: 6px var(--gb-space-3);
+  padding: 0.5em var(--gb-space-3);
   text-decoration: none;
   text-shadow: none;
   transition:
@@ -6716,7 +6778,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 /* Icon-only buttons (post buttons, pagination prev/next) — square-ish */
 .forgeboard .button.button-icon-only {
   gap: 0;
-  padding: 6px var(--gb-space-2);
 }
 
 /* Compact button variant */
@@ -6849,6 +6910,19 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   text-decoration: none;
 }
 
+/* Suppress :active colour flash on the PM/notification dropdown triggers
+   (open AND close): keep the link colour identical to the resting state
+   so opening/closing the panel does not produce a one-frame highlight. */
+.forgeboard .forge-nav-user-card .forge-nav-user-pm > a:active,
+.forgeboard .forge-nav-user-card .forge-nav-user-notify > a:active {
+  color: inherit;
+}
+
+.forgeboard .forge-nav-user-card .forge-nav-user-pm > a:active i.icon,
+.forgeboard .forge-nav-user-card .forge-nav-user-notify > a:active i.icon {
+  color: inherit;
+}
+
 /* ------------------------------------------------------------------
    Posting topic review (posting.php preview / reply pages)
    - Header bar: H3 left, Expand view right (flex layout)
@@ -6975,24 +7049,43 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   box-shadow: none;
 }
 
-/* Forum-card empty placeholders: box-sizing for clean borders */
+/* Forum-card empty placeholders: surface adapts to light/dark theme.
+   Shows the parent category name as a hint while the slot is unused. */
 .forgeboard .forge-category .forge-forum-grid::before,
 .forgeboard .forge-category .forge-forum-grid::after {
+  align-items: center;
   background:
     linear-gradient(160deg, rgba(88, 166, 255, 0.08), rgba(248, 81, 73, 0.06)),
-    rgba(22, 27, 34, 0.68);
-  border: 1px dashed rgba(88, 166, 255, 0.34);
+    var(--gb-surface-subtle);
+  border: 1px dashed var(--gb-border);
   border-radius: 6px;
   box-sizing: border-box;
-  color: var(--gb-header-muted);
+  color: var(--gb-text-muted);
   content: attr(data-placeholder-title);
   display: none;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0;
+  flex-direction: column;
+  font-size: var(--gb-font-sm);
+  font-weight: var(--gb-weight-semibold);
+  justify-content: center;
+  letter-spacing: 0.04em;
   min-height: 188px;
   padding: 14px;
+  text-align: center;
   text-transform: uppercase;
+}
+
+/* When the placeholder is shown (has-only-child / 2-forums-row),
+   force it to flex so vertical centering works. */
+.forgeboard
+  .forge-category
+  .forge-forum-grid:has(> .forge-forum-card:only-child)::before,
+.forgeboard
+  .forge-category
+  .forge-forum-grid:has(> .forge-forum-card:only-child)::after,
+.forgeboard
+  .forge-category
+  .forge-forum-grid:has(> .forge-forum-card:nth-child(2):last-child)::after {
+  display: flex;
 }
 
 /* ------------------------------------------------------------------
@@ -7296,6 +7389,44 @@ body.forgeboard {
   margin: 0 !important;
   margin-right: 0 !important;
   width: min(340px, calc(100vw - 24px)) !important;
+  z-index: 1000;
+}
+
+/* Notification dropdown header: title left, "Settings • Mark all read" right.
+   Prosilver's default lets .header_settings float, which broke into multiple
+   lines once the title was the only inline text. Force a single-row flex. */
+.forgeboard #notification_list .dropdown-contents > .header {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: var(--gb-font-sm);
+  font-weight: var(--gb-weight-medium);
+  gap: var(--gb-space-2);
+  justify-content: space-between;
+  padding: var(--gb-space-2) var(--gb-space-3);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.forgeboard #notification_list .header_settings {
+  align-items: center;
+  display: inline-flex;
+  float: none;
+  gap: 6px;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.forgeboard #notification_list .header_settings #mark_all_notifications {
+  align-items: center;
+  display: inline-flex;
+  gap: 6px;
+}
+
+/* Disable :active flash on notification dropdown links — keeps the hover
+   color stable when the user clicks Settings / Mark all read / See All. */
+.forgeboard #notification_list a:active {
+  color: var(--gb-link-hover);
 }
 
 /* Make .dropdown-contents flow inside the wrapper (override Prosilver's
@@ -7636,43 +7767,43 @@ body.forgeboard {
 .forgeboard dl.row-item.forum_unread_locked,
 .forgeboard dl.row-item.forum_unread_subforum,
 .forgeboard dl.row-item.forum_link,
-.forgeboard dl.row-item dt.topic_read,
-.forgeboard dl.row-item dt.topic_read_mine,
-.forgeboard dl.row-item dt.topic_read_locked,
-.forgeboard dl.row-item dt.topic_read_locked_mine,
-.forgeboard dl.row-item dt.topic_read_hot,
-.forgeboard dl.row-item dt.topic_read_hot_mine,
-.forgeboard dl.row-item dt.topic_unread,
-.forgeboard dl.row-item dt.topic_unread_mine,
-.forgeboard dl.row-item dt.topic_unread_locked,
-.forgeboard dl.row-item dt.topic_unread_locked_mine,
-.forgeboard dl.row-item dt.topic_unread_hot,
-.forgeboard dl.row-item dt.topic_unread_hot_mine,
-.forgeboard dl.row-item dt.topic_moved,
-.forgeboard dl.row-item dt.sticky_read,
-.forgeboard dl.row-item dt.sticky_read_mine,
-.forgeboard dl.row-item dt.sticky_read_locked,
-.forgeboard dl.row-item dt.sticky_read_locked_mine,
-.forgeboard dl.row-item dt.sticky_unread,
-.forgeboard dl.row-item dt.sticky_unread_mine,
-.forgeboard dl.row-item dt.sticky_unread_locked,
-.forgeboard dl.row-item dt.sticky_unread_locked_mine,
-.forgeboard dl.row-item dt.announce_read,
-.forgeboard dl.row-item dt.announce_read_mine,
-.forgeboard dl.row-item dt.announce_read_locked,
-.forgeboard dl.row-item dt.announce_read_locked_mine,
-.forgeboard dl.row-item dt.announce_unread,
-.forgeboard dl.row-item dt.announce_unread_mine,
-.forgeboard dl.row-item dt.announce_unread_locked,
-.forgeboard dl.row-item dt.announce_unread_locked_mine,
-.forgeboard dl.row-item dt.global_read,
-.forgeboard dl.row-item dt.global_read_mine,
-.forgeboard dl.row-item dt.global_read_locked,
-.forgeboard dl.row-item dt.global_read_locked_mine,
-.forgeboard dl.row-item dt.global_unread,
-.forgeboard dl.row-item dt.global_unread_mine,
-.forgeboard dl.row-item dt.global_unread_locked,
-.forgeboard dl.row-item dt.global_unread_locked_mine {
+.forgeboard dl.row-item.topic_read,
+.forgeboard dl.row-item.topic_read_mine,
+.forgeboard dl.row-item.topic_read_locked,
+.forgeboard dl.row-item.topic_read_locked_mine,
+.forgeboard dl.row-item.topic_read_hot,
+.forgeboard dl.row-item.topic_read_hot_mine,
+.forgeboard dl.row-item.topic_unread,
+.forgeboard dl.row-item.topic_unread_mine,
+.forgeboard dl.row-item.topic_unread_locked,
+.forgeboard dl.row-item.topic_unread_locked_mine,
+.forgeboard dl.row-item.topic_unread_hot,
+.forgeboard dl.row-item.topic_unread_hot_mine,
+.forgeboard dl.row-item.topic_moved,
+.forgeboard dl.row-item.sticky_read,
+.forgeboard dl.row-item.sticky_read_mine,
+.forgeboard dl.row-item.sticky_read_locked,
+.forgeboard dl.row-item.sticky_read_locked_mine,
+.forgeboard dl.row-item.sticky_unread,
+.forgeboard dl.row-item.sticky_unread_mine,
+.forgeboard dl.row-item.sticky_unread_locked,
+.forgeboard dl.row-item.sticky_unread_locked_mine,
+.forgeboard dl.row-item.announce_read,
+.forgeboard dl.row-item.announce_read_mine,
+.forgeboard dl.row-item.announce_read_locked,
+.forgeboard dl.row-item.announce_read_locked_mine,
+.forgeboard dl.row-item.announce_unread,
+.forgeboard dl.row-item.announce_unread_mine,
+.forgeboard dl.row-item.announce_unread_locked,
+.forgeboard dl.row-item.announce_unread_locked_mine,
+.forgeboard dl.row-item.global_read,
+.forgeboard dl.row-item.global_read_mine,
+.forgeboard dl.row-item.global_read_locked,
+.forgeboard dl.row-item.global_read_locked_mine,
+.forgeboard dl.row-item.global_unread,
+.forgeboard dl.row-item.global_unread_mine,
+.forgeboard dl.row-item.global_unread_locked,
+.forgeboard dl.row-item.global_unread_locked_mine {
   background-repeat: no-repeat;
 }
 
@@ -7698,117 +7829,117 @@ body.forgeboard {
   background-image: url("./images/forum_link.svg");
 }
 
-.forgeboard dl.row-item dt.topic_read {
+.forgeboard dl.row-item.topic_read {
   background-image: url("./images/topic_read.svg");
 }
-.forgeboard dl.row-item dt.topic_read_mine {
+.forgeboard dl.row-item.topic_read_mine {
   background-image: url("./images/topic_read_mine.svg");
 }
-.forgeboard dl.row-item dt.topic_read_locked {
+.forgeboard dl.row-item.topic_read_locked {
   background-image: url("./images/topic_read_locked.svg");
 }
-.forgeboard dl.row-item dt.topic_read_locked_mine {
+.forgeboard dl.row-item.topic_read_locked_mine {
   background-image: url("./images/topic_read_locked_mine.svg");
 }
-.forgeboard dl.row-item dt.topic_read_hot {
+.forgeboard dl.row-item.topic_read_hot {
   background-image: url("./images/topic_read_hot.svg");
 }
-.forgeboard dl.row-item dt.topic_read_hot_mine {
+.forgeboard dl.row-item.topic_read_hot_mine {
   background-image: url("./images/topic_read_hot_mine.svg");
 }
-.forgeboard dl.row-item dt.topic_unread {
+.forgeboard dl.row-item.topic_unread {
   background-image: url("./images/topic_unread.svg");
 }
-.forgeboard dl.row-item dt.topic_unread_mine {
+.forgeboard dl.row-item.topic_unread_mine {
   background-image: url("./images/topic_unread_mine.svg");
 }
-.forgeboard dl.row-item dt.topic_unread_locked {
+.forgeboard dl.row-item.topic_unread_locked {
   background-image: url("./images/topic_unread_locked.svg");
 }
-.forgeboard dl.row-item dt.topic_unread_locked_mine {
+.forgeboard dl.row-item.topic_unread_locked_mine {
   background-image: url("./images/topic_unread_locked_mine.svg");
 }
-.forgeboard dl.row-item dt.topic_unread_hot {
+.forgeboard dl.row-item.topic_unread_hot {
   background-image: url("./images/topic_unread_hot.svg");
 }
-.forgeboard dl.row-item dt.topic_unread_hot_mine {
+.forgeboard dl.row-item.topic_unread_hot_mine {
   background-image: url("./images/topic_unread_hot_mine.svg");
 }
-.forgeboard dl.row-item dt.topic_moved {
+.forgeboard dl.row-item.topic_moved {
   background-image: url("./images/topic_moved.svg");
 }
 
-.forgeboard dl.row-item dt.sticky_read {
+.forgeboard dl.row-item.sticky_read {
   background-image: url("./images/sticky_read.svg");
 }
-.forgeboard dl.row-item dt.sticky_read_mine {
+.forgeboard dl.row-item.sticky_read_mine {
   background-image: url("./images/sticky_read_mine.svg");
 }
-.forgeboard dl.row-item dt.sticky_read_locked {
+.forgeboard dl.row-item.sticky_read_locked {
   background-image: url("./images/sticky_read_locked.svg");
 }
-.forgeboard dl.row-item dt.sticky_read_locked_mine {
+.forgeboard dl.row-item.sticky_read_locked_mine {
   background-image: url("./images/sticky_read_locked_mine.svg");
 }
-.forgeboard dl.row-item dt.sticky_unread {
+.forgeboard dl.row-item.sticky_unread {
   background-image: url("./images/sticky_unread.svg");
 }
-.forgeboard dl.row-item dt.sticky_unread_mine {
+.forgeboard dl.row-item.sticky_unread_mine {
   background-image: url("./images/sticky_unread_mine.svg");
 }
-.forgeboard dl.row-item dt.sticky_unread_locked {
+.forgeboard dl.row-item.sticky_unread_locked {
   background-image: url("./images/sticky_unread_locked.svg");
 }
-.forgeboard dl.row-item dt.sticky_unread_locked_mine {
+.forgeboard dl.row-item.sticky_unread_locked_mine {
   background-image: url("./images/sticky_unread_locked_mine.svg");
 }
 
-.forgeboard dl.row-item dt.announce_read {
+.forgeboard dl.row-item.announce_read {
   background-image: url("./images/announce_read.svg");
 }
-.forgeboard dl.row-item dt.announce_read_mine {
+.forgeboard dl.row-item.announce_read_mine {
   background-image: url("./images/announce_read_mine.svg");
 }
-.forgeboard dl.row-item dt.announce_read_locked {
+.forgeboard dl.row-item.announce_read_locked {
   background-image: url("./images/announce_read_locked.svg");
 }
-.forgeboard dl.row-item dt.announce_read_locked_mine {
+.forgeboard dl.row-item.announce_read_locked_mine {
   background-image: url("./images/announce_read_locked_mine.svg");
 }
-.forgeboard dl.row-item dt.announce_unread {
+.forgeboard dl.row-item.announce_unread {
   background-image: url("./images/announce_unread.svg");
 }
-.forgeboard dl.row-item dt.announce_unread_mine {
+.forgeboard dl.row-item.announce_unread_mine {
   background-image: url("./images/announce_unread_mine.svg");
 }
-.forgeboard dl.row-item dt.announce_unread_locked {
+.forgeboard dl.row-item.announce_unread_locked {
   background-image: url("./images/announce_unread_locked.svg");
 }
-.forgeboard dl.row-item dt.announce_unread_locked_mine {
+.forgeboard dl.row-item.announce_unread_locked_mine {
   background-image: url("./images/announce_unread_locked_mine.svg");
 }
-.forgeboard dl.row-item dt.global_read {
+.forgeboard dl.row-item.global_read {
   background-image: url("./images/announce_read.svg");
 }
-.forgeboard dl.row-item dt.global_read_mine {
+.forgeboard dl.row-item.global_read_mine {
   background-image: url("./images/announce_read_mine.svg");
 }
-.forgeboard dl.row-item dt.global_read_locked {
+.forgeboard dl.row-item.global_read_locked {
   background-image: url("./images/announce_read_locked.svg");
 }
-.forgeboard dl.row-item dt.global_read_locked_mine {
+.forgeboard dl.row-item.global_read_locked_mine {
   background-image: url("./images/announce_read_locked_mine.svg");
 }
-.forgeboard dl.row-item dt.global_unread {
+.forgeboard dl.row-item.global_unread {
   background-image: url("./images/announce_unread.svg");
 }
-.forgeboard dl.row-item dt.global_unread_mine {
+.forgeboard dl.row-item.global_unread_mine {
   background-image: url("./images/announce_unread_mine.svg");
 }
-.forgeboard dl.row-item dt.global_unread_locked {
+.forgeboard dl.row-item.global_unread_locked {
   background-image: url("./images/announce_unread_locked.svg");
 }
-.forgeboard dl.row-item dt.global_unread_locked_mine {
+.forgeboard dl.row-item.global_unread_locked_mine {
   background-image: url("./images/announce_unread_locked_mine.svg");
 }
 
@@ -8022,118 +8153,29 @@ body.forgeboard {
   width: 32px;
 }
 
-/* ------------------------------------------------------------------
-   ForgeBoard custom smileys + post icons
-   Maps phpBB's default GIF URLs to our SVG counterparts via the CSS
-   `content: url()` trick — no database change required.
-   The .smilies-table in the smiley picker, the topic-icon radio in
-   posting, and inline post smileys all benefit automatically.
-   ------------------------------------------------------------------ */
-
-/* 24 smileys */
-.forgeboard img[src$="/smilies/icon_e_smile.gif"] {
-  content: url("./images/smilies/icon_e_smile.svg");
-}
-.forgeboard img[src$="/smilies/icon_e_biggrin.gif"] {
-  content: url("./images/smilies/icon_e_biggrin.svg");
-}
-.forgeboard img[src$="/smilies/icon_e_wink.gif"] {
-  content: url("./images/smilies/icon_e_wink.svg");
-}
-.forgeboard img[src$="/smilies/icon_e_sad.gif"] {
-  content: url("./images/smilies/icon_e_sad.svg");
-}
-.forgeboard img[src$="/smilies/icon_e_surprised.gif"] {
-  content: url("./images/smilies/icon_e_surprised.svg");
-}
-.forgeboard img[src$="/smilies/icon_e_confused.gif"] {
-  content: url("./images/smilies/icon_e_confused.svg");
-}
-.forgeboard img[src$="/smilies/icon_e_geek.gif"] {
-  content: url("./images/smilies/icon_e_geek.svg");
-}
-.forgeboard img[src$="/smilies/icon_e_ugeek.gif"] {
-  content: url("./images/smilies/icon_e_ugeek.svg");
-}
-.forgeboard img[src$="/smilies/icon_cool.gif"] {
-  content: url("./images/smilies/icon_cool.svg");
-}
-.forgeboard img[src$="/smilies/icon_cry.gif"] {
-  content: url("./images/smilies/icon_cry.svg");
-}
-.forgeboard img[src$="/smilies/icon_eek.gif"] {
-  content: url("./images/smilies/icon_eek.svg");
-}
-.forgeboard img[src$="/smilies/icon_evil.gif"] {
-  content: url("./images/smilies/icon_evil.svg");
-}
-.forgeboard img[src$="/smilies/icon_exclaim.gif"] {
-  content: url("./images/smilies/icon_exclaim.svg");
-}
-.forgeboard img[src$="/smilies/icon_idea.gif"] {
-  content: url("./images/smilies/icon_idea.svg");
-}
-.forgeboard img[src$="/smilies/icon_lol.gif"] {
-  content: url("./images/smilies/icon_lol.svg");
-}
-.forgeboard img[src$="/smilies/icon_mad.gif"] {
-  content: url("./images/smilies/icon_mad.svg");
-}
-.forgeboard img[src$="/smilies/icon_mrgreen.gif"] {
-  content: url("./images/smilies/icon_mrgreen.svg");
-}
-.forgeboard img[src$="/smilies/icon_neutral.gif"] {
-  content: url("./images/smilies/icon_neutral.svg");
-}
-.forgeboard img[src$="/smilies/icon_question.gif"] {
-  content: url("./images/smilies/icon_question.svg");
-}
-.forgeboard img[src$="/smilies/icon_razz.gif"] {
-  content: url("./images/smilies/icon_razz.svg");
-}
-.forgeboard img[src$="/smilies/icon_redface.gif"] {
-  content: url("./images/smilies/icon_redface.svg");
-}
-.forgeboard img[src$="/smilies/icon_rolleyes.gif"] {
-  content: url("./images/smilies/icon_rolleyes.svg");
-}
-.forgeboard img[src$="/smilies/icon_twisted.gif"] {
-  content: url("./images/smilies/icon_twisted.svg");
-}
-.forgeboard img[src$="/smilies/icon_arrow.gif"] {
-  content: url("./images/smilies/icon_arrow.svg");
+/* viewforum toolbar inline search: shorter than topbar search,
+   spaced from the New Topic button. */
+.forgeboard .forge-toolbar .forge-inline-search {
+  margin-left: var(--gb-space-3);
 }
 
-/* Post icons — misc */
-.forgeboard img[src$="/icons/misc/fire.gif"] {
-  content: url("./images/icons/misc/fire.svg");
-}
-.forgeboard img[src$="/icons/misc/star.gif"] {
-  content: url("./images/icons/misc/star.svg");
-}
-.forgeboard img[src$="/icons/misc/heart.gif"] {
-  content: url("./images/icons/misc/heart.svg");
-}
-.forgeboard img[src$="/icons/misc/radioactive.gif"] {
-  content: url("./images/icons/misc/radioactive.svg");
-}
-.forgeboard img[src$="/icons/misc/thinking.gif"] {
-  content: url("./images/icons/misc/thinking.svg");
+.forgeboard .forge-toolbar .forge-inline-search fieldset,
+.forgeboard .forge-toolbar .forge-inline-search .inputbox,
+.forgeboard .forge-toolbar .forge-inline-search .button {
+  height: 32px;
+  min-height: 32px;
 }
 
-/* Post icons — smile */
-.forgeboard img[src$="/icons/smile/redface.gif"] {
-  content: url("./images/icons/smile/redface.svg");
+.forgeboard .forge-toolbar .forge-inline-search .inputbox {
+  line-height: 30px;
+  padding: 0 10px;
 }
-.forgeboard img[src$="/icons/smile/mrgreen.gif"] {
-  content: url("./images/icons/smile/mrgreen.svg");
-}
-.forgeboard img[src$="/icons/smile/question.gif"] {
-  content: url("./images/icons/smile/question.svg");
-}
-.forgeboard img[src$="/icons/smile/alert.gif"] {
-  content: url("./images/icons/smile/alert.svg");
-}
-.forgeboard img[src$="/icons/smile/info.gif"] {
-  content: url("./images/icons/smile/info.svg");
+
+/* MCP only: bar-top action-bar uses just a bottom border (no full box). */
+.forgeboard.section-mcp .action-bar.bar-top {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--gb-border);
+  border-radius: 0;
+  box-shadow: none;
 }

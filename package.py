@@ -44,9 +44,25 @@ EXCLUDE_PATTERNS = [
     '_audit.csv',
 ]
 
+# Whole directories to skip (smiley + topic-icon packs are SHIPPED SEPARATELY)
+EXCLUDE_DIRS = {
+    'theme/images/smilies',     # 24 smileys -> separate pack
+    'theme/images/icons/misc',  # 5 misc post icons -> separate pack
+    'theme/images/icons/smile', # 5 smile post icons -> separate pack
+}
+
 
 def is_excluded(rel_path):
     """Check if a file should be excluded from the ZIP."""
+    # Strip the ForgeBoard/ prefix used inside the zip
+    rel = rel_path.replace('\\', '/').lstrip('/')
+    if rel.startswith('ForgeBoard/'):
+        rel = rel[len('ForgeBoard/'):]
+    # Whole-directory exclusions
+    for excluded_dir in EXCLUDE_DIRS:
+        if rel.startswith(excluded_dir + '/') or rel == excluded_dir:
+            return True
+    # Filename-pattern exclusions
     name = os.path.basename(rel_path)
     for pat in EXCLUDE_PATTERNS:
         if fnmatch.fnmatch(name, pat):
