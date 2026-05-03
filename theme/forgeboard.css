@@ -1419,7 +1419,7 @@ hr {
 }
 
 .site-description p {
-  color: #d9e2ea;
+  color: var(--gb-text-muted);
 }
 
 .search-header {
@@ -2520,7 +2520,7 @@ a:hover .icon.icon-orange {
 
 .forgeboard .panel-container hr,
 .forgeboard .cp-menu hr {
-  border-color: #414c59;
+  border-color: var(--gb-border);
 }
 
 .forgeboard .panel-container h3 {
@@ -2567,7 +2567,7 @@ a:hover .icon.icon-orange {
 }
 
 .forgeboard .topiclist li.row:hover dd {
-  border-left-color: #388bfd;
+  border-left-color: var(--gb-accent);
 }
 
 @media (max-width: 700px) {
@@ -3069,7 +3069,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
 }
 
 .forgeboard .forge-kicker {
-  color: #ff7b72;
+  color: var(--gb-danger);
   font-size: 15px;
 }
 
@@ -3719,7 +3719,7 @@ Prevents prosilver hover/focus rules from changing the geometry of search button
 .forgeboard .forge-brand {
   align-items: center;
   grid-template-columns: 48px minmax(0, 1fr);
-  max-width: 60%;
+  max-width: 60%; /* */
   min-width: 0;
   overflow: hidden;
   gap: 14px;
@@ -5500,7 +5500,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 .forgeboard .forge-nav-user-card {
   padding: 8px 10px;
-  border-right: 3px solid #30363d;
+  border-right: 3px solid var(--gb-border);
   border-radius: 0 9px 9px 0;
 }
 
