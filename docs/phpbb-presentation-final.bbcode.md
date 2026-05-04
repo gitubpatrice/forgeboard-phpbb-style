@@ -68,6 +68,9 @@ ForgeBoard takes design cues from modern developer-tooling UIs: clean typography
 [size=120][b]Demo[/b][/size]
 [url=YOUR_DEMO_URL]Live demo[/url] (anonymous / visitor mode - no account needed to browse)
 
+[size=120][b]Download[/b][/size]
+[url=https://github.com/gitubpatrice/forgeboard-phpbb-style/releases/download/v1.0.0-rc1/ForgeBoard-1.0.0.zip]ForgeBoard-1.0.0.zip[/url] (clean ZIP, ~126 KB, ready to extract into your phpBB styles/ directory)
+
 [size=120][b]Source code[/b][/size]
 [url=https://github.com/gitubpatrice/forgeboard-phpbb-style]github.com/gitubpatrice/forgeboard-phpbb-style[/url]
 
@@ -104,8 +107,9 @@ See [url=https://github.com/gitubpatrice/forgeboard-phpbb-style/blob/main/CHANGE
 
 [size=120][b]How to install for testing[/b][/size]
 [list=1]
-[*]Download the ZIP from GitHub
-[*]Extract /styles/ForgeBoard/ to your phpBB styles/ directory
+[*]Download [url=https://github.com/gitubpatrice/forgeboard-phpbb-style/releases/download/v1.0.0-rc1/ForgeBoard-1.0.0.zip]ForgeBoard-1.0.0.zip[/url]
+[*]Extract — the archive contains a single ForgeBoard/ folder
+[*]Drop ForgeBoard/ into your phpBB styles/ directory
 [*]ACP -> Customise -> Styles -> install ForgeBoard
 [*]Purge the phpBB cache (ACP -> General -> Server load -> purge cache)
 [*]Set ForgeBoard as the default style
