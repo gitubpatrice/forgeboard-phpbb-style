@@ -1,0 +1,73 @@
+<!-- INCLUDE overall_header.html -->
+
+<header class="forge-mcp-header">
+	<h2 class="forge-mcp-heading">{L_MCP}</h2>
+
+	<!-- IF U_MCP -->
+		<nav class="forge-mcp-quick-actions" aria-label="MCP quick actions">
+			<!-- IF U_ACP -->
+				<a href="{U_ACP}" class="button forge-mcp-link" title="{L_ACP}" data-responsive-text="{L_ACP_SHORT}">
+					<i class="icon fa-cogs fa-fw" aria-hidden="true"></i><span>{L_ACP}</span>
+				</a>
+			<!-- ENDIF -->
+			<a href="{U_MCP}" class="button forge-mcp-link" title="{L_MCP}" data-responsive-text="{L_MCP_SHORT}">
+				<i class="icon fa-gavel fa-fw" aria-hidden="true"></i><span>{L_MCP}</span>
+			</a>
+			<!-- IF U_MCP_FORUM -->
+				<a href="{U_MCP_FORUM}" class="button forge-mcp-link">
+					<i class="icon fa-folder fa-fw" aria-hidden="true"></i><span>{L_MODERATE_FORUM}</span>
+				</a>
+			<!-- ENDIF -->
+			<!-- IF U_MCP_TOPIC -->
+				<a href="{U_MCP_TOPIC}" class="button forge-mcp-link">
+					<i class="icon fa-file fa-fw" aria-hidden="true"></i><span>{L_MODERATE_TOPIC}</span>
+				</a>
+			<!-- ENDIF -->
+			<!-- IF U_MCP_POST -->
+				<a href="{U_MCP_POST}" class="button forge-mcp-link">
+					<i class="icon fa-comment fa-fw" aria-hidden="true"></i><span>{L_MODERATE_POST}</span>
+				</a>
+			<!-- ENDIF -->
+		</nav>
+	<!-- ENDIF -->
+</header>
+
+<div id="tabs" class="tabs">
+	<ul>
+		<!-- BEGIN l_block1 -->
+		<li class="tab<!-- IF l_block1.S_SELECTED --> activetab<!-- ENDIF -->"><a href="{l_block1.U_TITLE}">{l_block1.L_TITLE}</a></li>
+		<!-- END l_block1 -->
+	</ul>
+</div>
+
+<div class="panel bg3">
+	<div class="inner">
+
+	<div style="width: 100%;">
+
+	<div id="cp-menu" class="cp-menu">
+		<div id="navigation" class="navigation" role="navigation" aria-label="MCP sections">
+			<ul>
+			<!-- BEGIN l_block1 -->
+			<!-- IF l_block1.S_SELECTED -->
+				<!-- BEGIN l_block2 -->
+				<!-- IF l_block1.l_block2.S_SELECTED -->
+				<li id="active-subsection" class="active-subsection"><a href="{l_block1.l_block2.U_TITLE}" aria-current="page"><span>{l_block1.l_block2.L_TITLE}<!-- IF l_block1.l_block2.ADD_ITEM --> ({l_block1.l_block2.ADD_ITEM})<!-- ENDIF --></span></a></li>
+				<!-- ELSE -->
+				<li><a href="{l_block1.l_block2.U_TITLE}"><span>{l_block1.l_block2.L_TITLE}<!-- IF l_block1.l_block2.ADD_ITEM --> ({l_block1.l_block2.ADD_ITEM})<!-- ENDIF --></span></a></li>
+				<!-- ENDIF -->
+				<!-- END l_block2 -->
+			<!-- ENDIF -->
+			<!-- END l_block1 -->
+			</ul>
+		</div>
+	</div>
+
+	<div id="cp-main" class="cp-main mcp-main panel-container">
+		<!-- IF MESSAGE -->
+		<div class="content">
+			<h2 class="message-title">{L_MESSAGE}</h2>
+			<p class="error">{MESSAGE}</p>
+			<p><!-- BEGIN return_links -->{return_links.MESSAGE_LINK}<br /><br /><!-- END return_links --></p>
+		</div>
+		<!-- ENDIF -->

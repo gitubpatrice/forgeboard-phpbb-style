@@ -7274,3 +7274,158 @@ html, body.forgeboard{
   white-space: nowrap;
   width: 1px;
 }
+
+/* ------------------------------------------------------------------
+   MCP header — hi-tech: red accent rail, pulsing LED, shine sweep on
+   button hover, blue glow.
+   ------------------------------------------------------------------ */
+.forgeboard .forge-mcp-header {
+  align-items: flex-start;
+  background:
+    linear-gradient(135deg, rgba(248, 81, 73, 0.06) 0%, transparent 40%),
+    var(--gb-surface);
+  border: 1px solid var(--gb-border);
+  border-left: 3px solid var(--gb-danger);
+  border-radius: var(--gb-radius-md);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gb-space-3);
+  justify-content: space-between;
+  margin: 0 0 var(--gb-space-4);
+  overflow: hidden;
+  padding: var(--gb-space-3) var(--gb-space-4);
+  position: relative;
+}
+
+.forgeboard .forge-mcp-header::before {
+  background: linear-gradient(90deg, transparent, var(--gb-danger), transparent);
+  content: "";
+  height: 1px;
+  inset: 0 0 auto 0;
+  opacity: 0.5;
+  position: absolute;
+}
+
+.forgeboard .forge-mcp-heading {
+  align-items: center;
+  border-bottom: 0;
+  color: var(--gb-danger);
+  display: flex;
+  flex: 1 1 auto;
+  font-size: var(--gb-font-h2);
+  font-weight: var(--gb-weight-semibold);
+  gap: var(--gb-space-2);
+  margin: 0;
+  min-width: 0;
+}
+
+.forgeboard .forge-mcp-heading::before {
+  animation: forge-mcp-pulse 2s ease-in-out infinite;
+  background: var(--gb-danger);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--gb-danger), 0 0 20px var(--gb-danger);
+  content: "";
+  flex-shrink: 0;
+  height: 6px;
+  width: 6px;
+}
+
+@keyframes forge-mcp-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.6; transform: scale(0.85); }
+}
+
+.forgeboard .forge-mcp-quick-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gb-space-2);
+  margin: 0;
+  padding: 0;
+}
+
+.forgeboard .forge-mcp-quick-actions .button.forge-mcp-link {
+  align-items: center;
+  background: var(--gb-surface);
+  border: 1px solid var(--gb-border);
+  border-radius: var(--gb-radius-md);
+  color: var(--gb-text);
+  display: inline-flex;
+  font-size: var(--gb-font-sm);
+  font-weight: var(--gb-weight-medium);
+  gap: var(--gb-space-2);
+  overflow: hidden;
+  padding: 6px var(--gb-space-3);
+  position: relative;
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease,
+    transform 0.12s ease;
+}
+
+/* Animated shine sweep on hover */
+.forgeboard .forge-mcp-quick-actions .button.forge-mcp-link::before {
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(88, 166, 255, 0.18) 50%,
+    transparent 100%
+  );
+  content: "";
+  height: 100%;
+  left: -75%;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transform: skewX(-20deg);
+  transition: left 0.6s cubic-bezier(0.2, 0.6, 0.3, 1);
+  width: 50%;
+}
+
+.forgeboard .forge-mcp-quick-actions .button.forge-mcp-link:hover::before,
+.forgeboard .forge-mcp-quick-actions .button.forge-mcp-link:focus-visible::before {
+  left: 125%;
+}
+
+.forgeboard .forge-mcp-quick-actions .button.forge-mcp-link .icon {
+  color: var(--gb-text-muted);
+  font-size: 0.95em;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.forgeboard .forge-mcp-quick-actions .button.forge-mcp-link:hover,
+.forgeboard .forge-mcp-quick-actions .button.forge-mcp-link:focus-visible {
+  border-color: var(--gb-accent);
+  box-shadow:
+    0 0 0 1px rgba(88, 166, 255, 0.4),
+    0 0 18px rgba(88, 166, 255, 0.18);
+  color: var(--gb-link);
+  transform: translateY(-1px);
+}
+
+.forgeboard .forge-mcp-quick-actions .button.forge-mcp-link:hover .icon,
+.forgeboard .forge-mcp-quick-actions .button.forge-mcp-link:focus-visible .icon {
+  color: var(--gb-link);
+  transform: scale(1.08);
+}
+
+.forgeboard .forge-mcp-quick-actions .button.forge-mcp-link:active {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12);
+  transform: translateY(0);
+}
+
+@media (max-width: 760px) {
+  .forgeboard .forge-mcp-header {
+    flex-direction: column;
+  }
+  .forgeboard .forge-mcp-quick-actions {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forgeboard .forge-mcp-heading::before { animation: none; }
+  .forgeboard .forge-mcp-quick-actions .button.forge-mcp-link::before { display: none; }
+}
