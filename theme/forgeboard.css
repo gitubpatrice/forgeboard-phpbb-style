@@ -77,13 +77,13 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
     -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --gb-font-mono:
     SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
-  --gb-font-xs: 12px;
-  --gb-font-sm: 13px;
-  --gb-font-md: 14px;
-  --gb-font-lg: 16px;
-  --gb-font-h3: 20px;
-  --gb-font-h2: 24px;
-  --gb-font-h1: 32px;
+  --gb-font-xs: 11px;
+  --gb-font-sm: 12px;
+  --gb-font-md: 13px;
+  --gb-font-lg: 15px;
+  --gb-font-h3: 18px;
+  --gb-font-h2: 22px;
+  --gb-font-h1: 28px;
   --gb-leading-tight: 1.25;
   --gb-leading-normal: 1.5;
   --gb-weight-normal: 400;
@@ -217,7 +217,7 @@ body {
 }
 
 .forgeboard .panel h3 {
-  margin: 0 0 0.4em 0;
+  margin: 0 0 0.4em;
 }
 
 .forgeboard h4 {
@@ -630,7 +630,7 @@ hr {
 }
 
 .forge-forum-hero h1 {
-  font-size: clamp(3em, 4vw, 5em);
+  font-size: clamp(3em, 3.5vw, 4em);
   line-height: 0.98;
   margin: 0;
 }
@@ -3369,7 +3369,7 @@ Final visual layer for spacing, rhythm, readable cards and clean controls.
   overflow: hidden;
   background: var(--gb-surface);
   border-radius: 12px;
-  margin: 16px 0;
+  margin: 10px 0;
   position: relative;
 }
 
@@ -3938,12 +3938,6 @@ Replaces the old prosilver FAQ column stack with readable responsive cards.
   text-decoration: none;
 }
 
-.forgeboard .forge-faq-index-card a:hover,
-.forgeboard .forge-faq-index-card a:focus {
-  background: rgba(88, 166, 255, 0.1);
-  color: var(--gb-link-hover);
-}
-
 .forgeboard .forge-faq-section {
   display: grid;
   gap: 14px;
@@ -4028,13 +4022,6 @@ Replaces the old prosilver FAQ column stack with readable responsive cards.
   text-decoration: none;
 }
 
-.forgeboard .forge-faq-top:hover,
-.forgeboard .forge-faq-top:focus {
-  background: rgba(88, 166, 255, 0.1);
-  border-color: var(--gb-link);
-  color: var(--gb-link);
-}
-
 /*
 ForgeBoard phpBB list rows
 Neutralises prosilver white hover on UCP/MCP topiclist rows.
@@ -4049,13 +4036,6 @@ Neutralises prosilver white hover on UCP/MCP topiclist rows.
   border-color: rgba(88, 166, 255, 0.35);
   box-shadow: inset 3px 0 0 var(--gb-link);
   color: var(--gb-text);
-}
-
-.forgeboard .forge-faq-top:hover,
-.forgeboard .forge-faq-top:focus {
-  background: none;
-  color: var(--gb-link-hover);
-  text-decoration: none;
 }
 
 .forgeboard ul.topiclist li.row:hover a,
@@ -4448,18 +4428,18 @@ Aligns FAQ hover/focus with the global ForgeBoard interaction language.
 
 .forgeboard .forge-faq-index-card a:hover,
 .forgeboard .forge-faq-index-card a:focus {
-  background: rgba(88, 166, 255, 0.1);
-  border-color: rgba(88, 166, 255, 0.45);
-  color: var(--gb-link-hover);
-  text-decoration: none;
+	background: rgba(88, 166, 255, 0.1);
+	color: var(--gb-link-hover);
+	border-color: rgba(88, 166, 255, 0.45);
+	text-decoration: none;
 }
 
 .forgeboard .forge-faq-top:hover,
 .forgeboard .forge-faq-top:focus {
-  background: none;
-  border: 1px solid transparent;
-  color: var(--gb-link-hover);
-  text-decoration: none;
+	background: none;
+	border: 1px solid var(--gb-link);
+	color: var(--gb-link-hover);
+	text-decoration: none;
 }
 
 .forgeboard .forge-faq-item:target {
@@ -5322,6 +5302,8 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard .forge-quickmod-link {
   display: block;
 }
+
+.forgeboard .forge-bottom-row .forge-bottom-left a {margin-right:0;}
 
 /* B) Jumpbox */
 .forgeboard .jumpbox .dropdown-contents,
@@ -7395,18 +7377,6 @@ body.forgeboard {
 /* Notification dropdown header: title left, "Settings • Mark all read" right.
    Prosilver's default lets .header_settings float, which broke into multiple
    lines once the title was the only inline text. Force a single-row flex. */
-.forgeboard #notification_list .dropdown-contents > .header {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  font-size: var(--gb-font-sm);
-  font-weight: var(--gb-weight-medium);
-  gap: var(--gb-space-2);
-  justify-content: space-between;
-  padding: var(--gb-space-2) var(--gb-space-3);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
 
 .forgeboard #notification_list .header_settings {
   align-items: center;
@@ -7441,7 +7411,17 @@ body.forgeboard {
 
 /* Separator between the .header bar, the <ul> list, and the .footer */
 .forgeboard #notification_list .dropdown-contents > .header {
-  border-bottom: 1px solid var(--gb-border);
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	font-size: var(--gb-font-sm);
+	font-weight: var(--gb-weight-medium);
+	gap: var(--gb-space-2);
+	justify-content: space-between;
+	padding: var(--gb-space-2) var(--gb-space-3);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	border-bottom: 1px solid var(--gb-border);
 }
 
 .forgeboard #notification_list .dropdown-contents > ul {
@@ -8178,4 +8158,106 @@ body.forgeboard {
   border-bottom: 1px solid var(--gb-border);
   border-radius: 0;
   box-shadow: none;
+}
+
+/* viewtopic hero — same look as viewforum's .forge-forum-hero
+   Just adds the meta line for forum name + moderators. */
+.forgeboard .forge-topic-hero-meta {
+  color: var(--gb-text-muted);
+  font-size: var(--gb-font-md);
+  margin: var(--gb-space-2) 0 0;
+}
+
+.forgeboard .forge-topic-hero-meta a {
+  color: var(--gb-link);
+}
+
+.forgeboard .forge-topic-hero-meta a:hover {
+  color: var(--gb-link-hover);
+  text-decoration: underline;
+}
+
+.forgeboard .forge-topic-hero-meta strong {
+  color: var(--gb-text);
+  font-weight: var(--gb-weight-semibold);
+}
+
+/* ==================================================================
+   ACCESSIBILITY FIXES — sprint 1 (a11y audit blockers + majors)
+   ================================================================== */
+
+/* B1 — Skip link visible on focus only */
+.forgeboard .skiplink {
+  position: absolute;
+  left: -9999px;
+  top: 6px;
+  margin: 0;
+  z-index: 9999;
+}
+
+.forgeboard .skiplink a {
+  background: var(--gb-surface);
+  border: 2px solid var(--gb-focus);
+  color: var(--gb-link);
+  padding: 8px 14px;
+  text-decoration: none;
+  border-radius: var(--gb-radius-md);
+  font-weight: var(--gb-weight-semibold);
+}
+
+.forgeboard .skiplink:focus-within {
+  left: 12px;
+}
+
+/* B2 — Footer breadcrumb links: visible focus ring (was outline:0 with no replacement) */
+.forgeboard #page-footer #nav-footer .breadcrumbs a:focus-visible,
+.forgeboard #forge-footer-breadcrumbs .forge-footer-crumb-link:focus-visible {
+  outline: 2px solid var(--gb-focus);
+  outline-offset: 2px;
+  border-radius: var(--gb-radius-sm);
+}
+
+/* B3 — Form inputs: visible focus that meets 3:1 contrast in BOTH themes */
+.forgeboard .inputbox:focus-visible,
+.forgeboard input[type="text"]:focus-visible,
+.forgeboard input[type="email"]:focus-visible,
+.forgeboard input[type="password"]:focus-visible,
+.forgeboard input[type="search"]:focus-visible,
+.forgeboard input[type="url"]:focus-visible,
+.forgeboard input[type="tel"]:focus-visible,
+.forgeboard input[type="number"]:focus-visible,
+.forgeboard input[type="date"]:focus-visible,
+.forgeboard textarea:focus-visible,
+.forgeboard select:focus-visible {
+  outline: 2px solid var(--gb-focus);
+  outline-offset: 0;
+  border-color: var(--gb-accent);
+  box-shadow: 0 0 0 3px var(--gb-input-focus-ring);
+}
+
+/* M3 — Respect prefers-reduced-motion: kill animations + transitions */
+@media (prefers-reduced-motion: reduce) {
+  .forgeboard *,
+  .forgeboard *::before,
+  .forgeboard *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* sr-only utility (visually hidden but readable by SR) — for fieldset legends etc. */
+.forgeboard .sr-only,
+.forgeboard .visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }

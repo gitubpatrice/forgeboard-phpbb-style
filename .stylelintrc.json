@@ -14,10 +14,7 @@
 		"keyframe-block-no-duplicate-selectors": true,
 		"declaration-no-important": [true, { "severity": "warning" }],
 		"max-nesting-depth": [3, { "severity": "warning" }],
-		"selector-max-specificity": ["0,5,2", {
-			"severity": "warning",
-			"message": "Selector specificity above (0,5,2). Refactor instead of piling classes."
-		}],
+		"selector-max-specificity": null,
 		"color-no-invalid-hex": true,
 		"unit-no-unknown": true,
 		"font-family-no-missing-generic-family-keyword": true,

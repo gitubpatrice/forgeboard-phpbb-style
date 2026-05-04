@@ -61,7 +61,11 @@
 <!-- EVENT overall_header_stylesheets_after -->
 
 </head>
-<body id="phpbb" class="nojs notouch forgeboard section-{SCRIPT_NAME} {S_CONTENT_DIRECTION} {BODY_CLASS}">
+<body id="phpbb" class="nojs notouch forgeboard section-{SCRIPT_NAME} {S_CONTENT_DIRECTION} {BODY_CLASS}" data-print-site="{SITENAME}" data-print-url="{U_BOARD_URL}">
+
+<!-- Skip link must come BEFORE any keyboard-trappable navigation so users
+     can jump straight to the main content. (a11y / WCAG 2.4.1) -->
+<p class="skiplink"><a href="#page-body">{L_SKIP}</a></p>
 
 <!-- EVENT overall_header_body_before -->
 
@@ -69,7 +73,7 @@
 	<a id="top" class="top-anchor" accesskey="t"></a>
 
 	<header id="page-header" class="forge-page-header">
-		<div class="forge-topbar" role="banner">
+		<div class="forge-topbar">
 			<!-- EVENT overall_header_headerbar_before -->
 			<div id="logo" class="forge-brand">
 				<span class="site_logo"></span>
@@ -81,9 +85,11 @@
 
 			<!-- EVENT overall_header_searchbox_before -->
 			<!-- IF S_DISPLAY_SEARCH and not S_IN_SEARCH -->
-			<div id="search-box" class="search-box forge-search" role="search">
+			<div id="search-box" class="search-box forge-search" role="search" aria-label="{L_SEARCH}">
 				<form action="{U_SEARCH}" method="get" id="search">
 				<fieldset>
+					<legend class="sr-only">{L_SEARCH}</legend>
+					<label for="keywords" class="sr-only">{L_SEARCH_KEYWORDS}</label>
 					<input name="keywords" id="keywords" type="search" maxlength="128" title="{L_SEARCH_KEYWORDS}" class="inputbox search tiny" size="20" value="{SEARCH_WORDS}" placeholder="{L_SEARCH_MINI}" />
 					<button class="button button-search" type="submit" title="{L_SEARCH}">
 						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">{L_SEARCH}</span>
@@ -108,13 +114,11 @@
 
 	<!-- EVENT overall_header_page_body_before -->
 
-	<a id="start_here" class="anchor"></a>
-	<p class="skiplink"><a href="#start_here">{L_SKIP}</a></p>
-	<main id="page-body" class="page-body forge-main" role="main">
+	<main id="page-body" class="page-body forge-main" role="main" tabindex="-1">
 		<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
 		<div id="information" class="rules">
 			<div class="inner">
-				<strong>{L_INFORMATION}{L_COLON}</strong> {L_BOARD_DISABLED}
+				<strong>{L_INFORMATION}&nbsp;:</strong> {L_BOARD_DISABLED}
 			</div>
 		</div>
 		<!-- ENDIF -->

@@ -1,7 +1,7 @@
 <!-- INCLUDE mcp_header.html -->
 
 <div class="tabs-container forge-tabs-container">
-	<h2 class="forge-mcp-title"><a href="{U_VIEW_TOPIC}">{L_TOPIC}{L_COLON} {TOPIC_TITLE}</a></h2>
+	<h2 class="forge-mcp-title"><a href="{U_VIEW_TOPIC}">{L_TOPIC}&nbsp;: {TOPIC_TITLE}</a></h2>
 
 	<!-- IF S_MERGE_VIEW -->
 		<!-- DEFINE $SHOW_PANEL = 'merge-panel' -->
@@ -33,11 +33,11 @@
 
 	<fieldset id="display-panel" class="fields2 forge-mcp-fieldset" role="tabpanel">
 	<dl>
-		<dt><label for="posts_per_page">{L_POSTS_PER_PAGE}{L_COLON}</label><br /><span>{L_POSTS_PER_PAGE_EXPLAIN}</span></dt>
+		<dt><label for="posts_per_page">{L_POSTS_PER_PAGE}&nbsp;:</label><br /><span>{L_POSTS_PER_PAGE_EXPLAIN}</span></dt>
 		<dd><input class="inputbox autowidth" type="number" min="0" max="999999" name="posts_per_page" id="posts_per_page" value="{POSTS_PER_PAGE}" /></dd>
 	</dl>
 	<dl>
-		<dt><label>{L_DISPLAY_POSTS}{L_COLON}</label></dt>
+		<dt><label>{L_DISPLAY_POSTS}&nbsp;:</label></dt>
 		<dd>{S_SELECT_SORT_DAYS}&nbsp;&nbsp;<label>{L_SORT_BY} {S_SELECT_SORT_KEY}</label><label>{S_SELECT_SORT_DIR}</label> <input type="submit" name="sort" value="{L_GO}" class="button2" /></dd>
 	</dl>
 	</fieldset>
@@ -48,7 +48,7 @@
 
 	<!-- IF S_SHOW_TOPIC_ICONS -->
 		<dl>
-			<dt><label for="icon">{L_TOPIC_ICON}{L_COLON}</label></dt>
+			<dt><label for="icon">{L_TOPIC_ICON}&nbsp;:</label></dt>
 			<dd><label for="icon"><input type="radio" name="icon" id="icon" value="0" checked="checked" /> {L_NO_TOPIC_ICON}</label>
 			<!-- BEGIN topic_icon --><label for="icon-{topic_icon.ICON_ID}"><input type="radio" name="icon" id="icon-{topic_icon.ICON_ID}" value="{topic_icon.ICON_ID}" {topic_icon.S_ICON_CHECKED} /><img src="{topic_icon.ICON_IMG}" width="{topic_icon.ICON_WIDTH}" height="{topic_icon.ICON_HEIGHT}" alt="" title="" /></label> <!-- END topic_icon --></dd>
 		</dl>
@@ -56,12 +56,12 @@
 
 	<!-- EVENT mcp_topic_options_before -->
 	<dl>
-		<dt><label for="subject">{L_SPLIT_SUBJECT}{L_COLON}</label></dt>
+		<dt><label for="subject">{L_SPLIT_SUBJECT}&nbsp;:</label></dt>
 		<dd><input type="text" name="subject" id="subject" size="45" maxlength="124" tabindex="2" value="{SPLIT_SUBJECT}" title="{L_SPLIT_SUBJECT}" class="inputbox" /></dd>
 	</dl>
 	<!-- EVENT mcp_topic_options_after -->
 	<dl>
-		<dt><label>{L_SPLIT_FORUM}{L_COLON}</label></dt>
+		<dt><label>{L_SPLIT_FORUM}&nbsp;:</label></dt>
 		<dd><select name="to_forum_id">{S_FORUM_SELECT}</select></dd>
 	</dl>
 	</fieldset>
@@ -71,7 +71,7 @@
 	<fieldset id="merge-panel" class="fields2 forge-mcp-fieldset" role="tabpanel">
 		<p>{L_MERGE_TOPIC_EXPLAIN}</p>
 	<dl>
-		<dt><label for="to_topic_id">{L_MERGE_TOPIC_ID}{L_COLON}</label></dt>
+		<dt><label for="to_topic_id">{L_MERGE_TOPIC_ID}&nbsp;:</label></dt>
 		<dd>
 			<input class="inputbox autowidth" type="number" min="0" max="9999999999" name="to_topic_id" id="to_topic_id" value="{TO_TOPIC_ID}" />
 			<a href="{U_SELECT_TOPIC}" >{L_SELECT_TOPIC}</a>
@@ -88,7 +88,7 @@
 	<div class="inner">
 
 	<header class="forge-mcp-review-head">
-		<h3 id="review" class="review forge-mcp-review-title">{L_TOPIC_REVIEW}{L_COLON} <!-- EVENT mcp_topic_topic_title_before -->{TOPIC_TITLE}<!-- EVENT mcp_topic_topic_title_after --></h3>
+		<h3 id="review" class="review forge-mcp-review-title">{L_TOPIC_REVIEW}&nbsp;: <!-- EVENT mcp_topic_topic_title_before -->{TOPIC_TITLE}<!-- EVENT mcp_topic_topic_title_after --></h3>
 		<span class="right-box forge-mcp-review-toggle"><a href="#review" onclick="viewableArea(getElementById('topicreview'), true); var rev_link = getElementById('review').nextElementSibling.querySelector('a'); var rev_text = rev_link.firstChild; if (rev_text.data == '{LA_EXPAND_VIEW}'){rev_text.data = '{LA_COLLAPSE_VIEW}'; } else if (rev_text.data == '{LA_COLLAPSE_VIEW}'){rev_text.data = '{LA_EXPAND_VIEW}'};">{L_EXPAND_VIEW}</a></span>
 	</header>
 
@@ -109,7 +109,7 @@
 						</a>
 					</li>
 					<li class="forge-mcp-select-cell">
-						<label for="post_id_list_select_{postrow.POST_ID}">{L_SELECT}{L_COLON}
+						<label for="post_id_list_select_{postrow.POST_ID}">{L_SELECT}&nbsp;:
 							<input type="checkbox" id="post_id_list_select_{postrow.POST_ID}" name="post_id_list[]" value="{postrow.POST_ID}"<!-- IF postrow.S_CHECKED --> checked="checked"<!-- ENDIF --> />
 						</label>
 					</li>
