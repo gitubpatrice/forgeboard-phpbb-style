@@ -2958,10 +2958,23 @@ Overrides phpBB/prosilver dropdowns while keeping the native JS hooks.
 }
 
 .forgeboard .dropdown-extended .header a:hover,
-.forgeboard .dropdown-extended .footer a:hover,
 .forgeboard .dropdown-extended a.mark_read:hover {
   background: transparent;
   color: var(--gb-link-hover);
+}
+
+.forgeboard #notification_list .dropdown-contents > .footer a:hover,
+.forgeboard #notification_list .dropdown-contents > .footer a:focus-visible,
+.forgeboard #notification_list .dropdown-contents > .footer a:hover span,
+.forgeboard
+  #notification_list
+  .dropdown-contents
+  > .footer
+  a:focus-visible
+  span {
+  background: transparent;
+  color: var(--gb-link-hover);
+  text-decoration: none;
 }
 
 .forgeboard #notification_list {
@@ -4377,14 +4390,12 @@ Aligns header navigation hover/open states with UCP tabs.
   text-decoration: none;
 }
 
-.forgeboard .forge-nav-card .dropdown-visible > a,
-.forgeboard .forge-nav-card .dropdown-container.dropdown-visible > a,
-.forgeboard .forge-nav-card #username_logged_in.dropdown-visible > a,
-.forgeboard
-  .forge-nav-card
-  #username_logged_in.dropdown-visible
-  .header-profile
-  > a {
+/* Dropdown trigger when its panel is OPEN (.dropdown-visible).
+   We highlight only the quick-links / FAQ / ACP / MCP triggers in the
+   main nav, NOT the user-card icons (avatar / PM / notifications) where
+   the highlight feels too heavy. */
+.forgeboard .forge-nav-main-card .dropdown-visible > a,
+.forgeboard .forge-nav-main-card .dropdown-container.dropdown-visible > a {
   background:
     linear-gradient(135deg, rgba(248, 81, 73, 0.18), rgba(88, 166, 255, 0.12)),
     var(--gb-surface-muted);
@@ -4428,18 +4439,18 @@ Aligns FAQ hover/focus with the global ForgeBoard interaction language.
 
 .forgeboard .forge-faq-index-card a:hover,
 .forgeboard .forge-faq-index-card a:focus {
-	background: rgba(88, 166, 255, 0.1);
-	color: var(--gb-link-hover);
-	border-color: rgba(88, 166, 255, 0.45);
-	text-decoration: none;
+  background: rgba(88, 166, 255, 0.1);
+  color: var(--gb-link-hover);
+  border-color: rgba(88, 166, 255, 0.45);
+  text-decoration: none;
 }
 
 .forgeboard .forge-faq-top:hover,
 .forgeboard .forge-faq-top:focus {
-	background: none;
-	border: 1px solid var(--gb-link);
-	color: var(--gb-link-hover);
-	text-decoration: none;
+  background: none;
+  border: 1px solid var(--gb-link);
+  color: var(--gb-link-hover);
+  text-decoration: none;
 }
 
 .forgeboard .forge-faq-item:target {
@@ -5303,7 +5314,9 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   display: block;
 }
 
-.forgeboard .forge-bottom-row .forge-bottom-left a {margin-right:0;}
+.forgeboard .forge-bottom-row .forge-bottom-left a {
+  margin-right: 0;
+}
 
 /* B) Jumpbox */
 .forgeboard .jumpbox .dropdown-contents,
@@ -6071,8 +6084,10 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   border-radius: 6px;
   box-shadow: none;
   color: var(--gb-text);
+  font-size: var(--gb-font-md);
+  font-weight: var(--gb-weight-medium);
+  margin: 1px 0;
   display: block;
-  font-weight: 600;
   line-height: 1.2;
   padding: 9px 11px;
   text-decoration: none;
@@ -6805,37 +6820,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   padding: 0;
 }
 
-.forgeboard #cp-menu .navigation li,
-.forgeboard .cp-menu .navigation li {
-  margin: 0;
-}
-
-.forgeboard #cp-menu .navigation a,
-.forgeboard .cp-menu .navigation a {
-  background: transparent;
-  border: 0;
-  border-radius: var(--gb-radius-sm);
-  color: var(--gb-text-muted);
-  display: block;
-  font-size: var(--gb-font-md);
-  font-weight: var(--gb-weight-medium);
-  margin: 1px 0;
-  padding: var(--gb-space-2) var(--gb-space-3);
-  text-decoration: none;
-  transition:
-    background 0.15s ease,
-    color 0.15s ease;
-}
-
-.forgeboard #cp-menu .navigation a:hover,
-.forgeboard #cp-menu .navigation a:focus,
-.forgeboard .cp-menu .navigation a:hover,
-.forgeboard .cp-menu .navigation a:focus {
-  background: var(--gb-surface-subtle);
-  color: var(--gb-text);
-  text-decoration: none;
-}
-
 .forgeboard #cp-menu .navigation .active-subsection a,
 .forgeboard #cp-menu .navigation #active-subsection a,
 .forgeboard .cp-menu .navigation .active-subsection a,
@@ -7411,17 +7395,17 @@ body.forgeboard {
 
 /* Separator between the .header bar, the <ul> list, and the .footer */
 .forgeboard #notification_list .dropdown-contents > .header {
-	align-items: center;
-	display: flex;
-	flex-wrap: wrap;
-	font-size: var(--gb-font-sm);
-	font-weight: var(--gb-weight-medium);
-	gap: var(--gb-space-2);
-	justify-content: space-between;
-	padding: var(--gb-space-2) var(--gb-space-3);
-	text-transform: uppercase;
-	letter-spacing: 0.04em;
-	border-bottom: 1px solid var(--gb-border);
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: var(--gb-font-sm);
+  font-weight: var(--gb-weight-medium);
+  gap: var(--gb-space-2);
+  justify-content: space-between;
+  padding: var(--gb-space-2) var(--gb-space-3);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--gb-border);
 }
 
 .forgeboard #notification_list .dropdown-contents > ul {
@@ -8009,7 +7993,6 @@ body.forgeboard {
 
 .forgeboard .panel.forge-empty,
 .forgeboard .forge-empty-state,
-.forgeboard #notification_list .no_notifications,
 .forgeboard .search-results-empty,
 .forgeboard .panel:has(> .inner > strong:only-child) {
   align-items: center;
@@ -8033,8 +8016,7 @@ body.forgeboard {
 }
 
 .forgeboard .panel.forge-empty strong,
-.forgeboard .forge-empty-state strong,
-.forgeboard #notification_list .no_notifications {
+.forgeboard .forge-empty-state strong {
   color: var(--gb-text);
   font-size: var(--gb-font-lg);
   font-weight: var(--gb-weight-semibold);
@@ -8092,45 +8074,37 @@ body.forgeboard {
   -webkit-mask-image: url("./images/empty_check.svg");
 }
 
-/* Notification dropdown empty state */
+/* Notification dropdown empty state — vertical stack: bell icon above
+   text. Both centered. No overlap, no absolute positioning. */
 .forgeboard #notification_list .no_notifications {
-  position: relative;
-  padding-top: 72px;
-}
-
-.forgeboard #notification_list .no_notifications::before {
-  background:
-    radial-gradient(circle at 30% 30%, var(--gb-blue-soft), transparent 70%),
-    var(--gb-surface-subtle);
-  border: 1px solid var(--gb-border);
-  border-radius: 50%;
+  align-items: center;
+  background: transparent;
+  border: 0;
   color: var(--gb-text-muted);
-  content: "";
-  height: 56px;
-  left: 50%;
-  margin-left: -28px;
-  position: absolute;
-  top: 8px;
-  width: 56px;
+  display: flex;
+  flex-direction: column;
+  font-size: var(--gb-font-sm);
+  gap: var(--gb-space-3);
+  padding: var(--gb-space-6) var(--gb-space-4);
+  text-align: center;
 }
 
-.forgeboard #notification_list .no_notifications::after {
+/* Bell icon as ::before — sits ABOVE the text in the flex column */
+.forgeboard #notification_list .no_notifications::before {
   background-color: var(--gb-text-muted);
   content: "";
-  height: 32px;
-  left: 50%;
-  margin-left: -16px;
+  display: block;
+  height: 36px;
   mask-image: url("./images/empty_bell.svg");
   mask-position: center;
   mask-repeat: no-repeat;
   mask-size: contain;
+  opacity: 0.55;
   -webkit-mask-image: url("./images/empty_bell.svg");
   -webkit-mask-position: center;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: contain;
-  position: absolute;
-  top: 20px;
-  width: 32px;
+  width: 36px;
 }
 
 /* viewforum toolbar inline search: shorter than topbar search,
