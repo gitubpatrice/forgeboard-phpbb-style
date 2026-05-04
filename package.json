@@ -1,6 +1,6 @@
 {
 	"name": "forgeboard-phpbb-style",
-	"version": "1.3.0",
+	"version": "1.0.0",
 	"private": true,
 	"description": "Modern code-forge phpBB style based on Prosilver (3.3.16)",
 	"scripts": {
