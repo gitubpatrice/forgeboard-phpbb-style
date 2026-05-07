@@ -428,6 +428,23 @@
 
 	<!-- INCLUDE viewtopic_topic_tools.html -->
 
+	<!-- IF S_DISPLAY_SEARCHBOX -->
+	<div class="search-box forge-topic-search forge-topic-search-inline" role="search">
+		<form method="get" id="topic-search" action="{S_SEARCHBOX_ACTION}">
+		<fieldset>
+			<input class="inputbox search tiny" type="search" name="keywords" id="search_keywords" size="20" placeholder="{L_SEARCH_TOPIC}" />
+			<button class="button button-search" type="submit" title="{L_SEARCH}">
+				<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">{L_SEARCH}</span>
+			</button>
+			<a href="{U_SEARCH}" class="button button-search-end" title="{L_SEARCH_ADV}">
+				<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">{L_SEARCH_ADV}</span>
+			</a>
+			{S_SEARCH_LOCAL_HIDDEN_FIELDS}
+		</fieldset>
+		</form>
+	</div>
+	<!-- ENDIF -->
+
 	<!-- IF (S_NUM_POSTS > 1 or .pagination) and not S_IS_BOT  -->
 		<form method="post" action="{S_TOPIC_ACTION}">
 		<!-- INCLUDE display_options.html -->
@@ -505,24 +522,6 @@
 	</div>
 </div>
 
-<!-- IF S_DISPLAY_SEARCHBOX -->
-<div class="forge-topic-search-row">
-	<div class="search-box forge-topic-search" role="search">
-		<form method="get" id="topic-search" action="{S_SEARCHBOX_ACTION}">
-		<fieldset>
-			<input class="inputbox search tiny" type="search" name="keywords" id="search_keywords" size="20" placeholder="{L_SEARCH_TOPIC}" />
-			<button class="button button-search" type="submit" title="{L_SEARCH}">
-				<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">{L_SEARCH}</span>
-			</button>
-			<a href="{U_SEARCH}" class="button button-search-end" title="{L_SEARCH_ADV}">
-				<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">{L_SEARCH_ADV}</span>
-			</a>
-			{S_SEARCH_LOCAL_HIDDEN_FIELDS}
-		</fieldset>
-		</form>
-	</div>
-</div>
-<!-- ENDIF -->
 
 <!-- EVENT viewtopic_body_footer_before -->
 {% EVENT viewtopic_body_online_list_before %}

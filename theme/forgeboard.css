@@ -1604,7 +1604,7 @@ ul.topiclist dd {
 }
 
 ul.topiclist dt .list-inner {
-  padding-left: 44px;
+  padding-left: 50px;
 }
 
 .forum-image,
@@ -1977,7 +1977,7 @@ table.table1 tbody td {
   box-shadow: var(--gb-shadow);
   color: var(--gb-text-muted);
   margin: 18px 0 0;
-  padding: 14px;
+  padding: 0 13px 13px 13px;
 }
 
 .page-footer .navbar {
@@ -3780,7 +3780,8 @@ Prevents prosilver hover/focus rules from changing the geometry of search button
 
 .forgeboard .forge-search fieldset:focus-within,
 .forgeboard .action-bar .search-box fieldset:focus-within,
-.forgeboard .forge-topic-search fieldset:focus-within {
+.forgeboard .forge-topic-search fieldset:focus-within,
+.forgeboard .forge-inline-search fieldset:focus-within {
   border-color: rgba(88, 166, 255, 0.72);
   box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.14);
 }
@@ -4717,7 +4718,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forgeboard .forge-toolbar:has(.forge-inline-search) {
-  border: 0;
   box-shadow: none;
   display: grid;
   grid-template-columns: auto minmax(260px, 360px) minmax(0, 1fr);
@@ -5550,6 +5550,8 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   border: 0;
   box-shadow: none;
   outline: 0;
+  margin: 0;
+  padding: 0;
 }
 
 /* Header navigation split: main menu + breadcrumbs in two cards */
@@ -6993,7 +6995,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   border-bottom: 1px rgba(88, 166, 255, 0.45);
   color: var(--gb-link);
   margin: 0;
-  padding: 0;
+  padding: 5px 9px;
 }
 
 /* Nav main card links: don't inherit button chrome (they're nav links) */
@@ -8193,6 +8195,14 @@ body.forgeboard {
   padding: 0 10px;
 }
 
+.forgeboard .forge-toolbar .forge-inline-search .inputbox:hover,
+.forgeboard .forge-toolbar .forge-inline-search .inputbox:focus {
+  background: transparent;
+  border-right: 0;
+  box-shadow: none;
+  outline: 0;
+}
+
 /* MCP only: bar-top action-bar uses just a bottom border (no full box). */
 .forgeboard.section-mcp .action-bar.bar-top {
   background: transparent;
@@ -8453,5 +8463,64 @@ body.forgeboard {
 @media (prefers-reduced-motion: reduce) {
   .forgeboard .forge-mcp-quick-actions .button.forge-mcp-link::before {
     display: none;
+  }
+}
+
+/* Inline search box in viewtopic action bar — keep beside topic-tools and match button height */
+.forgeboard.section-viewtopic
+  .forge-topic-bottom-bar
+  .forge-topic-search-inline {
+  align-self: center;
+  flex: 0 1 auto;
+  margin: 0;
+  max-width: 240px;
+  width: auto;
+}
+.forgeboard.section-viewtopic
+  .forge-topic-bottom-bar
+  .forge-topic-search-inline
+  fieldset {
+  grid-template-columns: minmax(0, 1fr) 28px 28px;
+  height: 28px;
+  max-width: 240px;
+  min-height: 0;
+}
+.forgeboard.section-viewtopic
+  .forge-topic-bottom-bar
+  .forge-topic-search-inline
+  .inputbox {
+  font-size: 12px;
+  height: 26px;
+  line-height: 26px;
+  min-width: 0;
+  padding: 0 8px;
+}
+.forgeboard.section-viewtopic
+  .forge-topic-bottom-bar
+  .forge-topic-search-inline
+  .button {
+  height: 26px;
+  line-height: 1;
+  min-height: 0;
+  padding: 0;
+  width: 28px;
+}
+.forgeboard.section-viewtopic
+  .forge-topic-bottom-bar
+  .forge-topic-search-inline
+  .button
+  .icon {
+  font-size: 12px;
+}
+@media (max-width: 600px) {
+  .forgeboard.section-viewtopic
+    .forge-topic-bottom-bar
+    .forge-topic-search-inline,
+  .forgeboard.section-viewtopic
+    .forge-topic-bottom-bar
+    .forge-topic-search-inline
+    fieldset {
+    max-width: 100%;
+    width: 100%;
   }
 }
