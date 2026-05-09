@@ -1758,6 +1758,13 @@ ul.zebra-list li:nth-child(even) {
   white-space: pre;
 }
 
+.forgeboard .postbody .posthilit {
+  background-color: #e3a81d;
+  color: #2d2d2d;
+  border-radius: 7px;
+  padding: 0 5px;
+}
+
 /* Inline code (outside .codebox) — small chip on surface-subtle */
 .forgeboard .content code:not(.codebox code),
 .forgeboard .postbody code:not(.codebox code) {
