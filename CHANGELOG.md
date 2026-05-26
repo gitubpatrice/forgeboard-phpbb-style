@@ -2,6 +2,20 @@
 
 All notable changes to ForgeBoard are documented here.
 
+## [1.5.1] — 2026-05-26
+
+### Added
+- Template override `template/memberlist_view.html` introducing a `.forge-viewprofile-head` wrapper that drives the avatar/details layout via CSS Grid (200px + 1fr) instead of the legacy prosilver float stack
+- Spacing under the avatar (`margin: 0 0 14px`) and between rank lines (`margin: 0 0 10px`); rank title and rank image now left-aligned under the avatar
+- `max-width: 100%` clamp on rank images so an oversized rank graphic no longer overflows the avatar column
+
+### Fixed
+- Profile-details `<dt>` labels (Username, Groups, …) rendered one character per line on narrow panels. Root cause: prosilver's `dl.details dt { width: 30% }` was still applied inside the grid container. The `.forgeboard.section-memberlist #viewprofile .left-box.details.profile-details` rule now resets `width: auto` and `max-width: 100%` on dt/dd, plus a dedicated dt rule with `text-align: left` and `white-space: nowrap` to keep labels on a single line
+
+### Changed
+- `style_version` bumped to 1.0.2
+- `theme/stylesheet.css` bumped `forgeboard.css?hash=…` to force browser cache refresh
+
 ## [1.5.0] — 2026-05-02
 
 ### Added

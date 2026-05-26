@@ -5755,7 +5755,19 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   .left-box.details.profile-details
   dd {
   float: none;
+  width: auto;
+  max-width: 100%;
   margin: 0;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.forgeboard.section-memberlist
+  #viewprofile
+  .left-box.details.profile-details
+  dt {
+  text-align: left;
+  white-space: nowrap;
 }
 
 /* Remove parent frame: keep only the two split cards visible */
@@ -5852,6 +5864,47 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   display: grid;
   gap: 6px;
   min-width: 0;
+}
+
+/* ============================================================== */
+/* memberlist_view (Viewing profile)                              */
+/* Wrapper .forge-viewprofile-head : CSS Grid 200px + 1fr.        */
+/* Override the legacy prosilver float layout ONLY inside this    */
+/* container (class exclusive to this ForgeBoard template).       */
+/* ============================================================== */
+
+.forge-viewprofile-head {
+  align-items: start;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 200px minmax(0, 1fr);
+}
+
+.forge-viewprofile-head .avatar-rank-container,
+.forge-viewprofile-head .profile-details {
+  float: none;
+  max-width: 100%;
+  width: auto;
+}
+
+.forge-viewprofile-head .avatar-rank-container img {
+  height: auto;
+  max-width: 100%;
+}
+
+.forge-viewprofile-head .avatar-rank-container dt.profile-avatar {
+  margin: 0 0 14px;
+}
+
+.forge-viewprofile-head .avatar-rank-container dd {
+  margin: 0 0 10px;
+  text-align: left;
+}
+
+@media (max-width: 700px) {
+  .forge-viewprofile-head {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Default: stats wrapper is transparent to the parent grid (4-col card layout
