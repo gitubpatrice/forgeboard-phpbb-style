@@ -2,6 +2,22 @@
 
 All notable changes to ForgeBoard are documented here.
 
+## [1.5.3] — 2026-05-27
+
+### Added
+- Template override `template/mcp_reports.html` rewritten with the `forge-mcp-*` pattern (`.forge-mcp-reports` form class, `forge-mcp-list forge-mcp-list-reports` row container, `forge-mcp-mark-cell` mark column with `forge-mcp-mark-hit` label hit-area)
+- CSS block scoped to `.forge-mcp-reports` mirroring the `#mcp_queue` front-preview grid layout (3-col `1fr | 220px | 52px`, header bar, row borders, vertically centered MARK cell, full-height left border on `dd`)
+- Responsive `@media (max-width: 760px)` variant for `.forge-mcp-reports` (stack moderation column under details, 2-col `1fr | 46px`)
+
+### Fixed
+- `mcp_reports` MARK cell offset, missing full-height divider and checkbox not vertically centered. Root cause: legacy prosilver template kept `dl` as `display: block`, so the `dd.mark` floated and the `.section-mcp .topiclist dd.mark { display: flex }` generic rule had nothing to center against. The new grid `dl` layout aligns the cells and stretches the borders to row height
+- `mcp_queue.html` cleaned up: redundant `<button class="forge-mcp-mark-toggle">` removed in both topics and posts branches (the generic `forge_mcp_fix.js` already turns any `.forge-mcp-mark-cell` click into a checkbox toggle)
+
+### Changed
+- `forgeboard.css` minor tidy: `#cp-main h2` padding 0.3→0.5rem + `border: 0`, removed dead `.mark` hover/focus and base background rules, added `.cp-mini` transparent background + `dl.mini dt` color
+- `style_version` bumped to 1.0.4
+- `theme/stylesheet.css` bumped `forgeboard.css?hash=…` to force browser cache refresh
+
 ## [1.5.2] — 2026-05-27
 
 ### Removed
