@@ -4571,7 +4571,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 .forgeboard .forge-stats-grid .forge-login-panel h3 {
   color: var(--gb-link);
-  font-size: 22px;
   line-height: 1.15;
   margin: 0;
 }
@@ -6462,10 +6461,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
     grid-template-columns: 1fr;
   }
 
-  .forgeboard #nav-user {
-    justify-content: flex-start;
-  }
-
   .forgeboard .forge-category .forge-forum-grid {
     grid-template-columns: 1fr;
   }
@@ -7539,14 +7534,6 @@ body.forgeboard {
     display: flex !important;
     flex-wrap: wrap;
     justify-content: flex-start !important;
-  }
-
-  /* The responsive-menu / dropdown-container <li> (the burger) sticks to
-     the right edge, past any FAQ/ACP/MCP sibling on its left. */
-  .forgeboard #nav-main #quick-links.responsive-menu,
-  .forgeboard #nav-main li.responsive-menu.dropdown-container,
-  .forgeboard #nav-main li.dropdown-container.responsive-menu {
-    margin-left: auto;
   }
 
   /* Breadcrumbs row: rightside responsive-search icon stays right */

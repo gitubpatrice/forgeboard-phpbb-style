@@ -2,6 +2,17 @@
 
 All notable changes to ForgeBoard are documented here.
 
+## [1.5.2] — 2026-05-27
+
+### Removed
+- `font-size: 22px` on `.forge-stats-grid .forge-login-panel h3` (inherit from base h3 sizing)
+- Mobile rule `.forgeboard #nav-user { justify-content: flex-start }` (redundant with parent flex defaults)
+- Burger `margin-left: auto` override on `#nav-main #quick-links.responsive-menu` and `li.dropdown-container.responsive-menu` at `max-width: 510px` (handled by upstream layout)
+
+### Changed
+- `style_version` bumped to 1.0.3
+- `theme/stylesheet.css` bumped `forgeboard.css?hash=…` to force browser cache refresh
+
 ## [1.5.1] — 2026-05-26
 
 ### Added
