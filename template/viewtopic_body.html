@@ -11,11 +11,11 @@
 		</h1>
 		<!-- IF FORUM_NAME -->
 			<p class="forge-topic-hero-meta">
-				<strong>{L_FORUM}&nbsp;:</strong>
+				<strong>{L_FORUM}{L_COLON}</strong>
 				<a href="{U_VIEW_FORUM}">{FORUM_NAME}</a>
 				<!-- IF MODERATORS -->
 					&middot;
-					<strong><!-- IF S_SINGLE_MODERATOR -->{L_MODERATOR}<!-- ELSE -->{L_MODERATORS}<!-- ENDIF -->&nbsp;:</strong> {MODERATORS}
+					<strong><!-- IF S_SINGLE_MODERATOR -->{L_MODERATOR}<!-- ELSE -->{L_MODERATORS}<!-- ENDIF -->{L_COLON}</strong> {MODERATORS}
 				<!-- ENDIF -->
 			</p>
 		<!-- ENDIF -->
@@ -104,7 +104,7 @@
 
 				<dl class="poll_total_votes<!-- IF not S_DISPLAY_RESULTS --> hidden<!-- ENDIF -->">
 					<dt>&nbsp;</dt>
-					<dd class="resultbar">{L_TOTAL_VOTES}&nbsp;: <span class="poll_total_vote_cnt">{TOTAL_VOTES}</span></dd>
+					<dd class="resultbar">{L_TOTAL_VOTES}{L_COLON} <span class="poll_total_vote_cnt">{TOTAL_VOTES}</span></dd>
 				</dl>
 
 			<!-- IF S_CAN_VOTE -->
@@ -165,19 +165,19 @@
 			<!-- IF postrow.RANK_IMG --><dd class="profile-rank profile-rank-image">{postrow.RANK_IMG}</dd><!-- ENDIF -->
 			<!-- EVENT viewtopic_body_postrow_rank_after -->
 
-		<!-- IF postrow.POSTER_POSTS != '' --><dd class="profile-posts"><strong>{L_POSTS}&nbsp;:</strong> <!-- IF postrow.U_SEARCH !== '' --><a href="{postrow.U_SEARCH}"><!-- ENDIF -->{postrow.POSTER_POSTS}<!-- IF postrow.U_SEARCH !== '' --></a><!-- ENDIF --></dd><!-- ENDIF -->
-		<!-- IF postrow.POSTER_JOINED --><dd class="profile-joined"><strong>{L_JOINED}&nbsp;:</strong> {postrow.POSTER_JOINED}</dd><!-- ENDIF -->
-		<!-- IF postrow.POSTER_WARNINGS --><dd class="profile-warnings"><strong>{L_WARNINGS}&nbsp;:</strong> {postrow.POSTER_WARNINGS}</dd><!-- ENDIF -->
+		<!-- IF postrow.POSTER_POSTS != '' --><dd class="profile-posts"><strong>{L_POSTS}{L_COLON}</strong> <!-- IF postrow.U_SEARCH !== '' --><a href="{postrow.U_SEARCH}"><!-- ENDIF -->{postrow.POSTER_POSTS}<!-- IF postrow.U_SEARCH !== '' --></a><!-- ENDIF --></dd><!-- ENDIF -->
+		<!-- IF postrow.POSTER_JOINED --><dd class="profile-joined"><strong>{L_JOINED}{L_COLON}</strong> {postrow.POSTER_JOINED}</dd><!-- ENDIF -->
+		<!-- IF postrow.POSTER_WARNINGS --><dd class="profile-warnings"><strong>{L_WARNINGS}{L_COLON}</strong> {postrow.POSTER_WARNINGS}</dd><!-- ENDIF -->
 
 		<!-- IF postrow.S_PROFILE_FIELD1 -->
 			<!-- Use a construct like this to include admin defined profile fields. Replace FIELD1 with the name of your field. -->
-			<dd><strong>{postrow.PROFILE_FIELD1_NAME}&nbsp;:</strong> {postrow.PROFILE_FIELD1_VALUE}</dd>
+			<dd><strong>{postrow.PROFILE_FIELD1_NAME}{L_COLON}</strong> {postrow.PROFILE_FIELD1_VALUE}</dd>
 		<!-- ENDIF -->
 
 		<!-- EVENT viewtopic_body_postrow_custom_fields_before -->
 		<!-- BEGIN custom_fields -->
 			<!-- IF not postrow.custom_fields.S_PROFILE_CONTACT -->
-				<dd class="profile-custom-field profile-{postrow.custom_fields.PROFILE_FIELD_IDENT}"><strong>{postrow.custom_fields.PROFILE_FIELD_NAME}&nbsp;:</strong> {postrow.custom_fields.PROFILE_FIELD_VALUE}</dd>
+				<dd class="profile-custom-field profile-{postrow.custom_fields.PROFILE_FIELD_IDENT}"><strong>{postrow.custom_fields.PROFILE_FIELD_NAME}{L_COLON}</strong> {postrow.custom_fields.PROFILE_FIELD_VALUE}</dd>
 			<!-- ENDIF -->
 		<!-- END custom_fields -->
 		<!-- EVENT viewtopic_body_postrow_custom_fields_after -->
@@ -185,7 +185,7 @@
 		<!-- EVENT viewtopic_body_contact_fields_before -->
 		<!-- IF not S_IS_BOT and .postrow.contact -->
 			<dd class="profile-contact">
-				<strong>{L_CONTACT}&nbsp;:</strong>
+				<strong>{L_CONTACT}{L_COLON}</strong>
 				<div class="dropdown-container dropdown-left">
 					<a href="#" class="dropdown-trigger" title="{postrow.CONTACT_USER}">
 						<i class="icon fa-commenting-o fa-fw icon-lg" aria-hidden="true"></i><span class="sr-only">{postrow.CONTACT_USER}</span>
@@ -367,12 +367,12 @@
 			<!-- IF postrow.DELETED_MESSAGE or postrow.DELETE_REASON -->
 				<div class="notice post_deleted_msg">
 					{postrow.DELETED_MESSAGE}
-					<!-- IF postrow.DELETE_REASON --><br /><strong>{L_REASON}&nbsp;:</strong> <em>{postrow.DELETE_REASON}</em><!-- ENDIF -->
+					<!-- IF postrow.DELETE_REASON --><br /><strong>{L_REASON}{L_COLON}</strong> <em>{postrow.DELETE_REASON}</em><!-- ENDIF -->
 				</div>
 			<!-- ELSEIF postrow.EDITED_MESSAGE or postrow.EDIT_REASON -->
 				<div class="notice">
 					{postrow.EDITED_MESSAGE}
-					<!-- IF postrow.EDIT_REASON --><br /><strong>{L_REASON}&nbsp;:</strong> <em>{postrow.EDIT_REASON}</em><!-- ENDIF -->
+					<!-- IF postrow.EDIT_REASON --><br /><strong>{L_REASON}{L_COLON}</strong> <em>{postrow.EDIT_REASON}</em><!-- ENDIF -->
 				</div>
 			<!-- ENDIF -->
 

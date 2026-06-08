@@ -4,7 +4,7 @@
 
 <!-- IF not S_PM -->
 <fieldset class="forum-selection">
-	<label for="fo">{L_FORUM}&nbsp;: <select name="f" id="fo">{S_FORUM_OPTIONS}</select></label>
+	<label for="fo">{L_FORUM}{L_COLON} <select name="f" id="fo">{S_FORUM_OPTIONS}</select></label>
 	<input type="submit" name="sort" value="{L_GO}" class="button2" />
 	{S_FORM_TOKEN}
 </fieldset>
@@ -67,7 +67,7 @@
 					</dt>
 					<dd class="moderation">
 						<span>{postrow.REPORTER_FULL} &laquo; {postrow.REPORT_TIME}<br />
-						<!-- IF postrow.U_VIEWFORUM -->{L_FORUM}&nbsp;: <a href="{postrow.U_VIEWFORUM}">{postrow.FORUM_NAME}</a><!-- ELSE -->{postrow.FORUM_NAME}<!-- ENDIF --></span>
+						<!-- IF postrow.U_VIEWFORUM -->{L_FORUM}{L_COLON} <a href="{postrow.U_VIEWFORUM}">{postrow.FORUM_NAME}</a><!-- ELSE -->{postrow.FORUM_NAME}<!-- ENDIF --></span>
 					</dd>
 					<!-- ENDIF -->
 					<dd class="mark forge-mcp-mark forge-mcp-mark-cell">

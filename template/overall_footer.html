@@ -75,6 +75,13 @@
 <!-- INCLUDEJS ajax.js -->
 <!-- INCLUDEJS forge_mcp_fix.js -->
 <!-- INCLUDEJS forge_theme_toggle.js -->
+<script>
+	let styleLang = {
+		'auto': "{{ definition.STYLE_LANG.TOGGLE_THEME_AUTO|e('js') }}",
+		'light': "{{ definition.STYLE_LANG.TOGGLE_THEME_LIGHT|e('js') }}",
+		'dark': "{{ definition.STYLE_LANG.TOGGLE_THEME_DARK|e('js') }}"
+	};
+</script>
 <!-- INCLUDEJS forge_a11y.js -->
 <!-- IF S_ALLOW_CDN -->
 	<script>

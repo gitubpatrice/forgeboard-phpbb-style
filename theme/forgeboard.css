@@ -1661,7 +1661,9 @@ ul.zebra-list li:nth-child(even) {
 
 .postprofile {
   align-self: start;
-  background: var(--gb-surface-subtle);
+  background-color: var(--gb-surface-subtle);
+  background-position: 100% 0;
+  background-repeat: no-repeat;
   border-color: var(--gb-border);
   border-left: 1px solid var(--gb-border);
   border-width: 0 0 0 1px;
@@ -8690,4 +8692,51 @@ body.forgeboard {
     max-width: 100%;
     width: 100%;
   }
+}
+
+/* phpBB AJAX alert / confirm popups — dark theme override
+   (prosilver hardcodes #FFF background, unreadable when body text is light) */
+.forgeboard[data-theme="dark"] .phpbb_alert,
+[data-theme="dark"] .phpbb_alert {
+  background-color: var(--gb-surface);
+  border: 1px solid var(--gb-border);
+  color: var(--gb-text);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+}
+
+.forgeboard[data-theme="dark"] .phpbb_alert .alert_title,
+[data-theme="dark"] .phpbb_alert .alert_title,
+.forgeboard[data-theme="dark"] .phpbb_alert .alert_text,
+[data-theme="dark"] .phpbb_alert .alert_text,
+.forgeboard[data-theme="dark"] .phpbb_alert p,
+[data-theme="dark"] .phpbb_alert p,
+.forgeboard[data-theme="dark"] .phpbb_alert label,
+[data-theme="dark"] .phpbb_alert label {
+  color: var(--gb-text);
+}
+
+.forgeboard[data-theme="dark"] .phpbb_alert a,
+[data-theme="dark"] .phpbb_alert a {
+  color: var(--gb-link);
+}
+
+.forgeboard[data-theme="dark"] .phpbb_alert input,
+[data-theme="dark"] .phpbb_alert input,
+.forgeboard[data-theme="dark"] .phpbb_alert select,
+[data-theme="dark"] .phpbb_alert select,
+.forgeboard[data-theme="dark"] .phpbb_alert textarea,
+[data-theme="dark"] .phpbb_alert textarea {
+  background-color: var(--gb-surface-subtle);
+  border: 1px solid var(--gb-border);
+  color: var(--gb-text);
+}
+
+.forgeboard[data-theme="dark"] .alert_close .icon,
+[data-theme="dark"] .alert_close .icon {
+  color: var(--gb-text-muted);
+}
+
+.forgeboard[data-theme="dark"] .alert_close:hover .icon,
+[data-theme="dark"] .alert_close:hover .icon {
+  color: var(--gb-link);
 }

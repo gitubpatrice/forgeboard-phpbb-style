@@ -45,10 +45,10 @@
 
 			<!-- IF forumrow.MODERATORS or (.forumrow.subforum and forumrow.S_LIST_SUBFORUMS) -->
 			<div class="forge-forum-meta">
-				<!-- IF forumrow.MODERATORS --><span><strong>{forumrow.L_MODERATOR_STR}&nbsp;:</strong> {forumrow.MODERATORS}</span><!-- ENDIF -->
+				<!-- IF forumrow.MODERATORS --><span><strong>{forumrow.L_MODERATOR_STR}{L_COLON}</strong> {forumrow.MODERATORS}</span><!-- ENDIF -->
 				<!-- IF .forumrow.subforum and forumrow.S_LIST_SUBFORUMS -->
 					<!-- EVENT forumlist_body_subforums_before -->
-					<span><strong>{forumrow.L_SUBFORUM_STR}&nbsp;:</strong>
+					<span><strong>{forumrow.L_SUBFORUM_STR}{L_COLON}</strong>
 					<!-- BEGIN subforum -->
 						<!-- EVENT forumlist_body_subforum_link_prepend --><a href="{forumrow.subforum.U_SUBFORUM}" class="subforum<!-- IF forumrow.subforum.S_UNREAD --> unread<!-- ELSE --> read<!-- ENDIF -->" title="{% if forumrow.subforum.IS_LINK %}{{ lang('FORUM_LINK') }}{% elseif forumrow.subforum.S_UNREAD %}{{ lang('UNREAD_POSTS') }}{% else %}{{ lang('NO_UNREAD_POSTS') }}{% endif %}">{forumrow.subforum.SUBFORUM_NAME}</a><!-- IF not forumrow.subforum.S_LAST_ROW -->{L_COMMA_SEPARATOR}<!-- ENDIF --><!-- EVENT forumlist_body_subforum_link_append -->
 					<!-- END subforum -->

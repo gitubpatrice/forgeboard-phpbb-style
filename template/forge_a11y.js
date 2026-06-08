@@ -42,7 +42,11 @@
 		var btn = document.querySelector('[data-theme-toggle]');
 		if (!btn) return;
 		var pref = document.documentElement.getAttribute('data-theme-pref') || 'auto';
-		var labels = {
+		var labels = (typeof styleLang === 'object' && styleLang) ? {
+			auto: styleLang.auto,
+			light: styleLang.light,
+			dark: styleLang.dark
+		} : {
 			auto: 'Theme: auto (follow system) — click to switch to light',
 			light: 'Theme: light — click to switch to dark',
 			dark: 'Theme: dark — click to switch to auto'

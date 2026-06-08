@@ -26,8 +26,10 @@
      download needed). Open Sans loader from Prosilver is intentionally
      omitted: saves ~590 KB and ~6 round trips on first paint. -->
 
-<!-- Preconnect to FontAwesome CDN if it's served externally -->
-<link rel="preconnect" href="//cdnjs.cloudflare.com" crossorigin>
+<!-- IF S_ALLOW_CDN -->
+<!-- Preconnect to the configured FontAwesome CDN host -->
+<link rel="preconnect" href="https://maxcdn.bootstrapcdn.com" crossorigin>
+<!-- ENDIF -->
 
 <link href="{T_FONT_AWESOME_LINK}" rel="stylesheet">
 <link href="{T_STYLESHEET_LINK}" rel="stylesheet">
@@ -50,6 +52,8 @@
 <![endif]-->
 
 <!-- EVENT overall_header_head_append -->
+
+{{ include([T_THEME_LANG_NAME ~ '/style_lang.twig', 'en/style_lang.twig'], ignore_missing = true) }}
 
 <script>
 /* Inline theme bootstrap — applied before render to avoid FOUC */
@@ -118,7 +122,7 @@
 		<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
 		<div id="information" class="rules">
 			<div class="inner">
-				<strong>{L_INFORMATION}&nbsp;:</strong> {L_BOARD_DISABLED}
+				<strong>{L_INFORMATION}{L_COLON}</strong> {L_BOARD_DISABLED}
 			</div>
 		</div>
 		<!-- ENDIF -->

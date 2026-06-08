@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{META}
+<title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
+
+<!-- ForgeBoard uses the system font stack via CSS variables (no web-font
+     download needed). Open Sans loader from Prosilver is intentionally
+     omitted for popup pages as well. -->
+
+<!-- IF S_ALLOW_CDN -->
+<!-- Preconnect to the configured FontAwesome CDN host -->
+<link rel="preconnect" href="https://maxcdn.bootstrapcdn.com" crossorigin>
+<!-- ENDIF -->
+
+<link href="{T_FONT_AWESOME_LINK}" rel="stylesheet">
+<link href="{T_STYLESHEET_LINK}" rel="stylesheet">
+<link href="{T_STYLESHEET_LANG_LINK}" rel="stylesheet">
+
+<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->
+	<link href="{T_THEME_PATH}/bidi.css?assets_version={T_ASSETS_VERSION}" rel="stylesheet">
+<!-- ENDIF -->
+
+<!--[if lte IE 9]>
+	<link href="{T_THEME_PATH}/tweaks.css?assets_version={T_ASSETS_VERSION}" rel="stylesheet">
+<![endif]-->
+
+<!-- DEFINE $POPUP = 1 -->
+
+<!-- EVENT simple_header_head_append -->
+
+{{ include([T_THEME_LANG_NAME ~ '/style_lang.twig', 'en/style_lang.twig'], ignore_missing = true) }}
+
+<script>
+/* Inline theme bootstrap — applied before render to avoid FOUC */
+(function(){try{var s=localStorage.getItem('forgeboard_theme');if(!s){var m=document.cookie.match(/forgeboard_theme=([^;]+)/);if(m)s=decodeURIComponent(m[1]);}var t=s==='dark'||s==='light'?s:(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.documentElement.setAttribute('data-theme-pref',s||'auto');}catch(e){}})();
+</script>
+
+{$STYLESHEETS}
+
+<!-- EVENT simple_header_stylesheets_after -->
+
+</head>
+
+<body id="phpbb" class="forgeboard nojs {S_CONTENT_DIRECTION} {BODY_CLASS}">
+
+<!-- EVENT simple_header_body_before -->
+
+<div id="wrap" class="wrap">
+	<a id="top" class="top-anchor" accesskey="t"></a>
+	<div id="page-body" class="page-body" role="main">

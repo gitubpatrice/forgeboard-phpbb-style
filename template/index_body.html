@@ -29,8 +29,8 @@
 		</div>
 		<form method="post" action="{S_LOGIN_ACTION}">
 			<fieldset class="quick-login forge-login-grid">
-				<label for="username"><span>{L_USERNAME}&nbsp;:</span> <input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}" autocomplete="username" /></label>
-				<label for="password"><span>{L_PASSWORD}&nbsp;:</span> <input type="password" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}" autocomplete="current-password" /></label>
+				<label for="username"><span>{L_USERNAME}{L_COLON}</span> <input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}" autocomplete="username" /></label>
+				<label for="password"><span>{L_PASSWORD}{L_COLON}</span> <input type="password" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}" autocomplete="current-password" /></label>
 				<!-- IF U_SEND_PASSWORD --><a href="{U_SEND_PASSWORD}">{L_FORGOT_PASS}</a><!-- ENDIF -->
 				<!-- IF S_AUTOLOGIN_ENABLED --><label for="autologin" class="forge-check">{L_LOG_ME_IN} <input type="checkbox" name="autologin" id="autologin" /></label><!-- ENDIF -->
 				<input type="submit" name="login" value="{L_LOGIN}" class="button2" />
@@ -48,7 +48,7 @@
 			{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}
 			<!-- IF U_VIEWONLINE -->
 				<br /><br />{LOGGED_IN_USER_LIST}
-				<!-- IF LEGEND --><br /><em>{L_LEGEND}&nbsp;: {LEGEND}</em><!-- ENDIF -->
+				<!-- IF LEGEND --><br /><em>{L_LEGEND}{L_COLON} {LEGEND}</em><!-- ENDIF -->
 			<!-- ENDIF -->
 			<!-- EVENT index_body_block_online_append -->
 		</p>
@@ -62,7 +62,7 @@
 		<h3>{L_BIRTHDAYS}</h3>
 		<p>
 			<!-- EVENT index_body_block_birthday_prepend -->
-			<!-- IF .birthdays -->{L_CONGRATULATIONS}&nbsp;: <strong><!-- BEGIN birthdays -->{birthdays.USERNAME}<!-- IF birthdays.AGE !== '' --> ({birthdays.AGE})<!-- ENDIF --><!-- IF not birthdays.S_LAST_ROW -->, <!-- ENDIF --><!-- END birthdays --></strong><!-- ELSE -->{L_NO_BIRTHDAYS}<!-- ENDIF -->
+			<!-- IF .birthdays -->{L_CONGRATULATIONS}{L_COLON} <strong><!-- BEGIN birthdays -->{birthdays.USERNAME}<!-- IF birthdays.AGE !== '' --> ({birthdays.AGE})<!-- ENDIF --><!-- IF not birthdays.S_LAST_ROW -->, <!-- ENDIF --><!-- END birthdays --></strong><!-- ELSE -->{L_NO_BIRTHDAYS}<!-- ENDIF -->
 			<!-- EVENT index_body_block_birthday_append -->
 		</p>
 	</article>
