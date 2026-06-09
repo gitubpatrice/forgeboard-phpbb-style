@@ -1,2 +1,14 @@
-/* Online image */
-.online { background-image: url("./icon_user_online.svg"); }
+/* Online image (EN locale).
+   phpBB applies `.online` to <div class="post">, but ForgeBoard's
+   `.forgeboard .post.has-profile .postprofile` (specificity 0,4,0) uses
+   a `background:` shorthand that wipes background-image. We therefore
+   need a more specific selector (0,5,0) — adding `.online` to the chain
+   — so the green-dot indicator survives the cascade. */
+.online {
+	background-image: url("./icon_user_online.svg");
+}
+.forgeboard .post.online.has-profile .postprofile {
+	background-image: url("./icon_user_online.svg");
+	background-position: calc(100% - 8px) 8px;
+	background-repeat: no-repeat;
+}

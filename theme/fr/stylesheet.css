@@ -1,2 +1,15 @@
-/* Online image (FR locale) */
-.online { background-image: url("./icon_user_online.svg"); }
+/* Image online (locale FR).
+   phpBB applique `.online` sur <div class="post">, mais la règle
+   ForgeBoard `.forgeboard .post.has-profile .postprofile` (spécificité
+   0,4,0) utilise un raccourci `background:` qui efface le
+   background-image. Il faut donc une spécificité supérieure (0,5,0) en
+   ajoutant `.online` à la chaîne — afin que l'indicateur point vert
+   survive à la cascade. */
+.online {
+	background-image: url("./icon_user_online.svg");
+}
+.forgeboard .post.online.has-profile .postprofile {
+	background-image: url("./icon_user_online.svg");
+	background-position: calc(100% - 8px) 8px;
+	background-repeat: no-repeat;
+}
