@@ -38,20 +38,18 @@
 	}
 
 	/* ----- 2. Theme toggle aria-label dynamic ------------------------- */
+	/* Labels are injected by overall_footer.html (and simple_header.html)
+	   from theme/<lang>/style_lang.twig via the styleLang global. No
+	   English strings are hardcoded here — phpBB.com validation rule. */
 	function syncThemeLabel() {
 		var btn = document.querySelector('[data-theme-toggle]');
 		if (!btn) return;
+		if (typeof styleLang !== 'object' || !styleLang) return;
 		var pref = document.documentElement.getAttribute('data-theme-pref') || 'auto';
-		var labels = (typeof styleLang === 'object' && styleLang) ? {
-			auto: styleLang.auto,
-			light: styleLang.light,
-			dark: styleLang.dark
-		} : {
-			auto: 'Theme: auto (follow system) — click to switch to light',
-			light: 'Theme: light — click to switch to dark',
-			dark: 'Theme: dark — click to switch to auto'
-		};
-		btn.setAttribute('aria-label', labels[pref] || labels.auto);
+		var label = styleLang[pref] || styleLang.auto;
+		if (label) {
+			btn.setAttribute('aria-label', label);
+		}
 	}
 
 	function initThemeAria() {
