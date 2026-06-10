@@ -2876,17 +2876,11 @@ Intentional page-level overrides to move away from prosilver.
     border-radius: 0 0 12px 12px;
     margin-left: -8px;
     margin-right: -8px;
-    padding: 14px;
+    padding: 5px 0 0 10px;
   }
 
   .forge-brand {
     grid-template-columns: 44px minmax(0, 1fr);
-  }
-
-  .forge-brand .site_logo {
-    border-radius: 12px;
-    height: 44px;
-    width: 44px;
   }
 
   .forge-brand-copy strong {
@@ -2912,11 +2906,6 @@ Intentional page-level overrides to move away from prosilver.
 
   .forge-forum-numbers {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .forgeboard .forge-topbar {
-    margin-left: 0;
-    margin-right: 0;
   }
 }
 
@@ -5796,6 +5785,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forgeboard #nav-user .forge-nav-user-item > a {
+  align-items: center;
   display: inline-flex;
 }
 
@@ -7017,6 +7007,18 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   transform: none;
 }
 
+/* Remove padding on every <a> inside the user nav card (scoped). */
+.forgeboard .forge-nav-user-card a {
+  padding: 0;
+}
+
+/* PM / Notifications counter badge: small optical nudge so the badge
+   sits visually aligned with the icon/text baseline (scoped). */
+.forgeboard .forge-nav-user-card .badge {
+  position: relative;
+  top: 1px;
+}
+
 .forgeboard .forge-nav-user-card .header-avatar:hover,
 .forgeboard .forge-nav-user-card .header-avatar:focus,
 .forgeboard .forge-nav-user-card .forge-nav-user-pm > a:hover,
@@ -7736,7 +7738,8 @@ body.forgeboard {
   .forgeboard .forge-brand,
   .forgeboard .forge-search {
     min-height: 0;
-    padding: 18px;
+    padding: 0;
+    margin:0;
   }
 
   .forgeboard .forge-nav-card #nav-main > #username_logged_in {
