@@ -7443,6 +7443,13 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 /* Phone: even tighter spacing */
 @media (max-width: 480px) {
+  /* Hide the responsive-menu trigger on small screens — its dropdown
+     duplicates the navigation that is already visible elsewhere on
+     this viewport. */
+  .forgeboard li.responsive-menu.dropdown-container {
+    display: none;
+  }
+
   .forgeboard .wrap,
   .forgeboard .forge-shell {
     padding-left: 8px;
