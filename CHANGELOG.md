@@ -3,6 +3,12 @@
 All notable changes to ForgeBoard are documented here.
 Versions match `style.cfg` `style_version`.
 
+## [1.1.1] — 2026-06-11
+
+### Changed
+- Localised the remaining ARIA landmark labels (primary navigation, footer, MCP quick actions, MCP sections) through `theme/<lang>/style_lang.twig` instead of hardcoded English — added `NAV_PRIMARY_LABEL`, `NAV_FOOTER_LABEL`, `MCP_QUICK_ACTIONS_LABEL`, `MCP_SECTIONS_LABEL` (EN + FR)
+- `style_version` bumped to 1.1.1
+
 ## [1.1.0] — 2026-06-11
 
 ### Fixed
