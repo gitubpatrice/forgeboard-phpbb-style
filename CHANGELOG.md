@@ -3,6 +3,15 @@
 All notable changes to ForgeBoard are documented here.
 Versions match `style.cfg` `style_version`.
 
+## [1.1.2] — 2026-06-11
+
+### Added
+- Jumpbox links hover: a 3px left accent stripe mirroring the quick-links hover — blue (`--gb-link`) with a subtle inset outline for forum/sub links, red (`--gb-danger`) stripe only for category headers
+
+### Changed
+- `theme/stylesheet.css` cache-buster hash refreshed
+- `style_version` bumped to 1.1.2
+
 ## [1.1.1] — 2026-06-11
 
 ### Changed
