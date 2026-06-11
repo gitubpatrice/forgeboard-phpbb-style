@@ -5465,6 +5465,23 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   box-shadow: inset 3px 0 0 var(--gb-danger);
 }
 
+/* Topic-tools dropdown links: same quick-links-style accent stripe, no fill. */
+.forgeboard .topic-tools .dropdown-contents a:hover,
+.forgeboard .topic-tools .dropdown-contents a:focus {
+  background: transparent;
+  border-color: transparent;
+  border-radius: 5px;
+  box-shadow:
+    inset 0 0 0 1px rgba(88, 166, 255, 0.2),
+    inset 3px 0 0 var(--gb-link);
+  color: var(--gb-link-hover);
+}
+
+.forgeboard .topic-tools .dropdown-contents a:hover .icon,
+.forgeboard .topic-tools .dropdown-contents a:focus .icon {
+  background-color: transparent;
+}
+
 .forgeboard #jumpbox .dropdown-contents li.separator {
   margin: 2px 4px;
 }
