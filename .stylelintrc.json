@@ -59,6 +59,6 @@
 		"font-family-name-quotes": null,
 		"selector-not-notation": null,
 		"selector-id-pattern": null,
-		"selector-pseudo-element-colon-notation": [true, { "severity": "warning" }]
+		"selector-pseudo-element-colon-notation": ["double", { "severity": "warning" }]
 	}
 }
