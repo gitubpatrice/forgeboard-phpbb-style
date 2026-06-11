@@ -50,9 +50,10 @@ foreach ($item in $include) {
     }
 }
 
-# Add license.txt (phpBB convention is lowercase .txt; the repo uses LICENSE).
-$licenseSrc = Join-Path $root "LICENSE"
-if (Test-Path $licenseSrc) {
+# Add license.txt (phpBB convention is lowercase .txt). Accept common variants.
+$licenseSrc = @("license.txt", "licence.txt", "LICENSE", "licence") |
+    ForEach-Object { Join-Path $root $_ } | Where-Object { Test-Path $_ } | Select-Object -First 1
+if ($licenseSrc) {
     Copy-Item $licenseSrc (Join-Path $dest "license.txt") -Force
 }
 
