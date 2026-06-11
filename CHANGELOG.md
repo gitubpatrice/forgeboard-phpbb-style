@@ -3,6 +3,13 @@
 All notable changes to ForgeBoard are documented here.
 Versions match `style.cfg` `style_version`.
 
+## [1.1.4] — 2026-06-11
+
+### Changed
+- Extended the topic-tools accent-stripe hover to the quickmod dropdown links (same stripe, no fill, rounded 5px)
+- `theme/stylesheet.css` cache-buster hash refreshed
+- `style_version` bumped to 1.1.4
+
 ## [1.1.3] — 2026-06-11
 
 ### Added

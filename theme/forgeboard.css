@@ -5465,9 +5465,11 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   box-shadow: inset 3px 0 0 var(--gb-danger);
 }
 
-/* Topic-tools dropdown links: same quick-links-style accent stripe, no fill. */
+/* Topic-tools & quickmod dropdown links: quick-links-style accent stripe, no fill. */
 .forgeboard .topic-tools .dropdown-contents a:hover,
-.forgeboard .topic-tools .dropdown-contents a:focus {
+.forgeboard .topic-tools .dropdown-contents a:focus,
+.forgeboard .forge-quickmod .dropdown-contents a:hover,
+.forgeboard .forge-quickmod .dropdown-contents a:focus {
   background: transparent;
   border-color: transparent;
   border-radius: 5px;
@@ -5478,7 +5480,9 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forgeboard .topic-tools .dropdown-contents a:hover .icon,
-.forgeboard .topic-tools .dropdown-contents a:focus .icon {
+.forgeboard .topic-tools .dropdown-contents a:focus .icon,
+.forgeboard .forge-quickmod .dropdown-contents a:hover .icon,
+.forgeboard .forge-quickmod .dropdown-contents a:focus .icon {
   background-color: transparent;
 }
 
