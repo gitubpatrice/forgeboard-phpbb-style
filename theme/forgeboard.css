@@ -7399,6 +7399,29 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
     row-gap: 10px;
   }
 
+  /* TOP bar only: keep the desktop order — "New Topic" button on the left,
+     forum-search inline to its right — instead of letting the search drop
+     below. The pagination is what wraps onto its own row. Bottom bar untouched. */
+  .forgeboard.section-viewforum .forge-toolbar.bar-top {
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 10px;
+  }
+
+  .forgeboard.section-viewforum .forge-toolbar.bar-top .forge-toolbar-actions {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .forgeboard.section-viewforum .forge-toolbar.bar-top .forge-inline-search {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .forgeboard.section-viewforum .forge-toolbar.bar-top .forge-topic-pagination {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
   .forgeboard .forge-toolbar-actions {
     flex-wrap: wrap;
   }
@@ -7490,11 +7513,20 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 /* Phone: even tighter spacing */
 @media (max-width: 480px) {
-  /* Hide the responsive-menu trigger on small screens — its dropdown
-     duplicates the navigation that is already visible elsewhere on
-     this viewport. */
-  .forgeboard li.responsive-menu.dropdown-container {
-    display: none;
+  /* TOP bar only: on phones the search no longer fills all the free space —
+     cap it and align it to the right edge, "New Topic" stays left. */
+  .forgeboard.section-viewforum .forge-toolbar.bar-top .forge-inline-search {
+    justify-self: end;
+    max-width: 165px;
+  }
+
+  .forgeboard.section-viewforum
+    .forge-toolbar.bar-top
+    .forge-inline-search fieldset,
+  .forgeboard.section-viewforum
+    .forge-toolbar.bar-top
+    .forge-inline-search .inputbox {
+    width: 100%;
   }
 
   .forgeboard .wrap,

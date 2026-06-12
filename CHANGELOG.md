@@ -3,6 +3,17 @@
 All notable changes to ForgeBoard are documented here.
 Versions match `style.cfg` `style_version`.
 
+## [1.1.5] — 2026-06-12
+
+### Fixed
+- Mobile navbar: the quick-links responsive toggle (the "three bars" hamburger) now appears on phones again — removed an erroneous `display:none` on `li.responsive-menu.dropdown-container` below 480px
+- viewforum top toolbar (`bar-top`): below 760px the forum-search no longer drops onto its own line — it stays inline to the right of the "New Topic" button, with only the pagination wrapping underneath (bottom bar untouched)
+- viewforum top toolbar: on portrait phones (≤480px) the inline forum-search is capped to 165px and right-aligned so it no longer stretches across the row
+
+### Changed
+- `theme/stylesheet.css` cache-buster hash refreshed
+- `style_version` bumped to 1.1.5
+
 ## [1.1.4] — 2026-06-11
 
 ### Changed
