@@ -4068,10 +4068,6 @@ Neutralises prosilver white hover on UCP/MCP topiclist rows.
   color: var(--gb-danger);
 }
 
-.forgeboard #username_logged_in .dropdown {
-  padding-top: 20px;
-}
-
 .forgeboard #notification_list.dropdown {
   padding-top: 10px;
   right: 0;
@@ -4869,7 +4865,8 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forgeboard #quick-links.dropdown-container .dropdown {
-  padding-top: 35px;
+  padding-top: 22px;
+  left: 0;
 }
 
 .forgeboard #quick-links.dropdown-container .dropdown-contents,
@@ -5715,11 +5712,11 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
     var(--gb-surface);
   border: 1px solid var(--gb-border);
   border-radius: 6px;
-  padding: 8px 10px;
+  padding: 8px 10px 8px 3px;
 }
 
 .forgeboard .forge-nav-user-card {
-  padding: 8px 10px;
+  padding: 10px 0 10px 0;
   border-right: 3px solid var(--gb-border);
   border-radius: 0 9px 9px 0;
 }
@@ -5792,7 +5789,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 10px;
+  gap: 6px 7px;
   justify-content: flex-end;
   list-style: none;
   padding: 0;
@@ -6986,6 +6983,10 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   object-fit: cover;
 }
 
+.forgeboard a.header-avatar img {
+  margin-right: 5px;
+}
+
 /* ------------------------------------------------------------------
    UCP / MCP sidebar — rail navigation (GitHub-style)
    No per-item borders, no chip background. Active item is a filled
@@ -7056,7 +7057,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 /* Remove padding on every <a> inside the user nav card (scoped). */
 .forgeboard .forge-nav-user-card a {
-  padding: 0;
 }
 
 /* PM / Notifications counter badge: small optical nudge so the badge
@@ -7087,6 +7087,15 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 .forgeboard .forge-nav-user-card .forge-nav-user-pm > a:active i.icon,
 .forgeboard .forge-nav-user-card .forge-nav-user-notify > a:active i.icon {
   color: inherit;
+}
+
+/* Responsive overflow toggle ("...") in the user nav. Every user-nav item
+   is flagged data-skip-responsive (profile / PM / notifications), so
+   forum_fn.js never has anything to collapse into it — yet it still shows
+   this toggle once the row wraps on narrow screens (it appears empty).
+   Hide it: it can only ever be empty in the logged-in user nav. */
+.forgeboard #nav-user > .responsive-menu {
+  display: none;
 }
 
 /* ------------------------------------------------------------------

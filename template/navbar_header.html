@@ -83,7 +83,7 @@
 								</div>
 								<!-- EVENT navbar_header_username_append -->
 							</li>
-							<!-- IF S_DISPLAY_PM --><li class="forge-nav-user-item forge-nav-user-pm"><a href="{U_PRIVATEMSGS}"><i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>{L_PRIVATE_MESSAGES} </span><strong class="badge<!-- IF not PRIVATE_MESSAGE_COUNT --> hidden<!-- ENDIF -->">{PRIVATE_MESSAGE_COUNT}</strong></a></li><!-- ENDIF -->
+							<!-- IF S_DISPLAY_PM --><li class="forge-nav-user-item forge-nav-user-pm" data-skip-responsive="true"><a href="{U_PRIVATEMSGS}"><i class="icon fa-inbox fa-fw" aria-hidden="true"></i><span>{L_PRIVATE_MESSAGES} </span><strong class="badge<!-- IF not PRIVATE_MESSAGE_COUNT --> hidden<!-- ENDIF -->">{PRIVATE_MESSAGE_COUNT}</strong></a></li><!-- ENDIF -->
 							<!-- IF S_NOTIFICATIONS_DISPLAY -->
 								<li class="dropdown-container dropdown-{S_CONTENT_FLOW_END} forge-nav-user-item forge-nav-user-notify" data-skip-responsive="true">
 									<a href="{U_VIEW_ALL_NOTIFICATIONS}" id="notification_list_button" class="dropdown-trigger" aria-expanded="false" aria-haspopup="true"><i class="icon fa-bell fa-fw" aria-hidden="true"></i><span>{L_NOTIFICATIONS} </span><strong class="badge<!-- IF not NOTIFICATIONS_COUNT --> hidden<!-- ENDIF -->">{NOTIFICATIONS_COUNT}</strong></a>

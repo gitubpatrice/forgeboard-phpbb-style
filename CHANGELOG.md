@@ -3,6 +3,16 @@
 All notable changes to ForgeBoard are documented here.
 Versions match `style.cfg` `style_version`.
 
+## [1.1.6] — 2026-06-13
+
+### Fixed
+- User navbar (logged in): the responsive overflow toggle ("...") no longer appears on portrait phones. Every user-nav item (profile / private messages / notifications) is now flagged `data-skip-responsive`, so `forum_fn.js` has nothing to collapse — but it still rendered the toggle empty once the row wrapped (~461px). The empty toggle is now hidden, scoped to `#nav-user > .responsive-menu` so the `#nav-main` quick-links hamburger is untouched.
+
+### Changed
+- `template/navbar_header.html`: `data-skip-responsive="true"` added to the private-messages `<li>` (consistent with profile and notifications)
+- `theme/stylesheet.css` cache-buster hash refreshed
+- `style_version` bumped to 1.1.6
+
 ## [1.1.5] — 2026-06-12
 
 ### Fixed
