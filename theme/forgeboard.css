@@ -7380,20 +7380,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
     display: none;
   }
 
-  .forgeboard .forge-jumpbar {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .forgeboard .forge-jumpbox {
-    margin-left: 0;
-    width: 100%;
-  }
-
-  .forgeboard .forge-jumpbox .dropdown-trigger {
-    width: 100%;
-  }
-
   /* Post titles must wrap by word, not by letter */
   .forgeboard .post .postbody h3,
   .forgeboard .has-profile .postbody h3 {
