@@ -903,6 +903,16 @@ hr {
   width: 44px;
 }
 
+/* Locked topic: red border + red padlock (background tinted red to match). */
+.forgeboard .forge-topic-icon.forge-topic-icon-locked {
+  background: var(--gb-red-soft);
+  border-color: color-mix(in srgb, var(--gb-danger) 45%, var(--gb-border));
+  color: var(--gb-danger);
+}
+.forgeboard .forge-topic-icon.forge-topic-icon-locked .icon {
+  color: var(--gb-danger);
+}
+
 /* Admin-defined topic icon (ACP > Posting > Topic icons) shown in the card. */
 .forge-topic-icon .forge-topic-icon-img {
   display: block;
@@ -7073,6 +7083,23 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 .forgeboard .button.is-danger:active {
   background: var(--gb-btn-danger-bg-active);
+}
+
+/* Locked-topic reply button (viewtopic): solid red fill + red border so it
+   is obvious the topic is closed to replies. */
+.forgeboard .button.forge-button-locked,
+.forgeboard a.button.forge-button-locked {
+  background: var(--gb-btn-danger-bg);
+  border-color: var(--gb-btn-danger-bg);
+  color: var(--gb-btn-danger-fg);
+}
+.forgeboard .button.forge-button-locked:hover,
+.forgeboard a.button.forge-button-locked:hover,
+.forgeboard .button.forge-button-locked:focus,
+.forgeboard a.button.forge-button-locked:focus {
+  background: var(--gb-btn-danger-bg-hover);
+  border-color: var(--gb-btn-danger-bg-hover);
+  color: var(--gb-btn-danger-fg);
 }
 
 /* Icon-only buttons (post buttons, pagination prev/next) — square-ish */

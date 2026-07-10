@@ -3,6 +3,15 @@
 All notable changes to ForgeBoard are documented here.
 Versions match `style.cfg` `style_version`.
 
+## [1.2.1] — 2026-07-10
+
+### Changed
+- **Locked-topic cues in red.** The reply button on a locked topic (viewtopic) now uses a solid red fill + red border (`.forge-button-locked`) so it is obvious the topic is closed. In the topic list (viewforum), a locked topic's icon tile now gets a red border and a red padlock (`.forge-topic-icon-locked`), matching the closed state.
+
+### Changed
+- `theme/stylesheet.css` cache-buster hash refreshed
+- `style_version` bumped to 1.2.1
+
 ## [1.2.0] — 2026-07-10
 
 ### Added
