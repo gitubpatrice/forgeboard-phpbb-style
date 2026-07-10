@@ -1,7 +1,7 @@
 /*
 --------------------------------------------------------------
 ForgeBoard theme overrides
-Modern code-forge phpBB child style for phpBB 3.3.16.
+Modern code-forge phpBB child style for phpBB 3.3.17.
 -------------------------------------------------------------- */
 
 :root {
@@ -26,6 +26,10 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
   --gb-danger: #c83e4d;
   --gb-header: #0d1117;
   --gb-header-muted: #6b7c8c;
+  /* Block-header bar (forum/table headers) — must read as a distinct
+     band against the block surface (#fff) and the row stripes (#f7f9fb). */
+  --gb-block-header-bg: #dbe4f0;
+  --gb-block-header-fg: #1f2a3a;
   --gb-focus: #388bfd;
   --gb-red-soft: #fff0f2;
   --gb-blue-soft: #eaf3ff;
@@ -134,6 +138,8 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
   --gb-danger: #ff7b72;
   --gb-header: #010409;
   --gb-header-muted: #8b949e;
+  --gb-block-header-bg: #0d1220;
+  --gb-block-header-fg: #e6edf3;
   --gb-focus: #58a6ff;
   --gb-red-soft: rgba(248, 81, 73, 0.14);
   --gb-blue-soft: rgba(88, 166, 255, 0.12);
@@ -171,11 +177,71 @@ Modern code-forge phpBB child style for phpBB 3.3.16.
   --gb-info-fg: #79c0ff;
 }
 
-/* No @media (prefers-color-scheme) fallback: forge_theme_toggle.js
-   sets [data-theme="dark|light"] inline in <head> before render, so the
-   single [data-theme="dark"] block above covers ALL paths
-   (toggle, cookie, localStorage, system-preference detection by JS).
-   Visitors with JS disabled get the default light theme. */
+/* System-preference fallback for visitors with JavaScript disabled.
+   forge_theme_toggle.js normally sets [data-theme="dark|light"] inline in
+   <head> before render (covering toggle / cookie / localStorage). When JS
+   is unavailable, no attribute is set, so this @media block applies the
+   dark tokens when the OS prefers dark — unless the visitor previously
+   pinned light (:root[data-theme="light"] wins over the media query). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --gb-canvas: #0d1117;
+    --gb-canvas-end: #1e2530;
+    --gb-surface: #161b22;
+    --gb-surface-subtle: #21262d;
+    --gb-surface-muted: #30363d;
+    --gb-border: #30363d;
+    --gb-border-muted: #21262d;
+    --gb-text: #ffffff;
+    --gb-text-h: #4d5c6e;
+    --gb-text-muted: #aeb8c4;
+    --gb-code-text: #c9d1d9;
+    --gb-code-bg: #21262d;
+    --gb-link: #58a6ff;
+    --gb-link-hover: #79c0ff;
+    --gb-accent: #388bfd;
+    --gb-accent-hover: #58a6ff;
+    --gb-danger: #ff7b72;
+    --gb-header: #010409;
+    --gb-header-muted: #8b949e;
+    --gb-block-header-bg: #0d1220;
+    --gb-block-header-fg: #e6edf3;
+    --gb-focus: #58a6ff;
+    --gb-red-soft: rgba(248, 81, 73, 0.14);
+    --gb-blue-soft: rgba(88, 166, 255, 0.12);
+    --gb-white-soft: #0d1117;
+    --gb-shadow: 0 18px 48px rgba(0, 0, 0, 0.26);
+    --gb-shadow-soft: 0 1px 0 rgba(240, 246, 252, 0.06);
+
+    --gb-btn-primary-bg: #58a6ff;
+    --gb-btn-primary-bg-hover: #79c0ff;
+    --gb-btn-primary-bg-active: #388bfd;
+    --gb-btn-primary-fg: #0d1117;
+    --gb-btn-primary-border: rgba(240, 246, 252, 0.1);
+
+    --gb-btn-danger-bg: #da3633;
+    --gb-btn-danger-bg-hover: #f85149;
+    --gb-btn-danger-bg-active: #b62324;
+    --gb-btn-danger-fg: #ffffff;
+    --gb-btn-danger-border: rgba(240, 246, 252, 0.1);
+
+    --gb-input-focus-ring: rgba(88, 166, 255, 0.4);
+    --gb-input-shadow-inset: inset 0 1px 0 rgba(0, 0, 0, 0.2);
+
+    --gb-success-bg: rgba(63, 185, 80, 0.1);
+    --gb-success-border: rgba(63, 185, 80, 0.35);
+    --gb-success-fg: #56d364;
+    --gb-warning-bg: rgba(210, 153, 34, 0.1);
+    --gb-warning-border: rgba(210, 153, 34, 0.35);
+    --gb-warning-fg: #e3b341;
+    --gb-error-bg: rgba(248, 81, 73, 0.1);
+    --gb-error-border: rgba(248, 81, 73, 0.35);
+    --gb-error-fg: #ff7b72;
+    --gb-info-bg: rgba(88, 166, 255, 0.1);
+    --gb-info-border: rgba(88, 166, 255, 0.35);
+    --gb-info-fg: #79c0ff;
+  }
+}
 
 html,
 body {
@@ -823,6 +889,15 @@ hr {
   height: 44px;
   justify-content: center;
   width: 44px;
+}
+
+/* Admin-defined topic icon (ACP > Posting > Topic icons) shown in the card. */
+.forge-topic-icon .forge-topic-icon-img {
+  display: block;
+  height: auto;
+  max-height: 26px;
+  max-width: 26px;
+  width: auto;
 }
 
 .forge-topic-copy {
@@ -1563,15 +1638,15 @@ ul.navlinks {
 .forabg .header,
 .forumbg .header,
 table.table1 thead th {
-  background: var(--gb-surface-subtle);
+  background: var(--gb-block-header-bg);
   border-bottom: 1px solid var(--gb-border);
-  color: var(--gb-text);
+  color: var(--gb-block-header-fg);
 }
 
 .forabg .header a,
 .forumbg .header a,
 th a {
-  color: var(--gb-text);
+  color: var(--gb-block-header-fg);
 }
 
 .forabg .header a:hover,
@@ -2850,8 +2925,12 @@ Intentional page-level overrides to move away from prosilver.
 }
 
 .forgeboard table.table1 thead th {
-  background: var(--gb-surface-subtle);
-  color: var(--gb-text);
+  background: var(--gb-block-header-bg);
+  color: var(--gb-block-header-fg);
+}
+
+.forgeboard table.table1 thead th a {
+  color: var(--gb-block-header-fg);
 }
 
 .forgeboard table.table1 tbody tr:nth-child(odd) td {
@@ -4256,6 +4335,71 @@ Keeps the themed dropdown look while reducing item height near the header search
   min-height: 30px;
   padding: 0;
   width: 30px;
+}
+
+/* ------------------------------------------------------------------
+   Mini-profile contact icons — rendered with the style's own
+   FontAwesome glyphs instead of prosilver's icons_contact.png sprite
+   (a dark raster invisible on ForgeBoard's dark dropdown and a
+   parent-style dependency). The glyph inherits the theme link colour,
+   so it stays legible in both light and dark. The localized contact
+   name stays as the <a title> for assistive tech.
+   ------------------------------------------------------------------ */
+.forgeboard .contact-icons .contact-icon {
+  align-items: center;
+  background-image: none;
+  display: inline-flex;
+  font-size: 0;
+  height: 18px;
+  justify-content: center;
+  line-height: 1;
+  width: 18px;
+}
+
+.forgeboard .contact-icons .contact-icon::before {
+  color: var(--gb-link);
+  content: "\f2bb"; /* default: address-card */
+  /* Icon font: FA5 name first, FA4 fallback. phpBB serves whichever the
+     board runs; both carry these glyphs at the same code points. */
+  /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
+  font-family: "Font Awesome 5 Free", FontAwesome;
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.forgeboard .contact-icons a:hover .contact-icon::before,
+.forgeboard .contact-icons a:focus .contact-icon::before {
+  color: var(--gb-link-hover);
+}
+
+/* Per-network glyphs — declared after the default (same specificity). */
+.forgeboard .contact-icons .pm-icon::before {
+  content: "\f075";
+}
+.forgeboard .contact-icons .email-icon::before {
+  content: "\f0e0";
+}
+.forgeboard .contact-icons .jabber-icon::before {
+  content: "\f086";
+}
+.forgeboard .contact-icons .phpbb_website-icon::before {
+  content: "\f0ac";
+}
+.forgeboard .contact-icons .phpbb_youtube-icon::before {
+  content: "\f16a";
+}
+.forgeboard .contact-icons .phpbb_facebook-icon::before {
+  content: "\f09a";
+}
+.forgeboard .contact-icons .phpbb_twitter-icon::before {
+  content: "\f099";
+}
+.forgeboard .contact-icons .phpbb_skype-icon::before {
+  content: "\f17e";
+}
+.forgeboard .contact-icons .phpbb_yahoo-icon::before {
+  content: "\f19e";
 }
 
 /*
@@ -5923,7 +6067,9 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 /* Forum grid: keep 3-card rhythm, even with 1-2 real forums */
 .forgeboard .forge-category .forge-forum-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* auto-fit lets real forum cards flow up to 3 per row and expand to fill
+     the row when a category holds fewer — no decorative filler needed. */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .forgeboard .forge-category {
@@ -6425,41 +6571,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
 /* Mobile: stack vertically, hide labels, show stats as a 2-col chip row */
 
-/* 1 forum -> show 2 placeholders */
-.forgeboard
-  .forge-category
-  .forge-forum-grid:has(> .forge-forum-card:only-child)::after {
-  display: block;
-  content: attr(data-placeholder-title);
-  grid-column: 3;
-  grid-row: 1;
-}
-
-.forgeboard
-  .forge-category
-  .forge-forum-grid:has(> .forge-forum-card:only-child)::before {
-  display: block;
-  content: attr(data-placeholder-title);
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.forgeboard
-  .forge-category
-  .forge-forum-grid:has(> .forge-forum-card:only-child)
-  > .forge-forum-card {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-/* 2 forums -> show 1 placeholder */
-.forgeboard
-  .forge-category
-  .forge-forum-grid:has(> .forge-forum-card:nth-child(2):last-child)::after {
-  display: block;
-  grid-column: 3;
-}
-
 @media (max-width: 980px) {
   .forge-topbar,
   .forge-hero,
@@ -6599,11 +6710,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 
   .forgeboard .forge-category .forge-forum-grid {
     grid-template-columns: 1fr;
-  }
-
-  .forgeboard .forge-category .forge-forum-grid::before,
-  .forgeboard .forge-category .forge-forum-grid::after {
-    display: none;
   }
 }
 
@@ -7224,45 +7330,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   box-shadow: none;
 }
 
-/* Forum-card empty placeholders: surface adapts to light/dark theme.
-   Shows the parent category name as a hint while the slot is unused. */
-.forgeboard .forge-category .forge-forum-grid::before,
-.forgeboard .forge-category .forge-forum-grid::after {
-  align-items: center;
-  background:
-    linear-gradient(160deg, rgba(88, 166, 255, 0.08), rgba(248, 81, 73, 0.06)),
-    var(--gb-surface-subtle);
-  border: 1px dashed var(--gb-border);
-  border-radius: 6px;
-  box-sizing: border-box;
-  color: var(--gb-text-muted);
-  content: attr(data-placeholder-title);
-  display: none;
-  flex-direction: column;
-  font-size: var(--gb-font-sm);
-  font-weight: var(--gb-weight-semibold);
-  justify-content: center;
-  letter-spacing: 0.04em;
-  min-height: 188px;
-  padding: 14px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-/* When the placeholder is shown (has-only-child / 2-forums-row),
-   force it to flex so vertical centering works. */
-.forgeboard
-  .forge-category
-  .forge-forum-grid:has(> .forge-forum-card:only-child)::before,
-.forgeboard
-  .forge-category
-  .forge-forum-grid:has(> .forge-forum-card:only-child)::after,
-.forgeboard
-  .forge-category
-  .forge-forum-grid:has(> .forge-forum-card:nth-child(2):last-child)::after {
-  display: flex;
-}
-
 .forgeboard .arrow-left .icon {
   float: none;
 }
@@ -7322,21 +7389,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   .forgeboard .forge-hero h1,
   .forgeboard h1 {
     font-size: clamp(1.5rem, 6vw, 2rem);
-  }
-
-  /* Forum grid placeholders force-hidden (override any leftover display) */
-  .forgeboard .forge-category .forge-forum-grid::before,
-  .forgeboard .forge-category .forge-forum-grid::after,
-  .forgeboard
-    .forge-category
-    .forge-forum-grid:has(> .forge-forum-card:only-child)::before,
-  .forgeboard
-    .forge-category
-    .forge-forum-grid:has(> .forge-forum-card:only-child)::after,
-  .forgeboard
-    .forge-category
-    .forge-forum-grid:has(> .forge-forum-card:nth-child(2):last-child)::after {
-    display: none !important;
   }
 
   /* Force forum grid to single column at this breakpoint too */
@@ -8018,8 +8070,19 @@ body.forgeboard {
 .forgeboard dl.row-item.global_unread,
 .forgeboard dl.row-item.global_unread_mine,
 .forgeboard dl.row-item.global_unread_locked,
-.forgeboard dl.row-item.global_unread_locked_mine {
+.forgeboard dl.row-item.global_unread_locked_mine,
+.forgeboard dl.row-item.pm_read,
+.forgeboard dl.row-item.pm_unread {
   background-repeat: no-repeat;
+}
+
+/* Private-message folder list (UCP): use ForgeBoard's own status icons
+   instead of inheriting prosilver's topic_read/unread GIFs. */
+.forgeboard dl.row-item.pm_read {
+  background-image: url("./images/topic_read.svg");
+}
+.forgeboard dl.row-item.pm_unread {
+  background-image: url("./images/topic_unread.svg");
 }
 
 .forgeboard dl.row-item.forum_read {

@@ -21,7 +21,7 @@
 				</div>
 				<!-- EVENT forumlist_body_category_header_row_append -->
 			</header>
-			<div class="forge-forum-grid" data-placeholder-title="{SITENAME}">
+			<div class="forge-forum-grid">
 	<!-- ENDIF -->
 	<!-- EVENT forumlist_body_category_header_after -->
 
@@ -35,7 +35,7 @@
 						<!-- EVENT forumlist_body_forum_image_before -->
 						<span class="forum-image"><!-- EVENT forumlist_body_forum_image_prepend -->{forumrow.FORUM_IMAGE}<!-- EVENT forumlist_body_forum_image_append --></span>
 						<!-- EVENT forumlist_body_forum_image_after -->
-					<!-- ELSEIF forumrow.S_UNREAD_FORUM --><i class="icon fa-folder-open fa-fw icon-red"></i><!-- ELSEIF forumrow.S_IS_LINK --><i class="icon fa-external-link fa-fw icon-blue"></i><!-- ELSE --><i class="icon fa-folder fa-fw icon-blue"></i><!-- ENDIF -->
+					<!-- ELSEIF forumrow.S_LOCKED_FORUM --><i class="icon fa-lock fa-fw <!-- IF forumrow.S_UNREAD_FORUM -->icon-red<!-- ELSE -->icon-blue<!-- ENDIF -->"></i><!-- ELSEIF forumrow.S_UNREAD_FORUM --><i class="icon fa-folder-open fa-fw icon-red"></i><!-- ELSEIF forumrow.S_IS_LINK --><i class="icon fa-external-link fa-fw icon-blue"></i><!-- ELSE --><i class="icon fa-folder fa-fw icon-blue"></i><!-- ENDIF -->
 				</span>
 				<span class="forge-forum-copy">
 					<strong class="forumtitle">{forumrow.FORUM_NAME}</strong>
