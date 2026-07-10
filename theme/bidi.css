@@ -1,0 +1,294 @@
+/*  ForgeBoard — RTL (right-to-left) overrides
+    --------------------------------------------------------------
+	Loaded ONLY when the board language is RTL, via the conditional
+	<link href="{T_THEME_PATH}/bidi.css"> in overall_header.html /
+	simple_header.html. It therefore CANNOT affect the default LTR
+	rendering.
+
+	Part 1 imports prosilver's own bidi.css so every inherited base
+	element (breadcrumbs, forms, dropdowns, post profile, buttons,
+	pagination…) gets its established RTL treatment.
+
+	Part 2 mirrors the direction-sensitive PHYSICAL properties of
+	ForgeBoard's custom .forge-* cards. Flexbox/grid axes flip on their
+	own under dir="rtl"; only physical left/right properties need help.
+    -------------------------------------------------------------- */
+
+@import url("../../prosilver/theme/bidi.css?hash=ba7adc52");
+
+/* ==================================================================
+   Part 2 — ForgeBoard custom-card RTL overrides
+   Every rule is scoped `.forgeboard.rtl` (the <body> carries both
+   classes) so it outranks its `.forgeboard …` LTR counterpart. Flexbox
+   and grid axes already flip under dir="rtl"; only physical left/right
+   properties are mirrored here. Base prosilver elements are handled by
+   the imported bidi.css above.
+   ================================================================== */
+
+/* --- Card / hero left-edge accent (::before) --------------------- */
+.forgeboard.rtl .forge-forum-card::before,
+.forgeboard.rtl .forge-topic-card::before {
+  left: auto;
+  right: -1px;
+}
+.forgeboard.rtl .forge-forum-hero::before {
+  left: auto;
+  right: 0;
+}
+
+/* --- Last-post block: accent border, icon gutter, jump button ---- */
+.forgeboard.rtl .forge-lastpost {
+  border-left: 0;
+  border-right: 3px solid var(--gb-link);
+  padding: 14px 16px 14px 44px;
+}
+.forgeboard.rtl .forge-lastpost-jump {
+  right: auto;
+  left: 14px;
+}
+/* fa-arrow-circle-right is hard-coded; mirror the glyph in RTL. */
+.forgeboard.rtl .forge-lastpost-jump .icon {
+  transform: scaleX(-1);
+}
+
+/* --- Forum card icon gutter -------------------------------------- */
+.forgeboard.rtl .forge-forum-meta,
+.forgeboard.rtl .forge-forum-card > .forge-forum-numbers {
+  padding-left: 0;
+  padding-right: 64px;
+}
+
+/* --- Topbar brand + search chrome -------------------------------- */
+.forgeboard.rtl .forge-brand {
+  padding-left: 24px;
+  padding-right: 0;
+}
+.forgeboard.rtl .forge-brand-copy {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+.forgeboard.rtl .forge-search {
+  padding-left: 0;
+  padding-right: 22px;
+}
+.forgeboard.rtl .forge-search .inputbox {
+  border-radius: 0 6px 6px 0;
+}
+.forgeboard.rtl .forge-search .button,
+.forgeboard.rtl .forge-topic-search .button {
+  border-left: 0;
+  border-right: 1px solid var(--gb-border);
+}
+.forgeboard.rtl .forge-search fieldset .inputbox,
+.forgeboard.rtl .forge-inline-search fieldset .inputbox {
+  border-radius: 0 var(--gb-radius-md) var(--gb-radius-md) 0;
+}
+.forgeboard.rtl .forge-search fieldset .button-search + .button-search-end {
+  border-radius: var(--gb-radius-md) 0 0 var(--gb-radius-md);
+  margin-left: 0;
+  margin-right: -1px;
+}
+.forgeboard.rtl .forge-toolbar .forge-inline-search {
+  margin-left: 0;
+  margin-right: var(--gb-space-3);
+}
+
+/* --- Header nav split cards --------------------------------------- */
+.forgeboard.rtl .forge-nav-main-card {
+  padding: 8px 3px 8px 10px;
+}
+.forgeboard.rtl .forge-nav-user-card {
+  border-right: 0;
+  border-left: 3px solid var(--gb-border);
+  border-radius: 9px 0 0 9px;
+}
+.forgeboard.rtl .forge-nav-card #nav-main > #username_logged_in {
+  margin-left: 0;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 22px;
+}
+
+/* --- Flex "push to the end" helpers (margin auto) ---------------- */
+.forgeboard.rtl .forge-jumpbox,
+.forgeboard.rtl .forge-toolbar .forge-jumpbox-inline,
+.forgeboard.rtl .section-viewforum .forge-toolbar.bar-bottom .forge-bottom-right,
+.forgeboard.rtl .section-viewforum .forge-toolbar.bar-bottom .forge-jumpbox-inline,
+.forgeboard.rtl .section-viewtopic .forge-topic-bottom-bar .forge-bottom-right,
+.forgeboard.rtl .section-viewtopic .forge-topic-bottom-bar .forge-jumpbox-inline,
+.forgeboard.rtl .section-viewforum .forge-toolbar .forge-topic-pagination,
+.forgeboard.rtl .forge-mcp-mark-actions,
+.forgeboard.rtl .forge-faq-top,
+.forgeboard.rtl h2.forge-topic-title .forge-first-unread,
+.forgeboard.rtl .section-search .searchresults-actions .forge-search-jump {
+  margin-left: 0;
+  margin-right: auto;
+}
+.forgeboard.rtl .section-viewforum .forge-toolbar .forge-topic-pagination {
+  text-align: left;
+}
+.forgeboard.rtl .forge-topic-review-bar > .forge-topic-review-toggle,
+.forgeboard.rtl .tabs-container .minitabs,
+.forgeboard.rtl #minitabs {
+  margin: 0 auto 0 0;
+}
+.forgeboard.rtl #nav-main .forge-nav-theme-toggle,
+.forgeboard.rtl .forge-nav-main-card .forge-nav-theme-toggle {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+/* --- Accent hover stripes: 3px left edge -> 3px right edge -------- */
+/* transparent placeholders (keep the transition anchored on the end) */
+.forgeboard.rtl .dropdown-contents a,
+.forgeboard.rtl .dropdown-extended .dropdown-contents a,
+.forgeboard.rtl .jumpbox .dropdown-contents a,
+.forgeboard.rtl #username_logged_in .header-profile .dropdown-contents a,
+.forgeboard.rtl #quick-links.responsive-menu .dropdown-contents a {
+  box-shadow:
+    inset 0 0 0 1px transparent,
+    inset -3px 0 0 transparent;
+}
+/* active blue stripe */
+.forgeboard.rtl #username_logged_in .header-profile .dropdown-contents a:hover,
+.forgeboard.rtl #username_logged_in .header-profile .dropdown-contents a:focus,
+.forgeboard.rtl #quick-links.responsive-menu .dropdown-contents a:hover,
+.forgeboard.rtl #quick-links.responsive-menu .dropdown-contents a:focus,
+.forgeboard.rtl .forge-jumpbox-link:not(.jumpbox-cat-link):hover,
+.forgeboard.rtl .forge-jumpbox-link:not(.jumpbox-cat-link):focus,
+.forgeboard.rtl .topic-tools .dropdown-contents a:hover,
+.forgeboard.rtl .topic-tools .dropdown-contents a:focus,
+.forgeboard.rtl .forge-quickmod .dropdown-contents a:hover,
+.forgeboard.rtl .forge-quickmod .dropdown-contents a:focus {
+  box-shadow:
+    inset 0 0 0 1px rgba(88, 166, 255, 0.2),
+    inset -3px 0 0 var(--gb-link);
+}
+/* pill radius paired with the stripe */
+.forgeboard.rtl #username_logged_in .header-profile .dropdown-contents a:hover,
+.forgeboard.rtl #username_logged_in .header-profile .dropdown-contents a:focus,
+.forgeboard.rtl #quick-links.responsive-menu .dropdown-contents a {
+  border-radius: 0 6px 6px 0;
+}
+/* category header stripe (red) */
+.forgeboard.rtl .forge-jumpbox-link.jumpbox-cat-link:hover,
+.forgeboard.rtl .forge-jumpbox-link.jumpbox-cat-link:focus {
+  box-shadow: inset -3px 0 0 var(--gb-danger);
+}
+/* topic-row hover stripes (theme-added; the core bidi does not flip these) */
+.forgeboard.rtl ul.topiclist li.row:hover,
+.forgeboard.rtl ul.topiclist li.row:focus-within,
+.forgeboard.rtl .panel ul.topiclist li.row:hover,
+.forgeboard.rtl .panel ul.topiclist li.row:focus-within {
+  box-shadow: inset -3px 0 0 var(--gb-link);
+}
+.forgeboard.rtl ul.topiclist li.row.reported:hover,
+.forgeboard.rtl ul.topiclist li.row.reported:focus-within,
+.forgeboard.rtl .panel ul.topiclist li.row.reported:hover,
+.forgeboard.rtl .panel ul.topiclist li.row.reported:focus-within {
+  box-shadow: inset -3px 0 0 #612f2c;
+}
+
+/* --- Jumpbox sub-forum indentation ------------------------------- */
+.forgeboard.rtl .jumpbox .dropdown-contents .subforums {
+  padding-left: 0;
+  padding-right: 14px;
+}
+
+/* --- MCP custom layouts ------------------------------------------ */
+.forgeboard.rtl .forge-mcp-header {
+  border-left: 0;
+  border-right: 3px solid var(--gb-danger);
+}
+.forgeboard.rtl .section-posting .forge-topic-review-toggle,
+.forgeboard.rtl .forge-mcp-post-actions,
+.forgeboard.rtl .forge-topic-review-list .post .post-buttons {
+  float: left;
+}
+.forgeboard.rtl .section-posting .forge-topic-review-toggle {
+  margin-left: 0;
+  margin-right: 10px;
+}
+.forgeboard.rtl .forge-mcp-post-actions {
+  margin: 0 12px 6px 0;
+}
+.forgeboard.rtl .forge-topic-review-list .post .post-buttons {
+  margin: 0 var(--gb-space-3) var(--gb-space-2) 0;
+}
+.forgeboard.rtl #mcp_queue ul.topiclist.missing-column dt,
+.forgeboard.rtl #mcp_queue ul.topiclist.missing-column dd,
+.forgeboard.rtl .forge-mcp-reports ul.topiclist.missing-column dt,
+.forgeboard.rtl .forge-mcp-reports ul.topiclist.missing-column dd {
+  text-align: right;
+}
+.forgeboard.rtl #mcp_queue ul.topiclist.missing-column dd,
+.forgeboard.rtl .forge-mcp-reports ul.topiclist.missing-column dd,
+.forgeboard.rtl .section-mcp .topiclist dd.mark,
+.forgeboard.rtl .section-mcp .topiclist td.mark,
+.forgeboard.rtl .section-mcp .topiclist th.mark {
+  border-left: 0;
+  border-right: 1px solid var(--gb-border);
+}
+.forgeboard.rtl .section-mcp fieldset.display-actions > div {
+  margin: 0 10px 0 0;
+}
+
+/* --- Member profile / posting text alignment --------------------- */
+.forgeboard.rtl .section-memberlist #viewprofile .left-box.details.profile-details dt,
+.forgeboard.rtl .forge-viewprofile-head .avatar-rank-container dd {
+  text-align: right;
+}
+
+/* --- viewforum category labels micro-nudge ----------------------- */
+.forgeboard.rtl .section-viewforum .forge-topic-section .forge-category-labels span:nth-child(1),
+.forgeboard.rtl .section-viewforum .forge-topic-section .forge-category-labels span:nth-child(2) {
+  transform: translateX(6px);
+}
+
+/* --- Mini-profile (viewtopic) keeps ForgeBoard's own shape ------- */
+.forgeboard.rtl .postprofile {
+  border-left: 0;
+  border-right: 1px solid var(--gb-border);
+  border-radius: 12px 0 0 12px;
+  margin-right: 0;
+  margin-left: 13px;
+}
+.forgeboard.rtl .post.online.has-profile .postprofile {
+  background-position: 8px 8px;
+}
+
+/* --- CP menu active-item stripe ---------------------------------- */
+.forgeboard.rtl #cp-menu .navigation .active-subsection a::before {
+  left: auto;
+  right: 0;
+  border-radius: var(--gb-radius-sm) 0 0 var(--gb-radius-sm);
+}
+
+/* --- Generic theme-added inline spacings ------------------------- */
+.forgeboard.rtl select {
+  margin-right: 0;
+  margin-left: 5px;
+}
+.forgeboard.rtl a.header-avatar img {
+  margin-right: 0;
+  margin-left: 5px;
+}
+
+/* --- Skip link (a11y) -------------------------------------------- */
+.forgeboard.rtl .skiplink {
+  left: auto;
+  right: -9999px;
+}
+.forgeboard.rtl .skiplink:focus-within {
+  left: auto;
+  right: 12px;
+}
+
+/* --- Responsive-only pushers (mirror inside their breakpoints) --- */
+@media (max-width: 510px) {
+  .forgeboard.rtl .forge-nav-breadcrumbs-card .rightside.responsive-search,
+  .forgeboard.rtl #nav-breadcrumbs .rightside.responsive-search {
+    margin-left: 0;
+    margin-right: auto;
+  }
+}

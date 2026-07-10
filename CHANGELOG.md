@@ -3,6 +3,17 @@
 All notable changes to ForgeBoard are documented here.
 Versions match `style.cfg` `style_version`.
 
+## [1.2.0] — 2026-07-10
+
+### Added
+- **Full RTL (right-to-left) support.** ForgeBoard previously shipped no `bidi.css`, so the conditional `<link href="{T_THEME_PATH}/bidi.css">` in the headers 404'd and RTL boards got no mirroring at all. Added `theme/bidi.css`, loaded only when the board language is RTL (zero impact on the default LTR rendering):
+  - Part 1 imports prosilver's `bidi.css`, restoring the full inherited base (breadcrumbs, forms, dropdowns, mini-profile, pagination…).
+  - Part 2 mirrors the physical (left/right) properties of ForgeBoard's own `.forge-*` cards: hero/card accent bars, last-post block + jump arrow, forum icon gutters, topbar brand/search, nav split cards, all `margin:auto` push helpers, hover accent stripes, MCP layouts, member-profile alignment, skip link, and the viewtopic mini-profile shape. Flex/grid axes flip natively under `dir="rtl"`.
+- Verified by rendering the RTL forum index, viewforum and viewtopic (cards, hero bars, mini-profile split all mirror correctly).
+
+### Changed
+- `style_version` bumped to 1.2.0
+
 ## [1.1.9] — 2026-07-10
 
 ### Fixed
