@@ -3,6 +3,29 @@
 All notable changes to ForgeBoard are documented here.
 Versions match `style.cfg` `style_version`.
 
+## [1.1.9] — 2026-07-10
+
+### Fixed
+- Light-mode contrast hardening (follow-up to the Styles Team review): `--gb-danger` darkened `#c83e4d → #bd2130` so red text (kickers, flags, labels) meets WCAG AA (≥4.5:1) on the light canvas; `--gb-text-muted` darkened `#607080 → #5a6979` so small secondary labels also reach AA without losing hierarchy.
+- Restored `{LAST_VISIT_DATE}` on the index hero for logged-in users (parity with prosilver; it was the only content variable missing after the redesign).
+
+### Changed
+- `theme/stylesheet.css` cache-buster hash refreshed
+- `style_version` bumped to 1.1.9
+
+## [1.1.8] — 2026-07-10
+
+### Fixed — phpBB Styles Team validation feedback
+- Block headers now contrast with the block body in light mode (dedicated `--gb-block-header-bg` / `--gb-block-header-fg` tokens on `.forumbg`/`.forabg` headers and table `thead th`).
+- Removed the decorative "{SITENAME}" placeholder cards; the forum grid flows with `repeat(auto-fit, minmax(280px, 1fr))`.
+- Locked forums now show a lock icon (`S_LOCKED_FORUM` branch in the forum card).
+- Admin topic icons are rendered (`TOPIC_ICON_IMG` under `S_TOPIC_ICONS`) in the topic card.
+- Locked topics now show a lock icon (`S_TOPIC_LOCKED` branch).
+- PM folder icons use ForgeBoard's own SVGs instead of prosilver's GIFs (`dl.row-item.pm_read` / `.pm_unread`).
+- Mini-profile contact icons rendered with the style's own FontAwesome glyphs instead of prosilver's `icons_contact.png` sprite (legible in light and dark).
+- Stylesheet header comment corrected from 3.3.16 to 3.3.17.
+- Added an `@media (prefers-color-scheme: dark)` fallback so dark mode works with JavaScript disabled (respects an explicit light choice).
+
 ## [1.1.6] — 2026-06-13
 
 ### Fixed

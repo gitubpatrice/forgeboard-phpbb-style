@@ -16,14 +16,16 @@ Modern code-forge phpBB child style for phpBB 3.3.17.
   --gb-border: #cbd5df;
   --gb-border-muted: #dde4ec;
   --gb-text: #4d5c6e;
-  --gb-text-muted: #607080;
+  --gb-text-muted: #5a6979;
   --gb-code-text: #24292f;
   --gb-code-bg: #f6f8fa;
   --gb-link: #1f6feb;
   --gb-link-hover: #0a58ca;
   --gb-accent: #388bfd;
   --gb-accent-hover: #1f6feb;
-  --gb-danger: #c83e4d;
+  /* Darkened for AA contrast of red text (kickers, flags, labels) on the
+     light canvas — #c83e4d only reached ~4:1 for small text. */
+  --gb-danger: #bd2130;
   --gb-header: #0d1117;
   --gb-header-muted: #6b7c8c;
   /* Block-header bar (forum/table headers) — must read as a distinct
@@ -662,6 +664,16 @@ hr {
   line-height: 1.5;
   margin: 12px 0 0;
   max-width: 68ch;
+}
+
+/* Last-visit line (logged-in users) — small, muted, below the description.
+   Selector specificity (0,3,1) beats the generic hero-paragraph rule so the
+   font-size stays small. */
+.forgeboard .forge-hero p.forge-hero-lastvisit {
+  color: var(--gb-text-muted);
+  font-size: 0.95em;
+  line-height: 1.4;
+  margin: 10px 0 0;
 }
 
 .forge-hero-action {
