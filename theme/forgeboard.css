@@ -2763,6 +2763,35 @@ a:hover .icon.icon-orange {
   }
 }
 
+
+/* ----------------------------
+ Background-color Poll
+ ----------------------------*/
+.forgeboard fieldset.polls dl {
+  color: #FAFAFA;
+}
+
+.forgeboard fieldset.polls dd {
+  padding: 0 7px;
+}
+
+.forgeboard fieldset.polls dd div {
+  font-weight: normal;
+  padding: 2px 4px 0px 4px;
+}
+
+.pollbar1 {
+  background-color: #2794C9;
+  border-bottom-color: #2794C9;
+  border-right-color: #2794C9;
+}
+
+.forgeboard .pollbar5 {
+  background-color: #2794C9;
+  border-bottom-color: #2794C9;
+  border-right-color: #2794C9;
+}
+
 /*
 --------------------------------------------------------------
 ForgeBoard final polish
