@@ -3,6 +3,67 @@
 All notable changes to ForgeBoard are documented here.
 Versions match `style.cfg` `style_version`.
 
+## [1.2.4] — 2026-09-25
+
+Compatibility release for phpBB 3.3.19.
+
+### Changed
+- `phpbb_version` set to 3.3.19; footer credit updated to 1.2.4.
+
+### Added
+- `template/mcp_topic.html`: `{% EVENT mcp_topic_postrow_post_after %}`, new in prosilver 3.3.18.
+- `theme/en/` and `theme/fr/icon_user_online.gif` (prosilver's GIF), and an empty `theme/images/index.htm`.
+
+### Deliberately unchanged
+- `message_body.html` is not overridden, so the 3.3.19 return link (`RETURN_LINK`) comes from prosilver.
+
+## [1.2.3] — 2026-07-29
+
+Found while testing a real attachment upload; 1.2.2 had already been submitted,
+so this replaces it in the queue. CSS only — no template, event or asset
+touched. See `docs/phpbb-validation-response-1.2.3.md`.
+
+### Fixed
+- **Literal colours inherited from prosilver's `colours.css`.** ForgeBoard `@import`s prosilver's whole stylesheet chain, so every hardcoded colour there shows through on any element the style does not restyle. Written for a light board, they break the dark theme — the symptom was `.attachbox { background-color: #FFFFFF }`, a glaring white panel on a dark post. An audit for that exact pattern (a literal colour on a selector ForgeBoard never restyles) found **28 leaking rules**; the **20** that actually break in dark mode are now expressed in tokens: the attachment box and its captions, thumbnails, the UCP avatar gallery, `ul.forums`, `.jumpbox-sub-link`, the dropdown caret, `.current` (which needs `!important` to beat prosilver's own `color: #000000 !important`) and the reported/disapproved notification labels.
+- **Attachments tab label off-centre.** `posting_editor.html` puts `<strong class="file-total-progress">` inside the tab link. prosilver lays it out as a `display:block` element with negative margins calibrated for a `display:block` anchor padded `5px 9px`; ForgeBoard renders that anchor as an `inline-flex` row with a `gap`, so the bar became a second flex item beside the label and shoved the text sideways. It is now absolutely positioned along the bottom edge of the tab, inset by the corner radius. The anchor is already `position: relative` from prosilver's `cp.css`.
+- Attachment box padding raised from prosilver's `6px` to `var(--gb-space-3)`: `6px` was written for square corners and let the label run under the corner arc once the radius was applied.
+
+### Added
+- Tokens `--gb-attachbox-bg` / `--gb-attachbox-border`, declared in all three token blocks (`:root`, `[data-theme="dark"]`, and the `prefers-color-scheme` fallback for visitors with JavaScript disabled): `#f7f9fb` / `#7d8ea6` light, `#181c23` / `#5d6d88` dark. The fill deliberately sits close to the post surface in both themes (1.06:1 light, 1.01:1 dark), so the border alone delimits the block — which makes it a meaningful UI boundary, hence both borders clear 3:1 under WCAG 1.4.11 (3.16:1 light, 3.26:1 dark).
+
+### Changed
+- Attachment box radius uses `var(--gb-radius-lg)` instead of a loose value.
+- `theme/stylesheet.css` cache-buster hash refreshed
+- `style_version` bumped to 1.2.3
+
+### Deliberately unchanged
+- Eight prosilver colour leaks remain: the five PM colour flags (semantic markers, and side borders rather than fills), `.darken` and `.loading_indicator` (black overlays intended to be black in both themes), and `.message-box textarea`, where ForgeBoard's own rule already wins on source order at equal specificity.
+
+## [1.2.2] — 2026-07-29
+
+Answers the phpBB.com Styles Team review (_Vinny_).
+
+### Added
+- **`theme/plupload.css` — attachment upload status.** `overall_header.html` links this file directly from `{T_THEME_PATH}`, so it is *not* inherited from prosilver: ForgeBoard never shipped one, the `<link>` 404'd, and the whole attachment panel lost its styling — including the STATUS column, which stayed blank. The file now carries the panel layout rules plus the three upload states, drawn with Font Awesome and ForgeBoard tokens instead of prosilver's fixed-colour GIFs, so they stay readable on both surfaces: working (spinner, `--gb-text-muted`), uploaded (check, `--gb-success-fg`), error (cross, `--gb-danger`). The spinner honours `prefers-reduced-motion`. Progress bars use `--gb-link` on a `--gb-surface-muted` track (4.08:1 light / 4.83:1 dark).
+
+- **`theme/tweaks.css`.** Third and last file linked from `{T_THEME_PATH}` without a local copy (IE ≤ 9 conditional comment in both headers). Mirrors prosilver's, so every `{T_THEME_PATH}` link in the style now resolves.
+
+### Fixed
+- **MCP list header contrast.** The `li.header` band of the moderation queue and the reports list hardcoded `rgba(22, 27, 34, 0.72)` — a dark-theme value applied in both themes. In light mode the labels rendered dark-on-dark and only the red "Mark" was legible. Both rules now use the `--gb-block-header-bg` / `--gb-block-header-fg` pair already used by every other block header (11.28:1 light, 15.80:1 dark), and the `dt`/`dd`/`dd.mark` cells inherit that colour instead of pinning `--gb-text` / `--gb-danger` onto a surface that shifts under them.
+- **Black checkboxes on the light theme.** `:root` declared `color-scheme: light dark` and never updated it, so the UA painted native widgets (checkboxes, radios, selects, scrollbars) from the OS preference. A visitor on an OS in dark mode who pinned ForgeBoard's light theme got black checkboxes on a light page — visible on the MCP moderation queue's Mark column. `color-scheme` now flips in step with the dark tokens, in all three blocks (`:root`, `[data-theme="dark"]`, and the `prefers-color-scheme` fallback).
+- **Poll option captions invisible in light mode.** `fieldset.polls dl` set `color: #FAFAFA` unconditionally, so the option caption and the percentage — which sit on the panel surface, not on the bar — were near-white on white. The light foreground is now scoped to `dd.resultbar div`, the only element actually on the coloured bar.
+- **Reported-row highlight.** `li.row.reported:hover` / `:focus-within` forced a fixed dark red `#9c4d48` in both themes; on the light theme the row's own text fell to 1.16:1. Now `--gb-red-soft` with the red identity carried by the `--gb-danger` border and stripe (6.19:1 for row text, 5.55:1 for the accent). Affects the reported rows in the MCP and in the topic lists.
+- **UCP `dl.mini` labels.** `#7eafff` — a dark-theme blue — sat at 2.22:1 on the light surface. `dl.mini` comes from prosilver's `ucp_header.html`, which ForgeBoard does not override, so it renders in both themes; now `--gb-link` (4.63:1 / 6.85:1).
+- **Poll row alignment.** Prosilver lays each poll option out with floats, so the caption and the percentage sat at the top of their boxes while the bar sat lower by its own padding. The row is now a centred flex line, so the three columns share one axis whatever the bar's height; `float` is neutralised on `dt`/`dd`, with the matching override in `bidi.css` (which loads after `stylesheet.css` and would otherwise re-float them under RTL).
+- **Poll option hierarchy on tokens.** The inherited prosilver pair (`dl` `#666`, `dl.voted` `#000`) only works on a light surface — `#666` falls to 3.01:1 on ForgeBoard's dark panel. Non-voted options now use `--gb-text-muted` and the voted one `--gb-text`, keeping prosilver's "voted stands out" hierarchy in both themes (5.63:1 / 6.84:1 light, 8.61:1 / 17.30:1 dark).
+- **Poll bars unified.** Only `.pollbar1` and `.pollbar5` had been recoloured, leaving bars 2–4 on prosilver's red ramp; white vote counts on `.pollbar4` / `.pollbar5` sat at 4.63:1 / 4.03:1. All five now form one flat blue ramp, every step ≥5:1 with the white count, with the matching RTL left-border overrides in `bidi.css`.
+
+### Changed
+- `license.txt` now contains the verbatim GPL-2.0 text instead of a pointer to it.
+- Removed an empty `.forge-nav-user-card a` rule.
+- `theme/stylesheet.css` cache-buster hash refreshed
+- `style_version` bumped to 1.2.2
+
 ## [1.2.1] — 2026-07-10
 
 ### Changed

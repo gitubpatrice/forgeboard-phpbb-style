@@ -1,0 +1,55 @@
+/*  ForgeBoard — legacy Internet Explorer tweaks
+    --------------------------------------------------------------
+    overall_header.html and simple_header.html link this file from
+    {T_THEME_PATH} inside an <!--[if lte IE 9]--> conditional comment,
+    so it is NOT inherited from prosilver: without a local copy the
+    link 404s on those browsers. Same rule as bidi.css and
+    plupload.css — anything linked from {T_THEME_PATH} must exist in
+    this style's own theme/ folder.
+
+    Content mirrors prosilver's tweaks.css: the fixes target inherited
+    prosilver markup, which ForgeBoard still renders underneath its own
+    card layer.
+    -------------------------------------------------------------- */
+
+/* IE 8 tweaks — the (value)\9 hack applies to IE <= 8
+   -------------------------------------------------------------- */
+
+/* Clear float fix */
+.inner,
+ul.linklist {
+  zoom: 1\9;
+}
+
+/* Align checkboxes / radio buttons nicely */
+dd label input {
+  vertical-align: text-bottom\9;
+}
+
+/* stylelint-disable unit-no-unknown -- the trailing \9 is the IE8 hack */
+
+/* Fixes header-avatar aspect ratio */
+.header-avatar img {
+  height: 20px\9;
+}
+
+/* IE8 often can't handle max-width in %, so use px instead */
+.postprofile .avatar img {
+  max-width: 150px\9;
+}
+
+/* stylelint-enable unit-no-unknown */
+
+/* IE 9 tweaks
+   -------------------------------------------------------------- */
+
+/* Border-radius bleed fix in IE9 */
+.search-header,
+.search-header .inputbox,
+.search-header a.button {
+  border-radius: 0;
+}
+
+.tabs .tab > a {
+  border-radius: 0;
+}

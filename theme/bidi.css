@@ -284,6 +284,35 @@
   right: 12px;
 }
 
+/* --- Poll result bars ------------------------------------------- */
+/* The poll row is a flex line here, not floats. bidi.css loads after
+   stylesheet.css, so prosilver's `.rtl fieldset.polls dt/dd { float: right }`
+   would tie on specificity and win on source order — re-neutralise it. The
+   flex axis mirrors on its own under dir="rtl". */
+.forgeboard.rtl fieldset.polls dt,
+.forgeboard.rtl fieldset.polls dd {
+  float: none;
+}
+
+/* The imported prosilver bidi.css moves each bar's bevel to the left edge
+   and keeps prosilver's red border colour there. ForgeBoard's bars are
+   flat blue, so mirror the left border onto its own background. */
+.forgeboard.rtl .pollbar1 {
+  border-left-color: #16406e;
+}
+.forgeboard.rtl .pollbar2 {
+  border-left-color: #1d4e83;
+}
+.forgeboard.rtl .pollbar3 {
+  border-left-color: #275f99;
+}
+.forgeboard.rtl .pollbar4 {
+  border-left-color: #3168a4;
+}
+.forgeboard.rtl .pollbar5 {
+  border-left-color: #3c71ad;
+}
+
 /* --- Responsive-only pushers (mirror inside their breakpoints) --- */
 @media (max-width: 510px) {
   .forgeboard.rtl .forge-nav-breadcrumbs-card .rightside.responsive-search,

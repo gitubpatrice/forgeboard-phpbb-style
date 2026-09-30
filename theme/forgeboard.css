@@ -5,7 +5,12 @@ Modern code-forge phpBB child style for phpBB 3.3.17.
 -------------------------------------------------------------- */
 
 :root {
-  color-scheme: light dark;
+  /* Must track the RESOLVED theme, not "light dark": the UA paints native
+     widgets (checkboxes, radios, selects, scrollbars) from this value, so
+     leaving it to the OS preference renders black checkboxes on a visitor
+     who pinned the light theme from an OS in dark mode. The two blocks
+     below flip it in step with the dark tokens. */
+  color-scheme: light;
 
   /* Color tokens — light theme */
   --gb-canvas: #e2e7f0;
@@ -32,6 +37,10 @@ Modern code-forge phpBB child style for phpBB 3.3.17.
      band against the block surface (#fff) and the row stripes (#f7f9fb). */
   --gb-block-header-bg: #dbe4f0;
   --gb-block-header-fg: #1f2a3a;
+  /* Attachment box. prosilver hardcodes #FFFFFF here, which is invisible on
+     the light post surface and glaring on the dark one. */
+  --gb-attachbox-bg: #f7f9fb;
+  --gb-attachbox-border: #7d8ea6;
   --gb-focus: #388bfd;
   --gb-red-soft: #fff0f2;
   --gb-blue-soft: #eaf3ff;
@@ -121,6 +130,7 @@ Modern code-forge phpBB child style for phpBB 3.3.17.
    visitors with JS disabled via the @media block below. */
 :root[data-theme="dark"],
 [data-theme="dark"] {
+  color-scheme: dark;
   --gb-canvas: #0d1117;
   --gb-canvas-end: #1e2530;
   --gb-surface: #161b22;
@@ -142,6 +152,8 @@ Modern code-forge phpBB child style for phpBB 3.3.17.
   --gb-header-muted: #8b949e;
   --gb-block-header-bg: #0d1220;
   --gb-block-header-fg: #e6edf3;
+  --gb-attachbox-bg: #181c23;
+  --gb-attachbox-border: #5d6d88;
   --gb-focus: #58a6ff;
   --gb-red-soft: rgba(248, 81, 73, 0.14);
   --gb-blue-soft: rgba(88, 166, 255, 0.12);
@@ -187,6 +199,7 @@ Modern code-forge phpBB child style for phpBB 3.3.17.
    pinned light (:root[data-theme="light"] wins over the media query). */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
+    color-scheme: dark;
     --gb-canvas: #0d1117;
     --gb-canvas-end: #1e2530;
     --gb-surface: #161b22;
@@ -208,6 +221,8 @@ Modern code-forge phpBB child style for phpBB 3.3.17.
     --gb-header-muted: #8b949e;
     --gb-block-header-bg: #0d1220;
     --gb-block-header-fg: #e6edf3;
+    --gb-attachbox-bg: #181c23;
+    --gb-attachbox-border: #5d6d88;
     --gb-focus: #58a6ff;
     --gb-red-soft: rgba(248, 81, 73, 0.14);
     --gb-blue-soft: rgba(88, 166, 255, 0.12);
@@ -364,18 +379,21 @@ hr {
 .forgeboard .panel ul.topiclist li.row.reported:hover,
 .forgeboard .panel ul.topiclist li.row.reported:focus-within {
   /* !important required: Prosilver's colours.css sets
-	   `li.reported:hover { background-color: #ECD5D8 !important }` */
-  background: #9c4d48 !important;
-  background-color: #9c4d48 !important;
-  border-color: #612f2c;
-  box-shadow: inset 3px 0 0 #612f2c;
+	   `li.reported:hover { background-color: #ECD5D8 !important }`.
+	   Tokens rather than a fixed dark red: #9c4d48 was a dark-theme value
+	   applied in both themes, and the row's own text sat at 1.16:1 on it in
+	   light mode. The red identity now rides on the border + stripe. */
+  background: var(--gb-red-soft) !important;
+  background-color: var(--gb-red-soft) !important;
+  border-color: var(--gb-danger);
+  box-shadow: inset 3px 0 0 var(--gb-danger);
 }
 
 .forgeboard ul.topiclist li.row.reported:hover dd,
 .forgeboard ul.topiclist li.row.reported:focus-within dd,
 .forgeboard .panel ul.topiclist li.row.reported:hover dd,
 .forgeboard .panel ul.topiclist li.row.reported:focus-within dd {
-  border-left-color: #612f2c;
+  border-left-color: var(--gb-danger);
 }
 
 .wrap,
@@ -2085,7 +2103,7 @@ table.table1 tbody td {
   box-shadow: var(--gb-shadow);
   color: var(--gb-text-muted);
   margin: 18px 0 0;
-  padding: 0 13px 13px 13px;
+  padding: 0 13px 13px;
 }
 
 .page-footer .navbar {
@@ -2765,31 +2783,85 @@ a:hover .icon.icon-orange {
 
 
 /* ----------------------------
- Background-color Poll
- ----------------------------*/
+ Poll result bars
+ ---------------------------- */
+/* Layout: prosilver lays the row out with floats, so the caption and the
+   percentage sit at the TOP of their boxes while the bar sits lower by its
+   own padding. A flex row centres all three on one axis whatever the bar's
+   height.
+   Colour: prosilver marks the option you voted for with bold + a stronger
+   colour (#666 → #000), and that inherited #666 drops to 3.01:1 on the dark
+   surface. Same hierarchy on tokens instead — non-voted muted, voted
+   full-strength, which resolves to white in dark mode and stays legible in
+   light mode (see dl.voted below). */
 .forgeboard fieldset.polls dl {
-  color: #FAFAFA;
+  align-items: center;
+  color: var(--gb-text-muted);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.forgeboard fieldset.polls dt,
+.forgeboard fieldset.polls dd {
+  float: none;
+}
+
+.forgeboard fieldset.polls dt {
+  font-weight: normal;
+  letter-spacing: 0.03em;
 }
 
 .forgeboard fieldset.polls dd {
-  padding: 0 7px;
+  letter-spacing: 0.03em;
+  padding: 3px 10px 0 7px;
 }
 
-.forgeboard fieldset.polls dd div {
+/* Only the vote count sits ON the coloured bar, so the light foreground is
+   scoped to it. The option caption and the percentage sit on the panel
+   surface and keep the normal text colour. */
+.forgeboard fieldset.polls dd.resultbar div {
+  border-radius: 20px;
+  color: #ffffff;
   font-weight: normal;
-  padding: 2px 4px 0px 4px;
+  padding: 2px 5px;
 }
 
-.pollbar1 {
-  background-color: #2794C9;
-  border-bottom-color: #2794C9;
-  border-right-color: #2794C9;
+.forgeboard fieldset.polls dl.voted {
+  color: var(--gb-text);
+  font-weight: normal;
+}
+
+/* Flat blue ramp replacing prosilver's red one. Each step keeps the white
+   vote count above 4.5:1 (5.05:1 at the lightest); borders match their own
+   background so the bars read flat rather than bevelled. */
+.forgeboard .pollbar1 {
+  background-color: #16406e;
+  border-bottom-color: #16406e;
+  border-right-color: #16406e;
+}
+
+.forgeboard .pollbar2 {
+  background-color: #1d4e83;
+  border-bottom-color: #1d4e83;
+  border-right-color: #1d4e83;
+}
+
+.forgeboard .pollbar3 {
+  background-color: #275f99;
+  border-bottom-color: #275f99;
+  border-right-color: #275f99;
+}
+
+.forgeboard .pollbar4 {
+  background-color: #3168a4;
+  border-bottom-color: #3168a4;
+  border-right-color: #3168a4;
 }
 
 .forgeboard .pollbar5 {
-  background-color: #2794C9;
-  border-bottom-color: #2794C9;
-  border-right-color: #2794C9;
+  background-color: #3c71ad;
+  border-bottom-color: #3c71ad;
+  border-right-color: #3c71ad;
 }
 
 /*
@@ -5202,9 +5274,9 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forgeboard #mcp_queue ul.topiclist.missing-column li.header {
-  background: rgba(22, 27, 34, 0.72);
+  background: var(--gb-block-header-bg);
   border-bottom: 1px solid var(--gb-border);
-  color: var(--gb-danger);
+  color: var(--gb-block-header-fg);
 }
 
 .forgeboard #mcp_queue ul.topiclist.cplist.missing-column li.row + li.row {
@@ -5228,7 +5300,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   border: 0;
   box-shadow: none;
   box-sizing: border-box;
-  color: var(--gb-text);
+  color: inherit;
   float: none;
   font-size: 12px;
   line-height: 1.35;
@@ -5255,13 +5327,15 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   padding: 9px 12px;
 }
 
+/* Colour is inherited so the "Mark" label follows the header band and the
+   row cells follow the row text — never a fixed hue on a shifting surface. */
 .forgeboard #mcp_queue ul.topiclist.missing-column dd.mark,
 .forgeboard #mcp_queue ul.topiclist.cplist.missing-column dd.mark {
   align-items: center;
   background: transparent;
   border-left: 1px solid var(--gb-border);
   border-radius: 0;
-  color: var(--gb-danger);
+  color: inherit;
   display: flex;
   font-size: 11px;
   font-weight: 800;
@@ -5305,9 +5379,9 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forgeboard .forge-mcp-reports ul.topiclist.missing-column li.header {
-  background: rgba(22, 27, 34, 0.72);
+  background: var(--gb-block-header-bg);
   border-bottom: 1px solid var(--gb-border);
-  color: var(--gb-danger);
+  color: var(--gb-block-header-fg);
 }
 
 .forgeboard .forge-mcp-reports ul.topiclist.cplist.missing-column li.row + li.row {
@@ -5331,7 +5405,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   border: 0;
   box-shadow: none;
   box-sizing: border-box;
-  color: var(--gb-text);
+  color: inherit;
   float: none;
   font-size: 12px;
   line-height: 1.35;
@@ -5358,13 +5432,14 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   padding: 9px 12px;
 }
 
+/* Same inheritance rule as the #mcp_queue list above. */
 .forgeboard .forge-mcp-reports ul.topiclist.missing-column dd.mark,
 .forgeboard .forge-mcp-reports ul.topiclist.cplist.missing-column dd.mark {
   align-items: center;
   background: transparent;
   border-left: 1px solid var(--gb-border);
   border-radius: 0;
-  color: var(--gb-danger);
+  color: inherit;
   display: flex;
   font-size: 11px;
   font-weight: 800;
@@ -5911,7 +5986,7 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forgeboard .forge-nav-user-card {
-  padding: 10px 0 10px 0;
+  padding: 10px 0;
   border-right: 3px solid var(--gb-border);
   border-radius: 0 9px 9px 0;
 }
@@ -6224,11 +6299,11 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
 }
 
 .forge-viewprofile-head .avatar-rank-container dt.profile-avatar {
-	margin: 0 0 14px 0;
+	margin: 0 0 14px;
 }
 
 .forge-viewprofile-head .avatar-rank-container dd {
-	margin: 0 0 10px 0;
+	margin: 0 0 10px;
 	text-align: left;
 }
 
@@ -7229,10 +7304,6 @@ Login/stat order, detached post profiles, red rules, compact jumpbox and forum s
   transform: none;
 }
 
-/* Remove padding on every <a> inside the user nav card (scoped). */
-.forgeboard .forge-nav-user-card a {
-}
-
 /* PM / Notifications counter badge: small optical nudge so the badge
    sits visually aligned with the icon/text baseline (scoped). */
 .forgeboard .forge-nav-user-card .badge {
@@ -7793,9 +7864,11 @@ body.forgeboard {
   background-color: transparent;
 }
 
+/* dl.mini comes from prosilver's ucp_header.html (not overridden here), so it
+   renders on the light surface too — #7eafff sat at 2.22:1 there. */
 .forgeboard dl.mini dt {
-  margin-bottom:0.5rem;
-  color: #7eafff;
+  color: var(--gb-link);
+  margin-bottom: 0.5rem;
 }
 
 /* ------------------------------------------------------------------
@@ -8954,4 +9027,99 @@ body.forgeboard {
 .forgeboard[data-theme="dark"] .alert_close:hover .icon,
 [data-theme="dark"] .alert_close:hover .icon {
   color: var(--gb-link);
+}
+
+/* ------------------------------------------------------------------
+   Literal colours inherited from prosilver's colours.css
+
+   ForgeBoard @imports prosilver's whole stylesheet chain, so every
+   hardcoded colour there shows through on any element ForgeBoard does
+   not restyle. They were authored for a light board: on the dark theme
+   a #FFFFFF panel is glaring, and #666666 body copy loses contrast.
+   Everything below simply re-expresses prosilver's intent in tokens.
+   Scoped with .forgeboard so it outranks the inherited rule.
+   ------------------------------------------------------------------ */
+
+/* Attachments — the box, its separator, its captions and stats. */
+/* prosilver pads this box by 6px, which was fine on its square corners. The
+   12px radius eats into that, so the label ran under the corner arc — pad to
+   the radius so the content clears it. */
+.forgeboard .attachbox {
+  background-color: var(--gb-attachbox-bg);
+  border-color: var(--gb-attachbox-border);
+  border-radius: var(--gb-radius-lg);
+  padding: var(--gb-space-3);
+}
+
+.forgeboard .pm-message .attachbox {
+  background-color: var(--gb-attachbox-bg);
+}
+
+.forgeboard .attachbox dd {
+  border-top-color: var(--gb-attachbox-border);
+}
+
+.forgeboard .attachbox p,
+.forgeboard .attachbox p.stats,
+.forgeboard dl.file dd,
+.forgeboard dl.thumbnail dd {
+  color: var(--gb-text-muted);
+}
+
+.forgeboard .attach-image img {
+  border-color: var(--gb-border);
+}
+
+/* Thumbnails */
+.forgeboard dl.thumbnail img {
+  background-color: var(--gb-surface);
+  border-color: var(--gb-border);
+}
+
+.forgeboard dl.thumbnail dt a:hover {
+  background-color: var(--gb-surface-muted);
+}
+
+.forgeboard dl.thumbnail dt a:hover img {
+  border-color: var(--gb-accent);
+}
+
+/* Avatar gallery picker (UCP) */
+.forgeboard .gallery label {
+  background: var(--gb-surface);
+  border-color: var(--gb-border);
+}
+
+.forgeboard .gallery label:hover {
+  background-color: var(--gb-surface-muted);
+}
+
+/* Forum list fallback + jumpbox sub-levels */
+.forgeboard ul.forums {
+  background-color: var(--gb-surface);
+}
+
+.forgeboard .jumpbox-sub-link {
+  background-color: var(--gb-surface-subtle);
+}
+
+.forgeboard .jumpbox-sub-link:hover {
+  background-color: var(--gb-surface-muted);
+}
+
+/* Dropdown pointer */
+.forgeboard .caret {
+  border-color: var(--gb-border);
+}
+
+/* prosilver forces `color: #000000 !important` here, so the override has to
+   carry !important too or the text stays black on the dark surface. */
+.forgeboard .current {
+  color: var(--gb-text) !important;
+}
+
+/* Reported / disapproved notification labels */
+.forgeboard li.notification-reported strong,
+.forgeboard li.notification-disapproved strong {
+  color: var(--gb-danger);
 }

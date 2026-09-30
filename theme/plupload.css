@@ -1,0 +1,156 @@
+/*  ForgeBoard — attachment upload panel (plupload)
+    --------------------------------------------------------------
+    overall_header.html links this file directly from {T_THEME_PATH},
+    so it is NOT inherited from prosilver: every rule the attachment
+    panel needs must live here, or the panel renders unstyled and the
+    upload status column stays empty.
+
+    Status icons are drawn with Font Awesome + ForgeBoard tokens
+    instead of prosilver's fixed-colour GIFs, so they stay readable
+    on both the light and the dark surface.
+    -------------------------------------------------------------- */
+
+.attach-panel-multi {
+  display: none;
+  margin-bottom: 1em;
+}
+
+.attach-row-tpl {
+  display: none;
+}
+
+.file-list td {
+  vertical-align: middle;
+}
+
+.attach-name {
+  width: 50%;
+}
+
+.attach-comment {
+  width: 30%;
+}
+
+.attach-comment .inputbox {
+  resize: vertical;
+  width: 100%;
+}
+
+.attach-filesize {
+  width: 15%;
+}
+
+.attach-status {
+  width: 5%;
+}
+
+.attach-filesize,
+.attach-status {
+  text-align: center;
+}
+
+.attach-controls {
+  display: inline-block;
+  float: right;
+}
+
+.nojs .file-inline-bbcode {
+  display: none;
+}
+
+.file-name {
+  max-width: 65%;
+  vertical-align: bottom;
+}
+
+/* Progress bars — themed track + accent fill ---------------------- */
+
+/* Total upload progress: a thin bar along the bottom edge of the Attachments
+   tab. It is the only place this element appears (posting_editor.html), and
+   ForgeBoard renders that tab link as an inline-flex row with a gap — so left
+   in the flow it becomes a second flex item beside the label and shoves the
+   text off-centre. Take it out of the flow instead. The anchor is already
+   position:relative (prosilver cp.css); inset by the corner radius so the bar
+   stays inside the rounded edge. */
+.file-total-progress {
+  bottom: 0;
+  display: block;
+  height: 2px;
+  left: 6px;
+  margin: 0;
+  position: absolute;
+  right: 6px;
+}
+
+.file-progress {
+  background-color: var(--gb-surface-muted);
+  border-radius: var(--gb-radius-pill);
+  display: inline-block;
+  height: 8px;
+  overflow: hidden;
+  vertical-align: middle;
+  width: 50px;
+}
+
+.file-progress-bar,
+.file-total-progress-bar {
+  background-color: var(--gb-link);
+  display: block;
+  height: 100%;
+  width: 0;
+}
+
+/* Upload status — working / uploaded / error ---------------------- */
+
+.file-status {
+  display: inline-block;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  vertical-align: middle;
+  width: 16px;
+}
+
+.file-status.file-working::before,
+.file-status.file-uploaded::before,
+.file-status.file-error::before {
+  display: inline-block;
+  font-family: "Font Awesome 5 Free", FontAwesome, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 16px;
+  text-rendering: auto;
+}
+
+.file-status.file-working::before {
+  animation: forge-file-spin 1s linear infinite;
+  color: var(--gb-text-muted);
+  content: "\f110";
+}
+
+.file-status.file-uploaded::before {
+  color: var(--gb-success-fg);
+  content: "\f00c";
+}
+
+.file-status.file-error::before {
+  color: var(--gb-danger);
+  content: "\f00d";
+}
+
+@keyframes forge-file-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .file-status.file-working::before {
+    animation: none;
+  }
+}
