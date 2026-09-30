@@ -3,6 +3,17 @@
 All notable changes to ForgeBoard are documented here.
 Versions match `style.cfg` `style_version`.
 
+## [Unreleased]
+
+For the next submission. None of this is in the 1.2.4 archive.
+
+### Changed
+- **X icon replaces the Twitter bird in the mini-profile contact dropdown**, following prosilver 3.3.18 (PHPBB-17623). The FontAwesome build phpBB ships (4.7) has no X glyph, so `\f099` could only ever draw the bird. The logo is now `theme/images/contact_x.svg` (Simple Icons path, CC0 1.0), applied as a CSS mask and painted with `--gb-link` / `--gb-link-hover` like the glyphs beside it. It therefore follows the light and dark themes with no extra token. Checked in both themes against the Facebook and YouTube glyphs: same colour, matching size.
+- `theme/stylesheet.css`: `forgeboard.css` cache-buster hash refreshed.
+
+### Added
+- `@media (forced-colors: active)` rule for the X icon only. Forced colours repaint `background-color`, which would erase a mask-drawn icon, while the font glyphs are repainted as text and stay visible. The icon is drawn in `LinkText` there. Not yet checked in a real forced-colours session.
+
 ## [1.2.4] — 2026-09-25
 
 Compatibility release for phpBB 3.3.19.

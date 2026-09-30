@@ -4515,8 +4515,34 @@ Keeps the themed dropdown look while reducing item height near the header search
 .forgeboard .contact-icons .phpbb_facebook-icon::before {
   content: "\f09a";
 }
+/* X (formerly Twitter): the FontAwesome build phpBB ships has no X glyph, so
+   the logo is an SVG mask painted in the same link colour as the glyphs
+   around it. prosilver switched its sprite to X in 3.3.18 (PHPBB-17623). */
 .forgeboard .contact-icons .phpbb_twitter-icon::before {
-  content: "\f099";
+  background-color: var(--gb-link);
+  content: "";
+  height: 14px;
+  mask-image: url("./images/contact_x.svg");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  -webkit-mask-image: url("./images/contact_x.svg");
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  width: 14px;
+}
+.forgeboard .contact-icons a:hover .phpbb_twitter-icon::before,
+.forgeboard .contact-icons a:focus .phpbb_twitter-icon::before {
+  background-color: var(--gb-link-hover);
+}
+/* Forced colours repaint background-color, which would erase a mask-drawn
+   icon; the font glyphs beside it are repainted as text and stay visible. */
+@media (forced-colors: active) {
+  .forgeboard .contact-icons .phpbb_twitter-icon::before {
+    background-color: LinkText;
+    forced-color-adjust: none;
+  }
 }
 .forgeboard .contact-icons .phpbb_skype-icon::before {
   content: "\f17e";
